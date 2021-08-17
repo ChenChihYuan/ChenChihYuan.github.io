@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Reference_GeeksforGeeksThread Binary Tree Inorder Tree Traversal without recursion and without stackUsing Morris Travesal, we can traverse the tree without using stack and recursion. The idea of Morri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="InorderTreeTraversalWithoutRecursionAndWithoutStack">
+<meta property="og:url" content="https://chenchihyuan.github.io/2021/02/09/InorderTreeTraversalWithoutRecursionAndWithoutStack/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="Reference_GeeksforGeeksThread Binary Tree Inorder Tree Traversal without recursion and without stackUsing Morris Travesal, we can traverse the tree without using stack and recursion. The idea of Morri">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-09T13:38:46.000Z">
+<meta property="article:modified_time" content="2021-02-09T14:12:47.136Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="BinarySearchTree">
+<meta property="article:tag" content="BST">
+<meta property="article:tag" content="Inorder">
+<meta property="article:tag" content="Traversal">
+<meta property="article:tag" content="Morris Traversal">
+<meta property="article:tag" content="Threaded Binary Tree">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2021/02/09/InorderTreeTraversalWithoutRecursionAndWithoutStack/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>InorderTreeTraversalWithoutRecursionAndWithoutStack | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/09/InorderTreeTraversalWithoutRecursionAndWithoutStack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          InorderTreeTraversalWithoutRecursionAndWithoutStack
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-09 22:38:46 / Modified: 23:12:47" itemprop="dateCreated datePublished" datetime="2021-02-09T22:38:46+09:00">2021-02-09</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/?ref=rp">Reference_GeeksforGeeks</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Threaded_binary_tree">Thread Binary Tree</a></p>
+<h1 id="Inorder-Tree-Traversal-without-recursion-and-without-stack"><a href="#Inorder-Tree-Traversal-without-recursion-and-without-stack" class="headerlink" title="Inorder Tree Traversal without recursion and without stack"></a>Inorder Tree Traversal without recursion and without stack</h1><p>Using <code>Morris Travesal</code>, we can traverse the tree without using stack and recursion. The idea of Morris Traversal is based on <code>Threaded Binary Tree</code>.</p>
+<p>In this traveral, we first create links to Inorder successor and print the data using these links, and finally revert the changes to restore original tree.</p>
+<ol>
+<li>Initalize current as root</li>
+<li>While current <strong>is not NULL</strong><br> <strong>If</strong> the current does not have left child<pre><code> 1. Print current&#39;s data
+ 2. Go to the right, i.e., current = current-&gt;right
+</code></pre>
+ <strong>Else</strong><pre><code> Find rightmost node in current left subtree `OR` node whose right child == current
+ *If*
+     we found right child == current
+     Go to the right, i.e. current = current-&gt;right
+ *Else*
+     1. Make current as the right child of that rightmost node we found; and
+     2. Go to this left child, i.e., current = current -&gt; current-&gt;left
+</code></pre>
+</li>
+</ol>
+<p>Although the tree <strong>is modified through the traversal</strong>, it is reverted back to its original shape after the completion. <em>No extra space is required</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">right</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MorrisTraversal</span><span class="params">(struct tNode* root)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">current</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">pre</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    current = root;</span><br><span class="line">    <span class="keyword">while</span>(current != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(current-&gt;left == <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, current-&gt;data);</span><br><span class="line">            current = current-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// Find the inorder predecessor of current</span></span><br><span class="line">            pre = current-&gt;left;</span><br><span class="line">            <span class="keyword">while</span>(pre-&gt;right != <span class="literal">NULL</span> &amp;&amp; pre-&gt;right != current)</span><br><span class="line">                pre = pre-&gt;right;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Make current as the right child of its inorder predecessor</span></span><br><span class="line">            <span class="keyword">if</span>(pre-&gt;right == <span class="literal">NULL</span>)&#123;</span><br><span class="line">                pre-&gt;right = current;</span><br><span class="line">                current = current-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Revert the changes made in the `if` part to restore the original tree i.e., fix the right child of predecessor</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                pre-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, current-&gt;data);</span><br><span class="line">                current = current-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">struct tNode* <span class="title">newtNode</span><span class="params">(<span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">node</span> =</span> <span class="keyword">new</span> tNode;</span><br><span class="line">    node-&gt;data = data;</span><br><span class="line">    node-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">    node-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> (node);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* Constructed binary tree is</span></span><br><span class="line"><span class="comment">            1</span></span><br><span class="line"><span class="comment">          /   \</span></span><br><span class="line"><span class="comment">         2     3</span></span><br><span class="line"><span class="comment">       /   \</span></span><br><span class="line"><span class="comment">      4     5</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">root</span> =</span> <span class="built_in">newtNode</span>(<span class="number">1</span>);</span><br><span class="line">    root-&gt;left = <span class="built_in">newtNode</span>(<span class="number">2</span>);</span><br><span class="line">    root-&gt;right = <span class="built_in">newtNode</span>(<span class="number">3</span>);</span><br><span class="line">    root-&gt;left-&gt;left = <span class="built_in">newtNode</span>(<span class="number">4</span>);</span><br><span class="line">    root-&gt;left-&gt;right = <span class="built_in">newtNode</span>(<span class="number">5</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">MorrisTraversal</span>(root);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BinarySearchTree/" rel="tag"># BinarySearchTree</a>
+              <a href="/tags/BST/" rel="tag"># BST</a>
+              <a href="/tags/Inorder/" rel="tag"># Inorder</a>
+              <a href="/tags/Traversal/" rel="tag"># Traversal</a>
+              <a href="/tags/Morris-Traversal/" rel="tag"># Morris Traversal</a>
+              <a href="/tags/Threaded-Binary-Tree/" rel="tag"># Threaded Binary Tree</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/09/InorderTreeTraverseWithoutRecursion/" rel="prev" title="InorderTreeTraverseWithoutRecursion">
+      <i class="fa fa-chevron-left"></i> InorderTreeTraverseWithoutRecursion
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/09/Construct-BinaryTreefromPostorder-Inorder/" rel="next" title="Construct_BinaryTreefromPostorder_Inorder">
+      Construct_BinaryTreefromPostorder_Inorder <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Inorder-Tree-Traversal-without-recursion-and-without-stack"><span class="nav-number">1.</span> <span class="nav-text">Inorder Tree Traversal without recursion and without stack</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

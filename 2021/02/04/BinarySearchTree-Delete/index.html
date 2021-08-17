@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="The original article:Link When we delete a node, three possibilites arise.  Node to be deleted is leaf: Simply remove from the tree. Node to be deleted has only one child: Copy the child to the node a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BinarySearchTree_Delete">
+<meta property="og:url" content="https://chenchihyuan.github.io/2021/02/04/BinarySearchTree-Delete/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="The original article:Link When we delete a node, three possibilites arise.  Node to be deleted is leaf: Simply remove from the tree. Node to be deleted has only one child: Copy the child to the node a">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-03T15:59:56.000Z">
+<meta property="article:modified_time" content="2021-02-04T15:16:32.063Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="BinarySearchTree">
+<meta property="article:tag" content="BinaryTree">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2021/02/04/BinarySearchTree-Delete/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>BinarySearchTree_Delete | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/04/BinarySearchTree-Delete/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BinarySearchTree_Delete
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-04 00:59:56" itemprop="dateCreated datePublished" datetime="2021-02-04T00:59:56+09:00">2021-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 00:16:32" itemprop="dateModified" datetime="2021-02-05T00:16:32+09:00">2021-02-05</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>The original article:<br><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/">Link</a></p>
+<p>When we delete a node, <strong>three</strong> possibilites arise.</p>
+<ol>
+<li>Node to be deleted is leaf: Simply remove from the tree.</li>
+<li>Node to be deleted has only one child: Copy the child to the node and delete the child.</li>
+<li>Node to be deleted has two children: Find inorder successor of the node. Copy contents of the inorder successor to the node and delete the inorder successor. Note that inorder predecessor can also be used. </li>
+</ol>
+<p>The important thing to note is:<br>Inorder successor is needed only when right child is not empty.</p>
+<p>Also, I learned from the visualization algorithm website<a target="_blank" rel="noopener" href="https://visualgo.net/en/bst">LINK</a>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">search for v</span><br><span class="line">if v is a leaf</span><br><span class="line">    delete leaf v</span><br><span class="line">else if v has 1 child</span><br><span class="line">    bypass v</span><br><span class="line">else</span><br><span class="line">    replace v with successor</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>It is worth noting that when you delete nodes in a tree, deletion process will be in post-order. That is to say, when you delete a node, you will delete its left child and its right child before you delete the node itself.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">left</span>, *<span class="title">right</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">newNode</span><span class="params">(<span class="keyword">int</span> item)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">temp</span> =</span> (struct node*)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(struct node));</span><br><span class="line">    temp-&gt;key = item;</span><br><span class="line">    temp-&gt;left = temp-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(struct node* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;left);</span><br><span class="line">        cout&lt;&lt;root-&gt;key;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">insert</span><span class="params">(struct node* node, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">newNode</span>(key);</span><br><span class="line">    <span class="keyword">if</span>(key &lt; node-&gt;key)&#123;</span><br><span class="line">        node-&gt;left = <span class="built_in">insert</span>(node-&gt;left, key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        node-&gt;right = <span class="built_in">insert</span>(node-&gt;right, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// return the (unchanged) node pointer.</span></span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">minValueNode</span><span class="params">(struct node* node)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">current</span> =</span> node;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(current &amp;&amp; current-&gt;left != <span class="literal">NULL</span>)</span><br><span class="line">        current = current-&gt;left;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> current;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">deleteNode</span><span class="params">(struct node* root, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(key &lt; root-&gt;key)</span><br><span class="line">        root-&gt;left = <span class="built_in">deleteNode</span>(root-&gt;left, key);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(key &gt; root-&gt;key)</span><br><span class="line">        root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, key);</span><br><span class="line">    <span class="comment">// if key is same as root&#x27;s key, then this is the node</span></span><br><span class="line">    <span class="comment">// to be deleted</span></span><br><span class="line">    <span class="keyword">else</span>&#123; </span><br><span class="line">        <span class="comment">// 1. node with only one child or no child</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left == <span class="literal">NULL</span>)&#123;</span><br><span class="line">            struct node* temp = root-&gt;right;</span><br><span class="line">            <span class="built_in">free</span>(root);</span><br><span class="line">            <span class="keyword">return</span> temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;right == <span class="literal">NULL</span>)&#123;</span><br><span class="line">            struct node* temp = root-&gt;left;</span><br><span class="line">            <span class="built_in">free</span>(root);</span><br><span class="line">            <span class="keyword">return</span> temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 2. node with 2 children: Get the inorder successor(smallest in the right subtree)</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">temp</span> =</span> <span class="built_in">minValueNode</span>(root-&gt;right);</span><br><span class="line">        root-&gt;key = temp-&gt;key;</span><br><span class="line">        root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, temp-&gt;key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BinarySearchTree</span>&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Node</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> key;</span><br><span class="line">        <span class="keyword">public</span> Node left, right;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span>(<span class="params"><span class="built_in">int</span> item</span>)</span>&#123;</span><br><span class="line">            key = item;</span><br><span class="line">            left = right = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Root of BST</span></span><br><span class="line">    Node root;</span><br><span class="line">    BinarySearchTree()&#123;root = <span class="literal">null</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteRec</span>(<span class="params">Node root, <span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span>(key&lt; root.key)</span><br><span class="line">            root.left = deleteRec(root.left, key);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key &gt; root.key)</span><br><span class="line">            root.right = deleteRec(root.right,key);</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(root.left == <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> root.right;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(root.right == <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> root.left;</span><br><span class="line"></span><br><span class="line">            root.key = minValue(root.right);</span><br><span class="line">            root.right = deleteRec(root.right, root.key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">int</span> <span class="title">minValue</span>(<span class="params">Node root</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">int</span> minv = root.key;</span><br><span class="line">        <span class="keyword">while</span>(root.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            minv = root.left.key;</span><br><span class="line">            root = root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span>(<span class="params"><span class="built_in">int</span> key</span>)</span>&#123;root = insertRec(root, key);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node <span class="title">insertRec</span>(<span class="params">Node root, <span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == NULL)&#123;</span><br><span class="line">            root = <span class="keyword">new</span> Node(key);</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorder</span>(<span class="params"></span>)</span>&#123; inorderRec(root);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorderRec</span>(<span class="params">Node root</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">null</span>)&#123;</span><br><span class="line">            inorderRec(root.left);</span><br><span class="line">            Console.Write(root.key + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            inorderRec(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BinarySearchTree/" rel="tag"># BinarySearchTree</a>
+              <a href="/tags/BinaryTree/" rel="tag"># BinaryTree</a>
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/03/BinarySearchTree-Basic/" rel="prev" title="BinarySearchTree_Basic">
+      <i class="fa fa-chevron-left"></i> BinarySearchTree_Basic
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/06/DiscreteDifferentialGeometry-01-Overview/" rel="next" title="DiscreteDifferentialGeometry_01_Overview">
+      DiscreteDifferentialGeometry_01_Overview <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

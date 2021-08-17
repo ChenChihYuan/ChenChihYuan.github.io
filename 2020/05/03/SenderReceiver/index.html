@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言因為最近RIR(Rhino Inside Revit)的整合技術陸續Mcneel官方慢慢釋出相關的document跟陸續有點資料大家在討論，想整理一下目前的資料，以及剛聽完hiron對RhinoInside的簡介，想寫一下部分的筆記，也不確定可以寫多少，讀者加減把這篇看成入門的練習吧，如果有甚麼不詳盡的部分還請利用下方留言板跟我討論一下，謝謝~ What is Rhino.InsideRhin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SenderReceiver">
+<meta property="og:url" content="https://chenchihyuan.github.io/2020/05/03/SenderReceiver/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="前言因為最近RIR(Rhino Inside Revit)的整合技術陸續Mcneel官方慢慢釋出相關的document跟陸續有點資料大家在討論，想整理一下目前的資料，以及剛聽完hiron對RhinoInside的簡介，想寫一下部分的筆記，也不確定可以寫多少，讀者加減把這篇看成入門的練習吧，如果有甚麼不詳盡的部分還請利用下方留言板跟我討論一下，謝謝~ What is Rhino.InsideRhin">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chenchihyuan.github.io/uploads/RiWin.gif">
+<meta property="og:image" content="https://chenchihyuan.github.io/uploads/Sender.gif">
+<meta property="article:published_time" content="2020-05-03T13:58:52.000Z">
+<meta property="article:modified_time" content="2020-05-04T15:09:49.729Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="Grasshopper">
+<meta property="article:tag" content="Csharp">
+<meta property="article:tag" content="Rhino">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenchihyuan.github.io/uploads/RiWin.gif">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2020/05/03/SenderReceiver/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SenderReceiver | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/05/03/SenderReceiver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SenderReceiver
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-03 22:58:52" itemprop="dateCreated datePublished" datetime="2020-05-03T22:58:52+09:00">2020-05-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-05 00:09:49" itemprop="dateModified" datetime="2020-05-05T00:09:49+09:00">2020-05-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Grasshopper/" itemprop="url" rel="index"><span itemprop="name">Grasshopper</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Grasshopper/Csharp/" itemprop="url" rel="index"><span itemprop="name">Csharp</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Grasshopper/Csharp/RhinoInside/" itemprop="url" rel="index"><span itemprop="name">RhinoInside</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Grasshopper/Csharp/RhinoInside/Rhino/" itemprop="url" rel="index"><span itemprop="name">Rhino</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因為最近RIR(Rhino Inside Revit)的整合技術陸續Mcneel官方慢慢釋出相關的document跟陸續有點資料大家在討論，想整理一下目前的資料，以及剛聽完<a target="_blank" rel="noopener" href="https://hrntsm.github.io/">hiron</a>對RhinoInside的簡介，想寫一下部分的筆記，也不確定可以寫多少，讀者加減把這篇看成入門的練習吧，如果有甚麼不詳盡的部分還請利用下方留言板跟我討論一下，謝謝~</p>
+<h1 id="What-is-Rhino-Inside"><a href="#What-is-Rhino-Inside" class="headerlink" title="What is Rhino.Inside"></a><a target="_blank" rel="noopener" href="https://www.rhino3d.com/inside/revit/beta/getting-started">What is Rhino.Inside</a></h1><p>Rhino.Inside is a new technology developed by Robert McNeel &amp; Associates that allows embedding Rhino WIP into other applications. Rhino.Inside is being embedded into many applications from a wide variety of disciplines.</p>
+<h2 id="Rhino-Inside-Revit"><a href="#Rhino-Inside-Revit" class="headerlink" title="Rhino.Inside.Revit"></a>Rhino.Inside.Revit</h2><p>Rhino.Inside.Revit is an addon for Autodesk Revit that allows Rhino WIP to be loaded into the memory of Revit just like other Revit addons.</p>
+<h1 id="2020年5月的進度"><a href="#2020年5月的進度" class="headerlink" title="2020年5月的進度"></a>2020年5月的進度</h1><p>如果大家點開<a target="_blank" rel="noopener" href="https://github.com/mcneel/rhino.inside">RiR_github</a>然後可以發現McNeel官方在<code>.NET</code> framework下實踐了把Rhino塞到各個平台上。<br>大概的操作狀況可以參考<a target="_blank" rel="noopener" href="https://qiita.com/hiron_rgkr/items/ba00b7ae75068a54ff20">hironのblog</a>, 我自己嘗試了在autocad軟體上成功執行<code>TestRhinoInside</code>了。</p>
+<h2 id="Rhino-Inside"><a href="#Rhino-Inside" class="headerlink" title="Rhino.Inside"></a>Rhino.Inside</h2><ul>
+<li>Rhino.Inside illastrator</li>
+<li>Rhino.Inside AutoCAD</li>
+<li>Rhino.Inside Revit</li>
+<li>Rhino.Inside BricsCAD</li>
+<li>Rhino.Inside ConsoleApp</li>
+<li>Rhino.Inside DotNet</li>
+<li>Rhino.Inside JavaScript</li>
+<li>Rhino.Inside UE</li>
+<li>Rhino.Inside Excel</li>
+<li>Rhino.Inside Unity</li>
+</ul>
+<p>稍微嘗試了一下Rhino.Inside DotNet，拿了以前的模型丟進WinForms的小視窗。如果有用過WPF或是WinForms的話，大概可以知道做出一個pop up windows的感覺，Revit API也常常會遇到要設計給使用者輸入資訊的情況。<br>大概會像這樣<br><img src="/uploads/RiWin.gif" alt="Node"></p>
+<p>不過也有發現現在功能相對不穩定，不一定一開就可以成功，可能開發團隊還在努力吧。</p>
+<h1 id="Sender-amp-Receiver"><a href="#Sender-amp-Receiver" class="headerlink" title="Sender&amp;Receiver"></a>Sender&amp;Receiver</h1><p>這部份透過hiron的講解，大概讓我們知道Rhino.Inside的實作方式。因為還沒很深入去看底層的東西(一部分應該目前看也看不懂)就紀錄一下我的猜測，因為Rhino.Inside是把整個Rhino當作子程式掛件掛在其他程式上，如果用Rhino.Inside的時候開檔案管理員，應該會發現程式占用的記憶體會飆高。 但因為是在同一個主程式下的記憶體中運算，所以如果能做成一個通道把Rhino運算的東西傳給其他程式(傳回主程式)，或讀取主程式的資料的話。Rhino.Inside 任何程式都可以看成是資料寫出跟寫入的過程。其實大方向很簡單的來說就是省去了存檔再讀取的步驟，但因為寫出往往是寫到硬碟，又到硬碟讀會讓流程整個變慢，更別說是想要Real Time修改東西了。</p>
+<h2 id="Implement-in-Grasshopper"><a href="#Implement-in-Grasshopper" class="headerlink" title="Implement in Grasshopper"></a>Implement in Grasshopper</h2><p>hiron介紹了一段code如下:<br><img src="/uploads/Sender.gif" alt="Node"></p>
+<p>Sender</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">string</span> Send_Str</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span>(<span class="keyword">var</span> args = <span class="keyword">new</span> Rhino.Runtime.NamedParametersEventArgs())&#123;</span><br><span class="line">      args.Set(<span class="string">&quot;str&quot;</span>, Send_Str);</span><br><span class="line">      Rhino.Runtime.HostUtils.ExecuteNamedCallback(<span class="string">&quot;ToRiR&quot;</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Receiver</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="keyword">ref</span> <span class="built_in">object</span> Receive_str</span>)</span></span><br><span class="line"> &#123;</span><br><span class="line">   Receive(Component);</span><br><span class="line">   Receive_str = str;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line"> <span class="built_in">string</span> str;</span><br><span class="line"> <span class="built_in">bool</span> registered = <span class="literal">false</span>;</span><br><span class="line"> IGH_Component comp = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">Receive</span>(<span class="params">IGH_Component component</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(!registered)&#123;</span><br><span class="line">     Rhino.Runtime.HostUtils.RegisterNamedCallback(<span class="string">&quot;ToRiR&quot;</span>, RiRhino);</span><br><span class="line">     comp = component;</span><br><span class="line">     registered = <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">RiRhino</span>(<span class="params"><span class="built_in">object</span> sender, Rhino.Runtime.NamedParametersEventArgs args</span>)</span>&#123;</span><br><span class="line">   <span class="built_in">string</span> values;</span><br><span class="line">   <span class="keyword">if</span>(args.TryGetString(<span class="string">&quot;str&quot;</span>, <span class="keyword">out</span> values))&#123;</span><br><span class="line">     str = values;</span><br><span class="line">   &#125;</span><br><span class="line">   comp.ExpireSolution(<span class="literal">true</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>因為其實C# Component中 <code>Member</code>縮排那邊有先定義過一個<code>private readonly IGH_Component Component;</code> ，所以在上面的<code>RunScript</code>可以直接用。</p>
+<h3 id="Runtime-HostUtils-ExecuteNamedCallback"><a href="#Runtime-HostUtils-ExecuteNamedCallback" class="headerlink" title="Runtime.HostUtils.ExecuteNamedCallback"></a>Runtime.HostUtils.ExecuteNamedCallback</h3><blockquote>
+<p>Execute a named callback</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/wip/api/RhinoCommon/html/M_Rhino_Runtime_HostUtils_ExecuteNamedCallback.htm">Runtime.HostUtils.ExecuteNamedCallback</a></li>
+</ul>
+<h3 id="NamedParametersEventArgs"><a href="#NamedParametersEventArgs" class="headerlink" title="NamedParametersEventArgs"></a>NamedParametersEventArgs</h3><blockquote>
+<p>Dictionary style class used for named callback from <code>c++</code> -&gt; <code>.NET</code></p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/api/RhinoCommon/html/T_Rhino_Runtime_NamedParametersEventArgs.htm">NamedParametersEventArgs</a></li>
+</ul>
+<h3 id="Runtime-HostUtils-RegisterNamedCallback"><a href="#Runtime-HostUtils-RegisterNamedCallback" class="headerlink" title="Runtime.HostUtils.RegisterNamedCallback()"></a>Runtime.HostUtils.RegisterNamedCallback()</h3><blockquote>
+<p>Register a named callback from <code>C++</code> -&gt; <code>.NET</code></p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/api/RhinoCommon/html/M_Rhino_Runtime_HostUtils_RegisterNamedCallback.htm">Runtime.HostUtils.RegisterNamedCallback</a></li>
+</ul>
+<h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.rhino3d.com/inside">RhinoInside_OfficialPage</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mcneel/rhino.inside">RiR_github</a></li>
+<li><a target="_blank" rel="noopener" href="https://qiita.com/hiron_rgkr/items/ba00b7ae75068a54ff20">hironのblog</a></li>
+<li><a target="_blank" rel="noopener" href="https://amdlaboratory.com/amdblog/rhino-inside%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6revit%E3%81%A8%E9%80%A3%E6%90%BA%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B/">AMDlab</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=x_MU3vO1_II">Introduce_To_Rhino.Inside_Revit</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Grasshopper/" rel="tag"># Grasshopper</a>
+              <a href="/tags/Csharp/" rel="tag"># Csharp</a>
+              <a href="/tags/Rhino/" rel="tag"># Rhino</a>
+              <a href="/tags/Unity/" rel="tag"># Unity</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/03/NodeInCode/" rel="prev" title="NodeInCode">
+      <i class="fa fa-chevron-left"></i> NodeInCode
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/08/slider-modify/" rel="next" title="slider_modify">
+      slider_modify <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Rhino-Inside"><span class="nav-number">2.</span> <span class="nav-text">What is Rhino.Inside</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Rhino-Inside-Revit"><span class="nav-number">2.1.</span> <span class="nav-text">Rhino.Inside.Revit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2020%E5%B9%B45%E6%9C%88%E7%9A%84%E9%80%B2%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">2020年5月的進度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Rhino-Inside"><span class="nav-number">3.1.</span> <span class="nav-text">Rhino.Inside</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sender-amp-Receiver"><span class="nav-number">4.</span> <span class="nav-text">Sender&amp;Receiver</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-in-Grasshopper"><span class="nav-number">4.1.</span> <span class="nav-text">Implement in Grasshopper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Runtime-HostUtils-ExecuteNamedCallback"><span class="nav-number">4.1.1.</span> <span class="nav-text">Runtime.HostUtils.ExecuteNamedCallback</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NamedParametersEventArgs"><span class="nav-number">4.1.2.</span> <span class="nav-text">NamedParametersEventArgs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runtime-HostUtils-RegisterNamedCallback"><span class="nav-number">4.1.3.</span> <span class="nav-text">Runtime.HostUtils.RegisterNamedCallback()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
