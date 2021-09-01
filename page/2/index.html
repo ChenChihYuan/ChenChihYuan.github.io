@@ -146,6 +146,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/03/BinarySearchTree-Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/03/BinarySearchTree-Basic/" class="post-title-link" itemprop="url">BinarySearchTree_Basic</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-03 22:06:11" itemprop="dateCreated datePublished" datetime="2021-02-03T22:06:11+09:00">2021-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-04 00:58:36" itemprop="dateModified" datetime="2021-02-04T00:58:36+09:00">2021-02-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This post is for the notes for me re-learning ‘binary search’, somehow I feel like I have been learned this algorithm couple times. But shame to say, I still do not feel I totally get the idea behind, as for how to implement this. I hope I can spend some quailty time for once again learn and master binary Tree.</p>
+<p>The note here, and as code are from the GeeksforGeeks<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/binary-search-tree-data-structure/#basic">Link</a>.</p>
+<h1 id="Binary-Search-Tree"><a href="#Binary-Search-Tree" class="headerlink" title="Binary Search Tree"></a>Binary Search Tree</h1><p>**Binary Search Tree ** is a ‘node-based’ binary tree data structure which has the following properties.</p>
+<ul>
+<li>The left subtree of a node contains only nodes with keys lesser than the node’s key.</li>
+<li>The right subtree of a node contains only nodes with keys greater than the node’s key.</li>
+<li>The left and right subtree each must also be a binary search tree.</li>
+</ul>
+<h2 id="Binary-Search-Tree-Set1-Search-and-Insertion"><a href="#Binary-Search-Tree-Set1-Search-and-Insertion" class="headerlink" title="Binary Search Tree| Set1(Search and Insertion)"></a>Binary Search Tree| Set1(Search and Insertion)</h2><p>Operations like <strong>search</strong>, <strong>minimum</strong> and <strong>maximum</strong> can be done fast.</p>
+<h3 id="Searching-a-key"><a href="#Searching-a-key" class="headerlink" title="Searching a key"></a>Searching a key</h3><p>If we had a <strong>sorted array</strong>  we could performed a binary search.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BST</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        BST *left, *right;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">BST</span>();</span><br><span class="line">        <span class="built_in">BST</span>(<span class="keyword">int</span>);</span><br><span class="line">        <span class="function">BST* <span class="title">Insert</span><span class="params">(BST*, <span class="keyword">int</span>)</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">Inorder</span><span class="params">(BST*)</span></span>; <span class="comment">// Inorder traversal.</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// default constructor definition</span></span><br><span class="line">BST:: <span class="built_in">BST</span>() : <span class="built_in">data</span>(<span class="number">0</span>), <span class="built_in">left</span>(<span class="literal">NULL</span>),<span class="built_in">right</span>(<span class="literal">NULL</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Parameterized constructor definition</span></span><br><span class="line">BST::<span class="built_in">BST</span>(<span class="keyword">int</span> value)&#123;</span><br><span class="line">    data = value;</span><br><span class="line">    left = right = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Insert function definition.</span></span><br><span class="line">BST* BST :: <span class="built_in">Insert</span>(BST* root, <span class="keyword">int</span> value)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">        <span class="comment">// insert the first node, if root is NULL</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">BST</span>(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Insert data</span></span><br><span class="line">    <span class="keyword">if</span>(value &gt; root-&gt;data)&#123;</span><br><span class="line">        root-&gt;right = <span class="built_in">Insert</span>(root-&gt;right,value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        root-&gt;left = <span class="built_in">Insert</span>(root-&gt;left,value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Inorder traversal function</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BST::Inorder</span><span class="params">(BST* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Inorder</span>(root-&gt;left);</span><br><span class="line">    cout&lt;&lt;root-&gt;data&lt;&lt;endl;</span><br><span class="line">    <span class="built_in">Inorder</span>(root-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Driver code </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    BST b, *root = <span class="literal">NULL</span>; </span><br><span class="line">    root = b.<span class="built_in">Insert</span>(root, <span class="number">50</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">30</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">20</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">40</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">70</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">60</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">80</span>); </span><br><span class="line">  </span><br><span class="line">    b.<span class="built_in">Inorder</span>(root); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">class</span> <span class="title">BinarySearchTree</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Node</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> key;</span><br><span class="line">        <span class="keyword">public</span> Node left, right;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span>(<span class="params"><span class="built_in">int</span> item</span>)</span>&#123;</span><br><span class="line">            key = item;</span><br><span class="line">            left = right = NULL;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">Node root;</span><br><span class="line">BinarySearchTree()&#123;</span><br><span class="line">    root = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span>(<span class="params"><span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">    root = insertRec(root, key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node <span class="title">insertRec</span>(<span class="params">Node root, <span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">null</span>)&#123;</span><br><span class="line">        root = <span class="keyword">new</span> Node(key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(key &lt; root.key)</span><br><span class="line">        root.left = insertRec(root.left, key);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>( key&gt; root.key)</span><br><span class="line">        root.right = insertRec(root.right, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//return the (unchanged) node pointer</span></span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    inorderRec(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorderRec</span>(<span class="params">Node root</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">null</span>)&#123;</span><br><span class="line">        inorderRec(root.left);</span><br><span class="line">        Console.WriteLine(root.key);</span><br><span class="line">        inorderRec(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params">String[] args</span>)</span> </span><br><span class="line">&#123; </span><br><span class="line">    BinarySearchTree tree = <span class="keyword">new</span> BinarySearchTree(); </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* Let us create following BST </span></span><br><span class="line"><span class="comment">          50 </span></span><br><span class="line"><span class="comment">       /     \ </span></span><br><span class="line"><span class="comment">      30      70 </span></span><br><span class="line"><span class="comment">     /  \    /  \ </span></span><br><span class="line"><span class="comment">   20   40  60   80 */</span></span><br><span class="line">    tree.insert(<span class="number">50</span>); </span><br><span class="line">    tree.insert(<span class="number">30</span>); </span><br><span class="line">    tree.insert(<span class="number">20</span>); </span><br><span class="line">    tree.insert(<span class="number">40</span>); </span><br><span class="line">    tree.insert(<span class="number">70</span>); </span><br><span class="line">    tree.insert(<span class="number">60</span>); </span><br><span class="line">    tree.insert(<span class="number">80</span>); </span><br><span class="line">      </span><br><span class="line">    <span class="comment">// Print inorder traversal of the BST </span></span><br><span class="line">    tree.inorder(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/07/05/Chaikin-s-Algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1236,107 +1313,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/09/FunctionPointerC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/09/FunctionPointerC/" class="post-title-link" itemprop="url">FunctionPointerC++</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-09 22:55:25" itemprop="dateCreated datePublished" datetime="2020-06-09T22:55:25+09:00">2020-06-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-10 00:34:34" itemprop="dateModified" datetime="2020-06-10T00:34:34+09:00">2020-06-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=p4sDgQ-jao4">Recource Video</a><br>Thanks for the youtube channel, <code>The Cherno</code>. This post is basically a note I take to remind me what <code>Function Pointer</code> is about.</p>
-<p><code>Function Pointer</code> is a way to assign pointer to a variable.</p>
-<blockquote>
-<p>Pass a function as a parameter. </p>
-</blockquote>
-<h1 id="The-usual-way-about-function"><a href="#The-usual-way-about-function" class="headerlink" title="The usual way about function"></a>The usual way about function</h1><p>The implementation of a regular function should look like.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HelloWorld</span><span class="params">()</span></span>&#123;</span><br><span class="line">    std::cout&lt;&lt; <span class="string">&quot;Hello World!&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">HelloWorld</span>();</span><br><span class="line">    std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>The result should be like<br><img src="/uploads/HelloWorld.JPG" alt="idea"></p>
-<h2 id="What-if-we-try-to-use-auto-key-for-this-function"><a href="#What-if-we-try-to-use-auto-key-for-this-function" class="headerlink" title="What if we try to use auto key for this function?"></a>What if we try to use auto key for this function?</h2><p><img src="/uploads/auto1.JPG" alt="idea"><br>then you will see an error at the <code>auto</code>.<br>That is because what <code>HelloWorld()</code> return is a <code>void</code>.</p>
-<p>But what if we do like this. <code>auto function = HelloWorld</code><br><img src="/uploads/auto2.JPG" alt="idea"><br>then the error disapper.<br>This is because <code>HelloWorld</code> now return a <code>Function Pointer</code> instead of <code>void</code>.<br>so if we try to print the variable function in the next line, we will get the pointer of the <code>HelloWorld</code> function.<br><img src="/uploads/auto3.JPG" alt="idea"><br><img src="/uploads/functionPointer_result1.JPG" alt="idea"><br>Due to the implicitly conversion,</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> function = HelloWorld;</span><br><span class="line"><span class="comment">//much the same as </span></span><br><span class="line"><span class="keyword">auto</span> function = &amp;HelloWorld;</span><br></pre></td></tr></table></figure>
-<h2 id="What-Function-Pointer-is-about"><a href="#What-Function-Pointer-is-about" class="headerlink" title="What Function Pointer is about"></a>What Function Pointer is about</h2><blockquote>
-<p>Functions are of course just CPU instructions, and they are stored in somewhere in our binary/executable file.</p>
-</blockquote>
-<p>Find the <code>Hello World</code> function inside the CPU instruction and give it a <code>pointer</code>, to remember the location of this function code.</p>
-<p><img src="/uploads/CallFunctionTwice.JPG" alt="idea"><br><img src="/uploads/functionPointer_result2.JPG" alt="idea"></p>
-<p>so here we can assign a function to a varible.</p>
-<blockquote>
-<p>But what type is this <code>auto</code> actually?</p>
-</blockquote>
-<p>Here the auto hold the type write like</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in"><span class="keyword">void</span></span>(*function)()</span><br></pre></td></tr></table></figure>
-
-<p><code>void(*)()</code> is the type eventually, but since we have to get it a name so it became <code>void(*function)()</code>.<br>It works with any other name.(Like I named it jim here)<br><img src="/uploads/functionPointer_result3.JPG" alt="idea"></p>
-<p>Becauce this syntax is kinda confusing, programmer tend to either </p>
-<ul>
-<li>use <code>auto</code>, like what we did above </li>
-<li>use <code>typedef</code>/<code>using</code> it</li>
-</ul>
-<p><img src="/uploads/functionPointer_result4.JPG" alt="idea"><br>Here we make HelloWorld function require one <code>int</code> parameter<br><img src="/uploads/functionPointer_result5.JPG" alt="idea"></p>
-<h1 id="Back-to-programmer-want-to-use-function-pointer-in-the-first-place"><a href="#Back-to-programmer-want-to-use-function-pointer-in-the-first-place" class="headerlink" title="Back to programmer want to use function pointer in the first place"></a>Back to programmer want to use function pointer in the first place</h1><blockquote>
-<p>Programmers can pass one function to another function as a variable.</p>
-</blockquote>
-<p><img src="/uploads/functionPointer_result6.JPG" alt="idea"></p>
-<p>Here this code also show how to use <code>lambda function</code> instead of writing out the full function body.</p>
-<p>Reference: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=p4sDgQ-jao4">Cherno’s video</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1406,7 +1382,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1417,7 +1393,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
