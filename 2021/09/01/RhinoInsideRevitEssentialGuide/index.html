@@ -28,7 +28,7 @@
 <meta property="og:description" content="Webpage link: https:&#x2F;&#x2F;www.rhino3d.com&#x2F;inside&#x2F;revit&#x2F;1.0&#x2F;guides&#x2F;revit-revitThis article is the note after I read the essential guide from RIR. The Element DNA Keep in mind that not every element has geo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-01T13:20:21.000Z">
-<meta property="article:modified_time" content="2021-09-01T13:35:43.738Z">
+<meta property="article:modified_time" content="2021-09-01T14:01:14.310Z">
 <meta property="article:author" content="JimYuan">
 <meta property="article:tag" content="Rhino">
 <meta property="article:tag" content="Revit">
@@ -178,7 +178,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-09-01 22:20:21 / Modified: 22:35:43" itemprop="dateCreated datePublished" datetime="2021-09-01T22:20:21+09:00">2021-09-01</time>
+              <time title="Created: 2021-09-01 22:20:21 / Modified: 23:01:14" itemprop="dateCreated datePublished" datetime="2021-09-01T22:20:21+09:00">2021-09-01</time>
             </span>
 
           
@@ -209,6 +209,21 @@
 <li>Type<br>defines the <code>third</code> organization level. Type also carries <strong>value of type parameters</strong>. These values are fed in to the <em>Family</em> function to generate the element and calculated type parametes.</li>
 <li>Instance<br>carries <strong>transform information</strong> that places the element in the 2D or 3D space. It also carries values of instance paramters. These values are fed in to the <em>Family</em> function to generate the element and calculated instance parameters.</li>
 </ul>
+<h2 id="So-practically-we-feed-type-and-instance-information-into-the-family-function-to-generate-the-element-metadata-including-calculated-properties-and-geometry"><a href="#So-practically-we-feed-type-and-instance-information-into-the-family-function-to-generate-the-element-metadata-including-calculated-properties-and-geometry" class="headerlink" title="So practically, we feed type and instance information into the family function, to generate the element metadata(including calculated properties) and geometry."></a>So practically, we feed <strong>type</strong> and <strong>instance</strong> information into the family function, to generate the element metadata(including calculated properties) and geometry.</h2><p>The generated elements are stored in a Revit <strong>Document</strong>. They are also organized by a series of <strong>Containers</strong>.</p>
+<p>Subcategories can be think <em>as a property of geometry</em>.<br>When a Family function generates geometry, it can group them into subcategories of the main category.</p>
+<h1 id="Elements-amp-Instances"><a href="#Elements-amp-Instances" class="headerlink" title="Elements &amp; Instances"></a>Elements &amp; Instances</h1><ul>
+<li>Elements are the basic building block in Revit data model.</li>
+<li>Elements have <strong>Parameters</strong> that hold data associated with Element.<ul>
+<li>Bulit-in parameters</li>
+<li>custom parameters defined by user.</li>
+</ul>
+</li>
+<li>An Element could<ul>
+<li>has geometry (e.g. Walls(3D), Detail Components(2D))</li>
+<li>has <strong>no</strong> geometry (e.g. Project information)</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -232,7 +247,10 @@
     <a href="/2021/09/01/HyparLive202109/" rel="prev" title="HyparLive202109">
       <i class="fa fa-chevron-left"></i> HyparLive202109
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/07/BrepTransformation/" rel="next" title="BrepTransformation">
+      BrepTransformation <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -291,7 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Element-DNA"><span class="nav-number">1.</span> <span class="nav-text">The Element DNA</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Element-DNA"><span class="nav-number">1.</span> <span class="nav-text">The Element DNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#So-practically-we-feed-type-and-instance-information-into-the-family-function-to-generate-the-element-metadata-including-calculated-properties-and-geometry"><span class="nav-number">1.1.</span> <span class="nav-text">So practically, we feed type and instance information into the family function, to generate the element metadata(including calculated properties) and geometry.</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Elements-amp-Instances"><span class="nav-number">2.</span> <span class="nav-text">Elements &amp; Instances</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -305,7 +323,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
