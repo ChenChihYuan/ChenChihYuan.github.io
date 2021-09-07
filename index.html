@@ -177,7 +177,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-08 00:10:47" itemprop="dateModified" datetime="2021-09-08T00:10:47+09:00">2021-09-08</time>
+                <time title="Modified: 2021-09-08 00:13:01" itemprop="dateModified" datetime="2021-09-08T00:13:01+09:00">2021-09-08</time>
               </span>
 
           
@@ -197,7 +197,7 @@
 <p>So basically, in RhinoCommon, we have this <code>Brep.TransformComponent</code> function, this can allow developer to change(apply <strong>xform</strong>) on a certain <strong>component</strong>(vertice/ edge/ face) and the other components will changed accordingly as well.</p>
 <p>You could see the example code I provide here and also in the QA section page</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ComponentIndex&gt; ci = <span class="keyword">new</span> List&lt;ComponentIndex&gt;();</span><br><span class="line">    ci.Add(x.Faces[<span class="number">0</span>].ComponentIndex());</span><br><span class="line">    Transform moveDown  = Transform.Rotation(y, Vector3d.YAxis, x.Faces[<span class="number">0</span>].GetBoundingBox(<span class="literal">true</span>).Center);</span><br><span class="line">    x.TransformComponent(ci, moveDown, <span class="number">0.0001</span>, <span class="number">0.1</span>, <span class="literal">true</span>);</span><br><span class="line">    A = x;</span><br></pre></td></tr></table></figure>
-<p>And the result:<br><img src="source/uploads/BrepTransformation.jpg" alt="screenShot"></p>
+<p>And the result:<br><img src="uploads/BrepTransformation.jpg" alt="screenShot"></p>
 
       
     </div>
