@@ -146,6 +146,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/05/ErrorHandlingInGH/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/05/ErrorHandlingInGH/" class="post-title-link" itemprop="url">ErrorHandlingInGH</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-05 22:37:01 / Modified: 22:44:54" itemprop="dateCreated datePublished" datetime="2021-10-05T22:37:01+09:00">2021-10-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Recently, I wanna catch up the videos from Jose Lois. Hope this way I can rememeber the thing I’ve learned a bit longer.<br>Here’s the video:<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sJT_m4AxR0o">https://www.youtube.com/watch?v=sJT_m4AxR0o</a></p>
+<p>Things I’ve learned from the video is:</p>
+<ul>
+<li><strong>Sanity</strong>, can help construct the upper bound/ lower bound</li>
+<li>“<strong>List_Item</strong>“ component has <em>wrap</em> boolean toggle to help avoiding the boundary issue</li>
+<li>Whenever error happened, we could try use </li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Component.AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, <span class="string">&quot;Index out of bounds&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>This line make the script component yellow, and print the warning message.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/09/07/BrepTransformation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -177,7 +245,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-08 00:13:01" itemprop="dateModified" datetime="2021-09-08T00:13:01+09:00">2021-09-08</time>
+                <time title="Modified: 2021-09-08 00:16:33" itemprop="dateModified" datetime="2021-09-08T00:16:33+09:00">2021-09-08</time>
               </span>
 
           
@@ -193,7 +261,7 @@
       
           <p>Along my way of developing with RhinoCommon, I noticed that I have some certain patterns which I feel them handy and keep using from time to time.<br>This note is for the skill/ function I recently learned and implemented.</p>
 <hr>
-<p>Readers may refer this QA<br><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818">https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818</a></p>
+<p>Readers may refer to this QA<br><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818">https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818</a></p>
 <p>So basically, in RhinoCommon, we have this <code>Brep.TransformComponent</code> function, this can allow developer to change(apply <strong>xform</strong>) on a certain <strong>component</strong>(vertice/ edge/ face) and the other components will changed accordingly as well.</p>
 <p>You could see the example code I provide here and also in the QA section page</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ComponentIndex&gt; ci = <span class="keyword">new</span> List&lt;ComponentIndex&gt;();</span><br><span class="line">    ci.Add(x.Faces[<span class="number">0</span>].ComponentIndex());</span><br><span class="line">    Transform moveDown  = Transform.Rotation(y, Vector3d.YAxis, x.Faces[<span class="number">0</span>].GetBoundingBox(<span class="literal">true</span>).Center);</span><br><span class="line">    x.TransformComponent(ci, moveDown, <span class="number">0.0001</span>, <span class="number">0.1</span>, <span class="literal">true</span>);</span><br><span class="line">    A = x;</span><br></pre></td></tr></table></figure>
@@ -838,145 +906,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/06/BFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/06/BFS/" class="post-title-link" itemprop="url">BFS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-06 11:02:43" itemprop="dateCreated datePublished" datetime="2021-02-06T11:02:43+09:00">2021-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-08 00:34:39" itemprop="dateModified" datetime="2021-02-08T00:34:39+09:00">2021-02-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Breadth-first-search"><a href="#Breadth-first-search" class="headerlink" title="Breadth-first search"></a>Breadth-first search</h1><p><strong>Breath-first search</strong>(BFS) is an algorithm for traversing or searching <strong>tree</strong> or <strong>graph</strong> data structures. It starts ar the <strong>tree root</strong>(or some arbitrary node of a graph), and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level. -<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Breadth-first_search#:~:text=Breadth%2Dfirst%20search%20(BFS),tree%20or%20graph%20data%20structures.&text=It%20uses%20the%20opposite%20strategy,backtrack%20and%20expand%20other%20nodes.">Wiki</a></p>
-<h1 id="Queue-Method"><a href="#Queue-Method" class="headerlink" title="Queue Method"></a>Queue Method</h1><h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><hr>
-<p>Input:  A graph G and a starting vertex root of G<br>Output: Goal state. THe parent links trace the shortest path back to root.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">procedure BFS(G, root) is</span><br><span class="line">    let Q be a queue</span><br><span class="line">    label root as discovered</span><br><span class="line">    Q.enqueue(root)</span><br><span class="line">    while Q is not empty do</span><br><span class="line">        v := Q.dequeue()</span><br><span class="line">        if c is the goal then</span><br><span class="line">            return v</span><br><span class="line">        for all edges from v to w in G.</span><br></pre></td></tr></table></figure>
-
-<p>The concept can refer to this article, though it is in Japanese.<br><a target="_blank" rel="noopener" href="https://qiita.com/drken/items/996d80bcae64649a6580">BFS_queue</a><br><a target="_blank" rel="noopener" href="https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/990/">LeetCode_BFS</a></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelTravese</span>(TreeNode* root)&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; LvTraverse;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> LvTraverse;</span><br><span class="line">        </span><br><span class="line">        queue&lt;TreeNode*&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(root);</span><br><span class="line">        TreeNode* node = root;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">int</span> k = q.<span class="built_in">size</span>();</span><br><span class="line">            vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">            <span class="keyword">while</span>(k--)&#123;</span><br><span class="line">                root = q.<span class="built_in">front</span>();</span><br><span class="line">                tmp.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">                q.<span class="built_in">pop</span>();</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(root-&gt;left)</span><br><span class="line">                    q.<span class="built_in">push</span>(root-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;right)</span><br><span class="line">                    q.<span class="built_in">push</span>(root-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            LvTraverse.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> LvTraverse;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Recursive-Method"><a href="#Recursive-Method" class="headerlink" title="Recursive Method"></a>Recursive Method</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode* node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> lheight = <span class="built_in">height</span>(node-&gt;left);</span><br><span class="line">            <span class="keyword">int</span> rheight = <span class="built_in">height</span>(node-&gt;right);</span><br><span class="line">            <span class="keyword">return</span> lheight &gt; rheight ? lheight+<span class="number">1</span> : rheight+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">printlevelOrder</span>(TreeNode* root)&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; vecs;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;= <span class="built_in">height</span>(root);i++)&#123;</span><br><span class="line">            vector&lt;<span class="keyword">int</span>&gt; invec;</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root, i, invec);</span><br><span class="line">            vecs.<span class="built_in">push_back</span>(invec);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vecs;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddGivenLevel</span><span class="params">(TreeNode* root, <span class="keyword">int</span> level, vector&lt;<span class="keyword">int</span>&gt;&amp; vec)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(level ==<span class="number">1</span>)</span><br><span class="line">            vec.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(level&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root-&gt;left, level<span class="number">-1</span>, vec);</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root-&gt;right, level<span class="number">-1</span>, vec);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>Note:</p>
-<ol>
-<li>height can be found recursively. height(1_based) = level(0_based) + 1</li>
-</ol>
-<h1 id="Solve-Tree-Problems-Recursively"><a href="#Solve-Tree-Problems-Recursively" class="headerlink" title="Solve Tree Problems Recursively"></a>Solve Tree Problems Recursively</h1><p>Can refer to the LeetCode Page<a target="_blank" rel="noopener" href="https://leetcode.com/explore/learn/card/data-structure-tree/17/solve-problems-recursively/534/">LINK</a></p>
-<p>Typically, we can solve a tree problem recursively using a <strong>top-down approach</strong> or using a <strong>bottom-up approach</strong>.</p>
-<h2 id="Top-down-Solution"><a href="#Top-down-Solution" class="headerlink" title="Top-down Solution"></a>Top-down Solution</h2><p><strong>Top-down</strong> means that in each recursive call, we will <strong>visit the node first</strong> to come up with some values, and <strong>pass</strong> these values <strong>to its children</strong> when calling the function recursively.</p>
-<p>So the top-down solution can be consideredd as a kind of <strong>preorder</strong> travesal. To be specific, the recursive function <code>top-down(root, params)</code> works like this:</p>
-<ol>
-<li>return specific value for null node</li>
-<li>update the answer if needed                              // answer &lt;— params</li>
-<li>left_ans = top_down(root.left, left_params)              // left_params &lt;— root.val ,params</li>
-<li>right_ans = top_down(root.right, right_params)           // right_params &lt;— root.val , params</li>
-<li>return the answer if needed                              // answers &lt;— left_ans, right_ans</li>
-</ol>
-<h3 id="For-example-find-height-of-a-binary-Tree"><a href="#For-example-find-height-of-a-binary-Tree" class="headerlink" title="For example - find height of a binary Tree"></a>For example - find height of a binary Tree</h3><blockquote>
-<p>We know that depth of the root node is <code>1</code></p>
-</blockquote>
-<ol>
-<li>For each node, if we know its depth, we will know the depth of its children.</li>
-<li>Therefore, if we pass the depth of the node as a parameter when calling the function recursively, all the nodes will know their depth. </li>
-</ol>
-<hr>
-<ol>
-<li>return if root is <code>NULL</code></li>
-<li>if root is a leaf node:</li>
-<li><pre><code>answer = max(answer, depth)      // update the answer if needed
-</code></pre>
-</li>
-<li>maximum_depth(root.left, depth + 1)</li>
-<li>maximum_depth(root.right, depth+ 1)</li>
-</ol>
-<hr>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> answer;		       <span class="comment">// don&#x27;t forget to initialize answer before call maximum_depth</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">maximum_depth</span><span class="params">(TreeNode* root, <span class="keyword">int</span> depth)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) &#123;</span><br><span class="line">        answer = <span class="built_in">max</span>(answer, depth);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">maximum_depth</span>(root-&gt;left, depth + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">maximum_depth</span>(root-&gt;right, depth + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="Button-up-Solution"><a href="#Button-up-Solution" class="headerlink" title="Button-up Solution"></a>Button-up Solution</h2><p><code>Button-up</code> is another recursive solution. In each recursive call, we will firstly call the function recursively for <strong>all the children nodes</strong> and then come up with the answer according to the returned valued and the value of the current node itself. This process can be regraded as a kind of <strong>postordered</strong> traversal. Typically, a “button-up” recursive function <code>bottom_up(root)</code> will be something like this:</p>
-<ol>
-<li>return specific value for null node</li>
-<li>left_ans = bottom_up(root.left)          // call function recursively for left child</li>
-<li>right_ans = bottom_up(root.right)        // call function recursively for right child</li>
-<li>return answers   // answer &lt;– left_ans, right_ans, root.val</li>
-</ol>
-<hr>
-<h3 id="For-example-find-height-of-a-binary-Tree-1"><a href="#For-example-find-height-of-a-binary-Tree-1" class="headerlink" title="For example - find height of a binary Tree"></a>For example - find height of a binary Tree</h3><blockquote>
-<p>Same exmaple, different perspective.</p>
-</blockquote>
-<ol>
-<li><p>If we know the maximum depth <code>l</code> of the subtree rooted at its <strong>left</strong> child and the maximum depth <code>r</code> of the subtree rooted at its <strong>right</strong> child, can we answer the previous question? </p>
-</li>
-<li><p>Of course yes, we can choose the maximum between them and add 1 to get the maximum depth of the subtree rooted at the current node. That is <code>x = max(l,r) + 1</code></p>
-</li>
-<li><p>return 0 if root is null</p>
-</li>
-<li><p>left_depth = maximum_depth(root.left)</p>
-</li>
-<li><p>right_depth = maximum_depth(root.right)</p>
-</li>
-<li><p>return max(left_depth, right_depth) + 1</p>
-</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximum_depth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!root) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;                                 <span class="comment">// return 0 for null node</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> left_depth = <span class="built_in">maximum_depth</span>(root-&gt;left);</span><br><span class="line">	<span class="keyword">int</span> right_depth = <span class="built_in">maximum_depth</span>(root-&gt;right);</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">max</span>(left_depth, right_depth) + <span class="number">1</span>;	  <span class="comment">// return depth of the subtree rooted at root</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1042,7 +975,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1053,7 +986,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
