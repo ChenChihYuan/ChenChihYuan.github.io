@@ -20,15 +20,24 @@
     var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="JimYuan&#39;s Blog">
-<meta property="og:url" content="https://chenchihyuan.github.io/archives/2021/04/index.html">
+  <meta name="description" content="Recently, I tried RhinoInsideRevit a bit. I found that RIR has this Direct Shape to help deliver geometry from Rhino&#x2F;Grasshopper to Revit.I would like to note down some thought I currently have while">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DirectShape_Introduction">
+<meta property="og:url" content="https://chenchihyuan.github.io/2021/10/06/DirectShape-Introduction/index.html">
 <meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="Recently, I tried RhinoInsideRevit a bit. I found that RIR has this Direct Shape to help deliver geometry from Rhino&#x2F;Grasshopper to Revit.I would like to note down some thought I currently have while">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-06T06:26:33.000Z">
+<meta property="article:modified_time" content="2021-10-06T07:21:19.951Z">
 <meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="Rhino">
+<meta property="article:tag" content="Revit">
+<meta property="article:tag" content="RhinoInsideRevit">
+<meta property="article:tag" content="IFC">
+<meta property="article:tag" content="DirectShape">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://chenchihyuan.github.io/archives/2021/04/">
+<link rel="canonical" href="https://chenchihyuan.github.io/2021/10/06/DirectShape-Introduction/">
 
 
 <script id="page-configurations">
@@ -36,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | JimYuan's Blog</title>
+  <title>DirectShape_Introduction | JimYuan's Blog</title>
   
 
 
@@ -140,51 +149,99 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">OK! 32 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/06/DirectShape-Introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DirectShape_Introduction
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-06 15:26:33 / Modified: 16:21:19" itemprop="dateCreated datePublished" datetime="2021-10-06T15:26:33+09:00">2021-10-06</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <p>Recently, I tried RhinoInsideRevit a bit. I found that RIR has this <code>Direct Shape</code> to help deliver geometry from Rhino/Grasshopper to Revit.<br>I would like to note down some thought I currently have while I developing alongside.</p>
+<p>According to the RevitAPI doc page about <code>DirectShape</code>:<br><a target="_blank" rel="noopener" href="https://www.revitapidocs.com/2022/bfbd137b-c2c2-71bb-6f4a-992d0dcf6ea8.htm">https://www.revitapidocs.com/2022/bfbd137b-c2c2-71bb-6f4a-992d0dcf6ea8.htm</a></p>
+<blockquote>
+<blockquote>
+<p>This class is used to store externally created geometric shapes. Primary intended use is for importing shapes from other data formats such as IFC or STEP. A DirectShape object may be assigned a category. That will affect how that object is displayed in Revit.</p>
+</blockquote>
+</blockquote>
+<p>So, which may mean that although RhinoInsideRevit might be a get-around solution without producing/ exporting a IFC file by building the Rhino on Revit (In runtime, Revit occupied some memories, and inside those memeories Rhino takes some part to be built), internally, both (IFC-way and RIR) use this <code>DirectShape</code> to help external geometry to be put inside Reivt.</p>
+<p>About what RhinoInsideRevit, we can refer this QA interview video from the official developers group.<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kckMA-GdsLc&amp;t=6451s">https://www.youtube.com/watch?v=kckMA-GdsLc&amp;t=6451s</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-04-04T22:05:08+09:00"
-              content="2021-04-04">
-          04-04
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Rhino/" rel="tag"># Rhino</a>
+              <a href="/tags/Revit/" rel="tag"># Revit</a>
+              <a href="/tags/RhinoInsideRevit/" rel="tag"># RhinoInsideRevit</a>
+              <a href="/tags/IFC/" rel="tag"># IFC</a>
+              <a href="/tags/DirectShape/" rel="tag"># DirectShape</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/04/UnitTestingForBeginner/" itemprop="url">
-            <span itemprop="name">UnitTestingForBeginner</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/05/ErrorHandlingInGH/" rel="prev" title="ErrorHandlingInGH">
+      <i class="fa fa-chevron-left"></i> ErrorHandlingInGH
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
