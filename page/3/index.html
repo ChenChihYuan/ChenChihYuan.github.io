@@ -146,6 +146,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/24/IsoVist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/24/IsoVist/" class="post-title-link" itemprop="url">IsoVist</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-24 02:55:00 / Modified: 22:44:31" itemprop="dateCreated datePublished" datetime="2020-06-24T02:55:00+09:00">2020-06-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>可能大家有接觸過用Grasshopper作環境分析，那可能會知道<code>Isovist</code>這個方便的component。從下面看到這Component可以幫助決定<strong>視野範圍</strong>。<br><img src="/uploads/IsoVistDefault.gif" alt="Orientation"></p>
+<blockquote>
+<p>原理很簡單就是2D的圓看根最近的建築物交界到哪裡。</p>
+</blockquote>
+<p>建築物的線我是透過<code>Elk</code>放入OpenStreetMap達成的。可以參考一下<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=EJ5_0dQiKPc&t=411s">OSM_Through_Elk</a><br>或是我的方式:<br><img src="/uploads/IsoVist.jpg" alt="Orientation"></p>
+<h1 id="Csharp-code"><a href="#Csharp-code" class="headerlink" title="Csharp code"></a>Csharp code</h1><p>我意外看到這篇討論，想說自己也來實作一下用C#做一個IsoVist之後討論一下怎麼加速，跟後續可能可以玩的方向<br><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/isovist-optimization/103024/4">IsoVist_Optimization</a><br>而我自己的Code</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">Point3d PlanePt, <span class="built_in">int</span> Count, <span class="built_in">int</span> Radius, List&lt;Polyline&gt; ObsCrv, <span class="keyword">ref</span> <span class="built_in">object</span> Points, <span class="keyword">ref</span> <span class="built_in">object</span> C, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    List&lt;Point3d&gt; pts = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">    Circle cir = <span class="keyword">new</span> Circle(PlanePt, Radius);</span><br><span class="line">    Curve CirCrv = cir.ToNurbsCurve();</span><br><span class="line">    Point3d[] CirPts;</span><br><span class="line">    <span class="built_in">double</span>[] CirPts_double = CirCrv.DivideByCount(Count, <span class="literal">true</span>, <span class="keyword">out</span> CirPts);</span><br><span class="line">    List&lt;Point3d&gt; result_net = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> k = <span class="number">0</span>; k &lt; Count; k++)&#123;</span><br><span class="line">      Line ln = <span class="keyword">new</span> Line(PlanePt, CirPts[k]);</span><br><span class="line">      List&lt;Point3d&gt; ln_Pts = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">      <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; ObsCrv.Count; i++)&#123;</span><br><span class="line">        Line[] segs = ObsCrv[i].GetSegments();</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> j = <span class="number">0</span>; j &lt; segs.Length; j++)&#123;</span><br><span class="line">          <span class="built_in">double</span> a;</span><br><span class="line">          <span class="built_in">double</span> b;</span><br><span class="line">          Intersection.LineLine(ln, segs[j], <span class="keyword">out</span> a, <span class="keyword">out</span> b, <span class="number">0.00000001</span>, <span class="literal">true</span>);</span><br><span class="line">          <span class="keyword">if</span>(Intersection.LineLine(ln, segs[j], <span class="keyword">out</span> a, <span class="keyword">out</span> b, <span class="number">0.00000001</span>, <span class="literal">true</span>))&#123;</span><br><span class="line">            ln_Pts.Add(segs[j].PointAt(b));</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      Point3d closest_pt;</span><br><span class="line">      <span class="keyword">if</span>(ln_Pts.Count &gt; <span class="number">0</span>)</span><br><span class="line">        closest_pt = Point3dList.ClosestPointInList(ln_Pts, PlanePt);</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        closest_pt = CirPts[k];</span><br><span class="line">      &#125;</span><br><span class="line">      result_net.Add(closest_pt);</span><br><span class="line">    &#125;</span><br><span class="line">    A = result_net;</span><br><span class="line">    C = CirPts;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="演算法的想法"><a href="#演算法的想法" class="headerlink" title="演算法的想法"></a>演算法的想法</h2><ul>
+<li>平分個一個以人為圓點的圓，分成Count分</li>
+<li>用圓點跟在圓周上的點連線<code>ln</code> 和 每個建築物的牆壁<code>segs[j]</code>找相交點</li>
+<li>有兩個以上交點的話找離圓點最近的，沒有跟建築物相交的話 回傳圓周上的點</li>
+</ul>
+<h2 id="關於LineLine的相交"><a href="#關於LineLine的相交" class="headerlink" title="關於LineLine的相交"></a>關於LineLine的相交</h2><p>在部落格我分別寫了兩篇(2D/3D)的線與線相交的判定。<br>三維的線與線相交其實是看<code>兩條線的最短距離&lt;容許值</code></p>
+<p>ParametricCamp有比較完整的介紹<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=iZdAJ2CwmCk">Computational Design Live Stream #14</a></p>
+<p>論壇po文想達成的是盡量加速這個運算，之後我也能往那方向想，目前是跟Component效能差不多<br><img src="/uploads/IsoVist_Performance.JPG" alt="Orientation"></p>
+<ul>
+<li>目前的想到的想法是可以先對那些牆壁的line以角度sort過一遍，應該可以加速一個<code>for-loop</code></li>
+<li><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><img src="/uploads/IsoVistJim.gif" alt="Orientation"></li>
+</ul>
+<h1 id="可能的發展"><a href="#可能的發展" class="headerlink" title="可能的發展"></a>可能的發展</h1><h3 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h3><p>加速的理由有很多，</p>
+<ol>
+<li>為了一次分析多一點人</li>
+<li>讓計算時間變短-Real time result</li>
+</ol>
+<h3 id="導入Magnetic-field"><a href="#導入Magnetic-field" class="headerlink" title="導入Magnetic field"></a>導入Magnetic field</h3><p>在Grasshopper裡面有Fields對人流動線的分析應該會很有幫助<br>有興趣可以看看這個<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zSI1StT07LM">https://www.youtube.com/watch?v=zSI1StT07LM</a></p>
+<h3 id="扇形視野"><a href="#扇形視野" class="headerlink" title="扇形視野"></a>扇形視野</h3><p>最後可能可以分析的是更接近真實的視野，不是360度。轉成170之類的。<br><img src="/uploads/GettingLost.gif" alt="Orientation"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/16/EventAndDelegates/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1294,95 +1378,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/05/08/slider-modify/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/08/slider-modify/" class="post-title-link" itemprop="url">slider_modify</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-08 23:01:23" itemprop="dateCreated datePublished" datetime="2020-05-08T23:01:23+09:00">2020-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-09 16:10:51" itemprop="dateModified" datetime="2020-05-09T16:10:51+09:00">2020-05-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因為在grasshopper中slider的上下界是在創建的時後就被確定的，像是直接在canvas中輸入<code>0..10.0..20.0</code>這樣就能產生slider滿足</p>
-<ul>
-<li>上界是20.0，下界是<code>0.0</code></li>
-<li>精準度是小數點下一位</li>
-<li>slider產生時的起始值就是<code>10.0</code></li>
-</ul>
-<p>不過這樣做不能runtime的時候更改slider的上下界，雖然必要性沒有很大，而且想要在runtime有新的值不一定要改到slider本身，但因為相對起來slider還是滿直觀的，所以找了一下在runtime更改slider的文章。<br>主要內容參考來自<a target="_blank" rel="noopener" href="http://james-ramsden.com/remotely-change-value-of-number-slider-grasshopper/">James-Ramsden這篇</a></p>
-<h1 id="內文"><a href="#內文" class="headerlink" title="內文"></a>內文</h1><p>有時候會想要很明確掌握slider的範圍。像下面我自己嘗試的一小例子。</p>
-<p><img src="/uploads/SliderModifier0.png" alt="Node"></p>
-<p><img src="/uploads/SliderModifier1.gif" alt="Node"></p>
-<p>這個範例的邏輯很簡單，就是有個大的矩形然後我用大矩形的四個頂點做出四個空間，但因為我想要讓大矩形長寬是可以調整的，如果調整的話其他四個房間的slider如果能在runtie的時候就決定上界到多少就不會有超過跟重疊的狀況了。<br>所以用一下以下的C# code可以幫助決定上下界。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">double</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>]; <span class="comment">//get the first thing connected to the first input of this component</span></span><br><span class="line">    <span class="keyword">var</span> slider = (Grasshopper.Kernel.Special.GH_NumberSlider) input; <span class="comment">//try to cast that thing as a slider</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(slider != <span class="literal">null</span>) <span class="comment">//if the component was successfully cast as a slider</span></span><br><span class="line">    &#123;</span><br><span class="line">      slider.Slider.Value = (<span class="built_in">decimal</span>) y;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>這是讓<code>y</code>的值去寫進<code>x</code>裡面<br><img src="/uploads/SliderModifier2.gif" alt="Node"><br>但你也可以用<code>slider.Slider.Minimum</code> 和 <code>slider.Slider.Maximum</code>去決定他的上下界。<br>比如我x的上界會等於y值的一半。就可以這樣寫</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">double</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>]; <span class="comment">//get the first thing connected to the first input of this component</span></span><br><span class="line">    <span class="keyword">var</span> slider = (Grasshopper.Kernel.Special.GH_NumberSlider) input; <span class="comment">//try to cast that thing as a slider</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(slider != <span class="literal">null</span>) <span class="comment">//if the component was successfully cast as a slider</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span>(slider.Slider.Value &gt; (<span class="built_in">decimal</span>) y / <span class="number">2</span>)&#123;</span><br><span class="line">        slider.Slider.Value = (<span class="built_in">decimal</span>) y / <span class="number">2</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      slider.Slider.Maximum = (<span class="built_in">decimal</span>) y/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>我有寫一個防護的判斷如果原本<code>x</code>的值就超過<code>y/2</code>的話我就讓值變成<code>x = y/2</code> 就不會有奇怪的UI出現了XD<br><img src="/uploads/SliderModifier3.gif" alt="Node"></p>
-<p>那前面房間長寬slider上下界可以這樣修改</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">object</span> y, <span class="built_in">double</span> z, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input1 = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> slider1 = (Grasshopper.Kernel.Special.GH_NumberSlider) input1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> input2 = Component.Params.Input[<span class="number">1</span>].Sources[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> slider2 = (Grasshopper.Kernel.Special.GH_NumberSlider) input2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">decimal</span> val = slider2.Slider.Value;</span><br><span class="line">    <span class="keyword">if</span>(slider1 != <span class="literal">null</span> &amp;&amp; slider2 != <span class="literal">null</span>)&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(slider2.Slider.Value &gt; (<span class="built_in">decimal</span>) z - slider1.Slider.Value)&#123;</span><br><span class="line">        slider2.Slider.Value = (<span class="built_in">decimal</span>) z - slider1.Slider.Value;</span><br><span class="line">      &#125;</span><br><span class="line">      slider2.Slider.Minimum = <span class="number">0</span>;</span><br><span class="line">      slider2.Slider.Maximum = (<span class="built_in">decimal</span>) z - slider1.Slider.Value;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(slider1.Slider.Value &gt; (<span class="built_in">decimal</span>) z - slider2.Slider.Value)&#123;</span><br><span class="line">        slider1.Slider.Value = (<span class="built_in">decimal</span>) z - slider2.Slider.Value;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      slider1.Slider.Minimum = <span class="number">0</span>;</span><br><span class="line">      slider1.Slider.Maximum = (<span class="built_in">decimal</span>) z - slider2.Slider.Value;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//A = val;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以觀察一下<code>Dining Room</code> 和 <code>Living Room</code> 的水平方向 slider 調整一個另一個的上下界也會改，主要的邏輯是 <code>大矩形的寬 = DiningRoom_width + LivingRoom_Width</code>。<br>這是邊界條件啦<br><img src="/uploads/SliderModifier4.gif" alt="Node"></p>
-<p>碰到了XD 但沒有超過~</p>
-<p>最後阿，有個可以換slider顏色的方法滿酷的，雖然不知道有甚麼用<br><img src="/uploads/SliderModifier5.gif" alt="Node"></p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">double</span> y, System.Drawing.Color z, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>]; <span class="comment">//get the first thing connected to the first input of this component</span></span><br><span class="line">    <span class="keyword">var</span> slider = (Grasshopper.Kernel.Special.GH_NumberSlider) input; <span class="comment">//try to cast that thing as a slider</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(slider != <span class="literal">null</span>) <span class="comment">//if the component was successfully cast as a slider</span></span><br><span class="line">    &#123;</span><br><span class="line">      slider.Slider.DrawControlBackground = <span class="literal">true</span>;</span><br><span class="line">      slider.Slider.DrawControlBorder = <span class="literal">true</span>;</span><br><span class="line">      slider.Slider.ControlEdgeColour = Color.Blue;</span><br><span class="line">      slider.Slider.ControlBackColour = z;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>要記得先<code>using System.Drawing;</code> 這行喔</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="http://james-ramsden.com/remotely-change-value-of-number-slider-grasshopper/">James-Ramsden這篇</a><br>James感覺也是grasshopper/Revit相關的部落客/工程師，有很多很好的資源，推薦。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1452,7 +1447,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1463,7 +1458,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
