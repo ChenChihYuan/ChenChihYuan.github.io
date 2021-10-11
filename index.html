@@ -146,6 +146,186 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/11/d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/11/d/" class="post-title-link" itemprop="url">d</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-11 12:41:48" itemprop="dateCreated datePublished" datetime="2021-10-11T12:41:48+09:00">2021-10-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/11/g/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/11/g/" class="post-title-link" itemprop="url">g</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-11 12:41:44" itemprop="dateCreated datePublished" datetime="2021-10-11T12:41:44+09:00">2021-10-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/11/PhysicalSimulationIntrodutionInGH/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/11/PhysicalSimulationIntrodutionInGH/" class="post-title-link" itemprop="url">PhysicalSimulationIntrodutionInGH</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-11 11:54:46 / Modified: 12:41:31" itemprop="dateCreated datePublished" datetime="2021-10-11T11:54:46+09:00">2021-10-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>In grasshopper field, there’re some useful and famous plug-ins for phyiscal simulation. Just to mention a few, Kangaroo, Flexhopper,… and etc.<br>I always think it’s more fun to play around the modelling which mimic the realistic phyiscal behaviours. This post is for noting down some developers’ thoughts while developing the phyiscal simulation tools.</p>
+<p>And again this amazing tutorial is from <code>Professor. Jose</code>.<br>Here’s the link:</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kG-AxzMPjxk&amp;t=5311s">https://www.youtube.com/watch?v=kG-AxzMPjxk&amp;t=5311s</a></p>
+<p>Also, one important concept before doing simulations would be <code>iteration</code>.</p>
+<h2 id="Iteration"><a href="#Iteration" class="headerlink" title="Iteration"></a>Iteration</h2><p>Usually, the physic behaviors are related to time, meaning it’s a function of <strong>time</strong>.<br>In code, we need to make sure the result of previous round can be brought to the next round.<br>Might be seen something like this.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NextRound += PreviousRound;</span><br></pre></td></tr></table></figure>
+<h2 id="Iteration-In-C-script-Component"><a href="#Iteration-In-C-script-Component" class="headerlink" title="Iteration In C# script Component"></a>Iteration In C# script Component</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ek2iL88WqGQ&amp;t=497s">https://www.youtube.com/watch?v=ek2iL88WqGQ&amp;t=497s</a><br>Professor Jose well explained the <code>scope</code> of the variables in C# script component, which is one of the vital ingredient before you do any simualtion related to time.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>Here I would like to share one of the example in this tutorial.<br><img src="/uploads/DampingRope.gif" alt="idea"></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">bool</span> reset, Point3d anchorPoint, Point3d startPoint, <span class="built_in">double</span> radius, Vector3d gravity, <span class="built_in">double</span> stiffness, <span class="built_in">double</span> friction, <span class="keyword">ref</span> <span class="built_in">object</span> L, <span class="keyword">ref</span> <span class="built_in">object</span> S, <span class="keyword">ref</span> <span class="built_in">object</span> P, <span class="keyword">ref</span> <span class="built_in">object</span> V</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//Algorithm</span></span><br><span class="line">    <span class="keyword">if</span>(reset)</span><br><span class="line">    &#123;</span><br><span class="line">      currentLocation = startPoint;</span><br><span class="line">      currentVelocity = Vector3d.Zero;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Calculate all forces acting on the particle</span></span><br><span class="line">    Vector3d gravityForce = gravity;</span><br><span class="line">    Vector3d springForce = -stiffness * (currentLocation - anchorPoint);</span><br><span class="line"></span><br><span class="line">    Vector3d totalForces = gravityForce + springForce;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update the currentVelocity with all the acting forces</span></span><br><span class="line">    currentVelocity += totalForces;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Damp down velocity a little assuming friction on the system</span></span><br><span class="line">    currentVelocity *= friction;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update the location based on the velocity</span></span><br><span class="line">    currentLocation += currentVelocity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Output</span></span><br><span class="line">    L = <span class="keyword">new</span> Line(anchorPoint, currentLocation);</span><br><span class="line">    S = <span class="keyword">new</span> Sphere(currentLocation, radius);</span><br><span class="line">    P = currentLocation;</span><br><span class="line">    V = currentVelocity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line">  Point3d currentLocation = Point3d.Unset;</span><br><span class="line">  Vector3d currentVelocity = Vector3d.Unset;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/07/JSON-FirstGlance/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -658,253 +838,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/08/17/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/17/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-17 21:57:50" itemprop="dateCreated datePublished" datetime="2021-08-17T21:57:50+09:00">2021-08-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/04/04/UnitTestingForBeginner/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/04/UnitTestingForBeginner/" class="post-title-link" itemprop="url">UnitTestingForBeginner</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-04 22:05:08" itemprop="dateCreated datePublished" datetime="2021-04-04T22:05:08+09:00">2021-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 00:50:10" itemprop="dateModified" datetime="2021-04-05T00:50:10+09:00">2021-04-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Type-of-Tests"><a href="#Type-of-Tests" class="headerlink" title="Type of Tests"></a>Type of Tests</h1><ul>
-<li>Unit</li>
-<li>Integration</li>
-<li>End-to-End</li>
-</ul>
-<h2 id="Unit-test"><a href="#Unit-test" class="headerlink" title="Unit test"></a>Unit test</h2><p>Tests a unit of an application without its <strong>external</strong> dependencies</p>
-<ul>
-<li>Cheap to write</li>
-<li>Execute fast</li>
-<li>Don’t give a lot of confidence</li>
-</ul>
-<h2 id="Integration-Test"><a href="#Integration-Test" class="headerlink" title="Integration Test"></a>Integration Test</h2><p>Tests the application with its <strong>external</strong> dependencies</p>
-<ul>
-<li>Take longer to execute</li>
-<li>Give more confidence </li>
-</ul>
-<h2 id="End-to-End-Test"><a href="#End-to-End-Test" class="headerlink" title="End to End Test"></a>End to End Test</h2><p>Drives an application through its UI</p>
-<ul>
-<li>Give you the greatest confidence</li>
-<li>very slow</li>
-<li>very brittle</li>
-</ul>
-<h1 id="Testing-Frameworks"><a href="#Testing-Frameworks" class="headerlink" title="Testing Frameworks"></a>Testing Frameworks</h1><ul>
-<li>NUnit</li>
-<li>MSTest <code>(embed in VisualStudio)</code></li>
-<li>xUnit</li>
-</ul>
-<p>All of the Testing Frameworks have:</p>
-<ul>
-<li>Library </li>
-<li>Test runner </li>
-</ul>
-<p>Good pracitce for naming the TestingMetod:<br><strong>FunctionName_Condition_ExpectReturn</strong></p>
-<p>Inside every <strong>UnitTest</strong> with triple A</p>
-<ol>
-<li>Arrange</li>
-<li>Act</li>
-<li>Assert</li>
-</ol>
-<h1 id="Test-driven-Development-TDD"><a href="#Test-driven-Development-TDD" class="headerlink" title="Test-driven Development (TDD"></a>Test-driven Development (TDD</h1><ol>
-<li>write a failing test</li>
-<li>Write the simplest code to make the test pass.</li>
-<li>Refactor if necessary.</li>
-</ol>
-<h2 id="Benefits-of-TDD"><a href="#Benefits-of-TDD" class="headerlink" title="Benefits of TDD"></a>Benefits of TDD</h2><ul>
-<li>Testable Source Code</li>
-<li>Full Coverage by Tests</li>
-<li>Simpler Implementation</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/09/Construct-BinaryTreefromPostorder-Inorder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/09/Construct-BinaryTreefromPostorder-Inorder/" class="post-title-link" itemprop="url">Construct_BinaryTreefromPostorder_Inorder</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-09 23:23:02" itemprop="dateCreated datePublished" datetime="2021-02-09T23:23:02+09:00">2021-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-10 20:17:07" itemprop="dateModified" datetime="2021-02-10T20:17:07+09:00">2021-02-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -974,7 +907,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -985,7 +918,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
