@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="What Exactly Is Html5 https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Glossary&#x2F;HTML5 https:&#x2F;&#x2F;html.spec.whatwg.org&#x2F;  Living StandardThe HTML standard is a document that describes how HTML should work Role of">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IntroToTheWeb_Section_3">
+<meta property="og:url" content="https://chenchihyuan.github.io/2021/10/20/IntroToTheWeb-Section-3/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="What Exactly Is Html5 https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Glossary&#x2F;HTML5 https:&#x2F;&#x2F;html.spec.whatwg.org&#x2F;  Living StandardThe HTML standard is a document that describes how HTML should work Role of">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chenchihyuan.github.io/uploads/Emmet.gif">
+<meta property="article:published_time" content="2021-10-20T08:46:23.000Z">
+<meta property="article:modified_time" content="2021-10-21T12:15:18.077Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenchihyuan.github.io/uploads/Emmet.gif">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2021/10/20/IntroToTheWeb-Section-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>IntroToTheWeb_Section_3 | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/20/IntroToTheWeb-Section-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IntroToTheWeb_Section_3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-20 17:46:23" itemprop="dateCreated datePublished" datetime="2021-10-20T17:46:23+09:00">2021-10-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-21 21:15:18" itemprop="dateModified" datetime="2021-10-21T21:15:18+09:00">2021-10-21</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="What-Exactly-Is-Html5"><a href="#What-Exactly-Is-Html5" class="headerlink" title="What Exactly Is Html5"></a>What Exactly Is Html5</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5">https://developer.mozilla.org/en-US/docs/Glossary/HTML5</a></li>
+<li><a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/">https://html.spec.whatwg.org/</a></li>
+</ul>
+<h2 id="Living-Standard"><a href="#Living-Standard" class="headerlink" title="Living Standard"></a>Living Standard</h2><p>The HTML standard is a document that <strong>describes how HTML should work</strong></p>
+<h2 id="Role-of-Browsers"><a href="#Role-of-Browsers" class="headerlink" title="Role of Browsers"></a>Role of Browsers</h2><p><strong>The standard</strong> describes the rules of HTML, but browsers actaully have to do the work and implement HTML according to those rules.</p>
+<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><p>HTML5 is the lastest evolution of the standard that defines HTML. It includes new <strong>elements &amp; features</strong> for browsers to implement.</p>
+<h1 id="Block-vs-Inline-Elements"><a href="#Block-vs-Inline-Elements" class="headerlink" title="Block vs Inline Elements"></a>Block vs Inline Elements</h1><ul>
+<li>INLINE elements </li>
+<li>BLOCK elements</li>
+</ul>
+<h2 id="The-Content-Division-element"><a href="#The-Content-Division-element" class="headerlink" title=": The Content Division element"></a><div>: The Content Division element</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Generic container</em><br>Div helps us the group the content together and style them all in once.</p>
+<h1 id="An-Odd-Assortment-of-Elements-HR-BR-Sup-Sub"><a href="#An-Odd-Assortment-of-Elements-HR-BR-Sup-Sub" class="headerlink" title="An Odd Assortment of Elements: HR, BR, Sup, Sub"></a>An Odd Assortment of Elements: HR, BR, Sup, Sub</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- <span class="tag">&lt;<span class="name">hr</span>&gt;</span> : https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr</span><br><span class="line">- <span class="tag">&lt;<span class="name">br</span>&gt;</span> : https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br</span><br><span class="line">- <span class="tag">&lt;<span class="name">sup</span>&gt;</span><span class="tag">&lt;/<span class="name">sup</span>&gt;</span>: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup</span><br><span class="line">- <span class="tag">&lt;<span class="name">sub</span>&gt;</span><span class="tag">&lt;/<span class="name">sub</span>&gt;</span>: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub</span><br></pre></td></tr></table></figure>
+
+<h1 id="Entity-Code"><a href="#Entity-Code" class="headerlink" title="Entity Code"></a>Entity Code</h1><p><a target="_blank" rel="noopener" href="https://dev.w3.org/html5/html-author/charref">https://dev.w3.org/html5/html-author/charref</a><br><a target="_blank" rel="noopener" href="https://www.w3schools.com/html/html_entities.asp">https://www.w3schools.com/html/html_entities.asp</a></p>
+<blockquote>
+<p>Some characters are reserved in HTML. If you use the less than (&lt;) or greater than (&gt;) signs in your text, the browser might mix them with tags. Character entities are used to display reserved characters in HTML.</p>
+</blockquote>
+<h1 id="Intro-to-Semantic-Markup-MEANINGFUL-markup"><a href="#Intro-to-Semantic-Markup-MEANINGFUL-markup" class="headerlink" title="Intro to Semantic Markup - MEANINGFUL markup"></a>Intro to Semantic Markup - MEANINGFUL markup</h1><p>Semantic - relating to meaning</p>
+<blockquote>
+<p>what purpose of role does that HTML element have?</p>
+</blockquote>
+<p>Semantic Markup can organize your html code well, and also google can crawl your page easily.</p>
+<h2 id="Playing-with-Semantic-Elements"><a href="#Playing-with-Semantic-Elements" class="headerlink" title="Playing with Semantic Elements"></a>Playing with Semantic Elements</h2><h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main</a></p>
+<blockquote>
+<p>The <code>&lt;main&gt;</code> HTML element represents the dominant content of the <code>&lt;body&gt;</code> of a document. </p>
+</blockquote>
+<h3 id="nav"><a href="#nav" class="headerlink" title="nav"></a>nav</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav</a></p>
+<blockquote>
+<p>The <code>&lt;nav&gt;</code> HTML element represents a section of a page whose purpose is to provide <strong>navigation links</strong>, either within the current document or to other documents. </p>
+</blockquote>
+<h3 id="section"><a href="#section" class="headerlink" title="section"></a>section</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section</a></p>
+<h3 id="article"><a href="#article" class="headerlink" title="article"></a>article</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article</a></p>
+<blockquote>
+<p>The <code>&lt;article&gt;</code> HTML element represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., in syndication).</p>
+</blockquote>
+<h3 id="aside"><a href="#aside" class="headerlink" title="aside"></a>aside</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/search?q=aside">https://developer.mozilla.org/en-US/search?q=aside</a></p>
+<blockquote>
+<p>The <code>&lt;aside&gt;</code> HTML element represents a portion of a document whose content is only indirectly related to the document’s main content.</p>
+</blockquote>
+<h1 id="VSCode-Tip-Emmet"><a href="#VSCode-Tip-Emmet" class="headerlink" title="VSCode Tip: Emmet"></a>VSCode Tip: Emmet</h1><p><a target="_blank" rel="noopener" href="https://docs.emmet.io/">https://docs.emmet.io/</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.emmet.io/abbreviations/syntax/">https://docs.emmet.io/abbreviations/syntax/</a></p>
+<p>For example</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nav&gt;ul&gt;li + Tab</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/Emmet.gif" alt="Emmet"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/19/IntroToTheWeb-Section-2/" rel="prev" title="IntroToTheWeb_Section_2">
+      <i class="fa fa-chevron-left"></i> IntroToTheWeb_Section_2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/21/IntroToTheWeb-Section-4/" rel="next" title="IntroToTheWeb_Section_4">
+      IntroToTheWeb_Section_4 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-Exactly-Is-Html5"><span class="nav-number">1.</span> <span class="nav-text">What Exactly Is Html5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Living-Standard"><span class="nav-number">1.1.</span> <span class="nav-text">Living Standard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Role-of-Browsers"><span class="nav-number">1.2.</span> <span class="nav-text">Role of Browsers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5"><span class="nav-number">1.3.</span> <span class="nav-text">HTML5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Block-vs-Inline-Elements"><span class="nav-number">2.</span> <span class="nav-text">Block vs Inline Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Content-Division-element"><span class="nav-number">2.1.</span> <span class="nav-text">: The Content Division element</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#An-Odd-Assortment-of-Elements-HR-BR-Sup-Sub"><span class="nav-number">3.</span> <span class="nav-text">An Odd Assortment of Elements: HR, BR, Sup, Sub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Entity-Code"><span class="nav-number">4.</span> <span class="nav-text">Entity Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro-to-Semantic-Markup-MEANINGFUL-markup"><span class="nav-number">5.</span> <span class="nav-text">Intro to Semantic Markup - MEANINGFUL markup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Playing-with-Semantic-Elements"><span class="nav-number">5.1.</span> <span class="nav-text">Playing with Semantic Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#main"><span class="nav-number">5.1.1.</span> <span class="nav-text">main</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nav"><span class="nav-number">5.1.2.</span> <span class="nav-text">nav</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">5.1.3.</span> <span class="nav-text">section</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#article"><span class="nav-number">5.1.4.</span> <span class="nav-text">article</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aside"><span class="nav-number">5.1.5.</span> <span class="nav-text">aside</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VSCode-Tip-Emmet"><span class="nav-number">6.</span> <span class="nav-text">VSCode Tip: Emmet</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

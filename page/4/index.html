@@ -146,6 +146,211 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/10/MultiThread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/10/MultiThread/" class="post-title-link" itemprop="url">MultiThread</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-10 01:06:16" itemprop="dateCreated datePublished" datetime="2020-06-10T01:06:16+09:00">2020-06-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-15 23:28:48" itemprop="dateModified" datetime="2020-07-15T23:28:48+09:00">2020-07-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="How-Cherno-explain-about-Thread"><a href="#How-Cherno-explain-about-Thread" class="headerlink" title="How Cherno explain about Thread"></a>How Cherno explain about Thread</h1><blockquote>
+<p>How we could do multi-thread(parallel computating)</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">bool</span> s_Finished = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DoWork</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(!s_Finished)&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;Working....&quot;</span>&lt;&lt;std::<span class="built_in">endl</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">worker</span><span class="params">(DoWork)</span></span>; <span class="comment">//pass as Function pointer</span></span><br><span class="line"></span><br><span class="line">    std::cin.<span class="built_in">get</span>();</span><br><span class="line">    s_Finished = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    worker.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    std::cin.<span class="built_in">get</span>(); <span class="comment">// this line will wait until the threads(worker) joined.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Here we want program to do two things at the same time.</p>
+<ol>
+<li>keep printing <code>Working....</code></li>
+<li>receive the <code>cin.get()</code> from user, once get something from the user <code>s_Finished = true</code></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/thread/thread/join/">thread::join</a></p>
+<p>The behavior will be like this<br><img src="/uploads/Thread2.gif" alt="idea"></p>
+<p>However we might not want to let one single thread occupy whole CPU resource, we can use <code>std::this_thread::sleep_for(1s)</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">bool</span> s_Finished = <span class="literal">false</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DoWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> std::literals::chrono_literals;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Started thread id=&quot;</span> &lt;&lt; std::this_thread::<span class="built_in">get_id</span>() &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">while</span> (!s_Finished) &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;Working...\n&quot;</span>;</span><br><span class="line">		std::this_thread::<span class="built_in">sleep_for</span>(<span class="number">1</span>s); <span class="comment">//sleep for a second</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="function">std::thread <span class="title">worker</span><span class="params">(DoWork)</span></span>;</span><br><span class="line">	std::cin.<span class="built_in">get</span>();</span><br><span class="line">	s_Finished = <span class="literal">true</span>;</span><br><span class="line">	worker.<span class="built_in">join</span>(); <span class="comment">//await in C#</span></span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Finished\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Started thread id=&quot;</span> &lt;&lt; std::this_thread::<span class="built_in">get_id</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The demo of code above.<br><img src="/uploads/Thread3.gif" alt="idea"><br>Can notice that two <code>std::this_thread::get_id()</code> are different, cuz they are on the different threads.</p>
+<h1 id="How-we-could-implement-multi-thread-in-Grasshopper"><a href="#How-we-could-implement-multi-thread-in-Grasshopper" class="headerlink" title="How we could implement multi-thread in Grasshopper"></a>How we could implement multi-thread in Grasshopper</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=J6CwUuto9QA&list=PLIfg3sUCgQXDBRK478d6PwxX0IBdgkLE4&index=7&t=13s">Grasshopper Tutorial</a></p>
+<p>Like this tutorial shown, we can use</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.Threading.Tasks.Parallel.For(<span class="number">0</span>, loopCount, i =&gt;&#123; &#123;</span><br><span class="line">    <span class="comment">//for loop body</span></span><br><span class="line">&#125;&#125;);</span><br></pre></td></tr></table></figure>
+<p>instead of using <strong>regular for-loop</strong> to achieve multi-thread.</p>
+<h2 id="unsafe-problem-and-how-to-tackle-it"><a href="#unsafe-problem-and-how-to-tackle-it" class="headerlink" title="unsafe problem and how to tackle it"></a>unsafe problem and how to tackle it</h2><p>This is the part I might not fully understand, and you are welcome to correct me. Thanks.<br>Seems simply use multi_thread with <code>List</code>, like the example in tutorial, is not safe.<br>Means multi-thread cannot merge to the List in the order correctly. As a result, this cause some data lost.</p>
+<h3 id="How-we-can-tackle-this-problem"><a href="#How-we-can-tackle-this-problem" class="headerlink" title="How we can tackle this problem"></a>How we can tackle this problem</h3><ol>
+<li>We can use <code>lock</code> syntax to ensure the action of <strong>List</strong></li>
+<li>We use regular <code>array</code> instead of <strong>List</strong></li>
+</ol>
+<p>Here are the codes.</p>
+<h4 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">List&lt;Point3d&gt; startPts, <span class="built_in">object</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    List&lt;Point3d&gt; ptList = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">    <span class="comment">//for(int i = 0;i &lt; startPts.Count; i++)</span></span><br><span class="line">    System.Threading.Tasks.Parallel.For(<span class="number">0</span>, startPts.Count, i =&gt; &#123;</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">//Declare out agent location</span></span><br><span class="line">        Point3d agentLoc = startPts[i];</span><br><span class="line">        <span class="comment">//Add agents to ptLists</span></span><br><span class="line">        <span class="keyword">lock</span>(ptList)&#123;</span><br><span class="line">          ptList.Add(agentLoc);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    A = ptList;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="array"><a href="#array" class="headerlink" title="array"></a>array</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">List&lt;Point3d&gt; startPts, <span class="built_in">object</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//List&lt;Point3d&gt; ptList = new List&lt;Point3d&gt;();</span></span><br><span class="line">    Point3d[] ptList = <span class="keyword">new</span> Point3d[startPts.Count];</span><br><span class="line">    <span class="comment">//for(int i = 0;i &lt; startPts.Count; i++)</span></span><br><span class="line">    System.Threading.Tasks.Parallel.For(<span class="number">0</span>, startPts.Count, i =&gt; &#123;</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">//Declare out agent location</span></span><br><span class="line">        Point3d agentLoc = startPts[i];</span><br><span class="line">        <span class="comment">//Add agents to ptLists</span></span><br><span class="line">        ptList[i] = agentLoc;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    A = ptList;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Rhino-Official-Documents-General-Overview"><a href="#Rhino-Official-Documents-General-Overview" class="headerlink" title="Rhino Official Documents_General Overview"></a>Rhino Official Documents_General Overview</h1><p><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/guides/grasshopper/multi-treaded-components/">multi-thread</a></p>
+<h1 id="Rhino-Official-Documents-Developer"><a href="#Rhino-Official-Documents-Developer" class="headerlink" title="Rhino Official Documents_Developer"></a>Rhino Official Documents_Developer</h1><p><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/guides/grasshopper/programming-task-capable-component/">Task Capable Component</a></p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Grasshopper for Rhino6 allows you to develop mult-threaded components by way of the new <code>IGH_TaskCapableComponent</code> interface. Benchmarks have shown that Grasshopper can run <strong>significantly faster</strong> when using multi-threaded components. Results may vary, <strong>as not all solutions can be compute in parallel</strong></p>
+<h2 id="The-Interface"><a href="#The-Interface" class="headerlink" title="The Interface"></a>The Interface</h2><p>When a component implement the <code>IGH_TaskCapableComponent</code> interface, Grasshopper will notice and potentially call a <strong>full enumeration</strong> of <code>SolveInstance</code> for the component twice in consecutive passes:</p>
+<ol>
+<li>The first pass is for collecting data and starting tasks to compute result</li>
+<li>The second pass is for using the results from the tasks to sets outputs.</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/v6-feature-multi-threaded-gh-components/47049">https://discourse.mcneel.com/t/v6-feature-multi-threaded-gh-components/47049</a></p>
+<p>I found that there are some Rhino official posts talk about <code>mult-threaded</code> in grasshopper.<br>From User interface, if you see the component has two grey dots on its upper-left corner, means that component support mult-threaded computation(<code>parallel computing</code>).</p>
+<p>Still working on…. <code>To be continue</code></p>
+<p>(James_Ramsden_Multithreading)[<a target="_blank" rel="noopener" href="http://james-ramsden.com/multithreading-a-foreach-loop-in-a-grasshopper-components-in-c/]">http://james-ramsden.com/multithreading-a-foreach-loop-in-a-grasshopper-components-in-c/]</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/09/FunctionPointerC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/09/FunctionPointerC/" class="post-title-link" itemprop="url">FunctionPointerC++</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-09 22:55:25" itemprop="dateCreated datePublished" datetime="2020-06-09T22:55:25+09:00">2020-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-10 00:34:34" itemprop="dateModified" datetime="2020-06-10T00:34:34+09:00">2020-06-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=p4sDgQ-jao4">Recource Video</a><br>Thanks for the youtube channel, <code>The Cherno</code>. This post is basically a note I take to remind me what <code>Function Pointer</code> is about.</p>
+<p><code>Function Pointer</code> is a way to assign pointer to a variable.</p>
+<blockquote>
+<p>Pass a function as a parameter. </p>
+</blockquote>
+<h1 id="The-usual-way-about-function"><a href="#The-usual-way-about-function" class="headerlink" title="The usual way about function"></a>The usual way about function</h1><p>The implementation of a regular function should look like.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HelloWorld</span><span class="params">()</span></span>&#123;</span><br><span class="line">    std::cout&lt;&lt; <span class="string">&quot;Hello World!&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">HelloWorld</span>();</span><br><span class="line">    std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The result should be like<br><img src="/uploads/HelloWorld.JPG" alt="idea"></p>
+<h2 id="What-if-we-try-to-use-auto-key-for-this-function"><a href="#What-if-we-try-to-use-auto-key-for-this-function" class="headerlink" title="What if we try to use auto key for this function?"></a>What if we try to use auto key for this function?</h2><p><img src="/uploads/auto1.JPG" alt="idea"><br>then you will see an error at the <code>auto</code>.<br>That is because what <code>HelloWorld()</code> return is a <code>void</code>.</p>
+<p>But what if we do like this. <code>auto function = HelloWorld</code><br><img src="/uploads/auto2.JPG" alt="idea"><br>then the error disapper.<br>This is because <code>HelloWorld</code> now return a <code>Function Pointer</code> instead of <code>void</code>.<br>so if we try to print the variable function in the next line, we will get the pointer of the <code>HelloWorld</code> function.<br><img src="/uploads/auto3.JPG" alt="idea"><br><img src="/uploads/functionPointer_result1.JPG" alt="idea"><br>Due to the implicitly conversion,</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> function = HelloWorld;</span><br><span class="line"><span class="comment">//much the same as </span></span><br><span class="line"><span class="keyword">auto</span> function = &amp;HelloWorld;</span><br></pre></td></tr></table></figure>
+<h2 id="What-Function-Pointer-is-about"><a href="#What-Function-Pointer-is-about" class="headerlink" title="What Function Pointer is about"></a>What Function Pointer is about</h2><blockquote>
+<p>Functions are of course just CPU instructions, and they are stored in somewhere in our binary/executable file.</p>
+</blockquote>
+<p>Find the <code>Hello World</code> function inside the CPU instruction and give it a <code>pointer</code>, to remember the location of this function code.</p>
+<p><img src="/uploads/CallFunctionTwice.JPG" alt="idea"><br><img src="/uploads/functionPointer_result2.JPG" alt="idea"></p>
+<p>so here we can assign a function to a varible.</p>
+<blockquote>
+<p>But what type is this <code>auto</code> actually?</p>
+</blockquote>
+<p>Here the auto hold the type write like</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in"><span class="keyword">void</span></span>(*function)()</span><br></pre></td></tr></table></figure>
+
+<p><code>void(*)()</code> is the type eventually, but since we have to get it a name so it became <code>void(*function)()</code>.<br>It works with any other name.(Like I named it jim here)<br><img src="/uploads/functionPointer_result3.JPG" alt="idea"></p>
+<p>Becauce this syntax is kinda confusing, programmer tend to either </p>
+<ul>
+<li>use <code>auto</code>, like what we did above </li>
+<li>use <code>typedef</code>/<code>using</code> it</li>
+</ul>
+<p><img src="/uploads/functionPointer_result4.JPG" alt="idea"><br>Here we make HelloWorld function require one <code>int</code> parameter<br><img src="/uploads/functionPointer_result5.JPG" alt="idea"></p>
+<h1 id="Back-to-programmer-want-to-use-function-pointer-in-the-first-place"><a href="#Back-to-programmer-want-to-use-function-pointer-in-the-first-place" class="headerlink" title="Back to programmer want to use function pointer in the first place"></a>Back to programmer want to use function pointer in the first place</h1><blockquote>
+<p>Programmers can pass one function to another function as a variable.</p>
+</blockquote>
+<p><img src="/uploads/functionPointer_result6.JPG" alt="idea"></p>
+<p>Here this code also show how to use <code>lambda function</code> instead of writing out the full function body.</p>
+<p>Reference: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=p4sDgQ-jao4">Cherno’s video</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/01/LinesIntersection-in-3D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -936,7 +1141,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
