@@ -146,6 +146,77 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/09/07/BrepTransformation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/07/BrepTransformation/" class="post-title-link" itemprop="url">BrepTransformation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-09-07 23:58:27" itemprop="dateCreated datePublished" datetime="2021-09-07T23:58:27+09:00">2021-09-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-08 00:16:33" itemprop="dateModified" datetime="2021-09-08T00:16:33+09:00">2021-09-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Along my way of developing with RhinoCommon, I noticed that I have some certain patterns which I feel them handy and keep using from time to time.<br>This note is for the skill/ function I recently learned and implemented.</p>
+<hr>
+<p>Readers may refer to this QA<br><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818">https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818</a></p>
+<p>So basically, in RhinoCommon, we have this <code>Brep.TransformComponent</code> function, this can allow developer to change(apply <strong>xform</strong>) on a certain <strong>component</strong>(vertice/ edge/ face) and the other components will changed accordingly as well.</p>
+<p>You could see the example code I provide here and also in the QA section page</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ComponentIndex&gt; ci = <span class="keyword">new</span> List&lt;ComponentIndex&gt;();</span><br><span class="line">    ci.Add(x.Faces[<span class="number">0</span>].ComponentIndex());</span><br><span class="line">    Transform moveDown  = Transform.Rotation(y, Vector3d.YAxis, x.Faces[<span class="number">0</span>].GetBoundingBox(<span class="literal">true</span>).Center);</span><br><span class="line">    x.TransformComponent(ci, moveDown, <span class="number">0.0001</span>, <span class="number">0.1</span>, <span class="literal">true</span>);</span><br><span class="line">    A = x;</span><br></pre></td></tr></table></figure>
+<p>And the result:<br><img src="uploads/BrepTransformation.jpg" alt="screenShot"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/09/01/RhinoInsideRevitEssentialGuide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -902,94 +973,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/06/DiscreteDifferentialGeometry-01-Overview/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/06/DiscreteDifferentialGeometry-01-Overview/" class="post-title-link" itemprop="url">DiscreteDifferentialGeometry_01_Overview</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-06 00:08:14 / Modified: 11:02:49" itemprop="dateCreated datePublished" datetime="2021-02-06T00:08:14+09:00">2021-02-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="What-will-we-Learn-in-This-class"><a href="#What-will-we-Learn-in-This-class" class="headerlink" title="What will we Learn in This class?"></a>What will we Learn in This class?</h1><p>How to think about shape…</p>
-<ul>
-<li>mathematically (<em>differential geometry</em>)</li>
-<li>computationally (<em>geometry processing</em>)</li>
-</ul>
-<p><strong>Central Theme:</strong> link these two perspectives</p>
-<h1 id="What-is-Differential-Geometry"><a href="#What-is-Differential-Geometry" class="headerlink" title="What is Differential Geometry?"></a>What is Differential Geometry?</h1><p>Language for talking about <em>locel properties of shape</em></p>
-<ul>
-<li>How fast are we traveling along a curve?</li>
-<li>How much does the surface bend at a point?</li>
-<li>etc</li>
-</ul>
-<p>And their connection to <em>global properties of shape</em></p>
-<ul>
-<li>so-called “local-global” relationships.</li>
-</ul>
-<h1 id="What-is-Discrete-Differential-Geometry"><a href="#What-is-Discrete-Differential-Geometry" class="headerlink" title="What is Discrete Differential Geometry"></a>What is <strong>Discrete</strong> Differential Geometry</h1><p>Also a language describing local properties of shape</p>
-<ul>
-<li>infinity no longer allowed</li>
-<li>No longer talk about derivatives, infinitesimals…</li>
-<li>Everything expressed in terms of lengths, angles… </li>
-<li>Surprisinglt little is lost!</li>
-<li>Faithfully captures many fundamental ideas</li>
-</ul>
-<h1 id="How-can-we-get-there"><a href="#How-can-we-get-there" class="headerlink" title="How can we get there?"></a>How can we get there?</h1><p>A common “game” is played in DDG to obtain discrete definitions:</p>
-<ol>
-<li>Write down several <strong>equivalent</strong> definitions in the smooth setting</li>
-<li>Apply each smooth definition to an object in the discrete setting</li>
-<li>Determine which properties are captured by each resulting **inequivalent ** discrete definition.</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1059,7 +1042,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1070,7 +1053,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -146,6 +146,131 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/23/CSS-The-Very-Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/23/CSS-The-Very-Basic/" class="post-title-link" itemprop="url">CSS: The Very Basic</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-23 02:50:41" itemprop="dateCreated datePublished" datetime="2021-10-23T02:50:41+09:00">2021-10-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-26 00:12:03" itemprop="dateModified" datetime="2021-10-26T00:12:03+09:00">2021-10-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CSS-casading-style-sheet"><a href="#CSS-casading-style-sheet" class="headerlink" title="CSS - casading style sheet"></a>CSS - casading style sheet</h1><h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><p>CSS is a language for describing how documents are presented visually - how they are arranged and styled</p>
+<h2 id="What-does-it-stand-for"><a href="#What-does-it-stand-for" class="headerlink" title="What does it stand for?"></a>What does it stand for?</h2><p>CSS stands for <strong>Cascading Style Sheets</strong>.</p>
+<h1 id="CSS-RULES"><a href="#CSS-RULES" class="headerlink" title="CSS RULES"></a>CSS RULES</h1><ul>
+<li>(almost) everything you do in CSS follows this basic pattern<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    property: value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="Including-Style-Correctly"><a href="#Including-Style-Correctly" class="headerlink" title="Including Style Correctly"></a>Including Style Correctly</h1><ul>
+<li>Inline Style: You can write your styles directly inline on each element, but this is <strong>NOT A GOOD IDEA</strong> most of the time.</li>
+<li>The <code>STYLE</code> element: You can write your style inside of a <code>&lt;style&gt;</code> element. This is easy, but it makes it impossible to share styles between documents. <strong>Not recommended either</strong></li>
+<li>External stylesheet: Write your styles in a <code>.css</code> file, and then include the using a <code>&lt;link&gt;</code> in the head of your html document. <strong>Recommended!</strong></li>
+</ul>
+<blockquote>
+<p>Focusing on the third method, </p>
+</blockquote>
+<h3 id="my-styles-css"><a href="#my-styles-css" class="headerlink" title="my_styles.css"></a>my_styles.css</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h2</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: indianred;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Demo-html"><a href="#Demo-html" class="headerlink" title="Demo.html"></a>Demo.html</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Forms Demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;my_styles.css&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>I am Jim<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>I am Cool<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h2 style="color: indianred">I am Jim</h2>
+<h2 style="color: indianred">I am Cool</h2>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">https://developer.mozilla.org/en-US/docs/Web/CSS/color_value</a></p>
+<h1 id="Color-Systems-RGB-and-Named-Colors"><a href="#Color-Systems-RGB-and-Named-Colors" class="headerlink" title="Color Systems: RGB and Named Colors"></a>Color Systems: RGB and Named Colors</h1><p><a target="_blank" rel="noopener" href="https://htmlcolorcodes.com/color-names/">https://htmlcolorcodes.com/color-names/</a><br><a target="_blank" rel="noopener" href="https://htmlcolorcodes.com/color-picker/">https://htmlcolorcodes.com/color-picker/</a></p>
+<blockquote>
+<p>A typical computer can display ~16000000 different colors</p>
+</blockquote>
+<h2 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h2><ul>
+<li>Red, Green, Blue Channel</li>
+<li>Each channel ranges from <code>0-255</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h2</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: teal;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">89</span>, <span class="number">151</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Color-Systems-Hexadecimal"><a href="#Color-Systems-Hexadecimal" class="headerlink" title="Color Systems: Hexadecimal"></a>Color Systems: Hexadecimal</h1><h2 id="Hex"><a href="#Hex" class="headerlink" title="Hex"></a>Hex</h2><ul>
+<li>Still red, green and blue channels</li>
+<li>Each ranges from <code>0-255</code> BUT represented with <code>hexadecimal</code></li>
+</ul>
+<h3 id="Hexadecimal"><a href="#Hexadecimal" class="headerlink" title="Hexadecimal"></a>Hexadecimal</h3><blockquote>
+<p>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16*16 = 256</span><br></pre></td></tr></table></figure>
+<p>so, the rgb becomes -&gt; <code>#0f5679</code></p>
+<h1 id="Common-Text-Properties"><a href="#Common-Text-Properties" class="headerlink" title="Common Text Properties"></a>Common Text Properties</h1><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-align">https://developer.mozilla.org/en-US/docs/Web/CSS/text-align</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight">https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration">https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">https://developer.mozilla.org/en-US/docs/Web/CSS/line-height</a></p>
+<h1 id="Font-Size-Basics-With-Pixels"><a href="#Font-Size-Basics-With-Pixels" class="headerlink" title="Font Size Basics With Pixels"></a>Font Size Basics With Pixels</h1><h2 id="Relative"><a href="#Relative" class="headerlink" title="Relative"></a>Relative</h2><ul>
+<li>EM</li>
+<li>REM</li>
+<li>VH</li>
+<li>VW</li>
+<li>%</li>
+<li>AND MORE!</li>
+</ul>
+<h2 id="Absolute"><a href="#Absolute" class="headerlink" title="Absolute"></a>Absolute</h2><ul>
+<li>PX</li>
+<li>PT</li>
+<li>CM</li>
+<li>IN</li>
+<li>MM</li>
+</ul>
+<p>PX - BY FAR THE MOST COMMONLY USED ABSOLUTE UNIT</p>
+<blockquote>
+<p>1px does not necessarily equal the width of exactly one pixel!<br>Not recommended for <strong>responsive website</strong></p>
+</blockquote>
+<h1 id="The-Font-Family-Property"><a href="#The-Font-Family-Property" class="headerlink" title="The Font Family Property"></a>The Font Family Property</h1><p><a target="_blank" rel="noopener" href="https://www.cssfontstack.com/">https://www.cssfontstack.com/</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family">https://developer.mozilla.org/en-US/docs/Web/CSS/font-family</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/21/IntroToTheWeb-Section-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -177,7 +302,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-23 00:14:14" itemprop="dateModified" datetime="2021-10-23T00:14:14+09:00">2021-10-23</time>
+                <time title="Modified: 2021-10-24 22:11:32" itemprop="dateModified" datetime="2021-10-24T22:11:32+09:00">2021-10-24</time>
               </span>
 
           
@@ -614,10 +739,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-10-19 14:21:05 / Modified: 17:03:01" itemprop="dateCreated datePublished" datetime="2021-10-19T14:21:05+09:00">2021-10-19</time>
+              <time title="Created: 2021-10-19 14:21:05" itemprop="dateCreated datePublished" datetime="2021-10-19T14:21:05+09:00">2021-10-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-24 22:11:37" itemprop="dateModified" datetime="2021-10-24T22:11:37+09:00">2021-10-24</time>
+              </span>
 
           
 
@@ -1022,77 +1153,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/09/07/BrepTransformation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/07/BrepTransformation/" class="post-title-link" itemprop="url">BrepTransformation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-09-07 23:58:27" itemprop="dateCreated datePublished" datetime="2021-09-07T23:58:27+09:00">2021-09-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-08 00:16:33" itemprop="dateModified" datetime="2021-09-08T00:16:33+09:00">2021-09-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Along my way of developing with RhinoCommon, I noticed that I have some certain patterns which I feel them handy and keep using from time to time.<br>This note is for the skill/ function I recently learned and implemented.</p>
-<hr>
-<p>Readers may refer to this QA<br><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818">https://discourse.mcneel.com/t/moveface-in-rhinocommon/129818</a></p>
-<p>So basically, in RhinoCommon, we have this <code>Brep.TransformComponent</code> function, this can allow developer to change(apply <strong>xform</strong>) on a certain <strong>component</strong>(vertice/ edge/ face) and the other components will changed accordingly as well.</p>
-<p>You could see the example code I provide here and also in the QA section page</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ComponentIndex&gt; ci = <span class="keyword">new</span> List&lt;ComponentIndex&gt;();</span><br><span class="line">    ci.Add(x.Faces[<span class="number">0</span>].ComponentIndex());</span><br><span class="line">    Transform moveDown  = Transform.Rotation(y, Vector3d.YAxis, x.Faces[<span class="number">0</span>].GetBoundingBox(<span class="literal">true</span>).Center);</span><br><span class="line">    x.TransformComponent(ci, moveDown, <span class="number">0.0001</span>, <span class="number">0.1</span>, <span class="literal">true</span>);</span><br><span class="line">    A = x;</span><br></pre></td></tr></table></figure>
-<p>And the result:<br><img src="uploads/BrepTransformation.jpg" alt="screenShot"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1162,7 +1222,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1173,7 +1233,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
