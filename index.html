@@ -146,6 +146,133 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/26/The-World-of-CSS-Selectors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/26/The-World-of-CSS-Selectors/" class="post-title-link" itemprop="url">The World of CSS Selectors</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-26 12:33:59" itemprop="dateCreated datePublished" datetime="2021-10-26T12:33:59+09:00">2021-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-27 02:36:37" itemprop="dateModified" datetime="2021-10-27T02:36:37+09:00">2021-10-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.canva.com/design/DAEANYqyik4/tdD7T7i698xhdPQUS_nrtQ/view?utm_content=DAEANYqyik4&amp;utm_campaign=designshare&amp;utm_medium=link&amp;utm_source=sharebutton#6">https://www.canva.com/design/DAEANYqyik4/tdD7T7i698xhdPQUS_nrtQ/view?utm_content=DAEANYqyik4&amp;utm_campaign=designshare&amp;utm_medium=link&amp;utm_source=sharebutton#6</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="The-ID-Selector"><a href="#The-ID-Selector" class="headerlink" title="The ID Selector"></a>The ID Selector</h2><p><a target="_blank" rel="noopener" href="https://coolors.co/palettes/trending">https://coolors.co/palettes/trending</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#lagout</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: orange;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="The-class-Selector"><a href="#The-class-Selector" class="headerlink" title="The class Selector"></a>The class Selector</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;tag&quot;</span> <span class="attr">href</span>=<span class="string">&quot;#puppies&quot;</span>&gt;</span>Puppies<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tag</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#e63946</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Descendant-Selector"><a href="#Descendant-Selector" class="headerlink" title="Descendant Selector"></a>Descendant Selector</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> <span class="selector-tag">a</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: teal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Adjacent-Selector"><a href="#Adjacent-Selector" class="headerlink" title="Adjacent Selector"></a>Adjacent Selector</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> + <span class="selector-tag">p</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Select only the paragraphs that are immidiately preceded by an <code>&lt;h1&gt;</code></p>
+<h2 id="Direct-Child"><a href="#Direct-Child" class="headerlink" title="Direct Child"></a>Direct Child</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &gt; <span class="selector-tag">li</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Select only the <code>&lt;li&gt;</code>‘s that are <strong>direct children</strong> of a <code>&lt;div&gt;</code> element</p>
+<h2 id="Attribute-Selector"><a href="#Attribute-Selector" class="headerlink" title="Attribute Selector"></a>Attribute Selector</h2><p>Select all input elements where the type attribute is set to “text”</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;text&quot;</span>]</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href*=<span class="string">&quot;google&quot;</span>]</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: magenta;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p><code>class</code> is one attribute, so as <code>id</code>.<br>href*=”google” - Fuzzier matching</p>
+</blockquote>
+<h2 id="PSEUDO-classes"><a href="#PSEUDO-classes" class="headerlink" title="PSEUDO classes"></a>PSEUDO classes</h2><p>keyword added to a selector that specifies a special state of the selected element(s)</p>
+<ul>
+<li>:active</li>
+<li>:checked</li>
+<li>:first</li>
+<li>:first-child</li>
+<li>:hover</li>
+<li>:not()</li>
+<li>:nth-child()</li>
+<li>:nth-of-type()</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:hover">https://developer.mozilla.org/en-US/docs/Web/CSS/:hover</a></p>
+<h2 id="PSEUDO-ELEMENTS"><a href="#PSEUDO-ELEMENTS" class="headerlink" title="PSEUDO ELEMENTS"></a>PSEUDO ELEMENTS</h2><p>Keyword added to a selector that lets you style a particular part of selected element(s)</p>
+<ul>
+<li>::after</li>
+<li>::before</li>
+<li>::first-letter</li>
+<li>::first-line</li>
+<li>::selection</li>
+</ul>
+<h2 id="SPECIFICITY"><a href="#SPECIFICITY" class="headerlink" title="SPECIFICITY"></a>SPECIFICITY</h2><p>Specificity is how the brower decides which rules to apply when multiple rules could apply to the same element. It is a measure of how specific a given selector is. The more specific selector “wins”.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID &gt; Class &gt; Element</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-calculate-the-importance"><a href="#How-to-calculate-the-importance" class="headerlink" title="How to calculate the importance"></a>How to calculate the importance</h3><ul>
+<li>ID selector: 100</li>
+<li>Class, Attribute, Pseudo-Class, Selectors: 10</li>
+<li>Element, Pseudo-Element, Selectors: 1</li>
+</ul>
+<p>The combination of the things above:</p>
+<h4 id="For-example"><a href="#For-example" class="headerlink" title="For example"></a>For example</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-class">.active</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: orange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>0*100+1*10+2*1</code></p>
+<p><a target="_blank" rel="noopener" href="https://specificity.keegan.st/">https://specificity.keegan.st/</a></p>
+<p><code>!important</code> tag is superb every calculation above.</p>
+<h2 id="CSS-Inheritance"><a href="#CSS-Inheritance" class="headerlink" title="CSS Inheritance"></a>CSS Inheritance</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">button</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/23/CSS-The-Very-Basic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -491,7 +618,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-22 13:08:49" itemprop="dateModified" datetime="2021-10-22T13:08:49+09:00">2021-10-22</time>
+                <time title="Modified: 2021-10-26 01:41:56" itemprop="dateModified" datetime="2021-10-26T01:41:56+09:00">2021-10-26</time>
               </span>
 
           
@@ -606,7 +733,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-21 16:33:58" itemprop="dateModified" datetime="2021-10-21T16:33:58+09:00">2021-10-21</time>
+                <time title="Modified: 2021-10-26 01:41:56" itemprop="dateModified" datetime="2021-10-26T01:41:56+09:00">2021-10-26</time>
               </span>
 
           
@@ -1085,78 +1212,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/05/ErrorHandlingInGH/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/05/ErrorHandlingInGH/" class="post-title-link" itemprop="url">ErrorHandlingInGH</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-10-05 22:37:01 / Modified: 22:44:54" itemprop="dateCreated datePublished" datetime="2021-10-05T22:37:01+09:00">2021-10-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Recently, I wanna catch up the videos from Jose Lois. Hope this way I can rememeber the thing I’ve learned a bit longer.<br>Here’s the video:<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sJT_m4AxR0o">https://www.youtube.com/watch?v=sJT_m4AxR0o</a></p>
-<p>Things I’ve learned from the video is:</p>
-<ul>
-<li><strong>Sanity</strong>, can help construct the upper bound/ lower bound</li>
-<li>“<strong>List_Item</strong>“ component has <em>wrap</em> boolean toggle to help avoiding the boundary issue</li>
-<li>Whenever error happened, we could try use </li>
-</ul>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Component.AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, <span class="string">&quot;Index out of bounds&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>This line make the script component yellow, and print the warning message.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1222,7 +1281,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

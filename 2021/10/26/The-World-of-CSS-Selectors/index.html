@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAEANYqyik4&#x2F;tdD7T7i698xhdPQUS_nrtQ&#x2F;view?utm_content&#x3D;DAEANYqyik4&amp;utm_campaign&#x3D;designshare&amp;utm_medium&#x3D;link&amp;utm_source&#x3D;sharebutton#6 123h1, h2&amp;#123;    color: whi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The World of CSS Selectors">
+<meta property="og:url" content="https://chenchihyuan.github.io/2021/10/26/The-World-of-CSS-Selectors/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAEANYqyik4&#x2F;tdD7T7i698xhdPQUS_nrtQ&#x2F;view?utm_content&#x3D;DAEANYqyik4&amp;utm_campaign&#x3D;designshare&amp;utm_medium&#x3D;link&amp;utm_source&#x3D;sharebutton#6 123h1, h2&amp;#123;    color: whi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-26T03:33:59.000Z">
+<meta property="article:modified_time" content="2021-10-26T17:36:37.008Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2021/10/26/The-World-of-CSS-Selectors/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>The World of CSS Selectors | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/26/The-World-of-CSS-Selectors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The World of CSS Selectors
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-26 12:33:59" itemprop="dateCreated datePublished" datetime="2021-10-26T12:33:59+09:00">2021-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-27 02:36:37" itemprop="dateModified" datetime="2021-10-27T02:36:37+09:00">2021-10-27</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://www.canva.com/design/DAEANYqyik4/tdD7T7i698xhdPQUS_nrtQ/view?utm_content=DAEANYqyik4&amp;utm_campaign=designshare&amp;utm_medium=link&amp;utm_source=sharebutton#6">https://www.canva.com/design/DAEANYqyik4/tdD7T7i698xhdPQUS_nrtQ/view?utm_content=DAEANYqyik4&amp;utm_campaign=designshare&amp;utm_medium=link&amp;utm_source=sharebutton#6</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="The-ID-Selector"><a href="#The-ID-Selector" class="headerlink" title="The ID Selector"></a>The ID Selector</h2><p><a target="_blank" rel="noopener" href="https://coolors.co/palettes/trending">https://coolors.co/palettes/trending</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#lagout</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: orange;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="The-class-Selector"><a href="#The-class-Selector" class="headerlink" title="The class Selector"></a>The class Selector</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;tag&quot;</span> <span class="attr">href</span>=<span class="string">&quot;#puppies&quot;</span>&gt;</span>Puppies<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tag</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#e63946</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Descendant-Selector"><a href="#Descendant-Selector" class="headerlink" title="Descendant Selector"></a>Descendant Selector</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> <span class="selector-tag">a</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: teal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Adjacent-Selector"><a href="#Adjacent-Selector" class="headerlink" title="Adjacent Selector"></a>Adjacent Selector</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> + <span class="selector-tag">p</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Select only the paragraphs that are immidiately preceded by an <code>&lt;h1&gt;</code></p>
+<h2 id="Direct-Child"><a href="#Direct-Child" class="headerlink" title="Direct Child"></a>Direct Child</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &gt; <span class="selector-tag">li</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Select only the <code>&lt;li&gt;</code>‘s that are <strong>direct children</strong> of a <code>&lt;div&gt;</code> element</p>
+<h2 id="Attribute-Selector"><a href="#Attribute-Selector" class="headerlink" title="Attribute Selector"></a>Attribute Selector</h2><p>Select all input elements where the type attribute is set to “text”</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&quot;text&quot;</span>]</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href*=<span class="string">&quot;google&quot;</span>]</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: magenta;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p><code>class</code> is one attribute, so as <code>id</code>.<br>href*=”google” - Fuzzier matching</p>
+</blockquote>
+<h2 id="PSEUDO-classes"><a href="#PSEUDO-classes" class="headerlink" title="PSEUDO classes"></a>PSEUDO classes</h2><p>keyword added to a selector that specifies a special state of the selected element(s)</p>
+<ul>
+<li>:active</li>
+<li>:checked</li>
+<li>:first</li>
+<li>:first-child</li>
+<li>:hover</li>
+<li>:not()</li>
+<li>:nth-child()</li>
+<li>:nth-of-type()</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:hover">https://developer.mozilla.org/en-US/docs/Web/CSS/:hover</a></p>
+<h2 id="PSEUDO-ELEMENTS"><a href="#PSEUDO-ELEMENTS" class="headerlink" title="PSEUDO ELEMENTS"></a>PSEUDO ELEMENTS</h2><p>Keyword added to a selector that lets you style a particular part of selected element(s)</p>
+<ul>
+<li>::after</li>
+<li>::before</li>
+<li>::first-letter</li>
+<li>::first-line</li>
+<li>::selection</li>
+</ul>
+<h2 id="SPECIFICITY"><a href="#SPECIFICITY" class="headerlink" title="SPECIFICITY"></a>SPECIFICITY</h2><p>Specificity is how the brower decides which rules to apply when multiple rules could apply to the same element. It is a measure of how specific a given selector is. The more specific selector “wins”.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID &gt; Class &gt; Element</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-calculate-the-importance"><a href="#How-to-calculate-the-importance" class="headerlink" title="How to calculate the importance"></a>How to calculate the importance</h3><ul>
+<li>ID selector: 100</li>
+<li>Class, Attribute, Pseudo-Class, Selectors: 10</li>
+<li>Element, Pseudo-Element, Selectors: 1</li>
+</ul>
+<p>The combination of the things above:</p>
+<h4 id="For-example"><a href="#For-example" class="headerlink" title="For example"></a>For example</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-class">.active</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: orange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>0*100+1*10+2*1</code></p>
+<p><a target="_blank" rel="noopener" href="https://specificity.keegan.st/">https://specificity.keegan.st/</a></p>
+<p><code>!important</code> tag is superb every calculation above.</p>
+<h2 id="CSS-Inheritance"><a href="#CSS-Inheritance" class="headerlink" title="CSS Inheritance"></a>CSS Inheritance</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">button</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/23/CSS-The-Very-Basic/" rel="prev" title="CSS: The Very Basic">
+      <i class="fa fa-chevron-left"></i> CSS: The Very Basic
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-ID-Selector"><span class="nav-number">1.</span> <span class="nav-text">The ID Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-class-Selector"><span class="nav-number">2.</span> <span class="nav-text">The class Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Descendant-Selector"><span class="nav-number">3.</span> <span class="nav-text">Descendant Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adjacent-Selector"><span class="nav-number">4.</span> <span class="nav-text">Adjacent Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Direct-Child"><span class="nav-number">5.</span> <span class="nav-text">Direct Child</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attribute-Selector"><span class="nav-number">6.</span> <span class="nav-text">Attribute Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PSEUDO-classes"><span class="nav-number">7.</span> <span class="nav-text">PSEUDO classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PSEUDO-ELEMENTS"><span class="nav-number">8.</span> <span class="nav-text">PSEUDO ELEMENTS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPECIFICITY"><span class="nav-number">9.</span> <span class="nav-text">SPECIFICITY</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-calculate-the-importance"><span class="nav-number">9.1.</span> <span class="nav-text">How to calculate the importance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#For-example"><span class="nav-number">9.1.1.</span> <span class="nav-text">For example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Inheritance"><span class="nav-number">10.</span> <span class="nav-text">CSS Inheritance</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
