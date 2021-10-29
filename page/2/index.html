@@ -146,6 +146,156 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/07/JSON-FirstGlance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/07/JSON-FirstGlance/" class="post-title-link" itemprop="url">JSON_FirstGlance</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-07 22:22:37 / Modified: 22:26:22" itemprop="dateCreated datePublished" datetime="2021-10-07T22:22:37+09:00">2021-10-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>I just finished this quick introduction of JSON video, and it was so helpful.<br>Here is the link:<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=iiADhChRriM&amp;t=553s">https://www.youtube.com/watch?v=iiADhChRriM&amp;t=553s</a></p>
+<p>Several things I would like to take away from this lesson:</p>
+<p>The most important thing might be this one:</p>
+<blockquote>
+<blockquote>
+<p>Everything in JSON is <code>VALID</code> in JavaScript</p>
+</blockquote>
+</blockquote>
+<hr>
+<h2 id="JaveScript-Object-Notation"><a href="#JaveScript-Object-Notation" class="headerlink" title="JaveScript Object Notation"></a>JaveScript Object Notation</h2><ul>
+<li>Data Representation Format</li>
+<li>Commonly Used for APIs and Configs</li>
+<li>Lightweight and Easy to Read/Write</li>
+<li>Integrate Easily With Most Language</li>
+</ul>
+<h2 id="JSON-Types"><a href="#JSON-Types" class="headerlink" title="JSON Types"></a>JSON Types</h2><ul>
+<li>Strings</li>
+<li>Number</li>
+<li>Booleans</li>
+<li>null</li>
+<li>Array</li>
+<li>Object</li>
+</ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>user.json<br>{<br>    “name”: “Kyle”,<br>    “favoriteNumber”: 3,<br>    “isProgrammer”: true,<br>    “hobbies”: [“Weight Lifting”, “Bowling”],<br>    “friends”: [{<br>        “name”: “Joey”,<br>        “favoriteNumber”: 100,<br>        “isProgrammer”: false,<br>        “friends”: […]<br>    }]<br>}</p>
+<h2 id="How-to-Parse-from-string-to-JSON"><a href="#How-to-Parse-from-string-to-JSON" class="headerlink" title="How to Parse from string to JSON"></a>How to Parse from string to JSON</h2><p><code>JSON.Parse(string)</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/06/DirectShape-Introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/06/DirectShape-Introduction/" class="post-title-link" itemprop="url">DirectShape_Introduction</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-06 15:26:33 / Modified: 16:21:19" itemprop="dateCreated datePublished" datetime="2021-10-06T15:26:33+09:00">2021-10-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Recently, I tried RhinoInsideRevit a bit. I found that RIR has this <code>Direct Shape</code> to help deliver geometry from Rhino/Grasshopper to Revit.<br>I would like to note down some thought I currently have while I developing alongside.</p>
+<p>According to the RevitAPI doc page about <code>DirectShape</code>:<br><a target="_blank" rel="noopener" href="https://www.revitapidocs.com/2022/bfbd137b-c2c2-71bb-6f4a-992d0dcf6ea8.htm">https://www.revitapidocs.com/2022/bfbd137b-c2c2-71bb-6f4a-992d0dcf6ea8.htm</a></p>
+<blockquote>
+<blockquote>
+<p>This class is used to store externally created geometric shapes. Primary intended use is for importing shapes from other data formats such as IFC or STEP. A DirectShape object may be assigned a category. That will affect how that object is displayed in Revit.</p>
+</blockquote>
+</blockquote>
+<p>So, which may mean that although RhinoInsideRevit might be a get-around solution without producing/ exporting a IFC file by building the Rhino on Revit (In runtime, Revit occupied some memories, and inside those memeories Rhino takes some part to be built), internally, both (IFC-way and RIR) use this <code>DirectShape</code> to help external geometry to be put inside Reivt.</p>
+<p>About what RhinoInsideRevit, we can refer this QA interview video from the official developers group.<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kckMA-GdsLc&amp;t=6451s">https://www.youtube.com/watch?v=kckMA-GdsLc&amp;t=6451s</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/05/ErrorHandlingInGH/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -755,157 +905,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/09/InorderTreeTraversalWithoutRecursionAndWithoutStack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/09/InorderTreeTraversalWithoutRecursionAndWithoutStack/" class="post-title-link" itemprop="url">InorderTreeTraversalWithoutRecursionAndWithoutStack</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-09 22:38:46 / Modified: 23:12:47" itemprop="dateCreated datePublished" datetime="2021-02-09T22:38:46+09:00">2021-02-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/?ref=rp">Reference_GeeksforGeeks</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Threaded_binary_tree">Thread Binary Tree</a></p>
-<h1 id="Inorder-Tree-Traversal-without-recursion-and-without-stack"><a href="#Inorder-Tree-Traversal-without-recursion-and-without-stack" class="headerlink" title="Inorder Tree Traversal without recursion and without stack"></a>Inorder Tree Traversal without recursion and without stack</h1><p>Using <code>Morris Travesal</code>, we can traverse the tree without using stack and recursion. The idea of Morris Traversal is based on <code>Threaded Binary Tree</code>.</p>
-<p>In this traveral, we first create links to Inorder successor and print the data using these links, and finally revert the changes to restore original tree.</p>
-<ol>
-<li>Initalize current as root</li>
-<li>While current <strong>is not NULL</strong><br> <strong>If</strong> the current does not have left child<pre><code> 1. Print current&#39;s data
- 2. Go to the right, i.e., current = current-&gt;right
-</code></pre>
- <strong>Else</strong><pre><code> Find rightmost node in current left subtree `OR` node whose right child == current
- *If*
-     we found right child == current
-     Go to the right, i.e. current = current-&gt;right
- *Else*
-     1. Make current as the right child of that rightmost node we found; and
-     2. Go to this left child, i.e., current = current -&gt; current-&gt;left
-</code></pre>
-</li>
-</ol>
-<p>Although the tree <strong>is modified through the traversal</strong>, it is reverted back to its original shape after the completion. <em>No extra space is required</em></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">right</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MorrisTraversal</span><span class="params">(struct tNode* root)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">current</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">pre</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    current = root;</span><br><span class="line">    <span class="keyword">while</span>(current != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(current-&gt;left == <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, current-&gt;data);</span><br><span class="line">            current = current-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// Find the inorder predecessor of current</span></span><br><span class="line">            pre = current-&gt;left;</span><br><span class="line">            <span class="keyword">while</span>(pre-&gt;right != <span class="literal">NULL</span> &amp;&amp; pre-&gt;right != current)</span><br><span class="line">                pre = pre-&gt;right;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Make current as the right child of its inorder predecessor</span></span><br><span class="line">            <span class="keyword">if</span>(pre-&gt;right == <span class="literal">NULL</span>)&#123;</span><br><span class="line">                pre-&gt;right = current;</span><br><span class="line">                current = current-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Revert the changes made in the `if` part to restore the original tree i.e., fix the right child of predecessor</span></span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                pre-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, current-&gt;data);</span><br><span class="line">                current = current-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">struct tNode* <span class="title">newtNode</span><span class="params">(<span class="keyword">int</span> data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">node</span> =</span> <span class="keyword">new</span> tNode;</span><br><span class="line">    node-&gt;data = data;</span><br><span class="line">    node-&gt;left = <span class="literal">NULL</span>;</span><br><span class="line">    node-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> (node);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* Constructed binary tree is</span></span><br><span class="line"><span class="comment">            1</span></span><br><span class="line"><span class="comment">          /   \</span></span><br><span class="line"><span class="comment">         2     3</span></span><br><span class="line"><span class="comment">       /   \</span></span><br><span class="line"><span class="comment">      4     5</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tNode</span>* <span class="title">root</span> =</span> <span class="built_in">newtNode</span>(<span class="number">1</span>);</span><br><span class="line">    root-&gt;left = <span class="built_in">newtNode</span>(<span class="number">2</span>);</span><br><span class="line">    root-&gt;right = <span class="built_in">newtNode</span>(<span class="number">3</span>);</span><br><span class="line">    root-&gt;left-&gt;left = <span class="built_in">newtNode</span>(<span class="number">4</span>);</span><br><span class="line">    root-&gt;left-&gt;right = <span class="built_in">newtNode</span>(<span class="number">5</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">MorrisTraversal</span>(root);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/09/InorderTreeTraverseWithoutRecursion/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/09/InorderTreeTraverseWithoutRecursion/" class="post-title-link" itemprop="url">InorderTreeTraverseWithoutRecursion</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-09 21:57:46 / Modified: 22:33:25" itemprop="dateCreated datePublished" datetime="2021-02-09T21:57:46+09:00">2021-02-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Inorder-Tree-Traversal-without-Recursion"><a href="#Inorder-Tree-Traversal-without-Recursion" class="headerlink" title="Inorder Tree Traversal without Recursion"></a>Inorder Tree Traversal without Recursion</h1><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/?ref=lbp">Reference</a></p>
-<p><strong>Time Complexity:</strong> O(n2)</p>
-<p>Using <code>Stack</code> is the obvious way to travese tree without recursion.</p>
-<ol>
-<li>create an empty stack S </li>
-<li>Initialize current node as root </li>
-<li>Push the current node to S and set current = current-&gt;left until current is <strong>NULL</strong></li>
-<li>If current is <strong>NULL</strong> and stack is <strong>not empty</strong> then <ol>
-<li>Pop the top item from stack</li>
-<li>Print the popped item, set current = popped_item-&gt;right</li>
-<li>Go to step 3.</li>
-</ol>
-</li>
-<li>If current is <strong>NULL</strong> and stack is <strong>empty</strong></li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">right</span>;</span></span><br><span class="line">    <span class="built_in">Node</span>(<span class="keyword">int</span> data)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data = data;</span><br><span class="line">        left = right = null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(struct Node* root)</span></span>&#123;</span><br><span class="line">    stack&lt;Node*&gt; s;</span><br><span class="line">    Node* curr = root;</span><br><span class="line">    <span class="keyword">while</span>(curr!= <span class="literal">NULL</span> || s.<span class="built_in">empty</span>()==<span class="literal">false</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(curr!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">            s.<span class="built_in">push</span>(curr);</span><br><span class="line">            curr = curr-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        curr = s.<span class="built_in">top</span>();</span><br><span class="line">        s.<span class="built_in">pop</span>();</span><br><span class="line">        cout&lt;&lt;curr-&gt;data&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        curr =  curr-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">root</span> =</span> <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">1</span>);</span><br><span class="line">    root-&gt;left = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">2</span>);</span><br><span class="line">    root-&gt;right = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">3</span>);</span><br><span class="line">    root-&gt;left-&gt;left = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">4</span>);</span><br><span class="line">    root-&gt;left-&gt;right = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">inOrder</span>(root);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -975,7 +974,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
