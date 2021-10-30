@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ForewordI went a long long walk today, approximately 21km and took me 6.7 hours. The weather today was just so great. Recently, I noticed that if the article I posted only has the techicial contents,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YAML_Intro">
+<meta property="og:url" content="https://chenchihyuan.github.io/2021/10/31/YAML-Intro/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="ForewordI went a long long walk today, approximately 21km and took me 6.7 hours. The weather today was just so great. Recently, I noticed that if the article I posted only has the techicial contents,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-30T15:53:47.000Z">
+<meta property="article:modified_time" content="2021-10-30T16:36:10.932Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="yaml">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2021/10/31/YAML-Intro/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>YAML_Intro | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/31/YAML-Intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          YAML_Intro
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-31 00:53:47 / Modified: 01:36:10" itemprop="dateCreated datePublished" datetime="2021-10-31T00:53:47+09:00">2021-10-31</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Foreword"><a href="#Foreword" class="headerlink" title="Foreword"></a>Foreword</h1><p>I went a long long walk today, approximately 21km and took me 6.7 hours. The weather today was just so great. Recently, I noticed that if the article I posted only has the techicial contents, that might be a bit boring. The whole keep posting thing is for me to be motivated, so I decided that I need to write down some thoughts ahead or behind the article, to make it more human.</p>
+<h1 id="What’s-my-thoughts-about-YAML-before-learning-it"><a href="#What’s-my-thoughts-about-YAML-before-learning-it" class="headerlink" title="What’s my thoughts about YAML before learning it."></a>What’s my thoughts about YAML before learning it.</h1><p>I have had much knowledge about <code>yaml</code> before I tried to post on github Page. I am currently using the <code>hexo</code> framework, organizing my blogs, and inside the folder, there’s one <code>.yaml</code> file owns a lot of settings we can play around.</p>
+<h1 id="Lecture"><a href="#Lecture" class="headerlink" title="Lecture"></a>Lecture</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=cdLNKUoMc6c&amp;t=2s">https://www.youtube.com/watch?v=cdLNKUoMc6c&amp;t=2s</a></p>
+<blockquote>
+<p>YAML is a <code>data_serialization</code> language, which means it’s basically just used to store information about different things</p>
+</blockquote>
+<ul>
+<li>We can use yaml to define <code>key-value</code> pairs.</li>
+<li>Very similar to <code>JSON</code>, but YAML focusing on <code>readability</code> and user friendiness</li>
+</ul>
+<h2 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h2><ul>
+<li><code>.yml</code></li>
+<li><code>.yaml</code></li>
+</ul>
+<h2 id="comment-in-YAML"><a href="#comment-in-YAML" class="headerlink" title="comment in YAML"></a>comment in YAML</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This won&#x27;t be executed in yaml</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="key-value-example-in-yaml"><a href="#key-value-example-in-yaml" class="headerlink" title="key-value example in yaml"></a>key-value example in yaml</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">person:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">&amp;name</span> <span class="string">&quot;mike&quot;</span></span><br><span class="line">    <span class="attr">occupation:</span> <span class="string">&#x27;programmer&#x27;</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">23</span></span><br><span class="line">    <span class="attr">gpa:</span> <span class="number">3.5</span></span><br><span class="line">    <span class="attr">fav_num:</span> <span class="number">1e+10</span></span><br><span class="line">    <span class="attr">male:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">birthday:</span> <span class="number">1994-02-06 14:33:22</span>   <span class="comment">#ISO 8601</span></span><br><span class="line">    <span class="attr">flaws:</span> <span class="literal">null</span></span><br><span class="line">    <span class="attr">hobbies:</span> </span><br><span class="line">        <span class="bullet">-</span> <span class="string">hiking</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">movies</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">riding</span> <span class="string">bike</span></span><br><span class="line">    <span class="attr">movies:</span> [<span class="string">&quot;Dark Knight&quot;</span>, <span class="string">&quot;Good Will Hunting&quot;</span>]</span><br><span class="line">    <span class="attr">friends:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;Steph&quot;</span></span><br><span class="line">          <span class="attr">age:</span> <span class="number">22</span></span><br><span class="line">        <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">&quot;Adam&quot;</span>, <span class="attr">age:</span> <span class="number">22</span>&#125;   </span><br><span class="line">        <span class="bullet">-</span>   </span><br><span class="line">          <span class="attr">name:</span> <span class="string">&quot;joe&quot;</span>  </span><br><span class="line">          <span class="attr">age:</span> <span class="number">23</span></span><br><span class="line">    <span class="attr">desciption:</span> <span class="string">&gt; </span></span><br><span class="line"><span class="string">        Coming soon, Aeron in Onyx, made with ocean-bound plastic. Same design. Same comfort. Now more sustainable.</span></span><br><span class="line"><span class="string"></span>    <span class="attr">signature:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        Mike</span></span><br><span class="line"><span class="string">        Giraffe Academy</span></span><br><span class="line"><span class="string">        email - giraffeacademy@gmail.com</span></span><br><span class="line"><span class="string"></span>    <span class="attr">id:</span> <span class="string">*name</span> <span class="comment">#&quot;mike&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">base:</span> <span class="meta">&amp;base</span></span><br><span class="line">        <span class="attr">var1:</span> <span class="string">value1</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">foo:</span> </span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="string">*base</span> <span class="comment"># var1: value1</span></span><br><span class="line">        <span class="attr">var2:</span> <span class="string">value2</span></span><br><span class="line"></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>The way that we can define scope inside of yaml is with indentation(<code>tab</code>).</p>
+</blockquote>
+<ul>
+<li>With <code>&gt;</code> before a bunch of text, <code>yaml</code> will render the text in a single line.</li>
+<li>With <code>|</code>, this will preserve the format correctly.</li>
+<li><code>&amp;</code> as an anchor mark, <code>*</code> to call that anchor value</li>
+<li><code>&amp;</code> anchor mark can also anchor a entire <code>key-value</code>, the example <code>&amp;base</code></li>
+<li><code>!!float</code> can force int to float, changing the type</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/yaml/" rel="tag"># yaml</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/29/Responsive-CSS-and-Flexbox/" rel="prev" title="Responsive_CSS_and_Flexbox">
+      <i class="fa fa-chevron-left"></i> Responsive_CSS_and_Flexbox
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What%E2%80%99s-my-thoughts-about-YAML-before-learning-it"><span class="nav-number">2.</span> <span class="nav-text">What’s my thoughts about YAML before learning it.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture"><span class="nav-number">3.</span> <span class="nav-text">Lecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Format"><span class="nav-number">3.1.</span> <span class="nav-text">Format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comment-in-YAML"><span class="nav-number">3.2.</span> <span class="nav-text">comment in YAML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#key-value-example-in-yaml"><span class="nav-number">3.3.</span> <span class="nav-text">key-value example in yaml</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

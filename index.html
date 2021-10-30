@@ -146,6 +146,162 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/31/YAML-Intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/31/YAML-Intro/" class="post-title-link" itemprop="url">YAML_Intro</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-31 00:53:47 / Modified: 01:36:10" itemprop="dateCreated datePublished" datetime="2021-10-31T00:53:47+09:00">2021-10-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Foreword"><a href="#Foreword" class="headerlink" title="Foreword"></a>Foreword</h1><p>I went a long long walk today, approximately 21km and took me 6.7 hours. The weather today was just so great. Recently, I noticed that if the article I posted only has the techicial contents, that might be a bit boring. The whole keep posting thing is for me to be motivated, so I decided that I need to write down some thoughts ahead or behind the article, to make it more human.</p>
+<h1 id="What’s-my-thoughts-about-YAML-before-learning-it"><a href="#What’s-my-thoughts-about-YAML-before-learning-it" class="headerlink" title="What’s my thoughts about YAML before learning it."></a>What’s my thoughts about YAML before learning it.</h1><p>I have had much knowledge about <code>yaml</code> before I tried to post on github Page. I am currently using the <code>hexo</code> framework, organizing my blogs, and inside the folder, there’s one <code>.yaml</code> file owns a lot of settings we can play around.</p>
+<h1 id="Lecture"><a href="#Lecture" class="headerlink" title="Lecture"></a>Lecture</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=cdLNKUoMc6c&amp;t=2s">https://www.youtube.com/watch?v=cdLNKUoMc6c&amp;t=2s</a></p>
+<blockquote>
+<p>YAML is a <code>data_serialization</code> language, which means it’s basically just used to store information about different things</p>
+</blockquote>
+<ul>
+<li>We can use yaml to define <code>key-value</code> pairs.</li>
+<li>Very similar to <code>JSON</code>, but YAML focusing on <code>readability</code> and user friendiness</li>
+</ul>
+<h2 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h2><ul>
+<li><code>.yml</code></li>
+<li><code>.yaml</code></li>
+</ul>
+<h2 id="comment-in-YAML"><a href="#comment-in-YAML" class="headerlink" title="comment in YAML"></a>comment in YAML</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This won&#x27;t be executed in yaml</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="key-value-example-in-yaml"><a href="#key-value-example-in-yaml" class="headerlink" title="key-value example in yaml"></a>key-value example in yaml</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">person:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">&amp;name</span> <span class="string">&quot;mike&quot;</span></span><br><span class="line">    <span class="attr">occupation:</span> <span class="string">&#x27;programmer&#x27;</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">23</span></span><br><span class="line">    <span class="attr">gpa:</span> <span class="number">3.5</span></span><br><span class="line">    <span class="attr">fav_num:</span> <span class="number">1e+10</span></span><br><span class="line">    <span class="attr">male:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">birthday:</span> <span class="number">1994-02-06 14:33:22</span>   <span class="comment">#ISO 8601</span></span><br><span class="line">    <span class="attr">flaws:</span> <span class="literal">null</span></span><br><span class="line">    <span class="attr">hobbies:</span> </span><br><span class="line">        <span class="bullet">-</span> <span class="string">hiking</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">movies</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">riding</span> <span class="string">bike</span></span><br><span class="line">    <span class="attr">movies:</span> [<span class="string">&quot;Dark Knight&quot;</span>, <span class="string">&quot;Good Will Hunting&quot;</span>]</span><br><span class="line">    <span class="attr">friends:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;Steph&quot;</span></span><br><span class="line">          <span class="attr">age:</span> <span class="number">22</span></span><br><span class="line">        <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">&quot;Adam&quot;</span>, <span class="attr">age:</span> <span class="number">22</span>&#125;   </span><br><span class="line">        <span class="bullet">-</span>   </span><br><span class="line">          <span class="attr">name:</span> <span class="string">&quot;joe&quot;</span>  </span><br><span class="line">          <span class="attr">age:</span> <span class="number">23</span></span><br><span class="line">    <span class="attr">desciption:</span> <span class="string">&gt; </span></span><br><span class="line"><span class="string">        Coming soon, Aeron in Onyx, made with ocean-bound plastic. Same design. Same comfort. Now more sustainable.</span></span><br><span class="line"><span class="string"></span>    <span class="attr">signature:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        Mike</span></span><br><span class="line"><span class="string">        Giraffe Academy</span></span><br><span class="line"><span class="string">        email - giraffeacademy@gmail.com</span></span><br><span class="line"><span class="string"></span>    <span class="attr">id:</span> <span class="string">*name</span> <span class="comment">#&quot;mike&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">base:</span> <span class="meta">&amp;base</span></span><br><span class="line">        <span class="attr">var1:</span> <span class="string">value1</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">foo:</span> </span><br><span class="line">        <span class="string">&lt;&lt;:</span> <span class="string">*base</span> <span class="comment"># var1: value1</span></span><br><span class="line">        <span class="attr">var2:</span> <span class="string">value2</span></span><br><span class="line"></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>The way that we can define scope inside of yaml is with indentation(<code>tab</code>).</p>
+</blockquote>
+<ul>
+<li>With <code>&gt;</code> before a bunch of text, <code>yaml</code> will render the text in a single line.</li>
+<li>With <code>|</code>, this will preserve the format correctly.</li>
+<li><code>&amp;</code> as an anchor mark, <code>*</code> to call that anchor value</li>
+<li><code>&amp;</code> anchor mark can also anchor a entire <code>key-value</code>, the example <code>&amp;base</code></li>
+<li><code>!!float</code> can force int to float, changing the type</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/29/Responsive-CSS-and-Flexbox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/29/Responsive-CSS-and-Flexbox/" class="post-title-link" itemprop="url">Responsive_CSS_and_Flexbox</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-29 16:35:14 / Modified: 20:55:44" itemprop="dateCreated datePublished" datetime="2021-10-29T16:35:14+09:00">2021-10-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Introduction-to-CSS-Flexbox"><a href="#Introduction-to-CSS-Flexbox" class="headerlink" title="Introduction to CSS Flexbox"></a>Introduction to CSS Flexbox</h1><h2 id="The-Basic"><a href="#The-Basic" class="headerlink" title="The Basic"></a>The Basic</h2><h3 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h3><p>Flexbox is one-dimensional layout method for laying out items in rows or columns.</p>
+<h3 id="It’s-New-ish"><a href="#It’s-New-ish" class="headerlink" title="It’s New(ish)"></a>It’s New(ish)</h3><p>Flexbox is a recent addition to CSS, included to address common layout frustations.</p>
+<h3 id="Why-‘Flex’"><a href="#Why-‘Flex’" class="headerlink" title="Why ‘Flex’?"></a>Why ‘Flex’?</h3><p>Flexbox allows us to distirbute space dynamically accross elements of an unknown size, hence the term “flex”</p>
+<h2 id="Flex-direction"><a href="#Flex-direction" class="headerlink" title="Flex direction"></a>Flex direction</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction">https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction</a></p>
+<h2 id="Justify-content"><a href="#Justify-content" class="headerlink" title="Justify-content"></a>Justify-content</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content</a></p>
+<h2 id="Flex-Wrap"><a href="#Flex-Wrap" class="headerlink" title="Flex Wrap"></a>Flex Wrap</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap">https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap</a></p>
+<ul>
+<li>main Axis: <code>left-right</code></li>
+<li>cross Axis: `top-down</li>
+</ul>
+<h2 id="Align-Item"><a href="#Align-Item" class="headerlink" title="Align Item"></a>Align Item</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">https://developer.mozilla.org/en-US/docs/Web/CSS/align-items</a></p>
+<p>s</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/28/Opacity-TheAphlaChannel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1134,139 +1290,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/13/PhysicalSitmulationExample2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/13/PhysicalSitmulationExample2/" class="post-title-link" itemprop="url">PhysicalSitmulationExample2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-13 14:59:14" itemprop="dateCreated datePublished" datetime="2021-10-13T14:59:14+09:00">2021-10-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-19 14:00:27" itemprop="dateModified" datetime="2021-10-19T14:00:27+09:00">2021-10-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Physical-Sitmalation"><a href="#Physical-Sitmalation" class="headerlink" title="Physical Sitmalation"></a>Physical Sitmalation</h1><p>One big idea behind the physical simualtion is all the things inside computer is <code>discrete</code>. We should tranfer the <strong>smooth/ continuous</strong> real world into <strong>digit/ discrete/ finite</strong> computer language. Instead of having infinite elements(or atoms) in one rope, we are have <strong>finite amount of element</strong>. </p>
-<p><img src="/uploads/RopeSimulation.gif" alt="rope"></p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">bool</span> reset, Point3d anchor0, Point3d anchor1, <span class="built_in">int</span> nodeCount, <span class="built_in">double</span> mass, Vector3d gravity, <span class="built_in">double</span> stiffness, <span class="built_in">double</span> friction, <span class="keyword">ref</span> <span class="built_in">object</span> P, <span class="keyword">ref</span> <span class="built_in">object</span> V, <span class="keyword">ref</span> <span class="built_in">object</span> C</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(reset)&#123;</span><br><span class="line">      nodes.Clear();</span><br><span class="line">      vels.Clear();</span><br><span class="line"></span><br><span class="line">      Line line = <span class="keyword">new</span> Line(anchor0, anchor1);</span><br><span class="line">      NurbsCurve lineCurve = line.ToNurbsCurve();</span><br><span class="line"></span><br><span class="line">      Point3d[] pts;</span><br><span class="line">      lineCurve.DivideByCount(nodeCount - <span class="number">1</span>, <span class="literal">true</span>, <span class="keyword">out</span> pts);</span><br><span class="line"></span><br><span class="line">      nodes.AddRange(pts);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; nodeCount; i++)</span><br><span class="line">      &#123;</span><br><span class="line">        vels.Add(<span class="keyword">new</span> Vector3d(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update the location of the anchors</span></span><br><span class="line">    nodes[<span class="number">0</span>] = anchor0;</span><br><span class="line">    nodes[nodes.Count - <span class="number">1</span>] = anchor1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Simulation forces for each node</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; nodes.Count - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      Point3d n = nodes[i];</span><br><span class="line">      Vector3d v = vels[i];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Calculating all the forces</span></span><br><span class="line">      Vector3d gravityForce = mass * gravity;</span><br><span class="line">      Vector3d prevSpring = -stiffness * (n - nodes[i - <span class="number">1</span>]);</span><br><span class="line">      Vector3d nextSpring = -stiffness * (n - nodes[i + <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Aggregate all the forces</span></span><br><span class="line">      Vector3d totalForce = gravityForce + prevSpring + nextSpring;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Update velocity</span></span><br><span class="line">      v += totalForce;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Add friction</span></span><br><span class="line">      v *= friction;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Update location of the node</span></span><br><span class="line">      n += v;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Update values on the original lists</span></span><br><span class="line">      nodes[i] = n;</span><br><span class="line">      vels[i] = v;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    P = nodes;</span><br><span class="line">    V = vels;</span><br><span class="line">    C = <span class="keyword">new</span> Polyline(nodes);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line">  List&lt;Point3d&gt; nodes = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">  List&lt;Vector3d&gt; vels = <span class="keyword">new</span> List&lt;Vector3d&gt;();</span><br><span class="line">  <span class="comment">// &lt;/Custom additional code&gt; </span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/10/11/PhysicalSimulationIntrodutionInGH/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/11/PhysicalSimulationIntrodutionInGH/" class="post-title-link" itemprop="url">PhysicalSimulationIntrodutionInGH</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-10-11 11:54:46 / Modified: 12:41:31" itemprop="dateCreated datePublished" datetime="2021-10-11T11:54:46+09:00">2021-10-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>In grasshopper field, there’re some useful and famous plug-ins for phyiscal simulation. Just to mention a few, Kangaroo, Flexhopper,… and etc.<br>I always think it’s more fun to play around the modelling which mimic the realistic phyiscal behaviours. This post is for noting down some developers’ thoughts while developing the phyiscal simulation tools.</p>
-<p>And again this amazing tutorial is from <code>Professor. Jose</code>.<br>Here’s the link:</p>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kG-AxzMPjxk&amp;t=5311s">https://www.youtube.com/watch?v=kG-AxzMPjxk&amp;t=5311s</a></p>
-<p>Also, one important concept before doing simulations would be <code>iteration</code>.</p>
-<h2 id="Iteration"><a href="#Iteration" class="headerlink" title="Iteration"></a>Iteration</h2><p>Usually, the physic behaviors are related to time, meaning it’s a function of <strong>time</strong>.<br>In code, we need to make sure the result of previous round can be brought to the next round.<br>Might be seen something like this.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NextRound += PreviousRound;</span><br></pre></td></tr></table></figure>
-<h2 id="Iteration-In-C-script-Component"><a href="#Iteration-In-C-script-Component" class="headerlink" title="Iteration In C# script Component"></a>Iteration In C# script Component</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ek2iL88WqGQ&amp;t=497s">https://www.youtube.com/watch?v=ek2iL88WqGQ&amp;t=497s</a><br>Professor Jose well explained the <code>scope</code> of the variables in C# script component, which is one of the vital ingredient before you do any simualtion related to time.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>Here I would like to share one of the example in this tutorial.<br><img src="/uploads/DampingRope.gif" alt="idea"></p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">bool</span> reset, Point3d anchorPoint, Point3d startPoint, <span class="built_in">double</span> radius, Vector3d gravity, <span class="built_in">double</span> stiffness, <span class="built_in">double</span> friction, <span class="keyword">ref</span> <span class="built_in">object</span> L, <span class="keyword">ref</span> <span class="built_in">object</span> S, <span class="keyword">ref</span> <span class="built_in">object</span> P, <span class="keyword">ref</span> <span class="built_in">object</span> V</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//Algorithm</span></span><br><span class="line">    <span class="keyword">if</span>(reset)</span><br><span class="line">    &#123;</span><br><span class="line">      currentLocation = startPoint;</span><br><span class="line">      currentVelocity = Vector3d.Zero;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Calculate all forces acting on the particle</span></span><br><span class="line">    Vector3d gravityForce = gravity;</span><br><span class="line">    Vector3d springForce = -stiffness * (currentLocation - anchorPoint);</span><br><span class="line"></span><br><span class="line">    Vector3d totalForces = gravityForce + springForce;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update the currentVelocity with all the acting forces</span></span><br><span class="line">    currentVelocity += totalForces;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Damp down velocity a little assuming friction on the system</span></span><br><span class="line">    currentVelocity *= friction;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update the location based on the velocity</span></span><br><span class="line">    currentLocation += currentVelocity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Output</span></span><br><span class="line">    L = <span class="keyword">new</span> Line(anchorPoint, currentLocation);</span><br><span class="line">    S = <span class="keyword">new</span> Sphere(currentLocation, radius);</span><br><span class="line">    P = currentLocation;</span><br><span class="line">    V = currentVelocity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line">  Point3d currentLocation = Point3d.Unset;</span><br><span class="line">  Vector3d currentVelocity = Vector3d.Unset;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1336,7 +1359,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1347,7 +1370,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
