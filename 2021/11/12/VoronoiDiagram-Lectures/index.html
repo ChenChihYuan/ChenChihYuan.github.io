@@ -28,7 +28,7 @@
 <meta property="og:description" content="Lecture Linkhttps:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;Pn19deUBsM8&amp;t&#x3D;13s The Post-Office Problemhttps:&#x2F;&#x2F;link.springer.com&#x2F;chapter&#x2F;10.1007%2F3-540-10291-4_1 http:&#x2F;&#x2F;blog.ivank.net&#x2F;voronoi-diagram-in-javascript">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-12T07:31:40.000Z">
-<meta property="article:modified_time" content="2021-11-12T15:57:00.686Z">
+<meta property="article:modified_time" content="2021-11-19T17:37:29.882Z">
 <meta property="article:author" content="JimYuan">
 <meta property="article:tag" content="Voronoi">
 <meta property="article:tag" content="Diagram">
@@ -183,7 +183,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-13 00:57:00" itemprop="dateModified" datetime="2021-11-13T00:57:00+09:00">2021-11-13</time>
+                <time title="Modified: 2021-11-20 02:37:29" itemprop="dateModified" datetime="2021-11-20T02:37:29+09:00">2021-11-20</time>
               </span>
 
           
@@ -214,6 +214,101 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/pvigier/FortuneAlgorithm">https://github.com/pvigier/FortuneAlgorithm</a></p>
 <p><a target="_blank" rel="noopener" href="http://www.cs.uu.nl/geobook/">http://www.cs.uu.nl/geobook/</a></p>
 <p><a target="_blank" rel="noopener" href="https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html">https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html</a></p>
+<h1 id="TakeAwayFromPvigier’s-blog"><a href="#TakeAwayFromPvigier’s-blog" class="headerlink" title="TakeAwayFromPvigier’s blog"></a>TakeAwayFromPvigier’s blog</h1><p><a target="_blank" rel="noopener" href="https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html">https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html</a></p>
+<h2 id="pseudo-code-from-Pvigier’s-Blog"><a href="#pseudo-code-from-Pvigier’s-Blog" class="headerlink" title="pseudo-code from Pvigier’s Blog"></a>pseudo-code from Pvigier’s Blog</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">add a site event in the event queue for each site</span><br><span class="line">while the event queue is not empty</span><br><span class="line">    pop the top event</span><br><span class="line">    if the event is a site event</span><br><span class="line">        insert a new arc in the beachline</span><br><span class="line">        check for new circle events</span><br><span class="line">    else</span><br><span class="line">        create a vertex in the diagram</span><br><span class="line">        remove the shrunk arc from the beachline</span><br><span class="line">        delete invalidated events</span><br><span class="line">        check for new circle events</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>site event</li>
+<li>circle event</li>
+</ul>
+<h3 id="Diagram’s-Data-Structure"><a href="#Diagram’s-Data-Structure" class="headerlink" title="Diagram’s Data Structure"></a>Diagram’s Data Structure</h3><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Doubly_connected_edge_list">Double connected edge list(DCEL)</a>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VoronoiDiagram</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        std::vector&lt;Site&gt; mSite;</span><br><span class="line">        std::vector&lt;Face&gt; mFace;</span><br><span class="line">        std::list&lt;Vertex&gt; mVertices;</span><br><span class="line">        std::list&lt;HalfEdge&gt; mHalfEdges;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The <code>Site</code> class represents <strong>an input point</strong>. Each site has an <strong>index</strong>, which is useful to query them, coordinates and a pointer to their cell(<code>face</code>):</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Site</span>&#123;</span></span><br><span class="line">    std::<span class="keyword">size_t</span> index;</span><br><span class="line">    Vector2 point;</span><br><span class="line">    Face* face;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>The vertices of the cells are represented by the <code>Vertex</code> class, they just have a cooridinates field:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vertex</span>&#123;</span></span><br><span class="line">    Vector2 point;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Here is the implementation of <code>half-edges</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HalfEdge</span>&#123;</span></span><br><span class="line">    Vertex* origin;</span><br><span class="line">    Vertex* destination;</span><br><span class="line">    HalfEdge* twin;</span><br><span class="line">    Face* incidentFace;</span><br><span class="line">    HalfEdge* prev;</span><br><span class="line">    HalfEdge* next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>An edge in a Voronoi diagram is shared by two adjacent cells. In the DCEL data structure, we splite these edfes in two half-edges, one for each cell, and they are <strong>linked</strong> by the <code>twin</code> pointer.</p>
+<p>Moreover, a hald-edge has an origin vertex and a desrination vertex.<br>The <code>incidenetFace</code> field points to the face to which the half-edge belongs to.</p>
+<p>Finally, in DCEL, cells are implemented as a circular <strong>doubly linked list</strong> of half-edges where adjacent half-edges are linked together. Thus the <code>prev</code> and <code>next</code> fields points to the previous and next half-edges in the cell.</p>
+<p>Finally, the <code>Face</code> class represents a cell and it just contains a pointer to its site and another to one of its half-edges. It does not matter which half-edge it is because a cell is a <strong>closed polygon</strong>. Thus we can access to all of its hald-edges by traversing the circular linked list.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Face</span>&#123;</span></span><br><span class="line">    Site* site;</span><br><span class="line">    HalfEdge* outerComponent;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Event-Queue"><a href="#Event-Queue" class="headerlink" title="Event Queue"></a>Event Queue</h2><p>The standard way to implement the event queue is to use a <strong>priority queue</strong>.</p>
+<p>During the processing of site and circle events we may need to remove circle events from the queue because they are not valid anymore.</p>
+<p>But most of the standard implementations of priority queues do not allow to remove an element which is not the <strong>top one</strong>. In particular that is the case for <code>std::priority_queue</code>.</p>
+<p>There are two ways to tackle this problem.</p>
+<ol>
+<li>The first and simplest one is to add a <code>valid</code> flag to <code>true</code> initially. Then instead of removing the circle event from the queue, we just set its flag to <code>false</code>. Finially, when we process the events in the main loop, if the <code>valid</code> flag of an event equals to <code>false</code>, we simply discard it and process the next one.</li>
+<li>The second method which I adopted is not to use <code>std::priority_queue</code>. Instead, I implemented <strong>my own priority queue</strong> which supports removal of any element it contains. The implementation of such a queue is pretty straightforward. I choose this method because I find it makes the code for the algorithm clearer.</li>
+</ol>
+<h2 id="Beachline"><a href="#Beachline" class="headerlink" title="Beachline"></a>Beachline</h2><p>If not implemented correctly there is no guarantee that the algorithm will run in <em>O(log(n))</em>. The key to reach this time complecity is to use a <strong>self-balancing</strong> tree.</p>
+<p>In my implementation the beachline is still a tree, but <strong>all nodes represent an arc</strong>. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Arc</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">Color</span>&#123;</span>RED, BLACK&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Hierarchy</span></span><br><span class="line">    Arc* parent;</span><br><span class="line">    Arc* left;</span><br><span class="line">    Arc* right;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Diagram</span></span><br><span class="line">    VoronoiDiagram::Site* site;</span><br><span class="line">    VoronoiDiagram::HalfEdge* leftHalfEdge;</span><br><span class="line">    VoronoiDiagram::HalfEdge* rightHalfEdge;</span><br><span class="line">    Event* event;</span><br><span class="line">    <span class="comment">// Optimizations</span></span><br><span class="line">    Arc* prev;</span><br><span class="line">    Arc* next;</span><br><span class="line">    <span class="comment">// Only for balancing</span></span><br><span class="line">    Color color;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>In Fortune’s algorithm <strong>we have no key</strong>, we only know that we want to insert an arc before or after another in the beachline. To do that, I create methods <code>insertBefore</code> and <code>insertAfter</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Beachline::insertBefore</span><span class="params">(Arc* x, Arc* y)</span></span>&#123;</span><br><span class="line">    <span class="comment">// Find the right place</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">isNil</span>(x-&gt;left))&#123;</span><br><span class="line">        x-&gt;left = y;</span><br><span class="line">        y-&gt;parent = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        x-&gt;prev-&gt;right = y;</span><br><span class="line">        y-&gt;parent = x-&gt;prev;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Set the pointers</span></span><br><span class="line">    y-&gt;prev = x-&gt;prev;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">isNil</span>(y-&gt;prev))</span><br><span class="line">        y-&gt;prev-&gt;next = y;</span><br><span class="line">    </span><br><span class="line">    y-&gt;next = x;</span><br><span class="line">    x-&gt;prev = y;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Balance the tree</span></span><br><span class="line">    <span class="built_in">insertFixup</span>(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="Priority-Queues"><a href="#Priority-Queues" class="headerlink" title="Priority Queues"></a>Priority Queues</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=wptevk0bshY">https://www.youtube.com/watch?v=wptevk0bshY</a></p>
+<h4 id="What-is-a-Priority-Queue"><a href="#What-is-a-Priority-Queue" class="headerlink" title="What is a Priority Queue"></a>What is a Priority Queue</h4><p>A priority queue is an Abstract Data Type(ADT) that operates similar to a normal queue excpet that <strong>each element has a certain priority</strong>. The priority of the elements in priority queue determin the order in which elements are removed from the PQ.</p>
+<p>NOTE: Priority queues only supports <strong>comparable data</strong>.</p>
+<h4 id="What-is-a-Heap"><a href="#What-is-a-Heap" class="headerlink" title="What is a Heap?"></a>What is a Heap?</h4><p>A heap is a <strong>tree</strong> based DS that satifies the <strong>heap invariant</strong>(also called heap property):<br>If A is a parent node of B then A is ordered with repect to B for all nodes A, B in the heap.</p>
+<ul>
+<li>Max Heap</li>
+<li>Min Heap</li>
+</ul>
+<blockquote>
+<p>Heaps must be trees.</p>
+</blockquote>
+<h4 id="When-and-where-is-a-PQ-used"><a href="#When-and-where-is-a-PQ-used" class="headerlink" title="When and where is a PQ used?"></a>When and where is a PQ used?</h4><ul>
+<li>Used in certain implementaitons of Dijkstra’s shortest Path algorithm.</li>
+<li>Anytime you need the dynamically fetch the <code>next best</code> or <code>next worst</code> element</li>
+<li>Used in Huffman coding (which is often used for lossless data compression).</li>
+<li>Best First Search(BFS) algorithms such as A* use PQs to continuously grab the next most promising node</li>
+<li>Used by minimum Spanning Tree(MST) algorithms</li>
+</ul>
+<h4 id="Complexity-PQ-with-binary-heap"><a href="#Complexity-PQ-with-binary-heap" class="headerlink" title="Complexity PQ with binary heap"></a>Complexity PQ with binary heap</h4><ul>
+<li>Binary Heap construction: O(n)</li>
+<li>Polling: O(log(n))</li>
+<li>Peeking: O(1)</li>
+<li>Adding: O(log(n))</li>
+</ul>
+<h3 id="Self-balance-Tree-AVL-Tree"><a href="#Self-balance-Tree-AVL-Tree" class="headerlink" title="Self balance Tree (AVL Tree)"></a>Self balance Tree (AVL Tree)</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vRwi_UcZGjU">https://www.youtube.com/watch?v=vRwi_UcZGjU</a></p>
+<ul>
+<li>Balance</li>
+<li>Rotation</li>
+<li>Implementation</li>
+</ul>
+<p>Rebalancing threshold</p>
+<h2 id="pseudo-code-from-Jacquesheunis’-blog"><a href="#pseudo-code-from-Jacquesheunis’-blog" class="headerlink" title="pseudo-code from Jacquesheunis’ blog"></a>pseudo-code from Jacquesheunis’ blog</h2><p><a target="_blank" rel="noopener" href="https://jacquesheunis.com/post/fortunes-algorithm/">https://jacquesheunis.com/post/fortunes-algorithm/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Fill the event queue with site events for each input site.</span><br><span class="line">While the event queue still has items in it:</span><br><span class="line">    If the next event on the queue is a site event:</span><br><span class="line">        Add the new site to the beachline</span><br><span class="line">    Otherwise it must be an edge-intersection event:</span><br><span class="line">        Remove the squeezed cell from the beachline</span><br><span class="line">Cleanup any remaining intermediate state</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Voronoi-Diagram-Computataional-Geometry"><a href="#Voronoi-Diagram-Computataional-Geometry" class="headerlink" title="Voronoi Diagram - Computataional Geometry"></a>Voronoi Diagram - Computataional Geometry</h1><h2 id="Fortune’s-Sweep"><a href="#Fortune’s-Sweep" class="headerlink" title="Fortune’s Sweep"></a>Fortune’s Sweep</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">VoronoiDiagram(P are in R2)</span><br><span class="line">Q : new PriorityQueue(P) // site events sortes by y-coord.</span><br><span class="line">T : new BalancedBinarySearchTree() // sweep status(B)</span><br><span class="line">D : new DCEL() // to-be Vor(P)</span><br><span class="line"></span><br><span class="line">while not Q.empty() do</span><br><span class="line">    p &lt;- Q.ExtractMax()</span><br><span class="line">    if p site event then</span><br><span class="line">        HandleSiteEvent(p)</span><br><span class="line">    else</span><br><span class="line">        a &lt;- arc on B that will disappear</span><br><span class="line">        HandleCircleEvent(a)</span><br><span class="line"></span><br><span class="line">treat remaining int. nodes of T(unbnd. edges of Vor(P))</span><br><span class="line">return D</span><br></pre></td></tr></table></figure>
+
+<h3 id="Handling-Events"><a href="#Handling-Events" class="headerlink" title="Handling Events"></a>Handling Events</h3><ul>
+<li>HandleSiteEvent(point p)<ul>
+<li>Search in <code>T</code> for the arc <code>a</code> vertically above <code>p</code>. If <code>a</code> has pointer to circle event in <code>Q</code>, delete this event.   </li>
+<li>Split <code>a</code> into <code>a0</code> and <code>a2</code>. Let <code>a1</code> be the new arc of <code>p</code></li>
+<li>Add Vor-edges <code>&lt;q, p&gt;</code> and <code>&lt;p, q&gt;</code> to DECL</li>
+<li>Check <code>&lt;., a0, a1&gt;</code> and <code>&lt;a1, a2, .&gt;</code> for circle events.</li>
+</ul>
+</li>
+<li>HandleCircleEvent(arc <code>a</code>)<ul>
+<li>T.delete(a); update breakpts</li>
+<li>Delete all circle events involving <code>a</code> from <code>Q</code></li>
+<li>Add Vor-vtx <code>a_left</code> and <code>a_right</code></li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -298,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-Link"><span class="nav-number">1.</span> <span class="nav-text">Lecture Link</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Post-Office-Problem"><span class="nav-number">1.1.</span> <span class="nav-text">The Post-Office Problem</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-Link"><span class="nav-number">1.</span> <span class="nav-text">Lecture Link</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Post-Office-Problem"><span class="nav-number">1.1.</span> <span class="nav-text">The Post-Office Problem</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TakeAwayFromPvigier%E2%80%99s-blog"><span class="nav-number">2.</span> <span class="nav-text">TakeAwayFromPvigier’s blog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pseudo-code-from-Pvigier%E2%80%99s-Blog"><span class="nav-number">2.1.</span> <span class="nav-text">pseudo-code from Pvigier’s Blog</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Diagram%E2%80%99s-Data-Structure"><span class="nav-number">2.1.1.</span> <span class="nav-text">Diagram’s Data Structure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-Queue"><span class="nav-number">2.2.</span> <span class="nav-text">Event Queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beachline"><span class="nav-number">2.3.</span> <span class="nav-text">Beachline</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Priority-Queues"><span class="nav-number">2.3.1.</span> <span class="nav-text">Priority Queues</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-a-Priority-Queue"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">What is a Priority Queue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-a-Heap"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">What is a Heap?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#When-and-where-is-a-PQ-used"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">When and where is a PQ used?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Complexity-PQ-with-binary-heap"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">Complexity PQ with binary heap</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-balance-Tree-AVL-Tree"><span class="nav-number">2.3.2.</span> <span class="nav-text">Self balance Tree (AVL Tree)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pseudo-code-from-Jacquesheunis%E2%80%99-blog"><span class="nav-number">2.4.</span> <span class="nav-text">pseudo-code from Jacquesheunis’ blog</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Voronoi-Diagram-Computataional-Geometry"><span class="nav-number">3.</span> <span class="nav-text">Voronoi Diagram - Computataional Geometry</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fortune%E2%80%99s-Sweep"><span class="nav-number">3.1.</span> <span class="nav-text">Fortune’s Sweep</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-Events"><span class="nav-number">3.1.1.</span> <span class="nav-text">Handling Events</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -312,18 +407,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">86</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
