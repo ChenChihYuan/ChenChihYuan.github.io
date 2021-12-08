@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Referencehttps:&#x2F;&#x2F;help.autodesk.com&#x2F;cloudhelp&#x2F;2018&#x2F;CHS&#x2F;AutoCAD-AutoLISP-Tutorials&#x2F;files&#x2F;index.htm#! Basic TutorialTutoiral: Getting Started(AutoLISP)Autodesk explanation Link AutoLISP is based on the L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AutoLisp_Note">
+<meta property="og:url" content="https://chenchihyuan.github.io/2021/12/07/AutoLisp-Note/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="Referencehttps:&#x2F;&#x2F;help.autodesk.com&#x2F;cloudhelp&#x2F;2018&#x2F;CHS&#x2F;AutoCAD-AutoLISP-Tutorials&#x2F;files&#x2F;index.htm#! Basic TutorialTutoiral: Getting Started(AutoLISP)Autodesk explanation Link AutoLISP is based on the L">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-07T05:11:22.000Z">
+<meta property="article:modified_time" content="2021-12-08T06:11:17.783Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="AutoCAD">
+<meta property="article:tag" content="AutoLisp">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2021/12/07/AutoLisp-Note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>AutoLisp_Note | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/07/AutoLisp-Note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AutoLisp_Note
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-07 14:11:22" itemprop="dateCreated datePublished" datetime="2021-12-07T14:11:22+09:00">2021-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-08 15:11:17" itemprop="dateModified" datetime="2021-12-08T15:11:17+09:00">2021-12-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://help.autodesk.com/cloudhelp/2018/CHS/AutoCAD-AutoLISP-Tutorials/files/index.htm#">https://help.autodesk.com/cloudhelp/2018/CHS/AutoCAD-AutoLISP-Tutorials/files/index.htm#</a>!</p>
+<h1 id="Basic-Tutorial"><a href="#Basic-Tutorial" class="headerlink" title="Basic Tutorial"></a>Basic Tutorial</h1><h2 id="Tutoiral-Getting-Started-AutoLISP"><a href="#Tutoiral-Getting-Started-AutoLISP" class="headerlink" title="Tutoiral: Getting Started(AutoLISP)"></a>Tutoiral: Getting Started(AutoLISP)</h2><p><a target="_blank" rel="noopener" href="https://help.autodesk.com/view/OARX/2018/CHS/?guid=GUID-C64046FA-CD9E-4B38-9967-A501119E4A62">Autodesk explanation Link</a></p>
+<p>AutoLISP is based on the LISP(<code>LISt Processing</code>) programming<br>langauage.</p>
+<p>A <code>list</code> is a structure <strong>enclosed by parentheses</strong>.</p>
+<p>Usually, the first element in the list is the name of a function, and the following elements are called <em>arguments</em>.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">function_name</span> [argument1 argumentX ...])</span><br></pre></td></tr></table></figure>
+
+<p>The <code>!</code> (exclamation point) character can only be used at the <strong>AutoCAD Command prompt</strong> and is used to return the current value of an AutoLISP variable.</p>
+<hr>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">+</span> <span class="number">0.01</span> (<span class="name">*</span> <span class="number">2</span> <span class="number">0.875</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2 * 0.875 = 1.75</li>
+<li>0.01 + 1.75 = 1.76</li>
+</ul>
+<hr>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> nDist (<span class="name">getreal</span> <span class="string">&quot;\nEnter a distance: &quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>The <code>getreal</code> function prompts the user for a real numeric value. The value provided is then passed to the <code>setq</code> function and assigned to the <code>nDist</code> user-defined variable.</p>
+<hr>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">alert</span> (<span class="name">strcat</span> <span class="string">&quot;Welcome&quot;</span> <span class="string">&quot;to&quot;</span> <span class="string">&quot;AutoLISP!&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>The <code>stract</code> function combines all the strings into a single string value. The value returned bt the <code>strcat</code> function is then passed to the <code>alert</code> function and displayed in a message box.</p>
+<h2 id="Tutoiral-Creating-a-New-Custom-Command-and-Controllign-wiht-System-Variables-AutoLISP"><a href="#Tutoiral-Creating-a-New-Custom-Command-and-Controllign-wiht-System-Variables-AutoLISP" class="headerlink" title="Tutoiral: Creating a New Custom Command and Controllign wiht System Variables(AutoLISP)"></a>Tutoiral: Creating a New Custom Command and Controllign wiht System Variables(AutoLISP)</h2><p>Your custom commands can use standard AutoCAD commands with the <code>command</code> function, or they can directly manipulate objects using AutoLISP functions. </p>
+<h3 id="Creating-a-New-Function"><a href="#Creating-a-New-Function" class="headerlink" title="Creating a New Function"></a>Creating a New Function</h3><p><code>defun</code> means “define function.”</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> function_name ([arguments] [/ local_variables ...]) expr ...)</span><br></pre></td></tr></table></figure>
+
+<p>The <code>defun</code> function also allows you to define <strong>a list of arguments</strong> that can be passed to the function and a list of user-defined variable that are “local” to the function.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> display-msg (<span class="name">msg</span> mode / )</span><br><span class="line">  (<span class="name">if</span> (<span class="name">=</span> mode <span class="number">0</span>)</span><br><span class="line">    (<span class="name">prompt</span> (<span class="name">strcat</span> <span class="string">&quot;\n&quot;</span> msg))</span><br><span class="line">    (<span class="name">alert</span> msg)</span><br><span class="line">  )</span><br><span class="line"> (<span class="name">princ</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>(display-msg “Hello from AutoLISP!” 0)</li>
+<li>(display-msg “Hello from AutoLISP!” 1)</li>
+</ul>
+<h3 id="Creating-a-Custom-Command"><a href="#Creating-a-Custom-Command" class="headerlink" title="Creating a Custom Command"></a>Creating a Custom Command</h3><p>A custom command <strong>is a function</strong> that is defined with the <code>defun</code> function, but uses a special naming convention: they use the characters <code>c:</code> as a prefix. This distinguishes them from other functions.</p>
+<p>You can define a function that accepts arguments, but you should never define a function that will be used as a custom command to accpet arguments. </p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> c<span class="symbol">:hello</span> ( <span class="name">/</span> msg)</span><br><span class="line">  (<span class="name">setq</span> msg (<span class="name">getstring</span> T <span class="string">&quot;\nEnter a message: &quot;</span>))</span><br><span class="line">  (<span class="name">alert</span> msg)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><code>msg</code> is a varible only exist inside the <code>c:hello</code> scope.</p>
+<p>You can save your AutoLISP expressions to a file with the <strong>LSP file</strong> extension so they can be reused and loaded into other drawings.</p>
+<h3 id="Accessing-and-Setting-System-Variable-Value"><a href="#Accessing-and-Setting-System-Variable-Value" class="headerlink" title="Accessing and Setting System Variable Value"></a>Accessing and Setting System Variable Value</h3><p><strong>Getter/ Setter</strong></p>
+<ul>
+<li>getvar: Returns the current value of a system variable</li>
+<li>setvar: Assigns a new value to a system variable</li>
+</ul>
+<p>The following explain how to get and set the value of the <code>OSMODE</code>(<strong>Object Snap Mode</strong>) system varible.</p>
+<ol>
+<li>At the Command prompt, enter (setq cur_osmode (getvar “osmode”))<br>The current value of the OSMODE system variable is returned and assigned to the user-defined variable of <code>cur_osmode</code>. While OSMODE returns an <strong>integer value</strong>, the value is the sum of multiple “<strong>bit-code</strong>“ values. For example, the value 35 indicates that the EndPoint(1), Midpoint(2) and Intersection(32) running object snaps are enabled.</li>
+<li>At the Command prompt, enter <strong>osnap</strong></li>
+</ol>
+<h2 id="Creating-Loading-and-Opening-an-AutoLISP-File-AutoLISP"><a href="#Creating-Loading-and-Opening-an-AutoLISP-File-AutoLISP" class="headerlink" title="Creating, Loading, and Opening an AutoLISP File(AutoLISP)"></a>Creating, Loading, and Opening an AutoLISP File(AutoLISP)</h2><p>AutoLISP is an interpretive language, so it can be stored in an <strong>ASCII text file</strong>, loaded, and then executed directly within AutoCAD.</p>
+<p>AutoLISP files typically have an <code>.lsp</code> file extension, but they can also have the <code>.mnl</code> file extension. Both LSP and MNL files can be edited with a <strong>text editor</strong>.</p>
+<p>MNL files are associated with user interface customization and they are automatically loaded into AutoCAD when a customization (<code>CUI/ CUIx</code>) file of the <strong>same name</strong> is loaded. For example, the <code>acad.mnl</code> is automatically loaded into AutoCAD when the <code>acad.cuix</code> file is loaded.</p>
+<p>We can open any <strong>text editor</strong> create and <code>.lsp</code> file and load it into AutoCAD.</p>
+<p>The way to load it into AutoCAD.</p>
+<ul>
+<li>Manage &gt; Application&gt; Load Application(Find the correct file)</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AutoCAD/" rel="tag"># AutoCAD</a>
+              <a href="/tags/AutoLisp/" rel="tag"># AutoLisp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/29/Note-PriorityQueue/" rel="prev" title="Note_PriorityQueue">
+      <i class="fa fa-chevron-left"></i> Note_PriorityQueue
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/08/VisualLISP-GardenPath/" rel="next" title="VisualLISP_GardenPath">
+      VisualLISP_GardenPath <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">1.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Tutorial"><span class="nav-number">2.</span> <span class="nav-text">Basic Tutorial</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tutoiral-Getting-Started-AutoLISP"><span class="nav-number">2.1.</span> <span class="nav-text">Tutoiral: Getting Started(AutoLISP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tutoiral-Creating-a-New-Custom-Command-and-Controllign-wiht-System-Variables-AutoLISP"><span class="nav-number">2.2.</span> <span class="nav-text">Tutoiral: Creating a New Custom Command and Controllign wiht System Variables(AutoLISP)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-New-Function"><span class="nav-number">2.2.1.</span> <span class="nav-text">Creating a New Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-Custom-Command"><span class="nav-number">2.2.2.</span> <span class="nav-text">Creating a Custom Command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accessing-and-Setting-System-Variable-Value"><span class="nav-number">2.2.3.</span> <span class="nav-text">Accessing and Setting System Variable Value</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-Loading-and-Opening-an-AutoLISP-File-AutoLISP"><span class="nav-number">2.3.</span> <span class="nav-text">Creating, Loading, and Opening an AutoLISP File(AutoLISP)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

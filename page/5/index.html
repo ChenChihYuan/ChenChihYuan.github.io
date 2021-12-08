@@ -146,6 +146,384 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/06/BFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/06/BFS/" class="post-title-link" itemprop="url">BFS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-06 11:02:43" itemprop="dateCreated datePublished" datetime="2021-02-06T11:02:43+09:00">2021-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-08 00:34:39" itemprop="dateModified" datetime="2021-02-08T00:34:39+09:00">2021-02-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Breadth-first-search"><a href="#Breadth-first-search" class="headerlink" title="Breadth-first search"></a>Breadth-first search</h1><p><strong>Breath-first search</strong>(BFS) is an algorithm for traversing or searching <strong>tree</strong> or <strong>graph</strong> data structures. It starts ar the <strong>tree root</strong>(or some arbitrary node of a graph), and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level. -<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Breadth-first_search#:~:text=Breadth%2Dfirst%20search%20(BFS),tree%20or%20graph%20data%20structures.&text=It%20uses%20the%20opposite%20strategy,backtrack%20and%20expand%20other%20nodes.">Wiki</a></p>
+<h1 id="Queue-Method"><a href="#Queue-Method" class="headerlink" title="Queue Method"></a>Queue Method</h1><h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><hr>
+<p>Input:  A graph G and a starting vertex root of G<br>Output: Goal state. THe parent links trace the shortest path back to root.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">procedure BFS(G, root) is</span><br><span class="line">    let Q be a queue</span><br><span class="line">    label root as discovered</span><br><span class="line">    Q.enqueue(root)</span><br><span class="line">    while Q is not empty do</span><br><span class="line">        v := Q.dequeue()</span><br><span class="line">        if c is the goal then</span><br><span class="line">            return v</span><br><span class="line">        for all edges from v to w in G.</span><br></pre></td></tr></table></figure>
+
+<p>The concept can refer to this article, though it is in Japanese.<br><a target="_blank" rel="noopener" href="https://qiita.com/drken/items/996d80bcae64649a6580">BFS_queue</a><br><a target="_blank" rel="noopener" href="https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/990/">LeetCode_BFS</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelTravese</span>(TreeNode* root)&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; LvTraverse;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> LvTraverse;</span><br><span class="line">        </span><br><span class="line">        queue&lt;TreeNode*&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(root);</span><br><span class="line">        TreeNode* node = root;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">int</span> k = q.<span class="built_in">size</span>();</span><br><span class="line">            vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">            <span class="keyword">while</span>(k--)&#123;</span><br><span class="line">                root = q.<span class="built_in">front</span>();</span><br><span class="line">                tmp.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">                q.<span class="built_in">pop</span>();</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(root-&gt;left)</span><br><span class="line">                    q.<span class="built_in">push</span>(root-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;right)</span><br><span class="line">                    q.<span class="built_in">push</span>(root-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            LvTraverse.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> LvTraverse;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Recursive-Method"><a href="#Recursive-Method" class="headerlink" title="Recursive Method"></a>Recursive Method</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode* node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> lheight = <span class="built_in">height</span>(node-&gt;left);</span><br><span class="line">            <span class="keyword">int</span> rheight = <span class="built_in">height</span>(node-&gt;right);</span><br><span class="line">            <span class="keyword">return</span> lheight &gt; rheight ? lheight+<span class="number">1</span> : rheight+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">printlevelOrder</span>(TreeNode* root)&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; vecs;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;= <span class="built_in">height</span>(root);i++)&#123;</span><br><span class="line">            vector&lt;<span class="keyword">int</span>&gt; invec;</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root, i, invec);</span><br><span class="line">            vecs.<span class="built_in">push_back</span>(invec);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vecs;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddGivenLevel</span><span class="params">(TreeNode* root, <span class="keyword">int</span> level, vector&lt;<span class="keyword">int</span>&gt;&amp; vec)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(level ==<span class="number">1</span>)</span><br><span class="line">            vec.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(level&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root-&gt;left, level<span class="number">-1</span>, vec);</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root-&gt;right, level<span class="number">-1</span>, vec);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>Note:</p>
+<ol>
+<li>height can be found recursively. height(1_based) = level(0_based) + 1</li>
+</ol>
+<h1 id="Solve-Tree-Problems-Recursively"><a href="#Solve-Tree-Problems-Recursively" class="headerlink" title="Solve Tree Problems Recursively"></a>Solve Tree Problems Recursively</h1><p>Can refer to the LeetCode Page<a target="_blank" rel="noopener" href="https://leetcode.com/explore/learn/card/data-structure-tree/17/solve-problems-recursively/534/">LINK</a></p>
+<p>Typically, we can solve a tree problem recursively using a <strong>top-down approach</strong> or using a <strong>bottom-up approach</strong>.</p>
+<h2 id="Top-down-Solution"><a href="#Top-down-Solution" class="headerlink" title="Top-down Solution"></a>Top-down Solution</h2><p><strong>Top-down</strong> means that in each recursive call, we will <strong>visit the node first</strong> to come up with some values, and <strong>pass</strong> these values <strong>to its children</strong> when calling the function recursively.</p>
+<p>So the top-down solution can be consideredd as a kind of <strong>preorder</strong> travesal. To be specific, the recursive function <code>top-down(root, params)</code> works like this:</p>
+<ol>
+<li>return specific value for null node</li>
+<li>update the answer if needed                              // answer &lt;— params</li>
+<li>left_ans = top_down(root.left, left_params)              // left_params &lt;— root.val ,params</li>
+<li>right_ans = top_down(root.right, right_params)           // right_params &lt;— root.val , params</li>
+<li>return the answer if needed                              // answers &lt;— left_ans, right_ans</li>
+</ol>
+<h3 id="For-example-find-height-of-a-binary-Tree"><a href="#For-example-find-height-of-a-binary-Tree" class="headerlink" title="For example - find height of a binary Tree"></a>For example - find height of a binary Tree</h3><blockquote>
+<p>We know that depth of the root node is <code>1</code></p>
+</blockquote>
+<ol>
+<li>For each node, if we know its depth, we will know the depth of its children.</li>
+<li>Therefore, if we pass the depth of the node as a parameter when calling the function recursively, all the nodes will know their depth. </li>
+</ol>
+<hr>
+<ol>
+<li>return if root is <code>NULL</code></li>
+<li>if root is a leaf node:</li>
+<li><pre><code>answer = max(answer, depth)      // update the answer if needed
+</code></pre>
+</li>
+<li>maximum_depth(root.left, depth + 1)</li>
+<li>maximum_depth(root.right, depth+ 1)</li>
+</ol>
+<hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> answer;		       <span class="comment">// don&#x27;t forget to initialize answer before call maximum_depth</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">maximum_depth</span><span class="params">(TreeNode* root, <span class="keyword">int</span> depth)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) &#123;</span><br><span class="line">        answer = <span class="built_in">max</span>(answer, depth);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">maximum_depth</span>(root-&gt;left, depth + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">maximum_depth</span>(root-&gt;right, depth + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Button-up-Solution"><a href="#Button-up-Solution" class="headerlink" title="Button-up Solution"></a>Button-up Solution</h2><p><code>Button-up</code> is another recursive solution. In each recursive call, we will firstly call the function recursively for <strong>all the children nodes</strong> and then come up with the answer according to the returned valued and the value of the current node itself. This process can be regraded as a kind of <strong>postordered</strong> traversal. Typically, a “button-up” recursive function <code>bottom_up(root)</code> will be something like this:</p>
+<ol>
+<li>return specific value for null node</li>
+<li>left_ans = bottom_up(root.left)          // call function recursively for left child</li>
+<li>right_ans = bottom_up(root.right)        // call function recursively for right child</li>
+<li>return answers   // answer &lt;– left_ans, right_ans, root.val</li>
+</ol>
+<hr>
+<h3 id="For-example-find-height-of-a-binary-Tree-1"><a href="#For-example-find-height-of-a-binary-Tree-1" class="headerlink" title="For example - find height of a binary Tree"></a>For example - find height of a binary Tree</h3><blockquote>
+<p>Same exmaple, different perspective.</p>
+</blockquote>
+<ol>
+<li><p>If we know the maximum depth <code>l</code> of the subtree rooted at its <strong>left</strong> child and the maximum depth <code>r</code> of the subtree rooted at its <strong>right</strong> child, can we answer the previous question? </p>
+</li>
+<li><p>Of course yes, we can choose the maximum between them and add 1 to get the maximum depth of the subtree rooted at the current node. That is <code>x = max(l,r) + 1</code></p>
+</li>
+<li><p>return 0 if root is null</p>
+</li>
+<li><p>left_depth = maximum_depth(root.left)</p>
+</li>
+<li><p>right_depth = maximum_depth(root.right)</p>
+</li>
+<li><p>return max(left_depth, right_depth) + 1</p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximum_depth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!root) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;                                 <span class="comment">// return 0 for null node</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> left_depth = <span class="built_in">maximum_depth</span>(root-&gt;left);</span><br><span class="line">	<span class="keyword">int</span> right_depth = <span class="built_in">maximum_depth</span>(root-&gt;right);</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">max</span>(left_depth, right_depth) + <span class="number">1</span>;	  <span class="comment">// return depth of the subtree rooted at root</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/06/DiscreteDifferentialGeometry-01-Overview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/06/DiscreteDifferentialGeometry-01-Overview/" class="post-title-link" itemprop="url">DiscreteDifferentialGeometry_01_Overview</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-06 00:08:14 / Modified: 11:02:49" itemprop="dateCreated datePublished" datetime="2021-02-06T00:08:14+09:00">2021-02-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="What-will-we-Learn-in-This-class"><a href="#What-will-we-Learn-in-This-class" class="headerlink" title="What will we Learn in This class?"></a>What will we Learn in This class?</h1><p>How to think about shape…</p>
+<ul>
+<li>mathematically (<em>differential geometry</em>)</li>
+<li>computationally (<em>geometry processing</em>)</li>
+</ul>
+<p><strong>Central Theme:</strong> link these two perspectives</p>
+<h1 id="What-is-Differential-Geometry"><a href="#What-is-Differential-Geometry" class="headerlink" title="What is Differential Geometry?"></a>What is Differential Geometry?</h1><p>Language for talking about <em>locel properties of shape</em></p>
+<ul>
+<li>How fast are we traveling along a curve?</li>
+<li>How much does the surface bend at a point?</li>
+<li>etc</li>
+</ul>
+<p>And their connection to <em>global properties of shape</em></p>
+<ul>
+<li>so-called “local-global” relationships.</li>
+</ul>
+<h1 id="What-is-Discrete-Differential-Geometry"><a href="#What-is-Discrete-Differential-Geometry" class="headerlink" title="What is Discrete Differential Geometry"></a>What is <strong>Discrete</strong> Differential Geometry</h1><p>Also a language describing local properties of shape</p>
+<ul>
+<li>infinity no longer allowed</li>
+<li>No longer talk about derivatives, infinitesimals…</li>
+<li>Everything expressed in terms of lengths, angles… </li>
+<li>Surprisinglt little is lost!</li>
+<li>Faithfully captures many fundamental ideas</li>
+</ul>
+<h1 id="How-can-we-get-there"><a href="#How-can-we-get-there" class="headerlink" title="How can we get there?"></a>How can we get there?</h1><p>A common “game” is played in DDG to obtain discrete definitions:</p>
+<ol>
+<li>Write down several <strong>equivalent</strong> definitions in the smooth setting</li>
+<li>Apply each smooth definition to an object in the discrete setting</li>
+<li>Determine which properties are captured by each resulting **inequivalent ** discrete definition.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/04/BinarySearchTree-Delete/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/04/BinarySearchTree-Delete/" class="post-title-link" itemprop="url">BinarySearchTree_Delete</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-04 00:59:56" itemprop="dateCreated datePublished" datetime="2021-02-04T00:59:56+09:00">2021-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 00:16:32" itemprop="dateModified" datetime="2021-02-05T00:16:32+09:00">2021-02-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>The original article:<br><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/">Link</a></p>
+<p>When we delete a node, <strong>three</strong> possibilites arise.</p>
+<ol>
+<li>Node to be deleted is leaf: Simply remove from the tree.</li>
+<li>Node to be deleted has only one child: Copy the child to the node and delete the child.</li>
+<li>Node to be deleted has two children: Find inorder successor of the node. Copy contents of the inorder successor to the node and delete the inorder successor. Note that inorder predecessor can also be used. </li>
+</ol>
+<p>The important thing to note is:<br>Inorder successor is needed only when right child is not empty.</p>
+<p>Also, I learned from the visualization algorithm website<a target="_blank" rel="noopener" href="https://visualgo.net/en/bst">LINK</a>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">search for v</span><br><span class="line">if v is a leaf</span><br><span class="line">    delete leaf v</span><br><span class="line">else if v has 1 child</span><br><span class="line">    bypass v</span><br><span class="line">else</span><br><span class="line">    replace v with successor</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>It is worth noting that when you delete nodes in a tree, deletion process will be in post-order. That is to say, when you delete a node, you will delete its left child and its right child before you delete the node itself.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">left</span>, *<span class="title">right</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">newNode</span><span class="params">(<span class="keyword">int</span> item)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">temp</span> =</span> (struct node*)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(struct node));</span><br><span class="line">    temp-&gt;key = item;</span><br><span class="line">    temp-&gt;left = temp-&gt;right = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(struct node* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;left);</span><br><span class="line">        cout&lt;&lt;root-&gt;key;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">insert</span><span class="params">(struct node* node, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">newNode</span>(key);</span><br><span class="line">    <span class="keyword">if</span>(key &lt; node-&gt;key)&#123;</span><br><span class="line">        node-&gt;left = <span class="built_in">insert</span>(node-&gt;left, key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        node-&gt;right = <span class="built_in">insert</span>(node-&gt;right, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// return the (unchanged) node pointer.</span></span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">minValueNode</span><span class="params">(struct node* node)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">current</span> =</span> node;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(current &amp;&amp; current-&gt;left != <span class="literal">NULL</span>)</span><br><span class="line">        current = current-&gt;left;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> current;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct node* <span class="title">deleteNode</span><span class="params">(struct node* root, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(key &lt; root-&gt;key)</span><br><span class="line">        root-&gt;left = <span class="built_in">deleteNode</span>(root-&gt;left, key);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(key &gt; root-&gt;key)</span><br><span class="line">        root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, key);</span><br><span class="line">    <span class="comment">// if key is same as root&#x27;s key, then this is the node</span></span><br><span class="line">    <span class="comment">// to be deleted</span></span><br><span class="line">    <span class="keyword">else</span>&#123; </span><br><span class="line">        <span class="comment">// 1. node with only one child or no child</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left == <span class="literal">NULL</span>)&#123;</span><br><span class="line">            struct node* temp = root-&gt;right;</span><br><span class="line">            <span class="built_in">free</span>(root);</span><br><span class="line">            <span class="keyword">return</span> temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;right == <span class="literal">NULL</span>)&#123;</span><br><span class="line">            struct node* temp = root-&gt;left;</span><br><span class="line">            <span class="built_in">free</span>(root);</span><br><span class="line">            <span class="keyword">return</span> temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 2. node with 2 children: Get the inorder successor(smallest in the right subtree)</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">temp</span> =</span> <span class="built_in">minValueNode</span>(root-&gt;right);</span><br><span class="line">        root-&gt;key = temp-&gt;key;</span><br><span class="line">        root-&gt;right = <span class="built_in">deleteNode</span>(root-&gt;right, temp-&gt;key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BinarySearchTree</span>&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Node</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> key;</span><br><span class="line">        <span class="keyword">public</span> Node left, right;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span>(<span class="params"><span class="built_in">int</span> item</span>)</span>&#123;</span><br><span class="line">            key = item;</span><br><span class="line">            left = right = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Root of BST</span></span><br><span class="line">    Node root;</span><br><span class="line">    BinarySearchTree()&#123;root = <span class="literal">null</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteRec</span>(<span class="params">Node root, <span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        <span class="keyword">if</span>(key&lt; root.key)</span><br><span class="line">            root.left = deleteRec(root.left, key);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key &gt; root.key)</span><br><span class="line">            root.right = deleteRec(root.right,key);</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(root.left == <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> root.right;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(root.right == <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> root.left;</span><br><span class="line"></span><br><span class="line">            root.key = minValue(root.right);</span><br><span class="line">            root.right = deleteRec(root.right, root.key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">int</span> <span class="title">minValue</span>(<span class="params">Node root</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">int</span> minv = root.key;</span><br><span class="line">        <span class="keyword">while</span>(root.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            minv = root.left.key;</span><br><span class="line">            root = root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span>(<span class="params"><span class="built_in">int</span> key</span>)</span>&#123;root = insertRec(root, key);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Node <span class="title">insertRec</span>(<span class="params">Node root, <span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == NULL)&#123;</span><br><span class="line">            root = <span class="keyword">new</span> Node(key);</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorder</span>(<span class="params"></span>)</span>&#123; inorderRec(root);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorderRec</span>(<span class="params">Node root</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">null</span>)&#123;</span><br><span class="line">            inorderRec(root.left);</span><br><span class="line">            Console.Write(root.key + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            inorderRec(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/03/BinarySearchTree-Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/03/BinarySearchTree-Basic/" class="post-title-link" itemprop="url">BinarySearchTree_Basic</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-03 22:06:11" itemprop="dateCreated datePublished" datetime="2021-02-03T22:06:11+09:00">2021-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-04 00:58:36" itemprop="dateModified" datetime="2021-02-04T00:58:36+09:00">2021-02-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This post is for the notes for me re-learning ‘binary search’, somehow I feel like I have been learned this algorithm couple times. But shame to say, I still do not feel I totally get the idea behind, as for how to implement this. I hope I can spend some quailty time for once again learn and master binary Tree.</p>
+<p>The note here, and as code are from the GeeksforGeeks<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/binary-search-tree-data-structure/#basic">Link</a>.</p>
+<h1 id="Binary-Search-Tree"><a href="#Binary-Search-Tree" class="headerlink" title="Binary Search Tree"></a>Binary Search Tree</h1><p>**Binary Search Tree ** is a ‘node-based’ binary tree data structure which has the following properties.</p>
+<ul>
+<li>The left subtree of a node contains only nodes with keys lesser than the node’s key.</li>
+<li>The right subtree of a node contains only nodes with keys greater than the node’s key.</li>
+<li>The left and right subtree each must also be a binary search tree.</li>
+</ul>
+<h2 id="Binary-Search-Tree-Set1-Search-and-Insertion"><a href="#Binary-Search-Tree-Set1-Search-and-Insertion" class="headerlink" title="Binary Search Tree| Set1(Search and Insertion)"></a>Binary Search Tree| Set1(Search and Insertion)</h2><p>Operations like <strong>search</strong>, <strong>minimum</strong> and <strong>maximum</strong> can be done fast.</p>
+<h3 id="Searching-a-key"><a href="#Searching-a-key" class="headerlink" title="Searching a key"></a>Searching a key</h3><p>If we had a <strong>sorted array</strong>  we could performed a binary search.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BST</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        BST *left, *right;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">BST</span>();</span><br><span class="line">        <span class="built_in">BST</span>(<span class="keyword">int</span>);</span><br><span class="line">        <span class="function">BST* <span class="title">Insert</span><span class="params">(BST*, <span class="keyword">int</span>)</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">Inorder</span><span class="params">(BST*)</span></span>; <span class="comment">// Inorder traversal.</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// default constructor definition</span></span><br><span class="line">BST:: <span class="built_in">BST</span>() : <span class="built_in">data</span>(<span class="number">0</span>), <span class="built_in">left</span>(<span class="literal">NULL</span>),<span class="built_in">right</span>(<span class="literal">NULL</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Parameterized constructor definition</span></span><br><span class="line">BST::<span class="built_in">BST</span>(<span class="keyword">int</span> value)&#123;</span><br><span class="line">    data = value;</span><br><span class="line">    left = right = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Insert function definition.</span></span><br><span class="line">BST* BST :: <span class="built_in">Insert</span>(BST* root, <span class="keyword">int</span> value)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">        <span class="comment">// insert the first node, if root is NULL</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">BST</span>(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Insert data</span></span><br><span class="line">    <span class="keyword">if</span>(value &gt; root-&gt;data)&#123;</span><br><span class="line">        root-&gt;right = <span class="built_in">Insert</span>(root-&gt;right,value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        root-&gt;left = <span class="built_in">Insert</span>(root-&gt;left,value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Inorder traversal function</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BST::Inorder</span><span class="params">(BST* root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Inorder</span>(root-&gt;left);</span><br><span class="line">    cout&lt;&lt;root-&gt;data&lt;&lt;endl;</span><br><span class="line">    <span class="built_in">Inorder</span>(root-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Driver code </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    BST b, *root = <span class="literal">NULL</span>; </span><br><span class="line">    root = b.<span class="built_in">Insert</span>(root, <span class="number">50</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">30</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">20</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">40</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">70</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">60</span>); </span><br><span class="line">    b.<span class="built_in">Insert</span>(root, <span class="number">80</span>); </span><br><span class="line">  </span><br><span class="line">    b.<span class="built_in">Inorder</span>(root); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">class</span> <span class="title">BinarySearchTree</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Node</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> key;</span><br><span class="line">        <span class="keyword">public</span> Node left, right;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span>(<span class="params"><span class="built_in">int</span> item</span>)</span>&#123;</span><br><span class="line">            key = item;</span><br><span class="line">            left = right = NULL;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">Node root;</span><br><span class="line">BinarySearchTree()&#123;</span><br><span class="line">    root = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span>(<span class="params"><span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">    root = insertRec(root, key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node <span class="title">insertRec</span>(<span class="params">Node root, <span class="built_in">int</span> key</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">null</span>)&#123;</span><br><span class="line">        root = <span class="keyword">new</span> Node(key);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(key &lt; root.key)</span><br><span class="line">        root.left = insertRec(root.left, key);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>( key&gt; root.key)</span><br><span class="line">        root.right = insertRec(root.right, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//return the (unchanged) node pointer</span></span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    inorderRec(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorderRec</span>(<span class="params">Node root</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">null</span>)&#123;</span><br><span class="line">        inorderRec(root.left);</span><br><span class="line">        Console.WriteLine(root.key);</span><br><span class="line">        inorderRec(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params">String[] args</span>)</span> </span><br><span class="line">&#123; </span><br><span class="line">    BinarySearchTree tree = <span class="keyword">new</span> BinarySearchTree(); </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* Let us create following BST </span></span><br><span class="line"><span class="comment">          50 </span></span><br><span class="line"><span class="comment">       /     \ </span></span><br><span class="line"><span class="comment">      30      70 </span></span><br><span class="line"><span class="comment">     /  \    /  \ </span></span><br><span class="line"><span class="comment">   20   40  60   80 */</span></span><br><span class="line">    tree.insert(<span class="number">50</span>); </span><br><span class="line">    tree.insert(<span class="number">30</span>); </span><br><span class="line">    tree.insert(<span class="number">20</span>); </span><br><span class="line">    tree.insert(<span class="number">40</span>); </span><br><span class="line">    tree.insert(<span class="number">70</span>); </span><br><span class="line">    tree.insert(<span class="number">60</span>); </span><br><span class="line">    tree.insert(<span class="number">80</span>); </span><br><span class="line">      </span><br><span class="line">    <span class="comment">// Print inorder traversal of the BST </span></span><br><span class="line">    tree.inorder(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/07/05/Chaikin-s-Algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -720,627 +1098,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/15/Custom-Attribute-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/15/Custom-Attribute-note/" class="post-title-link" itemprop="url">Custom_Attribute_note</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-15 18:28:43" itemprop="dateCreated datePublished" datetime="2020-06-15T18:28:43+09:00">2020-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-19 02:05:59" itemprop="dateModified" datetime="2020-06-19T02:05:59+09:00">2020-06-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.grasshopper3d.com/forum/topics/clarification-about-gh-component-gh-param-and-gh-attributes">clarification_about_IGH</a></p>
-<blockquote>
-<p>All objects that want to be part of a GH_Document must implement the <code>IGH_DocumentObject</code> <strong>interface</strong>.</p>
-</blockquote>
-<p>This interface provides <strong>core methods</strong> needed for all objects</p>
-<ol>
-<li>Undo</li>
-<li>Autosave</li>
-<li>Display</li>
-<li>Menu</li>
-<li>Tooltip</li>
-</ol>
-<p><code>IGH_ActiveObject</code> extends upon <code>IGH_DocumentObject</code> and it provides methods for participating in the solution.</p>
-<h2 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h2><p>Parameters(via the <code>IGH_Param</code> interface and several <code>GH_Param&lt;T&gt;</code> classes) maintain a data tree which is associated with a special type of <code>IGH_Goo</code> data. They have the logic build in that allows them to communicate with other parameters via their input/output wires.</p>
-<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><p>Components tend to drive from GH_Component(or at the very least implemeny <code>IGH_Component</code>), as that class provides all the bookkeeping methods for managing a collection of input and output parameters.</p>
-<h2 id="Attribute"><a href="#Attribute" class="headerlink" title="Attribute"></a>Attribute</h2><p>Attributes are used primary for <strong>display purposes</strong>. Every object must be capable of creating and maintaining a class which ultimately implements <code>IGH_Attributes</code>. The attributes are in charge of </p>
-<ol>
-<li>rendering the object to the canvas </li>
-<li>providing basic information about the shape of an object</li>
-<li>handling mouse and key events</li>
-<li>responding correctly to selection actions</li>
-<li>maintaining the object hierarchy (Basically, it means that component attributes must be able to <strong>talk</strong> to input and output parameters, and the parameters need to be able to figure out they are slaved to a component.)</li>
-</ol>
-<hr>
-<p><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/api/grasshopper/html/8a7974ab-7b2b-4f48-84d0-6e81b184e6b0.htm">Custom Attribute SDK</a><br>Objects on the Grasshopper canvas consist of <strong>two part</strong>.<br>The most important piece is the class that implements the <code>IGH_DocumentObject</code>  interface.<br>This interface provides the basic <strong>plumbing</strong> needed to make objects work within <strong>a Grasshopper node network.</strong></p>
-<p>The interface part of objects however is handled seperately.</p>
-<p>Every <code>IGH_DocumentObject</code> carries around an instance of a class that implements the <code>IGH_Attriibutes</code> interface(indeed, every IGH_DocumentOBject knows how to create its own stand-alone attributes).</p>
-<p>It is not possible to have an <code>IGH_Attributes</code> instance work on its own, we need an <code>IGH_DocoumentObject</code> to tie it to.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/13/SQL_overview/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/13/SQL_overview/" class="post-title-link" itemprop="url">SQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-06-13 11:50:43 / Modified: 17:15:34" itemprop="dateCreated datePublished" datetime="2020-06-13T11:50:43+09:00">2020-06-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>Structured Query Langauge</p>
-<blockquote>
-<p>SQL is a programming language used to talk to the databases</p>
-</blockquote>
-<h2 id="Databases-that-use-SQL"><a href="#Databases-that-use-SQL" class="headerlink" title="Databases that use SQL"></a>Databases that use SQL</h2><ol>
-<li>SQL server</li>
-<li>Oracle</li>
-<li>MySQL</li>
-<li>Postgre SQL</li>
-<li>SQLite</li>
-<li>DB2</li>
-<li>BigData</li>
-</ol>
-<h2 id="Tools-to-write-SQL"><a href="#Tools-to-write-SQL" class="headerlink" title="Tools to write SQL"></a>Tools to write SQL</h2><ol>
-<li>SQL Server Management Studio (SSMS)</li>
-<li>SQL Developer</li>
-<li>SQL Workbench</li>
-<li>TOAD</li>
-</ol>
-<h1 id="Create-Database"><a href="#Create-Database" class="headerlink" title="Create Database"></a>Create Database</h1><hr>
-<h1 id="What-is-a-Database-DB"><a href="#What-is-a-Database-DB" class="headerlink" title="What is a Database(DB)?"></a>What is a Database(DB)?</h1><h2 id="any-collection-of-related-information"><a href="#any-collection-of-related-information" class="headerlink" title="any collection of related information"></a>any collection of related information</h2><ul>
-<li>Phone Book</li>
-<li>Shopping list</li>
-<li>Todo list</li>
-<li>Your 5 best friends</li>
-<li>Facebook’s User Base</li>
-</ul>
-<h2 id="Database-can-be-stored-in-different-ways"><a href="#Database-can-be-stored-in-different-ways" class="headerlink" title="Database can be stored in different ways"></a>Database can be stored in different ways</h2><ul>
-<li>On paper</li>
-<li>In your mind</li>
-<li>On a computer</li>
-<li>This powerpoint</li>
-<li>Comment Section</li>
-</ul>
-<h2 id="Computers-Databases-lt-3"><a href="#Computers-Databases-lt-3" class="headerlink" title="Computers + Databases = &lt;3"></a>Computers + Databases = &lt;3</h2><h3 id="Amazon-com"><a href="#Amazon-com" class="headerlink" title="Amazon.com"></a>Amazon.com</h3><ul>
-<li>Keeps track of Products, Reviews, Purchase Orders, Credit Cards…etc</li>
-<li>Information is extremely valuable and critical to Amazon.com’s functioning</li>
-<li>Security is essential</li>
-</ul>
-<blockquote>
-<p>Computers are great at keeping track of large amounts of information</p>
-</blockquote>
-<h1 id="Database-Managemeny-Systems-DBMS"><a href="#Database-Managemeny-Systems-DBMS" class="headerlink" title="Database Managemeny Systems(DBMS)"></a>Database Managemeny Systems(DBMS)</h1><ul>
-<li>A special software program that hekps users create and maintain a database.<ul>
-<li>Make it easy to manage large amounts of information</li>
-<li>Handle Security</li>
-<li>Backups</li>
-<li>Importing/Exporting data</li>
-<li>Concurrency</li>
-<li>Interacts with software applications<ul>
-<li>Programming Languages</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Amazon.com will interact with the <strong>DBMS</strong> in order to create, read, update and delete information.</p>
-</blockquote>
-<h1 id="C-R-U-D"><a href="#C-R-U-D" class="headerlink" title="C.R.U.D"></a>C.R.U.D</h1><ul>
-<li>Create</li>
-<li>Read</li>
-<li>Update</li>
-<li>Delete</li>
-</ul>
-<h1 id="Two-Types-of-Databases"><a href="#Two-Types-of-Databases" class="headerlink" title="Two Types of Databases"></a>Two Types of Databases</h1><h2 id="Rational-Databases-SQL"><a href="#Rational-Databases-SQL" class="headerlink" title="Rational Databases(SQL)"></a>Rational Databases(SQL)</h2><ul>
-<li>Organize data into one or more tables<ul>
-<li>Each table has columns and rows</li>
-<li>A unique key identifies each row</li>
-</ul>
-</li>
-</ul>
-<h2 id="Non-Retional-noSQL-not-just-SQL"><a href="#Non-Retional-noSQL-not-just-SQL" class="headerlink" title="Non-Retional(noSQL/ not just SQL)"></a>Non-Retional(noSQL/ not just SQL)</h2><ul>
-<li>Organize data is anything but a tranditional table<ul>
-<li>Key-value stores</li>
-<li>Documents(JSON, XML, etc)</li>
-<li>Graphs</li>
-<li>Flexible Table</li>
-</ul>
-</li>
-</ul>
-<h2 id="Relational-Databases-SQL"><a href="#Relational-Databases-SQL" class="headerlink" title="Relational Databases(SQL)"></a>Relational Databases(SQL)</h2><h3 id="Student-Table"><a href="#Student-Table" class="headerlink" title="Student Table"></a>Student Table</h3><table>
-<thead>
-<tr>
-<th>ID#</th>
-<th>Name</th>
-<th>Major</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>Jack</td>
-<td>Biology</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Kate</td>
-<td>Sociology</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Claire</td>
-<td>English</td>
-</tr>
-<tr>
-<td>4</td>
-<td>John</td>
-<td>Chemistry</td>
-</tr>
-</tbody></table>
-<h3 id="User-Table"><a href="#User-Table" class="headerlink" title="User Table"></a>User Table</h3><table>
-<thead>
-<tr>
-<th>UserName</th>
-<th>Password</th>
-<th>Email</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>jsmith22</td>
-<td>wordpass</td>
-<td></td>
-</tr>
-<tr>
-<td>catlover45</td>
-<td>apple223</td>
-<td></td>
-</tr>
-<tr>
-<td>gamerkid</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>Retional Database Management Systems(RDBMS)</p>
-<ul>
-<li>Help users create and maintain a relational database<ul>
-<li>mySQL, Oracle, postgreSQL, mariaDB, etc.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Structed Query Language(SQL)</p>
-<ul>
-<li>Standardized language for interacting with RDBMS</li>
-<li>Used to perfrom <code>C.R.U.D</code> operations, as well as other administrative tasks(user management, security, backup, etc)</li>
-<li>Used to define tables and structures</li>
-<li>SQL code used on one RDBMS is not always portable to another without modification</li>
-</ul>
-</li>
-<li><p>Non-Relational Databases</p>
-<ul>
-<li>Non-Relational Database Management Systems(NRDBMS)<ul>
-<li>Help users create and maintain a non-relational database<ul>
-<li>mongoDB, dynamoDB, apache, cassandra, firebase,etc</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Implementation Specific</p>
-<ul>
-<li>Any non-relational database falls under this category, so there’s no set language standard</li>
-<li>Most NRDBMS will implement their own language for performing <code>C.R.U.D</code> and administrative operations on the database</li>
-</ul>
-</li>
-</ul>
-<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><h2 id="Warp-up"><a href="#Warp-up" class="headerlink" title="Warp up"></a>Warp up</h2><ul>
-<li>Database is any collection of related information</li>
-<li>Computer are great for storing databases</li>
-<li>Database Management Systems(DBMS) make it easy to create, maintain and secure a database.</li>
-<li>DBMS allows you to perform the C.R.U.D operations and other administrative tasks</li>
-<li>two types of Database, <code>Relational</code> &amp; <code>Non-Relational</code></li>
-<li>Relational databases uses SQL and store data in tables with rows and columns</li>
-<li>Non-Relational data store data using other data structures</li>
-</ul>
-<hr>
-<table>
-<thead>
-<tr>
-<th>student_id</th>
-<th align="center">name</th>
-<th align="right">major</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td align="center">Kate</td>
-<td align="right">Sociology</td>
-</tr>
-<tr>
-<td>2</td>
-<td align="center">Jack</td>
-<td align="right">Biology</td>
-</tr>
-<tr>
-<td>3</td>
-<td align="center">Claire</td>
-<td align="right">English</td>
-</tr>
-<tr>
-<td>4</td>
-<td align="center">Jack</td>
-<td align="right">Biology</td>
-</tr>
-<tr>
-<td>5</td>
-<td align="center">Mike</td>
-<td align="right">Comp. Sci</td>
-</tr>
-<tr>
-<td></td>
-<td align="center"></td>
-<td align="right"></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>Though there are two Jacks and they both major in Biology, we can use <code>primary key</code>, namely the <strong>student id</strong>, to identify them.</p>
-</blockquote>
-<h1 id="Structured-Query-Language-SQL"><a href="#Structured-Query-Language-SQL" class="headerlink" title="Structured Query Language(SQL)"></a>Structured Query Language(SQL)</h1><ul>
-<li>SQL is a language used for interacting with Relational Database Management Systems(RDBMS)<ul>
-<li>You can use <code>SQL</code> to get the RDBMS to do things for you. <ul>
-<li>Create, retrieve, update &amp; delete data</li>
-<li>Create &amp; manage databases</li>
-<li>Design &amp; create databases tables</li>
-<li>Perform administration tasks(security, user management, import/export, etc) </li>
-</ul>
-</li>
-<li>SQL implementations cary between systems<ul>
-<li>Not all RDBMS’ follow the SQL standard to a <code>T</code></li>
-<li>The concepts are the same but the implementation may vary</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Structured-Query-Language-SQL-Hybrid-language"><a href="#Structured-Query-Language-SQL-Hybrid-language" class="headerlink" title="Structured Query Language(SQL) _ Hybrid language"></a>Structured Query Language(SQL) _ Hybrid language</h2><p>SQL is actually a <strong>hybrid language</strong>, it’s basically 4 types of languages in one</p>
-<h3 id="Data-Query-Language-DQL"><a href="#Data-Query-Language-DQL" class="headerlink" title="Data Query Language (DQL)"></a>Data Query Language (DQL)</h3><ul>
-<li>Used to query the database for information</li>
-<li>Get information that is already stored there</li>
-</ul>
-<h3 id="Data-Definition-Language-DDL"><a href="#Data-Definition-Language-DDL" class="headerlink" title="Data Definition Language (DDL)"></a>Data Definition Language (DDL)</h3><ul>
-<li>Used for defining database schemas</li>
-</ul>
-<h3 id="Data-Control-Language-DCL"><a href="#Data-Control-Language-DCL" class="headerlink" title="Data Control Language (DCL)"></a>Data Control Language (DCL)</h3><ul>
-<li>Used for controlling access to the data in the database.</li>
-<li>User &amp; permissions managemnet</li>
-</ul>
-<h3 id="Data-Manipulation-Language-DML"><a href="#Data-Manipulation-Language-DML" class="headerlink" title="Data Manipulation Language (DML)"></a>Data Manipulation Language (DML)</h3><ul>
-<li>Used for inserting, updating and deleting data from the databases</li>
-</ul>
-<h1 id="Queries"><a href="#Queries" class="headerlink" title="Queries"></a>Queries</h1><p>A query is a set of instructions given to the RDBMS(written is SQL) that tell the RDBMS what information you want it to retrieve for you.</p>
-<ul>
-<li>Tons of data in a DB</li>
-<li>Often hidden in a complex schema</li>
-<li>Goal is only get the data you need</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> employee.name, employee.age</span><br><span class="line"><span class="keyword">FROM</span> employee</span><br><span class="line"><span class="keyword">WHERE</span> employee.salary <span class="operator">&gt;</span> <span class="number">30000</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/10/MultiThread/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/10/MultiThread/" class="post-title-link" itemprop="url">MultiThread</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-10 01:06:16" itemprop="dateCreated datePublished" datetime="2020-06-10T01:06:16+09:00">2020-06-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-15 23:28:48" itemprop="dateModified" datetime="2020-07-15T23:28:48+09:00">2020-07-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="How-Cherno-explain-about-Thread"><a href="#How-Cherno-explain-about-Thread" class="headerlink" title="How Cherno explain about Thread"></a>How Cherno explain about Thread</h1><blockquote>
-<p>How we could do multi-thread(parallel computating)</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">bool</span> s_Finished = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DoWork</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(!s_Finished)&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;Working....&quot;</span>&lt;&lt;std::<span class="built_in">endl</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">worker</span><span class="params">(DoWork)</span></span>; <span class="comment">//pass as Function pointer</span></span><br><span class="line"></span><br><span class="line">    std::cin.<span class="built_in">get</span>();</span><br><span class="line">    s_Finished = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    worker.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    std::cin.<span class="built_in">get</span>(); <span class="comment">// this line will wait until the threads(worker) joined.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Here we want program to do two things at the same time.</p>
-<ol>
-<li>keep printing <code>Working....</code></li>
-<li>receive the <code>cin.get()</code> from user, once get something from the user <code>s_Finished = true</code></li>
-</ol>
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/thread/thread/join/">thread::join</a></p>
-<p>The behavior will be like this<br><img src="/uploads/Thread2.gif" alt="idea"></p>
-<p>However we might not want to let one single thread occupy whole CPU resource, we can use <code>std::this_thread::sleep_for(1s)</code>.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">bool</span> s_Finished = <span class="literal">false</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DoWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> std::literals::chrono_literals;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Started thread id=&quot;</span> &lt;&lt; std::this_thread::<span class="built_in">get_id</span>() &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">while</span> (!s_Finished) &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;Working...\n&quot;</span>;</span><br><span class="line">		std::this_thread::<span class="built_in">sleep_for</span>(<span class="number">1</span>s); <span class="comment">//sleep for a second</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="function">std::thread <span class="title">worker</span><span class="params">(DoWork)</span></span>;</span><br><span class="line">	std::cin.<span class="built_in">get</span>();</span><br><span class="line">	s_Finished = <span class="literal">true</span>;</span><br><span class="line">	worker.<span class="built_in">join</span>(); <span class="comment">//await in C#</span></span><br><span class="line"></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Finished\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Started thread id=&quot;</span> &lt;&lt; std::this_thread::<span class="built_in">get_id</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The demo of code above.<br><img src="/uploads/Thread3.gif" alt="idea"><br>Can notice that two <code>std::this_thread::get_id()</code> are different, cuz they are on the different threads.</p>
-<h1 id="How-we-could-implement-multi-thread-in-Grasshopper"><a href="#How-we-could-implement-multi-thread-in-Grasshopper" class="headerlink" title="How we could implement multi-thread in Grasshopper"></a>How we could implement multi-thread in Grasshopper</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=J6CwUuto9QA&list=PLIfg3sUCgQXDBRK478d6PwxX0IBdgkLE4&index=7&t=13s">Grasshopper Tutorial</a></p>
-<p>Like this tutorial shown, we can use</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.Threading.Tasks.Parallel.For(<span class="number">0</span>, loopCount, i =&gt;&#123; &#123;</span><br><span class="line">    <span class="comment">//for loop body</span></span><br><span class="line">&#125;&#125;);</span><br></pre></td></tr></table></figure>
-<p>instead of using <strong>regular for-loop</strong> to achieve multi-thread.</p>
-<h2 id="unsafe-problem-and-how-to-tackle-it"><a href="#unsafe-problem-and-how-to-tackle-it" class="headerlink" title="unsafe problem and how to tackle it"></a>unsafe problem and how to tackle it</h2><p>This is the part I might not fully understand, and you are welcome to correct me. Thanks.<br>Seems simply use multi_thread with <code>List</code>, like the example in tutorial, is not safe.<br>Means multi-thread cannot merge to the List in the order correctly. As a result, this cause some data lost.</p>
-<h3 id="How-we-can-tackle-this-problem"><a href="#How-we-can-tackle-this-problem" class="headerlink" title="How we can tackle this problem"></a>How we can tackle this problem</h3><ol>
-<li>We can use <code>lock</code> syntax to ensure the action of <strong>List</strong></li>
-<li>We use regular <code>array</code> instead of <strong>List</strong></li>
-</ol>
-<p>Here are the codes.</p>
-<h4 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">List&lt;Point3d&gt; startPts, <span class="built_in">object</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    List&lt;Point3d&gt; ptList = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">    <span class="comment">//for(int i = 0;i &lt; startPts.Count; i++)</span></span><br><span class="line">    System.Threading.Tasks.Parallel.For(<span class="number">0</span>, startPts.Count, i =&gt; &#123;</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">//Declare out agent location</span></span><br><span class="line">        Point3d agentLoc = startPts[i];</span><br><span class="line">        <span class="comment">//Add agents to ptLists</span></span><br><span class="line">        <span class="keyword">lock</span>(ptList)&#123;</span><br><span class="line">          ptList.Add(agentLoc);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    A = ptList;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="array"><a href="#array" class="headerlink" title="array"></a>array</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">List&lt;Point3d&gt; startPts, <span class="built_in">object</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//List&lt;Point3d&gt; ptList = new List&lt;Point3d&gt;();</span></span><br><span class="line">    Point3d[] ptList = <span class="keyword">new</span> Point3d[startPts.Count];</span><br><span class="line">    <span class="comment">//for(int i = 0;i &lt; startPts.Count; i++)</span></span><br><span class="line">    System.Threading.Tasks.Parallel.For(<span class="number">0</span>, startPts.Count, i =&gt; &#123;</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">//Declare out agent location</span></span><br><span class="line">        Point3d agentLoc = startPts[i];</span><br><span class="line">        <span class="comment">//Add agents to ptLists</span></span><br><span class="line">        ptList[i] = agentLoc;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    A = ptList;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Rhino-Official-Documents-General-Overview"><a href="#Rhino-Official-Documents-General-Overview" class="headerlink" title="Rhino Official Documents_General Overview"></a>Rhino Official Documents_General Overview</h1><p><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/guides/grasshopper/multi-treaded-components/">multi-thread</a></p>
-<h1 id="Rhino-Official-Documents-Developer"><a href="#Rhino-Official-Documents-Developer" class="headerlink" title="Rhino Official Documents_Developer"></a>Rhino Official Documents_Developer</h1><p><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/guides/grasshopper/programming-task-capable-component/">Task Capable Component</a></p>
-<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Grasshopper for Rhino6 allows you to develop mult-threaded components by way of the new <code>IGH_TaskCapableComponent</code> interface. Benchmarks have shown that Grasshopper can run <strong>significantly faster</strong> when using multi-threaded components. Results may vary, <strong>as not all solutions can be compute in parallel</strong></p>
-<h2 id="The-Interface"><a href="#The-Interface" class="headerlink" title="The Interface"></a>The Interface</h2><p>When a component implement the <code>IGH_TaskCapableComponent</code> interface, Grasshopper will notice and potentially call a <strong>full enumeration</strong> of <code>SolveInstance</code> for the component twice in consecutive passes:</p>
-<ol>
-<li>The first pass is for collecting data and starting tasks to compute result</li>
-<li>The second pass is for using the results from the tasks to sets outputs.</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/v6-feature-multi-threaded-gh-components/47049">https://discourse.mcneel.com/t/v6-feature-multi-threaded-gh-components/47049</a></p>
-<p>I found that there are some Rhino official posts talk about <code>mult-threaded</code> in grasshopper.<br>From User interface, if you see the component has two grey dots on its upper-left corner, means that component support mult-threaded computation(<code>parallel computing</code>).</p>
-<p>Still working on…. <code>To be continue</code></p>
-<p>(James_Ramsden_Multithreading)[<a target="_blank" rel="noopener" href="http://james-ramsden.com/multithreading-a-foreach-loop-in-a-grasshopper-components-in-c/]">http://james-ramsden.com/multithreading-a-foreach-loop-in-a-grasshopper-components-in-c/]</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/09/FunctionPointerC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/09/FunctionPointerC/" class="post-title-link" itemprop="url">FunctionPointerC++</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-09 22:55:25" itemprop="dateCreated datePublished" datetime="2020-06-09T22:55:25+09:00">2020-06-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-10 00:34:34" itemprop="dateModified" datetime="2020-06-10T00:34:34+09:00">2020-06-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=p4sDgQ-jao4">Recource Video</a><br>Thanks for the youtube channel, <code>The Cherno</code>. This post is basically a note I take to remind me what <code>Function Pointer</code> is about.</p>
-<p><code>Function Pointer</code> is a way to assign pointer to a variable.</p>
-<blockquote>
-<p>Pass a function as a parameter. </p>
-</blockquote>
-<h1 id="The-usual-way-about-function"><a href="#The-usual-way-about-function" class="headerlink" title="The usual way about function"></a>The usual way about function</h1><p>The implementation of a regular function should look like.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HelloWorld</span><span class="params">()</span></span>&#123;</span><br><span class="line">    std::cout&lt;&lt; <span class="string">&quot;Hello World!&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">HelloWorld</span>();</span><br><span class="line">    std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>The result should be like<br><img src="/uploads/HelloWorld.JPG" alt="idea"></p>
-<h2 id="What-if-we-try-to-use-auto-key-for-this-function"><a href="#What-if-we-try-to-use-auto-key-for-this-function" class="headerlink" title="What if we try to use auto key for this function?"></a>What if we try to use auto key for this function?</h2><p><img src="/uploads/auto1.JPG" alt="idea"><br>then you will see an error at the <code>auto</code>.<br>That is because what <code>HelloWorld()</code> return is a <code>void</code>.</p>
-<p>But what if we do like this. <code>auto function = HelloWorld</code><br><img src="/uploads/auto2.JPG" alt="idea"><br>then the error disapper.<br>This is because <code>HelloWorld</code> now return a <code>Function Pointer</code> instead of <code>void</code>.<br>so if we try to print the variable function in the next line, we will get the pointer of the <code>HelloWorld</code> function.<br><img src="/uploads/auto3.JPG" alt="idea"><br><img src="/uploads/functionPointer_result1.JPG" alt="idea"><br>Due to the implicitly conversion,</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> function = HelloWorld;</span><br><span class="line"><span class="comment">//much the same as </span></span><br><span class="line"><span class="keyword">auto</span> function = &amp;HelloWorld;</span><br></pre></td></tr></table></figure>
-<h2 id="What-Function-Pointer-is-about"><a href="#What-Function-Pointer-is-about" class="headerlink" title="What Function Pointer is about"></a>What Function Pointer is about</h2><blockquote>
-<p>Functions are of course just CPU instructions, and they are stored in somewhere in our binary/executable file.</p>
-</blockquote>
-<p>Find the <code>Hello World</code> function inside the CPU instruction and give it a <code>pointer</code>, to remember the location of this function code.</p>
-<p><img src="/uploads/CallFunctionTwice.JPG" alt="idea"><br><img src="/uploads/functionPointer_result2.JPG" alt="idea"></p>
-<p>so here we can assign a function to a varible.</p>
-<blockquote>
-<p>But what type is this <code>auto</code> actually?</p>
-</blockquote>
-<p>Here the auto hold the type write like</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in"><span class="keyword">void</span></span>(*function)()</span><br></pre></td></tr></table></figure>
-
-<p><code>void(*)()</code> is the type eventually, but since we have to get it a name so it became <code>void(*function)()</code>.<br>It works with any other name.(Like I named it jim here)<br><img src="/uploads/functionPointer_result3.JPG" alt="idea"></p>
-<p>Becauce this syntax is kinda confusing, programmer tend to either </p>
-<ul>
-<li>use <code>auto</code>, like what we did above </li>
-<li>use <code>typedef</code>/<code>using</code> it</li>
-</ul>
-<p><img src="/uploads/functionPointer_result4.JPG" alt="idea"><br>Here we make HelloWorld function require one <code>int</code> parameter<br><img src="/uploads/functionPointer_result5.JPG" alt="idea"></p>
-<h1 id="Back-to-programmer-want-to-use-function-pointer-in-the-first-place"><a href="#Back-to-programmer-want-to-use-function-pointer-in-the-first-place" class="headerlink" title="Back to programmer want to use function pointer in the first place"></a>Back to programmer want to use function pointer in the first place</h1><blockquote>
-<p>Programmers can pass one function to another function as a variable.</p>
-</blockquote>
-<p><img src="/uploads/functionPointer_result6.JPG" alt="idea"></p>
-<p>Here this code also show how to use <code>lambda function</code> instead of writing out the full function body.</p>
-<p>Reference: <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=p4sDgQ-jao4">Cherno’s video</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1406,7 +1167,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1417,7 +1178,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">97</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

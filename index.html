@@ -146,6 +146,302 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/08/VisualLISP-GardenPath/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/08/VisualLISP-GardenPath/" class="post-title-link" itemprop="url">VisualLISP_GardenPath</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-08 15:14:00" itemprop="dateCreated datePublished" datetime="2021-12-08T15:14:00+09:00">2021-12-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/07/AutoLisp-Note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/07/AutoLisp-Note/" class="post-title-link" itemprop="url">AutoLisp_Note</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-07 14:11:22" itemprop="dateCreated datePublished" datetime="2021-12-07T14:11:22+09:00">2021-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-08 15:11:17" itemprop="dateModified" datetime="2021-12-08T15:11:17+09:00">2021-12-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://help.autodesk.com/cloudhelp/2018/CHS/AutoCAD-AutoLISP-Tutorials/files/index.htm#">https://help.autodesk.com/cloudhelp/2018/CHS/AutoCAD-AutoLISP-Tutorials/files/index.htm#</a>!</p>
+<h1 id="Basic-Tutorial"><a href="#Basic-Tutorial" class="headerlink" title="Basic Tutorial"></a>Basic Tutorial</h1><h2 id="Tutoiral-Getting-Started-AutoLISP"><a href="#Tutoiral-Getting-Started-AutoLISP" class="headerlink" title="Tutoiral: Getting Started(AutoLISP)"></a>Tutoiral: Getting Started(AutoLISP)</h2><p><a target="_blank" rel="noopener" href="https://help.autodesk.com/view/OARX/2018/CHS/?guid=GUID-C64046FA-CD9E-4B38-9967-A501119E4A62">Autodesk explanation Link</a></p>
+<p>AutoLISP is based on the LISP(<code>LISt Processing</code>) programming<br>langauage.</p>
+<p>A <code>list</code> is a structure <strong>enclosed by parentheses</strong>.</p>
+<p>Usually, the first element in the list is the name of a function, and the following elements are called <em>arguments</em>.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">function_name</span> [argument1 argumentX ...])</span><br></pre></td></tr></table></figure>
+
+<p>The <code>!</code> (exclamation point) character can only be used at the <strong>AutoCAD Command prompt</strong> and is used to return the current value of an AutoLISP variable.</p>
+<hr>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">+</span> <span class="number">0.01</span> (<span class="name">*</span> <span class="number">2</span> <span class="number">0.875</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2 * 0.875 = 1.75</li>
+<li>0.01 + 1.75 = 1.76</li>
+</ul>
+<hr>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> nDist (<span class="name">getreal</span> <span class="string">&quot;\nEnter a distance: &quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>The <code>getreal</code> function prompts the user for a real numeric value. The value provided is then passed to the <code>setq</code> function and assigned to the <code>nDist</code> user-defined variable.</p>
+<hr>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">alert</span> (<span class="name">strcat</span> <span class="string">&quot;Welcome&quot;</span> <span class="string">&quot;to&quot;</span> <span class="string">&quot;AutoLISP!&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>The <code>stract</code> function combines all the strings into a single string value. The value returned bt the <code>strcat</code> function is then passed to the <code>alert</code> function and displayed in a message box.</p>
+<h2 id="Tutoiral-Creating-a-New-Custom-Command-and-Controllign-wiht-System-Variables-AutoLISP"><a href="#Tutoiral-Creating-a-New-Custom-Command-and-Controllign-wiht-System-Variables-AutoLISP" class="headerlink" title="Tutoiral: Creating a New Custom Command and Controllign wiht System Variables(AutoLISP)"></a>Tutoiral: Creating a New Custom Command and Controllign wiht System Variables(AutoLISP)</h2><p>Your custom commands can use standard AutoCAD commands with the <code>command</code> function, or they can directly manipulate objects using AutoLISP functions. </p>
+<h3 id="Creating-a-New-Function"><a href="#Creating-a-New-Function" class="headerlink" title="Creating a New Function"></a>Creating a New Function</h3><p><code>defun</code> means “define function.”</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> function_name ([arguments] [/ local_variables ...]) expr ...)</span><br></pre></td></tr></table></figure>
+
+<p>The <code>defun</code> function also allows you to define <strong>a list of arguments</strong> that can be passed to the function and a list of user-defined variable that are “local” to the function.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> display-msg (<span class="name">msg</span> mode / )</span><br><span class="line">  (<span class="name">if</span> (<span class="name">=</span> mode <span class="number">0</span>)</span><br><span class="line">    (<span class="name">prompt</span> (<span class="name">strcat</span> <span class="string">&quot;\n&quot;</span> msg))</span><br><span class="line">    (<span class="name">alert</span> msg)</span><br><span class="line">  )</span><br><span class="line"> (<span class="name">princ</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>(display-msg “Hello from AutoLISP!” 0)</li>
+<li>(display-msg “Hello from AutoLISP!” 1)</li>
+</ul>
+<h3 id="Creating-a-Custom-Command"><a href="#Creating-a-Custom-Command" class="headerlink" title="Creating a Custom Command"></a>Creating a Custom Command</h3><p>A custom command <strong>is a function</strong> that is defined with the <code>defun</code> function, but uses a special naming convention: they use the characters <code>c:</code> as a prefix. This distinguishes them from other functions.</p>
+<p>You can define a function that accepts arguments, but you should never define a function that will be used as a custom command to accpet arguments. </p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> c<span class="symbol">:hello</span> ( <span class="name">/</span> msg)</span><br><span class="line">  (<span class="name">setq</span> msg (<span class="name">getstring</span> T <span class="string">&quot;\nEnter a message: &quot;</span>))</span><br><span class="line">  (<span class="name">alert</span> msg)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><code>msg</code> is a varible only exist inside the <code>c:hello</code> scope.</p>
+<p>You can save your AutoLISP expressions to a file with the <strong>LSP file</strong> extension so they can be reused and loaded into other drawings.</p>
+<h3 id="Accessing-and-Setting-System-Variable-Value"><a href="#Accessing-and-Setting-System-Variable-Value" class="headerlink" title="Accessing and Setting System Variable Value"></a>Accessing and Setting System Variable Value</h3><p><strong>Getter/ Setter</strong></p>
+<ul>
+<li>getvar: Returns the current value of a system variable</li>
+<li>setvar: Assigns a new value to a system variable</li>
+</ul>
+<p>The following explain how to get and set the value of the <code>OSMODE</code>(<strong>Object Snap Mode</strong>) system varible.</p>
+<ol>
+<li>At the Command prompt, enter (setq cur_osmode (getvar “osmode”))<br>The current value of the OSMODE system variable is returned and assigned to the user-defined variable of <code>cur_osmode</code>. While OSMODE returns an <strong>integer value</strong>, the value is the sum of multiple “<strong>bit-code</strong>“ values. For example, the value 35 indicates that the EndPoint(1), Midpoint(2) and Intersection(32) running object snaps are enabled.</li>
+<li>At the Command prompt, enter <strong>osnap</strong></li>
+</ol>
+<h2 id="Creating-Loading-and-Opening-an-AutoLISP-File-AutoLISP"><a href="#Creating-Loading-and-Opening-an-AutoLISP-File-AutoLISP" class="headerlink" title="Creating, Loading, and Opening an AutoLISP File(AutoLISP)"></a>Creating, Loading, and Opening an AutoLISP File(AutoLISP)</h2><p>AutoLISP is an interpretive language, so it can be stored in an <strong>ASCII text file</strong>, loaded, and then executed directly within AutoCAD.</p>
+<p>AutoLISP files typically have an <code>.lsp</code> file extension, but they can also have the <code>.mnl</code> file extension. Both LSP and MNL files can be edited with a <strong>text editor</strong>.</p>
+<p>MNL files are associated with user interface customization and they are automatically loaded into AutoCAD when a customization (<code>CUI/ CUIx</code>) file of the <strong>same name</strong> is loaded. For example, the <code>acad.mnl</code> is automatically loaded into AutoCAD when the <code>acad.cuix</code> file is loaded.</p>
+<p>We can open any <strong>text editor</strong> create and <code>.lsp</code> file and load it into AutoCAD.</p>
+<p>The way to load it into AutoCAD.</p>
+<ul>
+<li>Manage &gt; Application&gt; Load Application(Find the correct file)</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/29/Note-PriorityQueue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/29/Note-PriorityQueue/" class="post-title-link" itemprop="url">Note_PriorityQueue</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-29 21:08:25" itemprop="dateCreated datePublished" datetime="2021-11-29T21:08:25+09:00">2021-11-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/29/RhinoInsideRevit-Intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/29/RhinoInsideRevit-Intro/" class="post-title-link" itemprop="url">RhinoInsideRevit_Intro</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-11-29 20:58:54 / Modified: 21:06:08" itemprop="dateCreated datePublished" datetime="2021-11-29T20:58:54+09:00">2021-11-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Last Saturday, I hosted one weekly session for TokyoAEC. Mainly I talked about how we could develop the RevitAPI tools in Grasshopper. People who found it interested can take a look the link below:</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ChenChihYuan/RhinoInsideRevit_ScriptingIntroduction">https://github.com/ChenChihYuan/RhinoInsideRevit_ScriptingIntroduction</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/22/LineSegmentIntersection-SweepLine/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -658,393 +954,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/12/VoronoiDiagram-Lectures/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/12/VoronoiDiagram-Lectures/" class="post-title-link" itemprop="url">VoronoiDiagram_Lectures</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-12 16:31:40" itemprop="dateCreated datePublished" datetime="2021-11-12T16:31:40+09:00">2021-11-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-20 02:37:29" itemprop="dateModified" datetime="2021-11-20T02:37:29+09:00">2021-11-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lecture-Link"><a href="#Lecture-Link" class="headerlink" title="Lecture Link"></a>Lecture Link</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Pn19deUBsM8&amp;t=13s">https://www.youtube.com/watch?v=Pn19deUBsM8&amp;t=13s</a></p>
-<h2 id="The-Post-Office-Problem"><a href="#The-Post-Office-Problem" class="headerlink" title="The Post-Office Problem"></a>The Post-Office Problem</h2><p><a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007%2F3-540-10291-4_1">https://link.springer.com/chapter/10.1007%2F3-540-10291-4_1</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.ivank.net/voronoi-diagram-in-javascript.html">http://blog.ivank.net/voronoi-diagram-in-javascript.html</a></p>
-<p><a target="_blank" rel="noopener" href="http://paperjs.org/examples/voronoi/">http://paperjs.org/examples/voronoi/</a></p>
-<p><a target="_blank" rel="noopener" href="https://shaneosullivan.wordpress.com/2011/03/22/sweep-line-voronoi-algorithm-in-javascript/">https://shaneosullivan.wordpress.com/2011/03/22/sweep-line-voronoi-algorithm-in-javascript/</a></p>
-<p><a target="_blank" rel="noopener" href="https://jacquesheunis.com/post/fortunes-algorithm/">https://jacquesheunis.com/post/fortunes-algorithm/</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.ivank.net/fortunes-algorithm-and-implementation.html">http://blog.ivank.net/fortunes-algorithm-and-implementation.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/pvigier/FortuneAlgorithm">https://github.com/pvigier/FortuneAlgorithm</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.cs.uu.nl/geobook/">http://www.cs.uu.nl/geobook/</a></p>
-<p><a target="_blank" rel="noopener" href="https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html">https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html</a></p>
-<h1 id="TakeAwayFromPvigier’s-blog"><a href="#TakeAwayFromPvigier’s-blog" class="headerlink" title="TakeAwayFromPvigier’s blog"></a>TakeAwayFromPvigier’s blog</h1><p><a target="_blank" rel="noopener" href="https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html">https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html</a></p>
-<h2 id="pseudo-code-from-Pvigier’s-Blog"><a href="#pseudo-code-from-Pvigier’s-Blog" class="headerlink" title="pseudo-code from Pvigier’s Blog"></a>pseudo-code from Pvigier’s Blog</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">add a site event in the event queue for each site</span><br><span class="line">while the event queue is not empty</span><br><span class="line">    pop the top event</span><br><span class="line">    if the event is a site event</span><br><span class="line">        insert a new arc in the beachline</span><br><span class="line">        check for new circle events</span><br><span class="line">    else</span><br><span class="line">        create a vertex in the diagram</span><br><span class="line">        remove the shrunk arc from the beachline</span><br><span class="line">        delete invalidated events</span><br><span class="line">        check for new circle events</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>site event</li>
-<li>circle event</li>
-</ul>
-<h3 id="Diagram’s-Data-Structure"><a href="#Diagram’s-Data-Structure" class="headerlink" title="Diagram’s Data Structure"></a>Diagram’s Data Structure</h3><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Doubly_connected_edge_list">Double connected edge list(DCEL)</a>.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VoronoiDiagram</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        std::vector&lt;Site&gt; mSite;</span><br><span class="line">        std::vector&lt;Face&gt; mFace;</span><br><span class="line">        std::list&lt;Vertex&gt; mVertices;</span><br><span class="line">        std::list&lt;HalfEdge&gt; mHalfEdges;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>The <code>Site</code> class represents <strong>an input point</strong>. Each site has an <strong>index</strong>, which is useful to query them, coordinates and a pointer to their cell(<code>face</code>):</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Site</span>&#123;</span></span><br><span class="line">    std::<span class="keyword">size_t</span> index;</span><br><span class="line">    Vector2 point;</span><br><span class="line">    Face* face;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>The vertices of the cells are represented by the <code>Vertex</code> class, they just have a cooridinates field:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vertex</span>&#123;</span></span><br><span class="line">    Vector2 point;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Here is the implementation of <code>half-edges</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HalfEdge</span>&#123;</span></span><br><span class="line">    Vertex* origin;</span><br><span class="line">    Vertex* destination;</span><br><span class="line">    HalfEdge* twin;</span><br><span class="line">    Face* incidentFace;</span><br><span class="line">    HalfEdge* prev;</span><br><span class="line">    HalfEdge* next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>An edge in a Voronoi diagram is shared by two adjacent cells. In the DCEL data structure, we splite these edfes in two half-edges, one for each cell, and they are <strong>linked</strong> by the <code>twin</code> pointer.</p>
-<p>Moreover, a hald-edge has an origin vertex and a desrination vertex.<br>The <code>incidenetFace</code> field points to the face to which the half-edge belongs to.</p>
-<p>Finally, in DCEL, cells are implemented as a circular <strong>doubly linked list</strong> of half-edges where adjacent half-edges are linked together. Thus the <code>prev</code> and <code>next</code> fields points to the previous and next half-edges in the cell.</p>
-<p>Finally, the <code>Face</code> class represents a cell and it just contains a pointer to its site and another to one of its half-edges. It does not matter which half-edge it is because a cell is a <strong>closed polygon</strong>. Thus we can access to all of its hald-edges by traversing the circular linked list.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Face</span>&#123;</span></span><br><span class="line">    Site* site;</span><br><span class="line">    HalfEdge* outerComponent;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Event-Queue"><a href="#Event-Queue" class="headerlink" title="Event Queue"></a>Event Queue</h2><p>The standard way to implement the event queue is to use a <strong>priority queue</strong>.</p>
-<p>During the processing of site and circle events we may need to remove circle events from the queue because they are not valid anymore.</p>
-<p>But most of the standard implementations of priority queues do not allow to remove an element which is not the <strong>top one</strong>. In particular that is the case for <code>std::priority_queue</code>.</p>
-<p>There are two ways to tackle this problem.</p>
-<ol>
-<li>The first and simplest one is to add a <code>valid</code> flag to <code>true</code> initially. Then instead of removing the circle event from the queue, we just set its flag to <code>false</code>. Finially, when we process the events in the main loop, if the <code>valid</code> flag of an event equals to <code>false</code>, we simply discard it and process the next one.</li>
-<li>The second method which I adopted is not to use <code>std::priority_queue</code>. Instead, I implemented <strong>my own priority queue</strong> which supports removal of any element it contains. The implementation of such a queue is pretty straightforward. I choose this method because I find it makes the code for the algorithm clearer.</li>
-</ol>
-<h2 id="Beachline"><a href="#Beachline" class="headerlink" title="Beachline"></a>Beachline</h2><p>If not implemented correctly there is no guarantee that the algorithm will run in <em>O(log(n))</em>. The key to reach this time complecity is to use a <strong>self-balancing</strong> tree.</p>
-<p>In my implementation the beachline is still a tree, but <strong>all nodes represent an arc</strong>. </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Arc</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title">Color</span>&#123;</span>RED, BLACK&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Hierarchy</span></span><br><span class="line">    Arc* parent;</span><br><span class="line">    Arc* left;</span><br><span class="line">    Arc* right;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Diagram</span></span><br><span class="line">    VoronoiDiagram::Site* site;</span><br><span class="line">    VoronoiDiagram::HalfEdge* leftHalfEdge;</span><br><span class="line">    VoronoiDiagram::HalfEdge* rightHalfEdge;</span><br><span class="line">    Event* event;</span><br><span class="line">    <span class="comment">// Optimizations</span></span><br><span class="line">    Arc* prev;</span><br><span class="line">    Arc* next;</span><br><span class="line">    <span class="comment">// Only for balancing</span></span><br><span class="line">    Color color;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>In Fortune’s algorithm <strong>we have no key</strong>, we only know that we want to insert an arc before or after another in the beachline. To do that, I create methods <code>insertBefore</code> and <code>insertAfter</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Beachline::insertBefore</span><span class="params">(Arc* x, Arc* y)</span></span>&#123;</span><br><span class="line">    <span class="comment">// Find the right place</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">isNil</span>(x-&gt;left))&#123;</span><br><span class="line">        x-&gt;left = y;</span><br><span class="line">        y-&gt;parent = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        x-&gt;prev-&gt;right = y;</span><br><span class="line">        y-&gt;parent = x-&gt;prev;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Set the pointers</span></span><br><span class="line">    y-&gt;prev = x-&gt;prev;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">isNil</span>(y-&gt;prev))</span><br><span class="line">        y-&gt;prev-&gt;next = y;</span><br><span class="line">    </span><br><span class="line">    y-&gt;next = x;</span><br><span class="line">    x-&gt;prev = y;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Balance the tree</span></span><br><span class="line">    <span class="built_in">insertFixup</span>(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h3 id="Priority-Queues"><a href="#Priority-Queues" class="headerlink" title="Priority Queues"></a>Priority Queues</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=wptevk0bshY">https://www.youtube.com/watch?v=wptevk0bshY</a></p>
-<h4 id="What-is-a-Priority-Queue"><a href="#What-is-a-Priority-Queue" class="headerlink" title="What is a Priority Queue"></a>What is a Priority Queue</h4><p>A priority queue is an Abstract Data Type(ADT) that operates similar to a normal queue excpet that <strong>each element has a certain priority</strong>. The priority of the elements in priority queue determin the order in which elements are removed from the PQ.</p>
-<p>NOTE: Priority queues only supports <strong>comparable data</strong>.</p>
-<h4 id="What-is-a-Heap"><a href="#What-is-a-Heap" class="headerlink" title="What is a Heap?"></a>What is a Heap?</h4><p>A heap is a <strong>tree</strong> based DS that satifies the <strong>heap invariant</strong>(also called heap property):<br>If A is a parent node of B then A is ordered with repect to B for all nodes A, B in the heap.</p>
-<ul>
-<li>Max Heap</li>
-<li>Min Heap</li>
-</ul>
-<blockquote>
-<p>Heaps must be trees.</p>
-</blockquote>
-<h4 id="When-and-where-is-a-PQ-used"><a href="#When-and-where-is-a-PQ-used" class="headerlink" title="When and where is a PQ used?"></a>When and where is a PQ used?</h4><ul>
-<li>Used in certain implementaitons of Dijkstra’s shortest Path algorithm.</li>
-<li>Anytime you need the dynamically fetch the <code>next best</code> or <code>next worst</code> element</li>
-<li>Used in Huffman coding (which is often used for lossless data compression).</li>
-<li>Best First Search(BFS) algorithms such as A* use PQs to continuously grab the next most promising node</li>
-<li>Used by minimum Spanning Tree(MST) algorithms</li>
-</ul>
-<h4 id="Complexity-PQ-with-binary-heap"><a href="#Complexity-PQ-with-binary-heap" class="headerlink" title="Complexity PQ with binary heap"></a>Complexity PQ with binary heap</h4><ul>
-<li>Binary Heap construction: O(n)</li>
-<li>Polling: O(log(n))</li>
-<li>Peeking: O(1)</li>
-<li>Adding: O(log(n))</li>
-</ul>
-<h3 id="Self-balance-Tree-AVL-Tree"><a href="#Self-balance-Tree-AVL-Tree" class="headerlink" title="Self balance Tree (AVL Tree)"></a>Self balance Tree (AVL Tree)</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vRwi_UcZGjU">https://www.youtube.com/watch?v=vRwi_UcZGjU</a></p>
-<ul>
-<li>Balance</li>
-<li>Rotation</li>
-<li>Implementation</li>
-</ul>
-<p>Rebalancing threshold</p>
-<h2 id="pseudo-code-from-Jacquesheunis’-blog"><a href="#pseudo-code-from-Jacquesheunis’-blog" class="headerlink" title="pseudo-code from Jacquesheunis’ blog"></a>pseudo-code from Jacquesheunis’ blog</h2><p><a target="_blank" rel="noopener" href="https://jacquesheunis.com/post/fortunes-algorithm/">https://jacquesheunis.com/post/fortunes-algorithm/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Fill the event queue with site events for each input site.</span><br><span class="line">While the event queue still has items in it:</span><br><span class="line">    If the next event on the queue is a site event:</span><br><span class="line">        Add the new site to the beachline</span><br><span class="line">    Otherwise it must be an edge-intersection event:</span><br><span class="line">        Remove the squeezed cell from the beachline</span><br><span class="line">Cleanup any remaining intermediate state</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="Voronoi-Diagram-Computataional-Geometry"><a href="#Voronoi-Diagram-Computataional-Geometry" class="headerlink" title="Voronoi Diagram - Computataional Geometry"></a>Voronoi Diagram - Computataional Geometry</h1><h2 id="Fortune’s-Sweep"><a href="#Fortune’s-Sweep" class="headerlink" title="Fortune’s Sweep"></a>Fortune’s Sweep</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">VoronoiDiagram(P are in R2)</span><br><span class="line">Q : new PriorityQueue(P) // site events sortes by y-coord.</span><br><span class="line">T : new BalancedBinarySearchTree() // sweep status(B)</span><br><span class="line">D : new DCEL() // to-be Vor(P)</span><br><span class="line"></span><br><span class="line">while not Q.empty() do</span><br><span class="line">    p &lt;- Q.ExtractMax()</span><br><span class="line">    if p site event then</span><br><span class="line">        HandleSiteEvent(p)</span><br><span class="line">    else</span><br><span class="line">        a &lt;- arc on B that will disappear</span><br><span class="line">        HandleCircleEvent(a)</span><br><span class="line"></span><br><span class="line">treat remaining int. nodes of T(unbnd. edges of Vor(P))</span><br><span class="line">return D</span><br></pre></td></tr></table></figure>
-
-<h3 id="Handling-Events"><a href="#Handling-Events" class="headerlink" title="Handling Events"></a>Handling Events</h3><ul>
-<li>HandleSiteEvent(point p)<ul>
-<li>Search in <code>T</code> for the arc <code>a</code> vertically above <code>p</code>. If <code>a</code> has pointer to circle event in <code>Q</code>, delete this event.   </li>
-<li>Split <code>a</code> into <code>a0</code> and <code>a2</code>. Let <code>a1</code> be the new arc of <code>p</code></li>
-<li>Add Vor-edges <code>&lt;q, p&gt;</code> and <code>&lt;p, q&gt;</code> to DECL</li>
-<li>Check <code>&lt;., a0, a1&gt;</code> and <code>&lt;a1, a2, .&gt;</code> for circle events.</li>
-</ul>
-</li>
-<li>HandleCircleEvent(arc <code>a</code>)<ul>
-<li>T.delete(a); update breakpts</li>
-<li>Delete all circle events involving <code>a</code> from <code>Q</code></li>
-<li>Add Vor-vtx <code>a_left</code> and <code>a_right</code></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/12/vscodeInBrower/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/12/vscodeInBrower/" class="post-title-link" itemprop="url">vscodeInBrower</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-11-12 12:50:29 / Modified: 12:54:40" itemprop="dateCreated datePublished" datetime="2021-11-12T12:50:29+09:00">2021-11-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Just want to a quick note for the cool thing I found we can do in github.</p>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ow1gea4FHMc">https://www.youtube.com/watch?v=ow1gea4FHMc</a></p>
-<p>Basically, as in this video. </p>
-<p>Now we can put</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vscode.dev/ + `any_githubRepo`</span><br></pre></td></tr></table></figure>
-
-<p>then we can editting code on our browser</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/11/voronoiJS-introduction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/11/voronoiJS-introduction/" class="post-title-link" itemprop="url">voronoiJS_introduction</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-11 18:19:42" itemprop="dateCreated datePublished" datetime="2021-11-11T18:19:42+09:00">2021-11-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-12 12:51:22" itemprop="dateModified" datetime="2021-11-12T12:51:22+09:00">2021-11-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Hey, it’s been a while since the last time I updated my blog. I spent some time learnig html, css and javascript. Though I am still in a very beginner state, I feel like I would like to learn some interesting code I randomly found. Try to breakdown to see what I can learn from them.</p>
-<p>The article is about implementing <code>Voronoi-Diagram</code> in Javascript. The resource can be found here.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/04/AEC-Hackathon-BLOXHUB-2021/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/04/AEC-Hackathon-BLOXHUB-2021/" class="post-title-link" itemprop="url">AEC_Hackathon_@BLOXHUB_2021</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-11-04 12:33:57 / Modified: 13:57:35" itemprop="dateCreated datePublished" datetime="2021-11-04T12:33:57+09:00">2021-11-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>I found this recently hosted AEC hackathon video. To be honest, this will be the first hackathon I knew in AEC industy was held.Just want to memo down some interesting ideas from each project. Oh also, I heard the <code>Glodfinger</code> was the big winner of this event. I would like to dive deep into there source code in near future, and I might write some other posts for that topic.</p>
-<h1 id="Sunday-Programme"><a href="#Sunday-Programme" class="headerlink" title="Sunday Programme"></a>Sunday Programme</h1><h2 id="Pollution-Solution"><a href="#Pollution-Solution" class="headerlink" title="Pollution Solution"></a>Pollution Solution</h2><p>People from A to B, might consider not only the distance, but also the air quality as well.</p>
-<ul>
-<li>Find alternative routes where pollution levels are significantly lower</li>
-<li>Algorithm taking the <strong>Google pollution data</strong> into account.</li>
-</ul>
-<h3 id="How-we-got-here"><a href="#How-we-got-here" class="headerlink" title="How we got here"></a>How we got here</h3><ol>
-<li>Google pollution data</li>
-<li>Making a graph network</li>
-<li>A* shortest path</li>
-</ol>
-<h2 id="Readapt"><a href="#Readapt" class="headerlink" title="Readapt"></a>Readapt</h2><p><a target="_blank" rel="noopener" href="https://readapt-a2656.web.app/">https://readapt-a2656.web.app/</a></p>
-<p>Reuse of components off-site</p>
-<ul>
-<li>Reduce</li>
-<li>Reuse </li>
-<li>Recycle</li>
-</ul>
-<h3 id="Scenario-1"><a href="#Scenario-1" class="headerlink" title="Scenario 1"></a>Scenario 1</h3><p>Adapt components to building</p>
-<h3 id="Scenario-2"><a href="#Scenario-2" class="headerlink" title="Scenario 2"></a>Scenario 2</h3><p>Adapt building to components</p>
-<h4 id="What-is-LCA"><a href="#What-is-LCA" class="headerlink" title="What is LCA"></a>What is LCA</h4><p><a target="_blank" rel="noopener" href="https://tenbou.nies.go.jp/science/description/detail.php?id=57">https://tenbou.nies.go.jp/science/description/detail.php?id=57</a></p>
-<h2 id="Procyon"><a href="#Procyon" class="headerlink" title="Procyon"></a>Procyon</h2><h2 id="Fuzzy-Bunnies"><a href="#Fuzzy-Bunnies" class="headerlink" title="Fuzzy Bunnies"></a>Fuzzy Bunnies</h2><p>Fuzzy Logic: Mapping off data</p>
-<h3 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h3><p>We want to find a way to make LCA/ LCC faster regardless off data with spelling errors or disrupted data.</p>
-<p>We know from our day-to-day work in AEC industry in the AEC industry that the data in our BIM-models is sometimes a bit fuzzy/ fluffy/ messy.</p>
-<p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0926580518309841">https://www.sciencedirect.com/science/article/abs/pii/S0926580518309841</a><br><a target="_blank" rel="noopener" href="https://www.wbdg.org/resources/life-cycle-cost-analysis-lcca#:~:text=Life%2Dcycle%20cost%20analysis%20(LCCA)%20is%20a%20method%20for,a%20building%20or%20building%20system.&amp;text=Lowest%20life%2Dcycle%20cost%20">https://www.wbdg.org/resources/life-cycle-cost-analysis-lcca#:~:text=Life%2Dcycle%20cost%20analysis%20(LCCA)%20is%20a%20method%20for,a%20building%20or%20building%20system.&amp;text=Lowest%20life%2Dcycle%20cost%20</a>(LCC,interpret%20measure%20of%20economic%20evaluation.</p>
-<h2 id="Learn-Carbon"><a href="#Learn-Carbon" class="headerlink" title="Learn Carbon"></a>Learn Carbon</h2><h2 id="Hypar-Hygge"><a href="#Hypar-Hygge" class="headerlink" title="Hypar-Hygge"></a>Hypar-Hygge</h2><h2 id="Goldfinger"><a href="#Goldfinger" class="headerlink" title="Goldfinger"></a>Goldfinger</h2><h2 id="LBD-hackers"><a href="#LBD-hackers" class="headerlink" title="LBD hackers"></a>LBD hackers</h2><h2 id="AFRY"><a href="#AFRY" class="headerlink" title="AFRY"></a>AFRY</h2><h2 id="Paper-Sketch"><a href="#Paper-Sketch" class="headerlink" title="Paper Sketch"></a>Paper Sketch</h2><h2 id="Google-Air-Quality"><a href="#Google-Air-Quality" class="headerlink" title="Google Air Quality"></a>Google Air Quality</h2><h2 id="Domovoy"><a href="#Domovoy" class="headerlink" title="Domovoy"></a>Domovoy</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1110,7 +1023,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1121,7 +1034,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">97</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
