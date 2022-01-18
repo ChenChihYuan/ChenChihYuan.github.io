@@ -146,6 +146,430 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2022/01/18/CustomUI-for-GH-component/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/18/CustomUI-for-GH-component/" class="post-title-link" itemprop="url">CustomUI_for_GH_component</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-18 12:58:01" itemprop="dateCreated datePublished" datetime="2022-01-18T12:58:01+09:00">2022-01-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2022/01/05/AutoCAD-Dev-with-Csharp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/05/AutoCAD-Dev-with-Csharp/" class="post-title-link" itemprop="url">AutoCAD_Dev_with_Csharp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-05 10:54:35 / Modified: 11:15:55" itemprop="dateCreated datePublished" datetime="2022-01-05T10:54:35+09:00">2022-01-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Apparently, we can develop APIs with <code>LISP</code> and <code>.NET</code> . Though I have been checking some articles mentioning the pros and cons for using one another.</p>
+<h1 id="DLLs"><a href="#DLLs" class="headerlink" title="DLLs"></a>DLLs</h1><ul>
+<li>ACMGD.DLL</li>
+<li>ACDBGD.DLL</li>
+<li>ACCOREMGD.DLL</li>
+</ul>
+<h1 id="using-lines"><a href="#using-lines" class="headerlink" title="using lines"></a>using lines</h1><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.ApplicationServices;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.DatabaseServices;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.Runtime;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.Geometry;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.EditorInput;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h1><ol>
+<li>Create the <code>Class Library(.NET framework)</code></li>
+<li>Add those 3 dlls listed above</li>
+<li>Add <code>the using lines</code></li>
+</ol>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.ApplicationServices;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.DatabaseServices;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.Runtime;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.Geometry;</span><br><span class="line"><span class="keyword">using</span> Autodesk.AutoCAD.EditorInput;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DrawObject</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DrawObject</span>&#123;</span><br><span class="line">        [<span class="meta">CommandMethod(<span class="meta-string">&quot;DrawLine&quot;</span>)</span>]</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DrawLine</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://amdlaboratory.com/amdblog/autocad%E3%81%AEaddin%E3%82%92c%E3%81%A7%E4%BD%9C%E3%82%8B%E6%96%B9%E6%B3%95/">https://amdlaboratory.com/amdblog/autocad%E3%81%AEaddin%E3%82%92c%E3%81%A7%E4%BD%9C%E3%82%8B%E6%96%B9%E6%B3%95/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/11/PriorityQueue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/11/PriorityQueue/" class="post-title-link" itemprop="url">PriorityQueue</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-11 00:25:38" itemprop="dateCreated datePublished" datetime="2021-12-11T00:25:38+09:00">2021-12-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-18 12:57:23" itemprop="dateModified" datetime="2022-01-18T12:57:23+09:00">2022-01-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/binary-heap/">Binary_Heap</a></p>
+<h1 id="Binary-Heap"><a href="#Binary-Heap" class="headerlink" title="Binary Heap"></a>Binary Heap</h1><p>A Binary Heap is a Binary Tree with following properties.</p>
+<ul>
+<li>It’s a <strong>complete tree</strong>. This property makes them suitable to be stored in an <strong>array</strong></li>
+<li>A Binary Heap is either <strong>Min Heap</strong> or <strong>Max Heap</strong>. (Recursively)</li>
+</ul>
+<h2 id="How-is-Binary-Heap-represent"><a href="#How-is-Binary-Heap-represent" class="headerlink" title="How is Binary Heap represent?"></a>How is Binary Heap represent?</h2><p>A Binary Heap is a <strong>Complete Binary Tree</strong>. A binary heap is typically represented as an <strong>array</strong>.</p>
+<ul>
+<li><p>The root element will be at <strong>Arr[0]</strong></p>
+</li>
+<li><p>Arr[(i-1)/2] : the parent node</p>
+</li>
+<li><p>Arr[(2*i)+1] : the left child</p>
+</li>
+<li><p>Arr[(2*i)+2] : the right child</p>
+</li>
+</ul>
+<p><img src="2021-12-11-00-34-00.png"></p>
+<h2 id="Applications-of-Heaps"><a href="#Applications-of-Heaps" class="headerlink" title="Applications of Heaps:"></a>Applications of Heaps:</h2><ol>
+<li>Heap Sort: Heap Sort uses Binary Heap to sort an array in O(nLogn) time.</li>
+<li>Priority Queue: Priority queues can be efficiently implemented using Binary Heap because it supports <code>insert()</code>, <code>delete()</code> and <code>extractmax()</code>, <code>decreaseKey()</code> operation in O(logn) time. </li>
+<li>Graph Algorithms: The priority queues are especially used in <code>Graph Algorithms</code> like <code>Dijkstra&#39;s Shortest Path</code> and <code>Prim&#39;s Minimum Spanning Tree</code></li>
+<li>Many problems can be efficiently solved using Heaps. See following. for example.<ol>
+<li>K’th Largest Element in an array</li>
+<li>Sort an almost sorted array</li>
+<li>Merge K sorted Arrays</li>
+</ol>
+</li>
+</ol>
+<h2 id="Operation-on-Min-Heap"><a href="#Operation-on-Min-Heap" class="headerlink" title="Operation on Min Heap"></a>Operation on Min Heap</h2><ol>
+<li>getMini()</li>
+<li>extractMin()</li>
+<li>decreaseKey()</li>
+<li>insert()</li>
+<li>delete()</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/09/RetrieveGraphInfo-InAutoCAD-autoLISP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/09/RetrieveGraphInfo-InAutoCAD-autoLISP/" class="post-title-link" itemprop="url">RetrieveGraphInfo_InAutoCAD_autoLISP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-09 15:12:16" itemprop="dateCreated datePublished" datetime="2021-12-09T15:12:16+09:00">2021-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-10 01:18:08" itemprop="dateModified" datetime="2021-12-10T01:18:08+09:00">2021-12-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://www.autocad.com.tw/lisp_6.htm">Reference</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://documentation.help/AutoLISP-Functions/WS1a9193826455f5ff1a32d8d10ebc6b7ccc-6a3e.htm">entsel</a> : prompts the user to select a single object(entity) by specifying a point</li>
+<li><a target="_blank" rel="noopener" href="https://documentation.help/AutoLISP-Functions/WS1a9193826455f5ff1a32d8d10ebc6b7ccc-6a86.htm">car</a></li>
+<li>cdr</li>
+<li><a target="_blank" rel="noopener" href="https://documentation.help/AutoLISP-Functions/WS1a9193826455f5ff1a32d8d10ebc6b7ccc-6a4c.htm">entget</a></li>
+</ul>
+<h1 id="entsel"><a href="#entsel" class="headerlink" title="entsel"></a>entsel</h1><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> en1 (<span class="name">entsel</span>))</span><br></pre></td></tr></table></figure>
+
+<p>If you want to prompt user with a sentence</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> e (<span class="name">entsel</span> <span class="string">&quot;Please choose an object: &quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="More-about-entsel"><a href="#More-about-entsel" class="headerlink" title="More about entsel"></a>More about entsel</h2><p>Return value:</p>
+<p>A list whose first element is the entity name of the chosen object and whose second element is the coordinates (in terms of the <strong>current UCS</strong>) of the point used to pick the object.</p>
+<blockquote>
+<p>The pick point returned by entsel does not represent a point that lies on the selected object. </p>
+</blockquote>
+<h1 id="car"><a href="#car" class="headerlink" title="car"></a>car</h1><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">car</span> en1)</span><br></pre></td></tr></table></figure>
+
+<p>In the previos example, <code>(car en1)</code> here will return the <strong>first element</strong> in the list, which is the <code>EntityName</code></p>
+<h1 id="cadr"><a href="#cadr" class="headerlink" title="cadr"></a>cadr</h1><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cadr</span> en1)</span><br></pre></td></tr></table></figure>
+
+<p>In the previos example, <code>(car en1)</code> here will return the <strong>second element</strong> in the list, which is the <code>point location</code></p>
+<h1 id="entget"><a href="#entget" class="headerlink" title="entget"></a>entget</h1><p>Retrieves an object’s (entity’s) definition data</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> en1_data (<span class="name">entget</span> (<span class="name">car</span> en1)))</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="2021-12-09-16-07-17.png"></p>
+<p>If the entity you selected is in the different types, <code>entget</code> may return different geometry infomation.</p>
+<p><a target="_blank" rel="noopener" href="http://docs.autodesk.com/ACD/2011/CHT/filesDXF/WS1a9193826455f5ff18cb41610ec0a2e719-7a3d.htm">群碼分析表</a></p>
+<p><a target="_blank" rel="noopener" href="http://docs.autodesk.com/ACAD_E/2012/ENU/filesDXF/WS1a9193826455f5ff18cb41610ec0a2e719-7a62.htm">Group Codes by Name</a></p>
+<blockquote>
+<p>If the graph info pair separated by <code>.</code>, (1 . “ABC”) for example, we need to use <code>cdr</code> to retrieve the secend element, instead of <code>cadr</code></p>
+</blockquote>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">cons</span> <span class="number">1</span> <span class="string">&quot;ABC&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>can create an <code>dot pair</code>, (1 . “ABC”)</p>
+<h1 id="How-to-revise-the-data"><a href="#How-to-revise-the-data" class="headerlink" title="How to revise the data?"></a>How to revise the data?</h1><ol>
+<li><p><code>entget</code> to get the entity information</p>
+</li>
+<li><p><code>assoc</code> to find the correct <strong>group_code</strong> string pair. The new string pair can be created by <code>cons</code></p>
+</li>
+<li><p><code>subst</code> to swap/change the new/old string pairs</p>
+</li>
+<li><p><code>entmod</code> to renew the autocad canvas and show the new string pair</p>
+</li>
+<li><p>!ent_data</p>
+</li>
+<li><p>(setq oldr (assoc 40 en1_data))</p>
+</li>
+<li><p>(setq newr (cons 40 23.8))</p>
+</li>
+<li><p>(setq en1_data (subst newr oldr en1_data))</p>
+</li>
+<li><p>(entmod en1_data)</p>
+</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://documentation.help/AutoLISP-Functions/WS1a9193826455f5ff1a32d8d10ebc6b7ccc-6a4c.htm">entget</a></li>
+<li><a target="_blank" rel="noopener" href="https://documentation.help/AutoLISP-Functions/WS1a9193826455f5ff1a32d8d10ebc6b7ccc-6aa4.htm">assoc</a>: Searches an association list for an element and returns that association list entry</li>
+<li><a target="_blank" rel="noopener" href="https://documentation.help/AutoLISP-Functions/WS1a9193826455f5ff1a32d8d10ebc6b7ccc-691f.htm">subst</a>: Searches a list for an old item and returns a copy of the list with a new item substituted in place of every occurrence of the old</li>
+<li><a target="_blank" rel="noopener" href="https://documentation.help/AutoLISP-Functions/WS1a9193826455f5ff1a32d8d10ebc6b7ccc-6a43.htm">entmod</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/09/UsingVisualLISPDebuggingTools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/09/UsingVisualLISPDebuggingTools/" class="post-title-link" itemprop="url">UsingVisualLISPDebuggingTools</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-09 13:06:26 / Modified: 13:33:30" itemprop="dateCreated datePublished" datetime="2021-12-09T13:06:26+09:00">2021-12-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Differentiating-Between-Local-and-Global-Variable"><a href="#Differentiating-Between-Local-and-Global-Variable" class="headerlink" title="Differentiating Between Local and Global Variable"></a>Differentiating Between Local and Global Variable</h1><ul>
+<li><strong>Global variables</strong> are accessible by all functions loaded within a document(or drawing).</li>
+<li><strong>Local variables</strong> retain their value only as long as the function that defined them is running. After the function finishes running, the local variable values are automatically discarded, and the system reclaims the memory space the variable used. </li>
+</ul>
+<h1 id="Using-Local-Variable-in-the-Program"><a href="#Using-Local-Variable-in-the-Program" class="headerlink" title="Using Local Variable in the Program"></a>Using Local Variable in the Program</h1><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> gp<span class="symbol">:getPointInput</span>	(<span class="name">/</span> StartPt EndPt HalfWidth)</span><br><span class="line">  (<span class="name">if</span> (<span class="name">setq</span> StartPt (<span class="name">getpoint</span> <span class="string">&quot;\nStart point of path: &quot;</span>))</span><br><span class="line">    (<span class="name">if</span> (<span class="name">setq</span> EndPt (<span class="name">getpoint</span> StartPt <span class="string">&quot;\nEndpoint of path: &quot;</span>))</span><br><span class="line">      (<span class="name">if</span> (<span class="name">setq</span> HalfWidth (<span class="name">getdist</span> EndPt <span class="string">&quot;\nhalf-width of path: &quot;</span>))</span><br><span class="line">          T</span><br><span class="line">      )</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>The local variables are declared following the <code>slash character</code>.</p>
+<hr>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/08/VisualLISP-GardenPath/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -542,462 +966,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/18/ParametericArchitectureTalkWithRorbertMcNeel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/18/ParametericArchitectureTalkWithRorbertMcNeel/" class="post-title-link" itemprop="url">ParametericArchitectureTalkWithRorbertMcNeel</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-18 15:46:49" itemprop="dateCreated datePublished" datetime="2021-11-18T15:46:49+09:00">2021-11-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-19 01:11:17" itemprop="dateModified" datetime="2021-11-19T01:11:17+09:00">2021-11-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Rhino/" itemprop="url" rel="index"><span itemprop="name">Rhino</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Rhino/Grasshopper/" itemprop="url" rel="index"><span itemprop="name">Grasshopper</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Rhino/Grasshopper/Interview/" itemprop="url" rel="index"><span itemprop="name">Interview</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QsaOPyipR-s">https://www.youtube.com/watch?v=QsaOPyipR-s</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/17/Making-Task-Capable-ComponentsInGH/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/17/Making-Task-Capable-ComponentsInGH/" class="post-title-link" itemprop="url">Making_Task_Capable_ComponentsInGH</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-11-17 23:07:09 / Modified: 23:11:57" itemprop="dateCreated datePublished" datetime="2021-11-17T23:07:09+09:00">2021-11-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/multithread/" itemprop="url" rel="index"><span itemprop="name">multithread</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/multithread/grasshopper/" itemprop="url" rel="index"><span itemprop="name">grasshopper</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/multithread/grasshopper/Csharp/" itemprop="url" rel="index"><span itemprop="name">Csharp</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>I just finished the first lesson of Performance_Engineering_Introduction, and saw these posts from McNeel.<br><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/guides/grasshopper/multi-treaded-components/">https://developer.rhino3d.com/guides/grasshopper/multi-treaded-components/</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/guides/grasshopper/programming-task-capable-component/">https://developer.rhino3d.com/guides/grasshopper/programming-task-capable-component/</a></p>
-<p>I might just leave the link here for a while, till I get time to really implement it by myself.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/17/ReadCSVinGH/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/17/ReadCSVinGH/" class="post-title-link" itemprop="url">ReadCSVinGH</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-17 11:14:13" itemprop="dateCreated datePublished" datetime="2021-11-17T11:14:13+09:00">2021-11-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/16/Performance-Engineering-IntroductionMatrixMultiplication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/16/Performance-Engineering-IntroductionMatrixMultiplication/" class="post-title-link" itemprop="url">Performance Engineering_IntroductionMatrixMultiplication</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-16 17:10:45" itemprop="dateCreated datePublished" datetime="2021-11-16T17:10:45+09:00">2021-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-17 22:48:17" itemprop="dateModified" datetime="2021-11-17T22:48:17+09:00">2021-11-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>There are usually some recommendation videos from MIT OCW on youtube for me. Shameless to say, although I am interested in the courses, I never finished any whole semester. But, Nah. I just want to note down those I clicked and gain some knowledge after all.</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=o7h_sYMk_oc&amp;list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf&amp;index=1">https://www.youtube.com/watch?v=o7h_sYMk_oc&amp;list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf&amp;index=1</a></p>
-<h1 id="Software-Properties"><a href="#Software-Properties" class="headerlink" title="Software Properties"></a>Software Properties</h1><p>What software properties are more important than performace?</p>
-<blockquote>
-<p>There are many things are more important than performance, but it doesn’t mean that performance is not important.</p>
-</blockquote>
-<p>Performance is like some kind of currency(water resource).</p>
-<h1 id="Computer-Programming-in-the-Early-Days"><a href="#Computer-Programming-in-the-Early-Days" class="headerlink" title="Computer Programming in the Early Days"></a>Computer Programming in the Early Days</h1><p>Software performace engineering was common, because machine resoures <strong>were limited</strong>.</p>
-<p>Many programs strained the machine’s resources.</p>
-<ul>
-<li>Programs had to be planned around the machine</li>
-<li>Many program would not “fit” without intense performance engineering.</li>
-</ul>
-<h2 id="Clockrate-memory-was-low-back-in-70s"><a href="#Clockrate-memory-was-low-back-in-70s" class="headerlink" title="Clockrate, memory was low back in 70s"></a>Clockrate, memory was low back in 70s</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3PcO10iAXTk">Clockrate</a></p>
-<p>Core Speed = (Bus/Base Speed) * (Multiplier)</p>
-<h1 id="Lessons-learned-from-the-70’s-and-80’s"><a href="#Lessons-learned-from-the-70’s-and-80’s" class="headerlink" title="Lessons learned from the 70’s and 80’s"></a>Lessons learned from the 70’s and 80’s</h1><blockquote>
-<p>Premature optimization is the root of all evil. - Donald Knuth</p>
-</blockquote>
-<blockquote>
-<p>More computing sins are committed in the name of efficiency(without necessarily achieving it) than for any other single reason - including blind stupidity  -William Wulf</p>
-</blockquote>
-<blockquote>
-<p>The First Rule of Program Optimization: Don’t do it. The Second Rule of Program Optimization - For experts only: Don’t do it yet. - Michael Jaskson</p>
-</blockquote>
-<p>Making code <strong>readable</strong> and <strong>Fast</strong></p>
-<h1 id="Vendor-Solution-Multicore"><a href="#Vendor-Solution-Multicore" class="headerlink" title="Vendor Solution: Multicore"></a>Vendor Solution: Multicore</h1><p>Clock rate seem stop growing after around 2004.</p>
-<ul>
-<li>To scale performance, processor manufacturers put many processing cores on the microprocessor chip</li>
-<li>Each generation of Moore’s Law potentially doubles the number of cores.</li>
-</ul>
-<h2 id="Performance-Is-No-Longer-Free"><a href="#Performance-Is-No-Longer-Free" class="headerlink" title="Performance Is No Longer Free"></a>Performance Is No Longer Free</h2><p>Moore’s Law continues to increase computer performance.<br>But now that performance looks like <strong>big multicore processors</strong> with <strong>complex cache hierarchies</strong>, <strong>wide vector units</strong>, <strong>GPU’s</strong>, <strong>FGPA’s</strong>, etc</p>
-<p>Generally, software must be <code>adapted</code> to utilize this hardware efficiently.</p>
-<h1 id="Same-code-writen-in-different-language-Python-Java-and-C-for-example"><a href="#Same-code-writen-in-different-language-Python-Java-and-C-for-example" class="headerlink" title="Same code writen in different language, Python, Java and C, for example"></a>Same code writen in different language, Python, Java and C, for example</h1><h2 id="Interpreters-are-versatile-but-slow"><a href="#Interpreters-are-versatile-but-slow" class="headerlink" title="Interpreters are versatile, but slow"></a>Interpreters are versatile, but slow</h2><ul>
-<li>The interpreter reads, interprets, and preforms each program statement and updates the machine state.</li>
-<li>Interpreters can easily support high-level programming features - such as <strong>dynamic code alteration</strong> - at the cost of performance</li>
-</ul>
-<h2 id="JIT-compilation"><a href="#JIT-compilation" class="headerlink" title="JIT compilation"></a>JIT compilation</h2><ul>
-<li>JIT compilers can recover some of the performance lost by interpretation.</li>
-<li>When code is first executed, it is interpreted.</li>
-<li>The runtime system keeps track of how often the various pieces of code are executed.</li>
-<li>Whenever some piece of code executes sufficiently frequently, it gets compiled to machine code in real time.</li>
-<li>Future executions of that code use the more-efficient compiled version.</li>
-</ul>
-<h1 id="Performance-of-Differnent-Order"><a href="#Performance-of-Differnent-Order" class="headerlink" title="Performance of Differnent Order"></a>Performance of Differnent Order</h1><h2 id="Loop-Order"><a href="#Loop-Order" class="headerlink" title="Loop Order"></a>Loop Order</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> k = <span class="number">0</span>; k &lt; n; k++)&#123;</span><br><span class="line">            c[i][j] += A[i][j] * B[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>what if we change the order of the loops, let’s say,</p>
-</blockquote>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> k = <span class="number">0</span>; k &lt; n; k++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;                    </span><br><span class="line">            c[i][j] += A[i][j] * B[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Does this cause any performance difference?</p>
-<blockquote>
-<p>cache location</p>
-</blockquote>
-<h2 id="Hardware-Caches"><a href="#Hardware-Caches" class="headerlink" title="Hardware Caches"></a>Hardware Caches</h2><p>Each processor reads and writes main memory in contiguous blocks, called <code>cache lines</code>.</p>
-<ul>
-<li>Previously accessed cache lines are stored in a small memory, called a <strong>cache</strong>, that sits near the processor</li>
-<li><strong>Cache hits</strong>: accesses to data in cache -&gt; are fast</li>
-<li><strong>Cache misses</strong>: accesses to data not in cache -&gt; are slow</li>
-</ul>
-<p>We can measure the effect of different access patterns using the <code>Cachegrind</code> cache simulator</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valgrind --tool=cachegrind ./mm</span><br></pre></td></tr></table></figure>
-
-<h1 id="Compiler-Optimization"><a href="#Compiler-Optimization" class="headerlink" title="Compiler Optimization"></a>Compiler Optimization</h1><p>Clang provides a collection of optimization switches. You can specify a switch to the compiler to ask it to optimize.</p>
-<h1 id="Parallel-Loops"><a href="#Parallel-Loops" class="headerlink" title="Parallel Loops"></a>Parallel Loops</h1><p>The <code>cilk_for</code> loop allows all iterations of the loop to execute in parallel.</p>
-<h2 id="Experimenting-with-Parallel-Loops"><a href="#Experimenting-with-Parallel-Loops" class="headerlink" title="Experimenting with Parallel Loops"></a>Experimenting with Parallel Loops</h2><h3 id="Parallel-i-Loop"><a href="#Parallel-i-Loop" class="headerlink" title="Parallel i Loop"></a>Parallel <code>i</code> Loop</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">clik_for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k =<span class="number">0</span>; k &lt; n ;++k)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j =<span class="number">0</span>; j &lt; n ;++j)&#123;</span><br><span class="line">            c[i][j] += A[i][j] * B[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Running time: 3.18s</p>
-<h3 id="Parallel-j-Loop"><a href="#Parallel-j-Loop" class="headerlink" title="Parallel j Loop"></a>Parallel <code>j</code> Loop</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k =<span class="number">0</span>; k &lt; n ;++k)&#123;</span><br><span class="line">        <span class="built_in">cilk_for</span>(<span class="keyword">int</span> j =<span class="number">0</span>; j &lt; n ;++j)&#123;</span><br><span class="line">            c[i][j] += A[i][j] * B[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Running time: 531.71s</p>
-<h3 id="Parallel-i-and-j-loops"><a href="#Parallel-i-and-j-loops" class="headerlink" title="Parallel i and j loops"></a>Parallel <code>i</code> and <code>j</code> loops</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cilk_for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k =<span class="number">0</span>; k &lt; n ;++k)&#123;</span><br><span class="line">        <span class="built_in">cilk_for</span>(<span class="keyword">int</span> j =<span class="number">0</span>; j &lt; n ;++j)&#123;</span><br><span class="line">            c[i][j] += A[i][j] * B[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Running time: 10.64s</p>
-<p>For some reason, we cannot parallel k to get the correct answer.</p>
-<blockquote>
-<p>Rule of Thumb: Parallelize <strong>outer loops</strong> rather than inner loops.</p>
-</blockquote>
-<p>Using parallel loops gets us almost <strong>18x</strong> speedup on 18 cores! (Disclaimer: Not all code is so easy to parallelize effictively.)</p>
-<h1 id="Vector-Hardware"><a href="#Vector-Hardware" class="headerlink" title="Vector Hardware"></a>Vector Hardware</h1><p>Modern microprocessors incorporate <strong>vector hardware</strong> to process data in <strong>single-instruction stream</strong>, <strong>multiple data stream(SIMD)</strong> fashion</p>
-<h2 id="Compiler-Vectorization"><a href="#Compiler-Vectorization" class="headerlink" title="Compiler Vectorization"></a>Compiler Vectorization</h2><p>Clang/LLVM uses vector instructions automatically when compiling at optimization level <code>-02</code> or higher. </p>
-<p>Many machines don’t support the newest set of vector instructions, however, so the compiler uses vector instructions conservatively by default.</p>
-<h2 id="Vectorization-Flags"><a href="#Vectorization-Flags" class="headerlink" title="Vectorization Flags"></a>Vectorization Flags</h2><p>Programmers can direct the compiler to use modern vector instructions using <strong>compiler flags</strong> such as the following:</p>
-<ul>
-<li>mavx: Use Intel AVX vector instructions</li>
-<li>mavx2: Use Intel AVX2 vector instructions</li>
-</ul>
-<h1 id="Version-Implementation"><a href="#Version-Implementation" class="headerlink" title="Version Implementation"></a>Version Implementation</h1><ol>
-<li>Python</li>
-<li>Java</li>
-<li>C</li>
-<li>+interchange loops</li>
-<li>+optimization flags</li>
-<li>Parallel loops</li>
-<li>+tilling</li>
-<li>Parallel divide-and-conquer</li>
-<li>+compiler vectorization</li>
-<li>+AVX intrinsics</li>
-</ol>
-<h1 id="Plus-More-Optimizations"><a href="#Plus-More-Optimizations" class="headerlink" title="Plus More Optimizations"></a>Plus More Optimizations</h1><p>We can apply several more insights and performance-engineering trick to make this code run faster, including: </p>
-<ul>
-<li>Preprocessing</li>
-<li>Matrix transposition</li>
-<li>Data alignment</li>
-<li>Memory-managemnet optimizations</li>
-<li>A clever algorithm for the base case that uses AVX intrinsic instructions explicitly</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/16/SelectGeometryInSameLayer-GH/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/16/SelectGeometryInSameLayer-GH/" class="post-title-link" itemprop="url">SelectGeometryInSameLayer_GH</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-11-16 13:35:12 / Modified: 14:24:57" itemprop="dateCreated datePublished" datetime="2021-11-16T13:35:12+09:00">2021-11-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Just as another regular work day, I memo down some new things along the task I am facing. Recently I have been crazy about the Voronoi diagram. Although as bad as I wanted to implement the sweepline algorithm, I found the best practice might be patient and learn thing little by little. Also, I am kinds into “Study with me” series on youtube. I feel clam with someone’s company alongside.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/c-select-objects-by-layer/84420/6">https://discourse.mcneel.com/t/c-select-objects-by-layer/84420/6</a><br>Appreciate the help from username Mahdiyar.</p>
-<p>Two things are different</p>
-<ul>
-<li>select object in Rhino DocView</li>
-<li>select object in GH</li>
-</ul>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ghobjs = <span class="keyword">new</span> List&lt;<span class="built_in">object</span>&gt;();</span><br><span class="line"><span class="keyword">var</span> selectedLayer = RhinoDoc.ActiveDoc.Layers.FindName(layerName);</span><br><span class="line"><span class="keyword">var</span> layers = <span class="keyword">new</span> List&lt;Rhino.DocObjects.Layer&gt;()&#123;selectedLayer&#125;;</span><br><span class="line"><span class="keyword">if</span>(subLayer)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">foreach</span>(<span class="keyword">var</span> layer <span class="keyword">in</span> RhinoDoc.ActiveDoc.Layers)</span><br><span class="line">    <span class="keyword">if</span>(layer.IsChildOf(selectedLayer))</span><br><span class="line">      layers.Add(layer);</span><br><span class="line">&#125;</span><br><span class="line">B = layers;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="keyword">var</span> layer <span class="keyword">in</span> layers)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> rhobjs = doc.Objects.FindByLayer(layer);</span><br><span class="line">  <span class="keyword">foreach</span> (<span class="keyword">var</span> rhObj <span class="keyword">in</span> rhobjs)</span><br><span class="line">    ghobjs.Add(rhObj.Geometry);</span><br><span class="line">&#125;</span><br><span class="line">A = ghobjs;</span><br></pre></td></tr></table></figure>
-
-<p><img src="./source/../../uploads/SelectInSameLayer.gif" alt="SelectInSameLayer"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1067,7 +1035,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1078,7 +1046,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">100</span>
+        <span class="site-state-item-count">102</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1105,7 +1073,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

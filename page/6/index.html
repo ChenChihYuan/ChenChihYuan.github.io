@@ -146,6 +146,502 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/07/03/LineWeight/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/03/LineWeight/" class="post-title-link" itemprop="url">LineWeight</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-03 10:51:14" itemprop="dateCreated datePublished" datetime="2020-07-03T10:51:14+09:00">2020-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-04 00:23:53" itemprop="dateModified" datetime="2020-07-04T00:23:53+09:00">2020-07-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Here I would like to note the way to customize the self-defined line weight display in Grasshopper.</p>
+<h2 id="Regular-Tag-dimension"><a href="#Regular-Tag-dimension" class="headerlink" title="Regular Tag/ dimension"></a>Regular Tag/ dimension</h2><p>Some readers might familir with the original <code>tag/dimension</code> components provided in Grasshopper.<br>A very simple demo picture is like these,</p>
+<h3 id="Line-Dimension"><a href="#Line-Dimension" class="headerlink" title="Line Dimension"></a>Line Dimension</h3><p><img src="/uploads/Tag1.JPG" alt="OriginalTag"></p>
+<h3 id="Aligned-Dimension"><a href="#Aligned-Dimension" class="headerlink" title="Aligned Dimension"></a>Aligned Dimension</h3><p><img src="/uploads/Tag2.JPG" alt="OriginalTag"><br>Little difference might be noticed, <code>alignmenet dimension</code> can offset the display lines.</p>
+<h3 id="Line-Weight-Tag-Csharp-customized"><a href="#Line-Weight-Tag-Csharp-customized" class="headerlink" title="Line Weight + Tag (Csharp customized)"></a>Line Weight + Tag (Csharp customized)</h3><p><img src="/uploads/Tag3.JPG" alt="OriginalTag"></p>
+<p><code>Tag</code></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">List&lt;Point3d&gt; Locations, List&lt;<span class="built_in">string</span>&gt; Descriptions, <span class="built_in">string</span> Font, <span class="built_in">int</span> Size, System.Drawing.Color Color, <span class="built_in">bool</span> Tag, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  clear_textdots();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(Tag)&#123;</span><br><span class="line">    <span class="keyword">var</span> attr = <span class="keyword">new</span> Rhino.DocObjects.ObjectAttributes();</span><br><span class="line">    attr.ColorSource = Rhino.DocObjects.ObjectColorSource.ColorFromObject;</span><br><span class="line">    attr.ObjectColor = Color;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; Locations.Count;i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> tdot = create_textdot(Descriptions[i], Locations[i], Size, Font);</span><br><span class="line">      Rhino.RhinoDoc.ActiveDoc.Objects.AddTextDot(tdot, attr);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    clear_textdots();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TextDot <span class="title">create_textdot</span>(<span class="params"><span class="built_in">string</span> text_str, Point3d point, <span class="built_in">int</span> height, <span class="built_in">string</span> font</span>)</span>&#123;</span><br><span class="line">  height = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">var</span> textdot = <span class="keyword">new</span> TextDot(text_str, point);</span><br><span class="line">  <span class="keyword">if</span>(height &gt; <span class="number">0</span>)</span><br><span class="line">    textdot.FontHeight = height;</span><br><span class="line">  <span class="keyword">if</span>(font != <span class="literal">null</span>)</span><br><span class="line">    textdot.FontFace = font;</span><br><span class="line">  <span class="keyword">return</span> textdot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear_textdots</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> textdots = Rhino.RhinoDoc.ActiveDoc.Objects.FindByObjectType(Rhino.DocObjects.ObjectType.TextDot);</span><br><span class="line">  <span class="keyword">if</span>(textdots.Length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="keyword">var</span> tdot <span class="keyword">in</span> textdots)&#123;</span><br><span class="line">      Rhino.RhinoDoc.ActiveDoc.Objects.Delete(tdot, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>Line Weight</code></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">List&lt;Polyline&gt; plns, System.Drawing.Color Color, List&lt;Point3d&gt; pts, <span class="built_in">int</span> width, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  pln = plns;</span><br><span class="line">  IList&lt;Point3d&gt; ipts = pts;</span><br><span class="line">  _clippingBox = <span class="keyword">new</span> BoundingBox(ipts);</span><br><span class="line">  _color = Color;</span><br><span class="line">  _width = width;</span><br><span class="line">  <span class="comment">//A = _clippingBox;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line">List&lt;Polyline&gt; pln;</span><br><span class="line">Color _color;</span><br><span class="line"><span class="built_in">int</span> _width;</span><br><span class="line">BoundingBox _clippingBox;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">BeforeRunScript</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  _clippingBox = BoundingBox.Empty;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">override</span> BoundingBox ClippingBox&#123;</span><br><span class="line">  <span class="keyword">get</span>&#123;<span class="keyword">return</span> _clippingBox;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">DrawViewportMeshes</span>(<span class="params">IGH_PreviewArgs args</span>)</span> &#123;</span><br><span class="line">  <span class="comment">//for (int i = 0 ; i &lt; limit; i++)</span></span><br><span class="line">  <span class="comment">//args.Display.DrawPoint(pts[i], Rhino.Display.PointStyle.Simple, 10, Color.FromArgb(100, 255 - i / 10, 255 - i / 10, 255 - i / 10));</span></span><br><span class="line">  <span class="keyword">foreach</span>(Polyline tmppln <span class="keyword">in</span> pln)</span><br><span class="line">    args.Display.DrawPolyline(tmppln, _color, _width);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>In the case of override the <code>DataTree(Point3d)</code>:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">DataTree&lt;Point3d&gt; points, List&lt;System.Drawing.Color&gt; colors, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line"></span><br><span class="line">    Bpoints = points;</span><br><span class="line">    Bcolor = colors;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line">  DataTree&lt;Point3d&gt; Bpoints = <span class="keyword">new</span> DataTree&lt;Point3d&gt;();</span><br><span class="line">  List&lt;Color&gt; Bcolor = <span class="keyword">new</span> List&lt;Color&gt;();</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">override</span> BoundingBox ClippingBox&#123;</span><br><span class="line">    <span class="keyword">get</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> BoundingBox(<span class="keyword">new</span> Point3d(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="keyword">new</span> Point3d(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">DrawViewportWires</span>(<span class="params">IGH_PreviewArgs args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>;i &lt; Bpoints.BranchCount;i++)&#123;</span><br><span class="line">      args.Display.DrawPoints(Bpoints.Branches[i], Rhino.Display.PointStyle.Circle, <span class="number">5</span>, Bcolor[j]);</span><br><span class="line">      <span class="comment">//args.Display.DrawPoints(,)</span></span><br><span class="line">      j++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/07/01/SweepLine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/01/SweepLine/" class="post-title-link" itemprop="url">SweepLine</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-01 01:58:52 / Modified: 03:00:44" itemprop="dateCreated datePublished" datetime="2020-07-01T01:58:52+09:00">2020-07-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nNtiZM-j3Pk&list=PLubYOWSl9mItBLmB2WiFU0A_WINUSLtGH&index=1">SweepLineSeries</a></p>
+<h1 id="Line-Segment-Intersection"><a href="#Line-Segment-Intersection" class="headerlink" title="Line-Segment Intersection"></a>Line-Segment Intersection</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Given a set <strong>S</strong> of <em>n closed</em> non-overlapping line segments in the plane, compute…</p>
+<ul>
+<li>all points where at least two segments intersect and</li>
+<li>for each such point report all segments that contain it.</li>
+</ul>
+<ol>
+<li>Brute Force, takes $O(n^2)$</li>
+<li>Process segments <code>top-to-bottom</code> using a <code>sweep line</code>.</li>
+</ol>
+<p>Consider when we should do something while using sweepLine algorithm</p>
+<ol>
+<li>SweepLine touch the endpoint</li>
+<li>SweepLine touch(identify) the intersection point</li>
+</ol>
+<h2 id="Event-Points"><a href="#Event-Points" class="headerlink" title="Event Points"></a>Event Points</h2><ul>
+<li>Endpoints on the segments</li>
+<li>intersection points</li>
+</ul>
+<p>Once the SweepLine run over the intersection point, should reconsider the possible intersect pair(<em>neighbor</em>) situation.</p>
+<h2 id="DataStructure-For-Event-Points-queue-Q"><a href="#DataStructure-For-Event-Points-queue-Q" class="headerlink" title="DataStructure For Event Points queue Q"></a>DataStructure For Event Points <code>queue Q</code></h2><p>When we think about situable data structure to tackle this problem should consider,<br>The data structure should fit </p>
+<ol>
+<li>can easily find the top most point</li>
+<li>can insert new event point while finding the intersection points, in run time.</li>
+</ol>
+<p>Store event points in <strong>balanced binary search tree</strong> </p>
+<h2 id="SweepLine-status-T"><a href="#SweepLine-status-T" class="headerlink" title="SweepLine status T"></a>SweepLine <code>status T</code></h2><p>When segments intersect to the SweepLine, we want them be ordered from left to right.</p>
+<ol>
+<li>easily add/reomove a segment</li>
+<li>swap the segment order, happen right after the intersection point found</li>
+</ol>
+<h1 id="Pseudo-code"><a href="#Pseudo-code" class="headerlink" title="Pseudo-code"></a>Pseudo-code</h1><p>findIntersections(S)</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input:"></a>Input:</h2><p>set S of n non-overlapping closed line segments</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output:"></a>Output:</h2><ul>
+<li>set <em>I</em> of intersection points</li>
+<li>for each $p \in I$ every $s \in S$ with $p \in s$</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/26/Parition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/26/Parition/" class="post-title-link" itemprop="url">Parition</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-26 23:26:40" itemprop="dateCreated datePublished" datetime="2020-06-26T23:26:40+09:00">2020-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-06 00:08:48" itemprop="dateModified" datetime="2021-02-06T00:08:48+09:00">2021-02-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>There are 2 goals of partitions into convex pieces</p>
+<ol>
+<li>parition a polygon into as few convex pieces as possible </li>
+<li>do so as quickly as possible</li>
+</ol>
+<p>Two types of partition of a polygon <code>P</code> may be distingusihed</p>
+<ol>
+<li>a partition by <code>diagonals</code>   (endpoints must be vertices)</li>
+<li>a partition by <code>segments</code>    (endpoints need lie on $\partial P$)</li>
+</ol>
+<p>The distinction is that diagonal endpoints must be <strong>vertices</strong>, whereas segment endpoints need lie on $\partial P$</p>
+<h2 id="Optimum-Partition"><a href="#Optimum-Partition" class="headerlink" title="Optimum Partition"></a>Optimum Partition</h2><p>To evalute the efficiency of partitions, it is useful to have bounds on the best possible partition.</p>
+<h3 id="Theorem-2-5-1-Chazelle"><a href="#Theorem-2-5-1-Chazelle" class="headerlink" title="Theorem 2.5.1(Chazelle)"></a>Theorem 2.5.1(Chazelle)</h3><p>Let $\phi$ be the fewest number of convex pieces into which a polygon may be partitioned.<br>For a polygon of <strong>r reflex vertices</strong>,<br>$$\frac{r}{2}+1 \leq \phi \leq r+1$$</p>
+<p><strong>Reflex vertice</strong>:<br>In a polygon, a vertex is called “<strong>convex</strong>“ if the internal angle of the polygon is less the $\pi$ randians; otherwise, it is called “<strong>concave</strong>“ or “<strong>reflex</strong>“</p>
+<h3 id="Hertel-and-Mehlhorn-Algorithm"><a href="#Hertel-and-Mehlhorn-Algorithm" class="headerlink" title="Hertel and Mehlhorn Algorithm"></a>Hertel and Mehlhorn Algorithm</h3><p>Hertel &amp; Melhorn (1983) found a very clean algorithm that <strong>partitions with diagonals</strong> quickly and has bounded “badness” in terms of the number of convex pieces.<br>In some convex partition of a polygon by <strong>diagonals</strong>, call a diagonal <code>d</code> is essential vertex <code>v</code> if removal of <code>d</code> creates a piece that is nonconvex at <code>v</code>.<br>Clearly if <code>d</code> is essential it must be incident to <code>v</code>, and <code>v</code> must be <strong>reflexed</strong>.<br>A diagonal that is not essential for either of its endpoints is called <strong>inessential</strong> </p>
+<p>Hertel and Mehlhorn’s algorithm is simply this:<br>Satrt with a trinagulation of P; remove an inessential diagonal; repeat.<br>Clearly this algorithm results in a partition of P by diagonals into convex pieces.<br>It can be accomplished in <strong>linear time</strong> with the use of appropriate data structure. So the only issue is how far from the optimum might it be.</p>
+<h2 id="Lemma-2-5-2"><a href="#Lemma-2-5-2" class="headerlink" title="Lemma 2.5.2"></a>Lemma 2.5.2</h2><blockquote>
+<p>There can be at most <strong>two diagonals</strong> essential for any reflex vertex</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IkA-2Y9lBvM&list=PLubYOWSl9mItnLTDrmr9D38AJ7EO1PWbN&index=3">Philipp Kindermann</a></p>
+<h1 id="Part-a-Polygon-into-Monotone-Pieces"><a href="#Part-a-Polygon-into-Monotone-Pieces" class="headerlink" title="Part. a Polygon into Monotone Pieces"></a>Part. a Polygon into Monotone Pieces</h1><p>Idea: Classify vertices of given simple polygon P</p>
+<ul>
+<li>turn vertices:<ul>
+<li>start vertex</li>
+<li>split vertex</li>
+<li>end vertex</li>
+<li>merge vertex</li>
+</ul>
+</li>
+<li>regular vertices</li>
+</ul>
+<h2 id="Lemma"><a href="#Lemma" class="headerlink" title="Lemma."></a>Lemma.</h2><blockquote>
+<p>Let <em>P</em> be a simple polygon. Then P is y-monotone &lt;-&gt; P has neither split vertices nor merge vertices</p>
+</blockquote>
+<p>The idea here is try to <strong>destory</strong> </p>
+<ol>
+<li>split vertices</li>
+<li>merge vertices</li>
+</ol>
+<p>Problem: Diagonals must not cross </p>
+<ul>
+<li>each other </li>
+<li>edges of P</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/24/IsoVist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/24/IsoVist/" class="post-title-link" itemprop="url">IsoVist</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-24 02:55:00 / Modified: 22:44:31" itemprop="dateCreated datePublished" datetime="2020-06-24T02:55:00+09:00">2020-06-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>可能大家有接觸過用Grasshopper作環境分析，那可能會知道<code>Isovist</code>這個方便的component。從下面看到這Component可以幫助決定<strong>視野範圍</strong>。<br><img src="/uploads/IsoVistDefault.gif" alt="Orientation"></p>
+<blockquote>
+<p>原理很簡單就是2D的圓看根最近的建築物交界到哪裡。</p>
+</blockquote>
+<p>建築物的線我是透過<code>Elk</code>放入OpenStreetMap達成的。可以參考一下<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=EJ5_0dQiKPc&t=411s">OSM_Through_Elk</a><br>或是我的方式:<br><img src="/uploads/IsoVist.jpg" alt="Orientation"></p>
+<h1 id="Csharp-code"><a href="#Csharp-code" class="headerlink" title="Csharp code"></a>Csharp code</h1><p>我意外看到這篇討論，想說自己也來實作一下用C#做一個IsoVist之後討論一下怎麼加速，跟後續可能可以玩的方向<br><a target="_blank" rel="noopener" href="https://discourse.mcneel.com/t/isovist-optimization/103024/4">IsoVist_Optimization</a><br>而我自己的Code</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">Point3d PlanePt, <span class="built_in">int</span> Count, <span class="built_in">int</span> Radius, List&lt;Polyline&gt; ObsCrv, <span class="keyword">ref</span> <span class="built_in">object</span> Points, <span class="keyword">ref</span> <span class="built_in">object</span> C, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    List&lt;Point3d&gt; pts = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">    Circle cir = <span class="keyword">new</span> Circle(PlanePt, Radius);</span><br><span class="line">    Curve CirCrv = cir.ToNurbsCurve();</span><br><span class="line">    Point3d[] CirPts;</span><br><span class="line">    <span class="built_in">double</span>[] CirPts_double = CirCrv.DivideByCount(Count, <span class="literal">true</span>, <span class="keyword">out</span> CirPts);</span><br><span class="line">    List&lt;Point3d&gt; result_net = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> k = <span class="number">0</span>; k &lt; Count; k++)&#123;</span><br><span class="line">      Line ln = <span class="keyword">new</span> Line(PlanePt, CirPts[k]);</span><br><span class="line">      List&lt;Point3d&gt; ln_Pts = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">      <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; ObsCrv.Count; i++)&#123;</span><br><span class="line">        Line[] segs = ObsCrv[i].GetSegments();</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> j = <span class="number">0</span>; j &lt; segs.Length; j++)&#123;</span><br><span class="line">          <span class="built_in">double</span> a;</span><br><span class="line">          <span class="built_in">double</span> b;</span><br><span class="line">          Intersection.LineLine(ln, segs[j], <span class="keyword">out</span> a, <span class="keyword">out</span> b, <span class="number">0.00000001</span>, <span class="literal">true</span>);</span><br><span class="line">          <span class="keyword">if</span>(Intersection.LineLine(ln, segs[j], <span class="keyword">out</span> a, <span class="keyword">out</span> b, <span class="number">0.00000001</span>, <span class="literal">true</span>))&#123;</span><br><span class="line">            ln_Pts.Add(segs[j].PointAt(b));</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      Point3d closest_pt;</span><br><span class="line">      <span class="keyword">if</span>(ln_Pts.Count &gt; <span class="number">0</span>)</span><br><span class="line">        closest_pt = Point3dList.ClosestPointInList(ln_Pts, PlanePt);</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        closest_pt = CirPts[k];</span><br><span class="line">      &#125;</span><br><span class="line">      result_net.Add(closest_pt);</span><br><span class="line">    &#125;</span><br><span class="line">    A = result_net;</span><br><span class="line">    C = CirPts;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="演算法的想法"><a href="#演算法的想法" class="headerlink" title="演算法的想法"></a>演算法的想法</h2><ul>
+<li>平分個一個以人為圓點的圓，分成Count分</li>
+<li>用圓點跟在圓周上的點連線<code>ln</code> 和 每個建築物的牆壁<code>segs[j]</code>找相交點</li>
+<li>有兩個以上交點的話找離圓點最近的，沒有跟建築物相交的話 回傳圓周上的點</li>
+</ul>
+<h2 id="關於LineLine的相交"><a href="#關於LineLine的相交" class="headerlink" title="關於LineLine的相交"></a>關於LineLine的相交</h2><p>在部落格我分別寫了兩篇(2D/3D)的線與線相交的判定。<br>三維的線與線相交其實是看<code>兩條線的最短距離&lt;容許值</code></p>
+<p>ParametricCamp有比較完整的介紹<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=iZdAJ2CwmCk">Computational Design Live Stream #14</a></p>
+<p>論壇po文想達成的是盡量加速這個運算，之後我也能往那方向想，目前是跟Component效能差不多<br><img src="/uploads/IsoVist_Performance.JPG" alt="Orientation"></p>
+<ul>
+<li>目前的想到的想法是可以先對那些牆壁的line以角度sort過一遍，應該可以加速一個<code>for-loop</code></li>
+<li><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><img src="/uploads/IsoVistJim.gif" alt="Orientation"></li>
+</ul>
+<h1 id="可能的發展"><a href="#可能的發展" class="headerlink" title="可能的發展"></a>可能的發展</h1><h3 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h3><p>加速的理由有很多，</p>
+<ol>
+<li>為了一次分析多一點人</li>
+<li>讓計算時間變短-Real time result</li>
+</ol>
+<h3 id="導入Magnetic-field"><a href="#導入Magnetic-field" class="headerlink" title="導入Magnetic field"></a>導入Magnetic field</h3><p>在Grasshopper裡面有Fields對人流動線的分析應該會很有幫助<br>有興趣可以看看這個<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zSI1StT07LM">https://www.youtube.com/watch?v=zSI1StT07LM</a></p>
+<h3 id="扇形視野"><a href="#扇形視野" class="headerlink" title="扇形視野"></a>扇形視野</h3><p>最後可能可以分析的是更接近真實的視野，不是360度。轉成170之類的。<br><img src="/uploads/GettingLost.gif" alt="Orientation"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/16/EventAndDelegates/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/16/EventAndDelegates/" class="post-title-link" itemprop="url">EventAndDelegates</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-16 15:31:13 / Modified: 21:34:49" itemprop="dateCreated datePublished" datetime="2020-06-16T15:31:13+09:00">2020-06-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jQgwEsJISy0">Resource</a></p>
+<h1 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h1><ul>
+<li>A mechanism for communication between objects</li>
+<li>Used in building <code>Loosely Coupled Applications</code></li>
+<li>Helps extending applications</li>
+</ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// Encoding logic</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        _mailService.Send(<span class="keyword">new</span> Mail());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>but, in the future, if we want to send <strong>text</strong> message to the video owner.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// Encoding logic</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        _mailService.Send(<span class="keyword">new</span> Mail());</span><br><span class="line">        </span><br><span class="line">        _messageService.Send(<span class="keyword">new</span> Text());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>but if we do it this way, the whole <strong>Encode() method</strong> will need to be recompiled, and the class depends on this function, will need to be recompiled and redeploied.</p>
+<blockquote>
+<p>We want to design our application such that when you want to change that, it changes the minimum impact on the application</p>
+</blockquote>
+<p>We can use <code>Event</code> to deal with this problem.</p>
+<h1 id="How-we-do-event-in-this-case"><a href="#How-we-do-event-in-this-case" class="headerlink" title="How we do event in this case"></a>How we do event in this case</h1><ul>
+<li>VideoEncoder<ol>
+<li>publisher</li>
+<li>event sender</li>
+</ol>
+</li>
+<li>MailService<ol>
+<li>Subscriber</li>
+<li>event receiver</li>
+</ol>
+</li>
+</ul>
+<p>So, in future.</p>
+<ul>
+<li>MessageService<ol>
+<li>Subscriber</li>
+<li>event receiver </li>
+</ol>
+</li>
+</ul>
+<h2 id="Main-changes"><a href="#Main-changes" class="headerlink" title="Main changes"></a>Main changes</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// Encoding logic</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        OnVideoEncoded();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>OnVidoEncoded()</code> method simply notify the subscribers.</p>
+<blockquote>
+<p><strong>VideoEncoder</strong> knows absoulately nothing about the <strong>MailService</strong> and <strong>MessageService</strong> or any other subscribers.<br>They(subscribers) can come later, and we can add more subscribers.</p>
+</blockquote>
+<h2 id="One-Question-Raise-How-VideoEncoder-publisher-notify-its-subscribers"><a href="#One-Question-Raise-How-VideoEncoder-publisher-notify-its-subscribers" class="headerlink" title="One Question Raise: How VideoEncoder(publisher) notify its subscribers"></a>One Question Raise: How VideoEncoder(publisher) notify its subscribers</h2><p>We need an agreement or contract between publisher and its subscribers.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params"><span class="built_in">object</span> source, EventArgs e</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This is a very typical implementation of method in the <code>subscribers</code>, and it is called <code>EventHandler</code>.<br>This is also the method which called by the <strong>publisher</strong> when the event is raised.</p>
+<p>Again, VideoEncoder(<strong>Event Publisher</strong>) do not know the existence of its publishers. Publisher <strong>decoupled</strong> from them(subscribers).<br>All the <strong>publisher</strong> knows, is a method(<strong>EventHandler</strong>).</p>
+<h2 id="How-do-you-tell-VideoEncoder-Publisher-what-method-to-call"><a href="#How-do-you-tell-VideoEncoder-Publisher-what-method-to-call" class="headerlink" title="How do you tell VideoEncoder(Publisher) what method to call?"></a>How do you tell VideoEncoder(Publisher) what method to call?</h2><p>That’s where a <code>Delegate</code> comes in.</p>
+<h1 id="Delegates"><a href="#Delegates" class="headerlink" title="Delegates"></a>Delegates</h1><ul>
+<li>Agreement/ Contract between Publisher and Subscriber</li>
+<li>Determines the <strong>signature</strong> of the event handler method in Subscriber</li>
+</ul>
+<ol>
+<li>Define a <strong>delegate</strong></li>
+<li>Define an event based on that delegate</li>
+<li>Raise the event</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">VideoEncodedEventHandler</span>(<span class="params"><span class="built_in">object</span> source, EventArgs args</span>)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>object source</code> : source of that event</li>
+<li><code>EventArgs args</code>: any additional data we want to send to the event</li>
+</ul>
+<p>Here we declare an <strong>event</strong>, which hold a <strong>reference to a function</strong>, look like </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">VideoEncodedEventHandler</span>(<span class="params"><span class="built_in">object</span> source, EventArgs args</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><h2 id="Program-cs"><a href="#Program-cs" class="headerlink" title="Program.cs"></a>Program.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> video = <span class="keyword">new</span> Video() &#123; Title = <span class="string">&quot;Video 1&quot;</span> &#125;;</span><br><span class="line">            <span class="keyword">var</span> videoEncoder = <span class="keyword">new</span> VideoEncoder();          <span class="comment">// publisher</span></span><br><span class="line">            <span class="keyword">var</span> mailService = <span class="keyword">new</span> MailService();            <span class="comment">// subscriber</span></span><br><span class="line">            <span class="keyword">var</span> messageSerive = <span class="keyword">new</span> MessageService();       <span class="comment">// subscriber</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;  <span class="comment">// VideoEncoded event behind the scene, is a list of function pointers. OnVideoEncoded is the function pointer</span></span><br><span class="line">            videoEncoder.VideoEncoded += messageSerive.OnVideoEncoded;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            videoEncoder.Encode(video);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Video-cs"><a href="#Video-cs" class="headerlink" title="Video.cs"></a>Video.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Video</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Title &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="VideoEncoder-cs"><a href="#VideoEncoder-cs" class="headerlink" title="VideoEncoder.cs"></a>VideoEncoder.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Threading;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEventArgs</span> : <span class="title">EventArgs</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Video Video &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 1- Define a delegate</span></span><br><span class="line">        <span class="comment">// 2- Define an event based on that delegate</span></span><br><span class="line">        <span class="comment">// 3- Raise the event</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">VideoEncodedEventHandler</span>(<span class="params"><span class="built_in">object</span> source, VideoEventArgs args</span>)</span>;      <span class="comment">// 1. define a delegate</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> VideoEncodedEventHandler VideoEncoded;                                     <span class="comment">// 2. define an event based on the delegate</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> EventHandler&lt;VideoEventArgs&gt; VideoEncoding;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Encoding Video...&quot;</span>);</span><br><span class="line">            Thread.Sleep(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line">            OnVideoEncoded(video);                                                              <span class="comment">// 3. Raise the event</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params">Video video</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (VideoEncoded != <span class="literal">null</span>)</span><br><span class="line">                VideoEncoded(<span class="keyword">this</span>, <span class="keyword">new</span> VideoEventArgs() &#123; Video = video &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MailService-cs"><a href="#MailService-cs" class="headerlink" title="MailService.cs"></a>MailService.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MailService</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params"><span class="built_in">object</span> source, VideoEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;MailService: Sending an email...&quot;</span> + e.Video.Title);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MessageService-cs"><a href="#MessageService-cs" class="headerlink" title="MessageService.cs"></a>MessageService.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MessageService</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params"><span class="built_in">object</span> source, VideoEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;MessageService: Sending a text message...&quot;</span> + e.Video.Title);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p><img src="/uploads/Delegate1.JPG" alt="idea"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/15/Custom-Attribute-note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -840,553 +1336,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/05/30/LinesIntersection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/30/LinesIntersection/" class="post-title-link" itemprop="url">LinesIntersection_in_2D</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-30 00:15:17" itemprop="dateCreated datePublished" datetime="2020-05-30T00:15:17+09:00">2020-05-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-01 23:33:17" itemprop="dateModified" datetime="2020-06-01T23:33:17+09:00">2020-06-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Intersection-in-2D"><a href="#Intersection-in-2D" class="headerlink" title="Intersection in 2D"></a>Intersection in 2D</h1><p>How to check if two given line segments intersect? (2D)<br><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/">GeeksforGeeks</a><br>One can determine if two given line segments(2D/laid on the same plane) <code>intersect</code> by the <code>Orientation</code>.</p>
-<p>Orinentation of an oedered triplet of points in the plane can be:</p>
-<ul>
-<li>counterclockwise</li>
-<li>clockwise</li>
-<li>colinear</li>
-</ul>
-<h1 id="Orinetation-constructed-by-3-points"><a href="#Orinetation-constructed-by-3-points" class="headerlink" title="Orinetation constructed by 3 points"></a>Orinetation constructed by 3 points</h1><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/orientation-3-ordered-points/">check orinetation</a><br>In short, three points can form 2 lines. By checking these two lines($m_1$ &amp; $m_2$) <code>slope change</code>, we can determine either</p>
-<ol>
-<li>counterclockerwise($m_2&gt;m_1$)</li>
-<li>clockwise ($ m_2 &gt; m_1$)</li>
-<li>colinear ($ m_1 == m_2$)</li>
-</ol>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">Point3d pointA, Point3d pointB, Point3d pointC, <span class="keyword">ref</span> <span class="built_in">object</span> orientation</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">double</span> m1 = (pointB.Y - pointA.Y) / (pointB.X - pointA.X);</span><br><span class="line">  <span class="built_in">double</span> m2 = (pointC.Y - pointB.Y) / (pointC.X - pointB.X);</span><br><span class="line"></span><br><span class="line">  Print(m1.ToString());</span><br><span class="line">  Print(m2.ToString());</span><br><span class="line">  <span class="keyword">if</span>(m1 == m2) orientation = <span class="string">&quot;colinear&quot;</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(m1 &gt; m2) orientation = <span class="string">&quot;clockwise&quot;</span>;</span><br><span class="line">  <span class="keyword">else</span> orientation = <span class="string">&quot;counterclockwise&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/uploads/Orientation.gif" alt="Orientation"></p>
-<p>Let’s assume there are two line segments <code>Line A</code> and <code>Line B</code>.</p>
-<ul>
-<li>The end points on <code>Line A</code> are <code>Point p1</code> and <code>Point q1</code></li>
-<li>The end points on <code>Line B</code> are <code>Point p2</code> and <code>Point q2</code><br>as the picture shown below.<br><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/orientation-3-ordered-points/">Orientation of 3-ordered points</a></li>
-</ul>
-<h2 id="Example-of-lines-intersect-to-each-other"><a href="#Example-of-lines-intersect-to-each-other" class="headerlink" title="Example of lines intersect to each other"></a>Example of lines intersect to each other</h2><p><img src="/uploads/LineLine1.JPG" alt="2D line Intersection"></p>
-<h3 id="starting-from-Line-A-p1"><a href="#starting-from-Line-A-p1" class="headerlink" title="starting from Line A(p1)"></a>starting from Line A(p1)</h3><p>$ p1 \rightarrow q1 \rightarrow p2$ is <code>clockwise</code>, while<br>$ p1 \rightarrow q1 \rightarrow q2$ is <code>counterclockwise</code>.</p>
-<h3 id="starting-from-Line-B-p2"><a href="#starting-from-Line-B-p2" class="headerlink" title="starting from Line B(p2)"></a>starting from Line B(p2)</h3><p>$ p2 \rightarrow q2 \rightarrow p1$ is <code>counterclockwise</code>, while<br>$ p2 \rightarrow q2 \rightarrow q1$ is <code>clockwise</code>.</p>
-<blockquote>
-<p>If both cases have different orientations, then we can say that they are intersected to each other. </p>
-</blockquote>
-<h2 id="Example-of-lines-are-not-intersected"><a href="#Example-of-lines-are-not-intersected" class="headerlink" title="Example of lines are not intersected"></a>Example of lines are not intersected</h2><p><img src="/uploads/LineLine2.JPG" alt="2D line Intersection"></p>
-<h3 id="starting-from-Line-A-p1-1"><a href="#starting-from-Line-A-p1-1" class="headerlink" title="starting from Line A(p1)"></a>starting from Line A(p1)</h3><p>$ p1 \rightarrow q1 \rightarrow p2$ is <code>clockwise</code>, while<br>$ p1 \rightarrow q1 \rightarrow q2$ is <code>counterclockwise</code>.</p>
-<h3 id="starting-from-Line-B-p2-1"><a href="#starting-from-Line-B-p2-1" class="headerlink" title="starting from Line B(p2)"></a>starting from Line B(p2)</h3><p>$ p2 \rightarrow q2 \rightarrow p1$ is <code>counterclockwise</code>, and<br>$ p2 \rightarrow q2 \rightarrow q1$ is <strong>also</strong> <code>counterclockwise</code>.</p>
-<h2 id="Special-Case-colinear"><a href="#Special-Case-colinear" class="headerlink" title="Special Case - colinear"></a>Special Case - colinear</h2><blockquote>
-<p>Two lines colinear</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/05/26/ConvexHull-Javis-March/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/26/ConvexHull-Javis-March/" class="post-title-link" itemprop="url">ConvexHull_Javis'_March</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-26 21:32:10 / Modified: 22:50:50" itemprop="dateCreated datePublished" datetime="2020-05-26T21:32:10+09:00">2020-05-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/" itemprop="url" rel="index"><span itemprop="name">Grasshopper</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/" itemprop="url" rel="index"><span itemprop="name">Csharp</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/ConvexHull/" itemprop="url" rel="index"><span itemprop="name">ConvexHull</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/ConvexHull/Polyline/" itemprop="url" rel="index"><span itemprop="name">Polyline</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/ConvexHull/Polyline/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/uploads/march.gif" alt="Node"></p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>I have implemented <code>Convex hull</code> algorithm in grasshopper by creating one <code>C# scripting component</code>. Here, I would like to note some codes I have learned.<br>There are many algorithms for finding <strong>convex hull</strong>, <code>Javis&#39; March</code>, also known as <code>Gift Wrapping Algorithm</code>, should be the most intuitive one.<br>Though it is not the fastest one, this algorithm solve the problem with only an simple geometric algebra sense.</p>
-<p>Some other algorithms about <code>Convex hull</code> can be found <a target="_blank" rel="noopener" href="http://www.csie.ntnu.edu.tw/~u91029/ConvexHull.html">here</a></p>
-<h1 id="Dive-into-Algorithm"><a href="#Dive-into-Algorithm" class="headerlink" title="Dive into Algorithm"></a>Dive into Algorithm</h1><p><img src="/uploads/March.png" alt="idea"></p>
-<blockquote>
-<p>While marching, by the result of the cross Product to determine the next point.</p>
-</blockquote>
-<ul>
-<li>Prepare point cloud(many points) on one plane.</li>
-<li>Decided the starting point</li>
-<li>Using crossProduct property to march through the points.</li>
-</ul>
-<h2 id="Starting-point"><a href="#Starting-point" class="headerlink" title="Starting point"></a>Starting point</h2><p>I set the buttom-most point as the starting point, and if the y is the same then compare x-value.</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">bool</span> <span class="title">compare</span>(<span class="params">Point3d a, Point3d b</span>)</span>&#123; <span class="comment">// to find the starting point</span></span><br><span class="line">    <span class="keyword">return</span> (a.Y &lt; b.Y) || (a.Y == b.Y &amp;&amp; a.X &lt; b.Y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="CrossProduct"><a href="#CrossProduct" class="headerlink" title="CrossProduct"></a>CrossProduct</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vector3d <span class="title">crossProduct</span>(<span class="params">Vector3d u, Vector3d v</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">double</span> x = u.Y * v.Z - u.Z * v.Y;</span><br><span class="line">    <span class="built_in">double</span> y = u.Z * v.X - u.X * v.Z;</span><br><span class="line">    <span class="built_in">double</span> z = u.X * v.Y - u.Y * v.X;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Vector3d(x, y, z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Length2"><a href="#Length2" class="headerlink" title="Length2"></a>Length2</h2><p>Though we should calculate distance, which should use <code>square root</code>, we here can do the same thing without using it because we want the relationship, instead of the precise distance.<br>By doing this way, we get what we want, and because not using <code>square root</code> calculation, it is faster.</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">double</span> <span class="title">length2</span>(<span class="params">Point3d a, Point3d b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="All-code"><a href="#All-code" class="headerlink" title="All code"></a>All code</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params">List&lt;Point3d&gt; pts, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    A = Javis_march(pts);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line">  <span class="comment">// find the buttom-most points(left most if the y values are the same)</span></span><br><span class="line">  <span class="function"><span class="built_in">bool</span> <span class="title">compare</span>(<span class="params">Point3d a, Point3d b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a.Y &lt; b.Y) || (a.Y == b.Y &amp;&amp; a.X &lt; b.Y);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">Vector3d <span class="title">crossProduct</span>(<span class="params">Vector3d u, Vector3d v</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">double</span> x = u.Y * v.Z - u.Z * v.Y;</span><br><span class="line">    <span class="built_in">double</span> y = u.Z * v.X - u.X * v.Z;</span><br><span class="line">    <span class="built_in">double</span> z = u.X * v.Y - u.Y * v.X;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Vector3d(x, y, z);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="built_in">double</span> <span class="title">length2</span>(<span class="params">Point3d a, Point3d b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="built_in">bool</span> <span class="title">far</span>(<span class="params">Point3d o, Point3d a, Point3d b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> length2(o, a) &gt; length2(o, b);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">List&lt;Point3d&gt; <span class="title">Javis_march</span>(<span class="params">List&lt;Point3d&gt; pts</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Point3d&gt; vertexs = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> start = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; pts.Count;i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(compare(pts[i], pts[start]))</span><br><span class="line">        start = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    vertexs.Add(pts[start]);</span><br><span class="line">    <span class="built_in">int</span> current = start;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">      <span class="built_in">int</span> next = current;</span><br><span class="line">      <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; pts.Count; i++)&#123;</span><br><span class="line">        <span class="built_in">double</span> c = crossProduct(<span class="keyword">new</span> Vector3d(pts[i] - vertexs[vertexs.Count - <span class="number">1</span>]), <span class="keyword">new</span> Vector3d(pts[i] - pts[next])).Z;</span><br><span class="line">        <span class="keyword">if</span>(c &gt; <span class="number">0</span> || c == <span class="number">0</span> &amp;&amp; far(vertexs[vertexs.Count - <span class="number">1</span>], pts[i], pts[next]))&#123;</span><br><span class="line">          next = i;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      vertexs.Add(pts[next]);</span><br><span class="line">      current = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(current != start);</span><br><span class="line">    <span class="keyword">return</span> vertexs;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>I used <code>do-while</code> first ,cause I want to at least run once, which make sure the list contains at least two points.</p>
-<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>Let’s assume if there are <code>n</code> points in the point cloud, and <code>m</code> points on the convex hull.<br>Then the total time complexity will be <code>O(NM)</code>.</p>
-<p>There are some faster algorithms doing sorting before running cross Product calculation, <code>Andrew&#39;s Monotone Chain</code>, for example. I might try to implement this algorithm the other day.</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
-<li><a target="_blank" rel="noopener" href="http://www.csie.ntnu.edu.tw/~u91029/ConvexHull.html">演算法筆記</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/05/21/Ramer%E2%80%93Douglas%E2%80%93Peucker-algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/21/Ramer%E2%80%93Douglas%E2%80%93Peucker-algorithm/" class="post-title-link" itemprop="url">Ramer–Douglas–Peucker_algorithm</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-21 23:16:36" itemprop="dateCreated datePublished" datetime="2020-05-21T23:16:36+09:00">2020-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-26 21:34:48" itemprop="dateModified" datetime="2020-05-26T21:34:48+09:00">2020-05-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/" itemprop="url" rel="index"><span itemprop="name">Grasshopper</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/" itemprop="url" rel="index"><span itemprop="name">Csharp</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/uploads/DAC1.gif" alt="Node"></p>
-<h1 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h1><p>I just learned this algorithm to simplified polyline, with <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=y8uO-0JB1V4&list=PLx3k0RGeXZ_zEzxbWCmTjGoxnphn1bwiZ&index=1">Professor. Jose’s amazing tutorial</a>. People who want to learn a bit more, should definitely follow this channel.</p>
-<p>The idea is relatively simple, but the implementation could be thousands and millions way.<br>The goal of this algorithm is to reduce the points in one polyline(points + line), but still want to remain to soul(properity, or shape to be more specifically). There are tons of benefits by doing this, obvious one is that this can clearly releave your memory while speed up the computation time.</p>
-<h1 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h1><blockquote>
-<p>The method here is to <strong>recursively</strong> find the <code>farthest point</code> to the two segment endpoints. That’s it.</p>
-</blockquote>
-<h2 id="Dive-into-the-Csharp-code"><a href="#Dive-into-the-Csharp-code" class="headerlink" title="Dive into the Csharp code"></a>Dive into the Csharp code</h2><p>Something should be took care</p>
-<ul>
-<li>epilson </li>
-<li>left points</li>
-<li>right points</li>
-<li>two lists combinition</li>
-<li>recursive function</li>
-<li>Point-Line distance</li>
-</ul>
-<p>Because this blog is for recording something I have learned, it is definitely not detail-clear to everyone. Please refer to the Professor Jose’s tutorial video, if you want to have a clear idea of this.</p>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><h3 id="crossProduct"><a href="#crossProduct" class="headerlink" title="crossProduct"></a>crossProduct</h3><p>Though in RhinoCommon, there are one predefined crossProduct method that we could use directly, it is convenient that we made by ourselves in the cases of bring this method to another Csharp-based platform.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vector3d crossProduct(Vector3d u, Vector3d v)&#123;</span><br><span class="line">    double x = u.Y * v.Z - u.Z * v.Y;</span><br><span class="line">    double y = u.Z * v.X - u.X * v.Z;</span><br><span class="line">    double z = u.X * v.Y - u.Y * v.X;</span><br><span class="line"></span><br><span class="line">    return new Vector3d(x, y, z);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="Point-Line-distance"><a href="#Point-Line-distance" class="headerlink" title="Point-Line distance"></a>Point-Line distance</h3><p>$$ \frac{\vec{AB} \times \vec{AP}}{| \vec{AB}|}$$</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">double</span> <span class="title">distToLine</span>(<span class="params">Point3d P, Point3d A, Point3d B</span>)</span>&#123;</span><br><span class="line">    Vector3d AB = B - A;</span><br><span class="line">    Vector3d AP = P - A;</span><br><span class="line"></span><br><span class="line">    Vector3d cross = crossProduct(AB, AP);</span><br><span class="line">    <span class="built_in">double</span> lengthCross = cross.Length;</span><br><span class="line">    <span class="built_in">double</span> lengthAB = AB.Length;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">double</span> h = lengthCross / lengthAB;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="simplifyPolyline"><a href="#simplifyPolyline" class="headerlink" title="simplifyPolyline"></a>simplifyPolyline</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;Point3d&gt; <span class="title">simplifyPolyline</span>(<span class="params">List&lt;Point3d&gt; points, <span class="built_in">double</span> epsilon</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">double</span> maxDist = <span class="number">-1.0</span>;</span><br><span class="line">    <span class="built_in">int</span> maxIndex = <span class="number">-1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( <span class="built_in">int</span> i = <span class="number">1</span>; i &lt; points.Count - <span class="number">1</span> ;i++)&#123;</span><br><span class="line">      <span class="built_in">double</span> d = distToLine(points[i], points[<span class="number">0</span>], points[points.Count - <span class="number">1</span>]);</span><br><span class="line">      <span class="keyword">if</span>( d &gt; maxDist)&#123;</span><br><span class="line">        maxDist = d;</span><br><span class="line">        maxIndex = i;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Print(<span class="string">&quot;max index: &quot;</span> + maxIndex + <span class="string">&quot;\t maxdist:&quot;</span> + maxDist);</span><br><span class="line">    </span><br><span class="line">    List&lt;Point3d&gt; cleanPoints;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(maxDist &gt; epsilon)&#123;</span><br><span class="line">      <span class="comment">// Subdivide poly in two parts</span></span><br><span class="line">      Print(<span class="string">&quot;should do subdivision here&quot;</span>);</span><br><span class="line">      List&lt;Point3d&gt; leftPoly = points.GetRange(<span class="number">0</span>, maxIndex +<span class="number">1</span>);</span><br><span class="line">      List&lt;Point3d&gt; rightPoly = points.GetRange(maxIndex, points.Count - maxIndex);</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// Apply recursion to each one</span></span><br><span class="line">      List&lt;Point3d&gt; leftSimplified = simplifyPolyline(leftPoly, epsilon);</span><br><span class="line">      List&lt;Point3d&gt; rightSimplified = simplifyPolyline(rightPoly, epsilon);</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// Avoid duplicating split points</span></span><br><span class="line">      rightSimplified.RemoveAt(<span class="number">0</span>);</span><br><span class="line">      <span class="comment">//rightSimplified = rightSimplified.GetRange(1,rightSimplified.Count-1);</span></span><br><span class="line">      </span><br><span class="line">      cleanPoints = leftSimplified;</span><br><span class="line">      cleanPoints.AddRange(rightSimplified);</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// remove all points between endpoints and return</span></span><br><span class="line">      cleanPoints = <span class="keyword">new</span> List&lt;Point3d&gt;()&#123;points[<span class="number">0</span>], points[points.Count - <span class="number">1</span>]&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cleanPoints;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Note-from-reading-Wiki"><a href="#Note-from-reading-Wiki" class="headerlink" title="Note from reading Wiki"></a>Note from reading Wiki</h1><h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><p>The algorithm is used for the processing of <strong>vector graphics</strong> and <strong>cateographic generalization</strong>.</p>
-<blockquote>
-<p>It does not always preserve the property of <code>non-self intersection</code> for curves which has led to the development of variant algorithms.</p>
-</blockquote>
-<blockquote>
-</blockquote>
-<p>Like Jose mentioned in his video, this method is widely used in robotics to perform simplification and denoiseing of range data acuquired by a rotating <code>range scanner</code>.</p>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=y8uO-0JB1V4&list=PLx3k0RGeXZ_zEzxbWCmTjGoxnphn1bwiZ&index=1">Professor. Jose’s amazing tutorial</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm">wiki_Ramer–Douglas–Peucker_algorithm</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/05/08/slider-modify/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/08/slider-modify/" class="post-title-link" itemprop="url">slider_modify</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-08 23:01:23" itemprop="dateCreated datePublished" datetime="2020-05-08T23:01:23+09:00">2020-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-09 16:10:51" itemprop="dateModified" datetime="2020-05-09T16:10:51+09:00">2020-05-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因為在grasshopper中slider的上下界是在創建的時後就被確定的，像是直接在canvas中輸入<code>0..10.0..20.0</code>這樣就能產生slider滿足</p>
-<ul>
-<li>上界是20.0，下界是<code>0.0</code></li>
-<li>精準度是小數點下一位</li>
-<li>slider產生時的起始值就是<code>10.0</code></li>
-</ul>
-<p>不過這樣做不能runtime的時候更改slider的上下界，雖然必要性沒有很大，而且想要在runtime有新的值不一定要改到slider本身，但因為相對起來slider還是滿直觀的，所以找了一下在runtime更改slider的文章。<br>主要內容參考來自<a target="_blank" rel="noopener" href="http://james-ramsden.com/remotely-change-value-of-number-slider-grasshopper/">James-Ramsden這篇</a></p>
-<h1 id="內文"><a href="#內文" class="headerlink" title="內文"></a>內文</h1><p>有時候會想要很明確掌握slider的範圍。像下面我自己嘗試的一小例子。</p>
-<p><img src="/uploads/SliderModifier0.png" alt="Node"></p>
-<p><img src="/uploads/SliderModifier1.gif" alt="Node"></p>
-<p>這個範例的邏輯很簡單，就是有個大的矩形然後我用大矩形的四個頂點做出四個空間，但因為我想要讓大矩形長寬是可以調整的，如果調整的話其他四個房間的slider如果能在runtie的時候就決定上界到多少就不會有超過跟重疊的狀況了。<br>所以用一下以下的C# code可以幫助決定上下界。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">double</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>]; <span class="comment">//get the first thing connected to the first input of this component</span></span><br><span class="line">    <span class="keyword">var</span> slider = (Grasshopper.Kernel.Special.GH_NumberSlider) input; <span class="comment">//try to cast that thing as a slider</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(slider != <span class="literal">null</span>) <span class="comment">//if the component was successfully cast as a slider</span></span><br><span class="line">    &#123;</span><br><span class="line">      slider.Slider.Value = (<span class="built_in">decimal</span>) y;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>這是讓<code>y</code>的值去寫進<code>x</code>裡面<br><img src="/uploads/SliderModifier2.gif" alt="Node"><br>但你也可以用<code>slider.Slider.Minimum</code> 和 <code>slider.Slider.Maximum</code>去決定他的上下界。<br>比如我x的上界會等於y值的一半。就可以這樣寫</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">double</span> y, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>]; <span class="comment">//get the first thing connected to the first input of this component</span></span><br><span class="line">    <span class="keyword">var</span> slider = (Grasshopper.Kernel.Special.GH_NumberSlider) input; <span class="comment">//try to cast that thing as a slider</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(slider != <span class="literal">null</span>) <span class="comment">//if the component was successfully cast as a slider</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span>(slider.Slider.Value &gt; (<span class="built_in">decimal</span>) y / <span class="number">2</span>)&#123;</span><br><span class="line">        slider.Slider.Value = (<span class="built_in">decimal</span>) y / <span class="number">2</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      slider.Slider.Maximum = (<span class="built_in">decimal</span>) y/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>我有寫一個防護的判斷如果原本<code>x</code>的值就超過<code>y/2</code>的話我就讓值變成<code>x = y/2</code> 就不會有奇怪的UI出現了XD<br><img src="/uploads/SliderModifier3.gif" alt="Node"></p>
-<p>那前面房間長寬slider上下界可以這樣修改</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">object</span> y, <span class="built_in">double</span> z, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input1 = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> slider1 = (Grasshopper.Kernel.Special.GH_NumberSlider) input1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> input2 = Component.Params.Input[<span class="number">1</span>].Sources[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> slider2 = (Grasshopper.Kernel.Special.GH_NumberSlider) input2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">decimal</span> val = slider2.Slider.Value;</span><br><span class="line">    <span class="keyword">if</span>(slider1 != <span class="literal">null</span> &amp;&amp; slider2 != <span class="literal">null</span>)&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(slider2.Slider.Value &gt; (<span class="built_in">decimal</span>) z - slider1.Slider.Value)&#123;</span><br><span class="line">        slider2.Slider.Value = (<span class="built_in">decimal</span>) z - slider1.Slider.Value;</span><br><span class="line">      &#125;</span><br><span class="line">      slider2.Slider.Minimum = <span class="number">0</span>;</span><br><span class="line">      slider2.Slider.Maximum = (<span class="built_in">decimal</span>) z - slider1.Slider.Value;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(slider1.Slider.Value &gt; (<span class="built_in">decimal</span>) z - slider2.Slider.Value)&#123;</span><br><span class="line">        slider1.Slider.Value = (<span class="built_in">decimal</span>) z - slider2.Slider.Value;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      slider1.Slider.Minimum = <span class="number">0</span>;</span><br><span class="line">      slider1.Slider.Maximum = (<span class="built_in">decimal</span>) z - slider2.Slider.Value;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//A = val;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以觀察一下<code>Dining Room</code> 和 <code>Living Room</code> 的水平方向 slider 調整一個另一個的上下界也會改，主要的邏輯是 <code>大矩形的寬 = DiningRoom_width + LivingRoom_Width</code>。<br>這是邊界條件啦<br><img src="/uploads/SliderModifier4.gif" alt="Node"></p>
-<p>碰到了XD 但沒有超過~</p>
-<p>最後阿，有個可以換slider顏色的方法滿酷的，雖然不知道有甚麼用<br><img src="/uploads/SliderModifier5.gif" alt="Node"></p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">object</span> x, <span class="built_in">double</span> y, System.Drawing.Color z, <span class="keyword">ref</span> <span class="built_in">object</span> A</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> input = Component.Params.Input[<span class="number">0</span>].Sources[<span class="number">0</span>]; <span class="comment">//get the first thing connected to the first input of this component</span></span><br><span class="line">    <span class="keyword">var</span> slider = (Grasshopper.Kernel.Special.GH_NumberSlider) input; <span class="comment">//try to cast that thing as a slider</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(slider != <span class="literal">null</span>) <span class="comment">//if the component was successfully cast as a slider</span></span><br><span class="line">    &#123;</span><br><span class="line">      slider.Slider.DrawControlBackground = <span class="literal">true</span>;</span><br><span class="line">      slider.Slider.DrawControlBorder = <span class="literal">true</span>;</span><br><span class="line">      slider.Slider.ControlEdgeColour = Color.Blue;</span><br><span class="line">      slider.Slider.ControlBackColour = z;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>要記得先<code>using System.Drawing;</code> 這行喔</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="http://james-ramsden.com/remotely-change-value-of-number-slider-grasshopper/">James-Ramsden這篇</a><br>James感覺也是grasshopper/Revit相關的部落客/工程師，有很多很好的資源，推薦。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/05/03/SenderReceiver/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JimYuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JimYuan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/03/SenderReceiver/" class="post-title-link" itemprop="url">SenderReceiver</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-03 22:58:52" itemprop="dateCreated datePublished" datetime="2020-05-03T22:58:52+09:00">2020-05-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-05 00:09:49" itemprop="dateModified" datetime="2020-05-05T00:09:49+09:00">2020-05-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/" itemprop="url" rel="index"><span itemprop="name">Grasshopper</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/" itemprop="url" rel="index"><span itemprop="name">Csharp</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/RhinoInside/" itemprop="url" rel="index"><span itemprop="name">RhinoInside</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Grasshopper/Csharp/RhinoInside/Rhino/" itemprop="url" rel="index"><span itemprop="name">Rhino</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因為最近RIR(Rhino Inside Revit)的整合技術陸續Mcneel官方慢慢釋出相關的document跟陸續有點資料大家在討論，想整理一下目前的資料，以及剛聽完<a target="_blank" rel="noopener" href="https://hrntsm.github.io/">hiron</a>對RhinoInside的簡介，想寫一下部分的筆記，也不確定可以寫多少，讀者加減把這篇看成入門的練習吧，如果有甚麼不詳盡的部分還請利用下方留言板跟我討論一下，謝謝~</p>
-<h1 id="What-is-Rhino-Inside"><a href="#What-is-Rhino-Inside" class="headerlink" title="What is Rhino.Inside"></a><a target="_blank" rel="noopener" href="https://www.rhino3d.com/inside/revit/beta/getting-started">What is Rhino.Inside</a></h1><p>Rhino.Inside is a new technology developed by Robert McNeel &amp; Associates that allows embedding Rhino WIP into other applications. Rhino.Inside is being embedded into many applications from a wide variety of disciplines.</p>
-<h2 id="Rhino-Inside-Revit"><a href="#Rhino-Inside-Revit" class="headerlink" title="Rhino.Inside.Revit"></a>Rhino.Inside.Revit</h2><p>Rhino.Inside.Revit is an addon for Autodesk Revit that allows Rhino WIP to be loaded into the memory of Revit just like other Revit addons.</p>
-<h1 id="2020年5月的進度"><a href="#2020年5月的進度" class="headerlink" title="2020年5月的進度"></a>2020年5月的進度</h1><p>如果大家點開<a target="_blank" rel="noopener" href="https://github.com/mcneel/rhino.inside">RiR_github</a>然後可以發現McNeel官方在<code>.NET</code> framework下實踐了把Rhino塞到各個平台上。<br>大概的操作狀況可以參考<a target="_blank" rel="noopener" href="https://qiita.com/hiron_rgkr/items/ba00b7ae75068a54ff20">hironのblog</a>, 我自己嘗試了在autocad軟體上成功執行<code>TestRhinoInside</code>了。</p>
-<h2 id="Rhino-Inside"><a href="#Rhino-Inside" class="headerlink" title="Rhino.Inside"></a>Rhino.Inside</h2><ul>
-<li>Rhino.Inside illastrator</li>
-<li>Rhino.Inside AutoCAD</li>
-<li>Rhino.Inside Revit</li>
-<li>Rhino.Inside BricsCAD</li>
-<li>Rhino.Inside ConsoleApp</li>
-<li>Rhino.Inside DotNet</li>
-<li>Rhino.Inside JavaScript</li>
-<li>Rhino.Inside UE</li>
-<li>Rhino.Inside Excel</li>
-<li>Rhino.Inside Unity</li>
-</ul>
-<p>稍微嘗試了一下Rhino.Inside DotNet，拿了以前的模型丟進WinForms的小視窗。如果有用過WPF或是WinForms的話，大概可以知道做出一個pop up windows的感覺，Revit API也常常會遇到要設計給使用者輸入資訊的情況。<br>大概會像這樣<br><img src="/uploads/RiWin.gif" alt="Node"></p>
-<p>不過也有發現現在功能相對不穩定，不一定一開就可以成功，可能開發團隊還在努力吧。</p>
-<h1 id="Sender-amp-Receiver"><a href="#Sender-amp-Receiver" class="headerlink" title="Sender&amp;Receiver"></a>Sender&amp;Receiver</h1><p>這部份透過hiron的講解，大概讓我們知道Rhino.Inside的實作方式。因為還沒很深入去看底層的東西(一部分應該目前看也看不懂)就紀錄一下我的猜測，因為Rhino.Inside是把整個Rhino當作子程式掛件掛在其他程式上，如果用Rhino.Inside的時候開檔案管理員，應該會發現程式占用的記憶體會飆高。 但因為是在同一個主程式下的記憶體中運算，所以如果能做成一個通道把Rhino運算的東西傳給其他程式(傳回主程式)，或讀取主程式的資料的話。Rhino.Inside 任何程式都可以看成是資料寫出跟寫入的過程。其實大方向很簡單的來說就是省去了存檔再讀取的步驟，但因為寫出往往是寫到硬碟，又到硬碟讀會讓流程整個變慢，更別說是想要Real Time修改東西了。</p>
-<h2 id="Implement-in-Grasshopper"><a href="#Implement-in-Grasshopper" class="headerlink" title="Implement in Grasshopper"></a>Implement in Grasshopper</h2><p>hiron介紹了一段code如下:<br><img src="/uploads/Sender.gif" alt="Node"></p>
-<p>Sender</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="built_in">string</span> Send_Str</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span>(<span class="keyword">var</span> args = <span class="keyword">new</span> Rhino.Runtime.NamedParametersEventArgs())&#123;</span><br><span class="line">      args.Set(<span class="string">&quot;str&quot;</span>, Send_Str);</span><br><span class="line">      Rhino.Runtime.HostUtils.ExecuteNamedCallback(<span class="string">&quot;ToRiR&quot;</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Receiver</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RunScript</span>(<span class="params"><span class="keyword">ref</span> <span class="built_in">object</span> Receive_str</span>)</span></span><br><span class="line"> &#123;</span><br><span class="line">   Receive(Component);</span><br><span class="line">   Receive_str = str;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// &lt;Custom additional code&gt; </span></span><br><span class="line"> <span class="built_in">string</span> str;</span><br><span class="line"> <span class="built_in">bool</span> registered = <span class="literal">false</span>;</span><br><span class="line"> IGH_Component comp = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">Receive</span>(<span class="params">IGH_Component component</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(!registered)&#123;</span><br><span class="line">     Rhino.Runtime.HostUtils.RegisterNamedCallback(<span class="string">&quot;ToRiR&quot;</span>, RiRhino);</span><br><span class="line">     comp = component;</span><br><span class="line">     registered = <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">RiRhino</span>(<span class="params"><span class="built_in">object</span> sender, Rhino.Runtime.NamedParametersEventArgs args</span>)</span>&#123;</span><br><span class="line">   <span class="built_in">string</span> values;</span><br><span class="line">   <span class="keyword">if</span>(args.TryGetString(<span class="string">&quot;str&quot;</span>, <span class="keyword">out</span> values))&#123;</span><br><span class="line">     str = values;</span><br><span class="line">   &#125;</span><br><span class="line">   comp.ExpireSolution(<span class="literal">true</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>因為其實C# Component中 <code>Member</code>縮排那邊有先定義過一個<code>private readonly IGH_Component Component;</code> ，所以在上面的<code>RunScript</code>可以直接用。</p>
-<h3 id="Runtime-HostUtils-ExecuteNamedCallback"><a href="#Runtime-HostUtils-ExecuteNamedCallback" class="headerlink" title="Runtime.HostUtils.ExecuteNamedCallback"></a>Runtime.HostUtils.ExecuteNamedCallback</h3><blockquote>
-<p>Execute a named callback</p>
-</blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/wip/api/RhinoCommon/html/M_Rhino_Runtime_HostUtils_ExecuteNamedCallback.htm">Runtime.HostUtils.ExecuteNamedCallback</a></li>
-</ul>
-<h3 id="NamedParametersEventArgs"><a href="#NamedParametersEventArgs" class="headerlink" title="NamedParametersEventArgs"></a>NamedParametersEventArgs</h3><blockquote>
-<p>Dictionary style class used for named callback from <code>c++</code> -&gt; <code>.NET</code></p>
-</blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/api/RhinoCommon/html/T_Rhino_Runtime_NamedParametersEventArgs.htm">NamedParametersEventArgs</a></li>
-</ul>
-<h3 id="Runtime-HostUtils-RegisterNamedCallback"><a href="#Runtime-HostUtils-RegisterNamedCallback" class="headerlink" title="Runtime.HostUtils.RegisterNamedCallback()"></a>Runtime.HostUtils.RegisterNamedCallback()</h3><blockquote>
-<p>Register a named callback from <code>C++</code> -&gt; <code>.NET</code></p>
-</blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.rhino3d.com/api/RhinoCommon/html/M_Rhino_Runtime_HostUtils_RegisterNamedCallback.htm">Runtime.HostUtils.RegisterNamedCallback</a></li>
-</ul>
-<h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.rhino3d.com/inside">RhinoInside_OfficialPage</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mcneel/rhino.inside">RiR_github</a></li>
-<li><a target="_blank" rel="noopener" href="https://qiita.com/hiron_rgkr/items/ba00b7ae75068a54ff20">hironのblog</a></li>
-<li><a target="_blank" rel="noopener" href="https://amdlaboratory.com/amdblog/rhino-inside%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6revit%E3%81%A8%E9%80%A3%E6%90%BA%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B/">AMDlab</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=x_MU3vO1_II">Introduce_To_Rhino.Inside_Revit</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1456,7 +1405,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1467,7 +1416,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">100</span>
+        <span class="site-state-item-count">102</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1494,7 +1443,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
