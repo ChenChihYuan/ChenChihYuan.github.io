@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="PrefaceIt’s been a while that I updated my blog, and it’s about time. I spent some time learning Three.js recently. Before this, I only know basic html, css and javascript. Though some people might th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FPS in ThreeJS">
+<meta property="og:url" content="https://chenchihyuan.github.io/2022/04/24/FPS-in-ThreeJS/index.html">
+<meta property="og:site_name" content="JimYuan&#39;s Blog">
+<meta property="og:description" content="PrefaceIt’s been a while that I updated my blog, and it’s about time. I spent some time learning Three.js recently. Before this, I only know basic html, css and javascript. Though some people might th">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-24T09:18:37.000Z">
+<meta property="article:modified_time" content="2022-04-24T09:35:43.731Z">
+<meta property="article:author" content="JimYuan">
+<meta property="article:tag" content="ThreeJS">
+<meta property="article:tag" content="FPS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2022/04/24/FPS-in-ThreeJS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>FPS in ThreeJS | JimYuan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JimYuan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sharing the things I learned</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2022/04/24/FPS-in-ThreeJS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JimYuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JimYuan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FPS in ThreeJS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-24 18:18:37 / Modified: 18:35:43" itemprop="dateCreated datePublished" datetime="2022-04-24T18:18:37+09:00">2022-04-24</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>It’s been a while that I updated my blog, and it’s about time. I spent some time learning <code>Three.js</code> recently. Before this, I only know basic <code>html</code>, <code>css</code> and <code>javascript</code>. Though some people might think that’s totally enough for being a front-end developer in the old days, there’s tons of great tools I needed to catch up with. I think I will catch up through doing some side projects.</p>
+<p>To name a few, which at this point, I think I should definitely check them out in near future.</p>
+<ul>
+<li>TypeScript</li>
+<li>React</li>
+<li>Webpack</li>
+</ul>
+<h1 id="FrontEnd-Roadmap"><a href="#FrontEnd-Roadmap" class="headerlink" title="FrontEnd - Roadmap"></a>FrontEnd - Roadmap</h1><p>By a quick google search,<br><a target="_blank" rel="noopener" href="https://roadmap.sh/frontend">https://roadmap.sh/frontend</a></p>
+<p>Though I am not sure if I will end up being a front-end developer, I want to put AEC models on web, so it kinda means I have to learn these…<br>I’ll do my best.</p>
+<h1 id="First-Person-Shooter"><a href="#First-Person-Shooter" class="headerlink" title="First Person Shooter"></a>First Person Shooter</h1><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/First-person_shooter">https://en.wikipedia.org/wiki/First-person_shooter</a></p>
+<p>Basically, I was following this tutorial.<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q_I0Tq61Ud8&amp;t=744s">https://www.youtube.com/watch?v=Q_I0Tq61Ud8&amp;t=744s</a></p>
+<p>So, yeah.</p>
+<p>The key ideas is to combine thess two parts.</p>
+<ul>
+<li><code>PointerLockContorls</code></li>
+<li><code>wasd control</code></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://threejs.org/docs/#examples/en/controls/PointerLockControls">https://threejs.org/docs/#examples/en/controls/PointerLockControls</a></p>
+<hr>
+<h2 id="PointerLockContorls"><a href="#PointerLockContorls" class="headerlink" title="PointerLockContorls"></a>PointerLockContorls</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  PointerLockControls</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;three/examples/jsm/controls/PointerLockControls&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> controls = <span class="keyword">new</span> PointerLockControls(camera, <span class="built_in">document</span>.domElement);</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  controls.lock();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="wasd-contorls"><a href="#wasd-contorls" class="headerlink" title="wasd contorls"></a>wasd contorls</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前進か後進か変数宣言</span></span><br><span class="line"><span class="keyword">let</span> moveForward = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">let</span> moveBackward = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">let</span> moveLeft = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">let</span> moveRight = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//移動速度と移動方向の定義</span></span><br><span class="line"><span class="keyword">const</span> velocity = <span class="keyword">new</span> THREE.Vector3();</span><br><span class="line"><span class="keyword">const</span> direction = <span class="keyword">new</span> THREE.Vector3();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> onKeyDown = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (e.code) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyW&quot;</span>:</span><br><span class="line">      moveForward = <span class="literal">true</span>;</span><br><span class="line">      <span class="built_in">console</span>.log(moveForward)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyS&quot;</span>:</span><br><span class="line">      moveBackward = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyA&quot;</span>:</span><br><span class="line">      moveLeft = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyD&quot;</span>:</span><br><span class="line">      moveRight = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> onKeyUp = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (e.code) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyW&quot;</span>:</span><br><span class="line">      moveForward = <span class="literal">false</span>;</span><br><span class="line">      <span class="built_in">console</span>.log(moveForward)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyS&quot;</span>:</span><br><span class="line">      moveBackward = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyA&quot;</span>:</span><br><span class="line">      moveLeft = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;KeyD&quot;</span>:</span><br><span class="line">      moveRight = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">&quot;keydown&quot;</span>, onKeyDown);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">&quot;keyup&quot;</span>, onKeyUp);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> prevTime = performance.now();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  requestAnimationFrame(animate);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> time = performance.now();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 前進後進判定</span></span><br><span class="line">  direction.z = <span class="built_in">Number</span>(moveForward) - <span class="built_in">Number</span>(moveBackward);</span><br><span class="line">  direction.x = <span class="built_in">Number</span>(moveLeft) - <span class="built_in">Number</span>(moveRight);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//ポインターがONになったら</span></span><br><span class="line">  <span class="keyword">if</span> (controls.isLocked) &#123;</span><br><span class="line">    <span class="keyword">const</span> delta = (time - prevTime) / <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// decline</span></span><br><span class="line">    velocity.z -= velocity.z * <span class="number">5.0</span> * delta;</span><br><span class="line">    velocity.x -= velocity.x * <span class="number">5.0</span> * delta;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (moveForward || moveBackward) &#123;</span><br><span class="line">      velocity.z -= direction.z * <span class="number">200</span> * delta;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (moveRight || moveLeft) &#123;</span><br><span class="line">      velocity.x -= direction.x * <span class="number">200</span> * delta;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    controls.moveForward(-velocity.z * delta);</span><br><span class="line">    controls.moveRight(-velocity.x * delta);</span><br><span class="line">  &#125;</span><br><span class="line">  prevTime = time;</span><br><span class="line">  renderer.render(scene, camera);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">animate();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ThreeJS/" rel="tag"># ThreeJS</a>
+              <a href="/tags/FPS/" rel="tag"># FPS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/17/OpenCV-Course-Note/" rel="prev" title="OpenCV_Course_Note">
+      <i class="fa fa-chevron-left"></i> OpenCV_Course_Note
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preface"><span class="nav-number">1.</span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FrontEnd-Roadmap"><span class="nav-number">2.</span> <span class="nav-text">FrontEnd - Roadmap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#First-Person-Shooter"><span class="nav-number">3.</span> <span class="nav-text">First Person Shooter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PointerLockContorls"><span class="nav-number">3.1.</span> <span class="nav-text">PointerLockContorls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wasd-contorls"><span class="nav-number">3.2.</span> <span class="nav-text">wasd contorls</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JimYuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JimYuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
