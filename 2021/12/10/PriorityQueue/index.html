@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="IntroductionA Priority Queue is an extension of a normal Queue. In a standard Queue (FIFO - First In First Out), the “next” item is always the one that arrived earliest. However, in a Priority Queue,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Priority Queue &amp; Binary Heap">
+<meta property="og:url" content="http://example.com/2021/12/10/PriorityQueue/index.html">
+<meta property="og:site_name" content="Jim Chen&#39;s Blog">
+<meta property="og:description" content="IntroductionA Priority Queue is an extension of a normal Queue. In a standard Queue (FIFO - First In First Out), the “next” item is always the one that arrived earliest. However, in a Priority Queue,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-10T06:25:38.000Z">
+<meta property="article:modified_time" content="2026-01-06T02:58:55.266Z">
+<meta property="article:author" content="Jim">
+<meta property="article:tag" content="Csharp">
+<meta property="article:tag" content="DataStructure">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="priorityQueue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/12/10/PriorityQueue/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Priority Queue & Binary Heap | Jim Chen's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jim Chen's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/10/PriorityQueue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Priority Queue & Binary Heap
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-10 15:25:38" itemprop="dateCreated datePublished" datetime="2021-12-10T15:25:38+09:00">2021-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-06 11:58:55" itemprop="dateModified" datetime="2026-01-06T11:58:55+09:00">2026-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>A <strong>Priority Queue</strong> is an extension of a normal Queue. In a standard Queue (FIFO - First In First Out), the “next” item is always the one that arrived earliest. However, in a Priority Queue, the “next” item is the one with the <strong>highest priority</strong>.</p>
+<p>Think of a hospital emergency room:</p>
+<ul>
+<li><strong>Queue</strong>: Patients are treated in the order they walked in.</li>
+<li><strong>Priority Queue</strong>: A patient with a heart attack is treated before someone with a sprained ankle, even if the heart attack patient arrived later.</li>
+</ul>
+<h1 id="The-Binary-Heap"><a href="#The-Binary-Heap" class="headerlink" title="The Binary Heap"></a>The Binary Heap</h1><p>While a Priority Queue is an <em>Abstract Data Type</em> (ADT)—meaning it defines <em>behavior</em>—a <strong>Binary Heap</strong> is the most common <em>Data Structure</em> used to implement it efficiently.</p>
+<p>A Binary Heap is a Binary Tree with two specific properties:</p>
+<ol>
+<li><strong>Shape Property</strong>: It is a <strong>Complete Binary Tree</strong>. All levels are fully filled except possibly the last level, which is filled from left to right. This allows us to store it efficiently in an <strong>Array</strong>.</li>
+<li><strong>Heap Property</strong>:<ul>
+<li><strong>Min Heap</strong>: The value of each node is $\le$ the values of its children. The root is the minimum element.</li>
+<li><strong>Max Heap</strong>: The value of each node is $\ge$ the values of its children. The root is the maximum element.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Array-Representation"><a href="#Array-Representation" class="headerlink" title="Array Representation"></a>Array Representation</h2><p>Because of the “Complete Tree” property, we don’t need point-and-node classes. We can map the tree directly to an index-based array which is cache-friendly.</p>
+<p>Given a node at index <code>i</code>:</p>
+<ul>
+<li><strong>Parent</strong>: $\lfloor \frac{i-1}{2} \rfloor$</li>
+<li><strong>Left Child</strong>: $2i + 1$</li>
+<li><strong>Right Child</strong>: $2i + 2$</li>
+</ul>
+<h1 id="Core-Operations"><a href="#Core-Operations" class="headerlink" title="Core Operations"></a>Core Operations</h1><p>The magic of the Heap lies in how it maintains the Heap Property efficiently during modification. Operations typically take $O(\log N)$ time, which is the height of the tree.</p>
+<h2 id="1-Insert-Push-“Bubble-Up”"><a href="#1-Insert-Push-“Bubble-Up”" class="headerlink" title="1. Insert (Push) - “Bubble Up”"></a>1. Insert (Push) - “Bubble Up”</h2><p>When we add a new element:</p>
+<ol>
+<li>Place the new element at the <strong>end</strong> of the array (the first empty spot in the tree).</li>
+<li>Compare it with its <strong>Parent</strong>.</li>
+<li>If it violates the heap property (e.g., in a MinHeap, it’s smaller than the parent), <strong>swap</strong> them.</li>
+<li>Repeat step 2-3 until the property is restored or the root is reached.</li>
+</ol>
+<h2 id="2-Extract-Min-Max-Pop-“Bubble-Down”"><a href="#2-Extract-Min-Max-Pop-“Bubble-Down”" class="headerlink" title="2. Extract Min/Max (Pop) - “Bubble Down”"></a>2. Extract Min/Max (Pop) - “Bubble Down”</h2><p>When we remove the root (the highest priority item):</p>
+<ol>
+<li>Replace the <strong>root</strong> with the <strong>last element</strong> in the array.</li>
+<li>Remove the last element.</li>
+<li>Compare the new root with its <strong>Children</strong>.</li>
+<li>Swap it with the <strong>smaller/larger child</strong> (depending on Min/Max heap type).</li>
+<li>Repeat until the property is restored or a leaf is reached.</li>
+</ol>
+<h1 id="Complexity-Analysis"><a href="#Complexity-Analysis" class="headerlink" title="Complexity Analysis"></a>Complexity Analysis</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Operation</th>
+<th style="text-align:left">Array (Unsorted)</th>
+<th style="text-align:left">Array (Sorted)</th>
+<th style="text-align:left">Binary Heap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Peek</strong> (Get Top)</td>
+<td style="text-align:left">$O(N)$</td>
+<td style="text-align:left">$O(1)$</td>
+<td style="text-align:left">$O(1)$</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Insert</strong></td>
+<td style="text-align:left">$O(1)$</td>
+<td style="text-align:left">$O(N)$ (shift items)</td>
+<td style="text-align:left">$O(\log N)$</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Extract</strong></td>
+<td style="text-align:left">$O(N)$ (find max)</td>
+<td style="text-align:left">$O(N)$ (shift items)</td>
+<td style="text-align:left">$O(\log N)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The Heap provides the best balance. It’s not as fast as a sorted array for peeking, but insertion and deletion are strictly logarithmic, making it scalable for millions of items.</p>
+<h1 id="C-Implementation"><a href="#C-Implementation" class="headerlink" title="C# Implementation"></a>C# Implementation</h1><p>Here is a clean implementation of a Min-Heap in C#.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MinHeap</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">IComparable</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; elements = <span class="keyword">new</span> List&lt;T&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Count =&gt; elements.Count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Push</span>(<span class="params">T item</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        elements.Add(item);</span><br><span class="line">        BubbleUp(elements.Count - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">Pop</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (elements.Count == <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException(<span class="string">&quot;Heap is empty&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        T result = elements[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// Move last item to root</span></span><br><span class="line">        elements[<span class="number">0</span>] = elements[elements.Count - <span class="number">1</span>];</span><br><span class="line">        elements.RemoveAt(elements.Count - <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (elements.Count &gt; <span class="number">0</span>)</span><br><span class="line">            BubbleDown(<span class="number">0</span>);</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">BubbleUp</span>(<span class="params"><span class="built_in">int</span> index</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (index &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">int</span> parentIndex = (index - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (elements[index].CompareTo(elements[parentIndex]) &gt;= <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            Swap(index, parentIndex);</span><br><span class="line">            index = parentIndex;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">BubbleDown</span>(<span class="params"><span class="built_in">int</span> index</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">int</span> childIndex = <span class="number">2</span> * index + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (childIndex &gt;= elements.Count) <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Find smaller child</span></span><br><span class="line">            <span class="built_in">int</span> rightChild = childIndex + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (rightChild &lt; elements.Count &amp;&amp; </span><br><span class="line">                elements[rightChild].CompareTo(elements[childIndex]) &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                childIndex = rightChild;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (elements[index].CompareTo(elements[childIndex]) &lt;= <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            Swap(index, childIndex);</span><br><span class="line">            index = childIndex;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Swap</span>(<span class="params"><span class="built_in">int</span> i, <span class="built_in">int</span> j</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        T temp = elements[i];</span><br><span class="line">        elements[i] = elements[j];</span><br><span class="line">        elements[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Modern-NET-6-Note"><a href="#Modern-NET-6-Note" class="headerlink" title="Modern .NET 6+ Note"></a>Modern .NET 6+ Note</h1><p>If you are using .NET 6 or later (which you likely are for modern development), you no longer need to roll your own class! C# now includes a built-in <code>System.Collections.Generic.PriorityQueue&lt;TElement, TPriority&gt;</code>.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example using built-in .NET 6 PriorityQueue</span></span><br><span class="line"><span class="keyword">var</span> pq = <span class="keyword">new</span> PriorityQueue&lt;<span class="built_in">string</span>, <span class="built_in">int</span>&gt;();</span><br><span class="line"></span><br><span class="line">pq.Enqueue(<span class="string">&quot;Low Priority Task&quot;</span>, <span class="number">10</span>);</span><br><span class="line">pq.Enqueue(<span class="string">&quot;Critical Task&quot;</span>, <span class="number">1</span>);</span><br><span class="line">pq.Enqueue(<span class="string">&quot;Medium Task&quot;</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (pq.TryDequeue(<span class="keyword">out</span> <span class="built_in">string</span> item, <span class="keyword">out</span> <span class="built_in">int</span> priority))</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;Processing <span class="subst">&#123;item&#125;</span> (Priority: <span class="subst">&#123;priority&#125;</span>)&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Output: </span></span><br><span class="line"><span class="comment">// Processing Critical Task (Priority: 1)</span></span><br><span class="line"><span class="comment">// Processing Medium Task (Priority: 5)</span></span><br><span class="line"><span class="comment">// Processing Low Priority Task (Priority: 10)</span></span><br></pre></td></tr></table></figure>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><ol>
+<li><strong>Graph Algorithms</strong>:<ul>
+<li><strong>Dijkstra’s Algorithm</strong>: Finds the shortest path in a weighted graph. It always explores the “closest” node next, which is efficiently retrieved using a Min-Heap.</li>
+<li><strong>Prim’s Algorithm</strong>: Used for Minimum Spanning Trees.</li>
+</ul>
+</li>
+<li><strong>Geometry Processing</strong>:<ul>
+<li><strong>Visvalingam-Whyatt</strong>: As mentioned in my <a href="/2026/01/06/Visvalingam-Whyatt/" title="Visvalingam-Whyatt">Visvalingam-Whyatt post</a>, we process triangles with the smallest area first.</li>
+<li><strong>Sweepline Algorithms</strong>: Processing events (intersections, start/end points) in order of their X-coordinate.</li>
+</ul>
+</li>
+<li><strong>Systems</strong>:<ul>
+<li><strong>Task Scheduling</strong>: CPU scheduling processes based on priority levels.</li>
+</ul>
+</li>
+</ol>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://www.geeksforgeeks.org/binary-heap/">GeeksForGeeks: Binary Heap</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Csharp/" rel="tag"># Csharp</a>
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/priorityQueue/" rel="tag"># priorityQueue</a>
+              <a href="/tags/DataStructure/" rel="tag"># DataStructure</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/09/RetrieveGraphInfo-InAutoCAD-autoLISP/" rel="prev" title="RetrieveGraphInfo_InAutoCAD_autoLISP">
+      <i class="fa fa-chevron-left"></i> RetrieveGraphInfo_InAutoCAD_autoLISP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/05/AutoCAD-Dev-with-Csharp/" rel="next" title="AutoCAD_Dev_with_Csharp">
+      AutoCAD_Dev_with_Csharp <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Binary-Heap"><span class="nav-number">2.</span> <span class="nav-text">The Binary Heap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-Representation"><span class="nav-number">2.1.</span> <span class="nav-text">Array Representation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Core-Operations"><span class="nav-number">3.</span> <span class="nav-text">Core Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Insert-Push-%E2%80%9CBubble-Up%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">1. Insert (Push) - “Bubble Up”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Extract-Min-Max-Pop-%E2%80%9CBubble-Down%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">2. Extract Min&#x2F;Max (Pop) - “Bubble Down”</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Complexity-Analysis"><span class="nav-number">4.</span> <span class="nav-text">Complexity Analysis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Implementation"><span class="nav-number">5.</span> <span class="nav-text">C# Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modern-NET-6-Note"><span class="nav-number">6.</span> <span class="nav-text">Modern .NET 6+ Note</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Applications"><span class="nav-number">7.</span> <span class="nav-text">Applications</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jim</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jim</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

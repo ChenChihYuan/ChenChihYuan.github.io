@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="HTML: Forms and TablesTables: TR, TD, and TH element TR: The Table Row element TD: The Table Data Cell element TH: The Table Header element  TR: Table Rowhttps:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IntroToTheWeb_Section_4">
+<meta property="og:url" content="http://example.com/2021/10/21/IntroToTheWeb-Section-4/index.html">
+<meta property="og:site_name" content="Jim Chen&#39;s Blog">
+<meta property="og:description" content="HTML: Forms and TablesTables: TR, TD, and TH element TR: The Table Row element TD: The Table Data Cell element TH: The Table Header element  TR: Table Rowhttps:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;H">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/uploads/NameAttributes.gif">
+<meta property="article:published_time" content="2021-10-21T03:29:59.000Z">
+<meta property="article:modified_time" content="2026-01-05T11:17:34.660Z">
+<meta property="article:author" content="Jim">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/uploads/NameAttributes.gif">
+
+<link rel="canonical" href="http://example.com/2021/10/21/IntroToTheWeb-Section-4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>IntroToTheWeb_Section_4 | Jim Chen's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jim Chen's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/IntroToTheWeb-Section-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IntroToTheWeb_Section_4
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-21 12:29:59" itemprop="dateCreated datePublished" datetime="2021-10-21T12:29:59+09:00">2021-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-05 20:17:34" itemprop="dateModified" datetime="2026-01-05T20:17:34+09:00">2026-01-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="HTML-Forms-and-Tables"><a href="#HTML-Forms-and-Tables" class="headerlink" title="HTML: Forms and Tables"></a><a href="#HTML-Forms-and-Tables" title="HTML: Forms and Tables"></a>HTML: Forms and Tables</h1><h2 id="Tables-TR-TD-and-TH-element"><a href="#Tables-TR-TD-and-TH-element" class="headerlink" title="Tables: TR, TD, and TH element"></a><a href="#Tables-TR-TD-and-TH-element" title="Tables: TR, TD, and TH element"></a>Tables: TR, TD, and TH element</h2><ul>
+<li>TR: The <strong>Table Row</strong> element</li>
+<li>TD: The <strong>Table Data</strong> Cell element</li>
+<li>TH: The <strong>Table Header</strong> element</li>
+</ul>
+<h3 id="TR-Table-Row"><a href="#TR-Table-Row" class="headerlink" title="TR: Table Row"></a><a href="#TR-Table-Row" title="TR: Table Row"></a>TR: Table Row</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr</a></p>
+<h3 id="TD-Table-Data"><a href="#TD-Table-Data" class="headerlink" title="TD: Table Data"></a><a href="#TD-Table-Data" title="TD: Table Data"></a>TD: Table Data</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td</a></p>
+<h3 id="TH-Table-Header"><a href="#TH-Table-Header" class="headerlink" title="TH: Table Header"></a><a href="#TH-Table-Header" title="TH: Table Header"></a>TH: Table Header</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th</a></p>
+<h2 id="Tables-Thead-Tbody-and-Tfoot-Elements"><a href="#Tables-Thead-Tbody-and-Tfoot-Elements" class="headerlink" title="Tables: Thead, Tbody and Tfoot Elements"></a><a href="#Tables-Thead-Tbody-and-Tfoot-Elements" title="Tables: Thead, Tbody and Tfoot Elements"></a>Tables: Thead, Tbody and Tfoot Elements</h2><ul>
+<li>Thead: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead</a></li>
+<li>Tbody: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody</a></li>
+<li>Tfoot: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot</a></li>
+</ul>
+<h2 id="Tables-Colspan-and-Rowspan"><a href="#Tables-Colspan-and-Rowspan" class="headerlink" title="Tables: Colspan and Rowspan"></a><a href="#Tables-Colspan-and-Rowspan" title="Tables: Colspan and Rowspan"></a>Tables: Colspan and Rowspan</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line">Name</span><br><span class="line">ID</span><br><span class="line">Membership Dates</span><br><span class="line">Balance</span><br><span class="line">  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Coding-Excersice"><a href="#Coding-Excersice" class="headerlink" title="Coding Excersice"></a><a href="#Coding-Excersice" title="Coding Excersice"></a>Coding Excersice</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Document</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Heaviset Bird</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">        </span><br><span class="line">            Subscription</span><br><span class="line">            Price</span><br><span class="line">            Support</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">        </span><br><span class="line">            Free</span><br><span class="line">            Free</span><br><span class="line">            N/A</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">            Personal</span><br><span class="line">            $9.99</span><br><span class="line">            Weekdays</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">            Business</span><br><span class="line">            $49.99</span><br><span class="line">            24/7</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">table&gt;tr&gt;td*5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="The-Form-Element"><a href="#The-Form-Element" class="headerlink" title="The Form Element"></a><a href="#The-Form-Element" title="The Form Element"></a>The Form Element</h1><h2 id="Creating-Forms"><a href="#Creating-Forms" class="headerlink" title="Creating Forms"></a><a href="#Creating-Forms" title="Creating Forms"></a>Creating Forms</h2><ul>
+<li>The <code>&lt;form&gt;</code> element itself is <strong>a shell of container</strong> that doesn’t have any visual impact.</li>
+<li>We then fill the form with a collection of inputs, checkboxes, buttons, etc.</li>
+</ul>
+<h2 id="lt-form-gt"><a href="#lt-form-gt" class="headerlink" title="&lt;form&gt;"></a><a href="#lt-form-gt" title="&lt;form&gt;"></a><code>&lt;form&gt;</code></h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form</a></p>
+<ul>
+<li>The form element represents a document section containing interactive contorls for submitting information.</li>
+<li>The <strong>action</strong> attribute specifies <strong>WHERE</strong> the form data should be sent</li>
+<li>The <strong>method</strong> attribute specifies which HTTP method should be used</li>
+</ul>
+<h2 id="lt-input-gt-Common-Input-Types"><a href="#lt-input-gt-Common-Input-Types" class="headerlink" title="&lt;input&gt; Common Input Types"></a><a href="#lt-input-gt-Common-Input-Types" title="&lt;input&gt; Common Input Types"></a><code>&lt;input&gt;</code> Common Input Types</h2><ul>
+<li>The input element is used to create a variety of different form controls</li>
+<li>We have 20+ possible types of inputs ranging from data pickers to checkboxes.</li>
+<li>The type attribute is where the magic happens. Changing type dramatically alters the input’s behavior and appearance</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<h2 id="The-All-important-Label-label"><a href="#The-All-important-Label-label" class="headerlink" title="The All-important Label label"></a><a href="#The-All-important-Label-label" title="The All-important Label label"></a>The All-important Label <code>label</code></h2><p><a href="https://developer.mozilla.org/en-US/search?q=label">https://developer.mozilla.org/en-US/search?q=label</a></p>
+<blockquote>
+<p>The HTML element represents a caption for an item in a user interface.</p>
+</blockquote>
+<hr>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Do you like cheese?</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Do you like peas?</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Do you like cheese? </p>
+<p>Do you like peas? </p>
+<hr>
+<h1 id="HTML-Buttons"><a href="#HTML-Buttons" class="headerlink" title="HTML Buttons"></a><a href="#HTML-Buttons" title="HTML Buttons"></a>HTML Buttons</h1><blockquote>
+<p>The <code>&lt;button&gt;</code> HTML element represents a clickable button, used to <strong>submit forms</strong> or anywhere in a document for accessible, standard button functionality.</p>
+</blockquote>
+<p>By default, <code>button</code> hold a <code>type=&quot;submit&quot;</code> but if you <em>want the button do not submit a form</em>, you can do <code>&lt;button type=&quot;button&quot;&gt;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Add to favorites</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="alternative"><a href="#alternative" class="headerlink" title="alternative"></a><a href="#alternative" title="alternative"></a>alternative</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="The-name-Attribute"><a href="#The-name-Attribute" class="headerlink" title="The name Attribute"></a><a href="#The-name-Attribute" title="The name Attribute"></a>The name Attribute</h1><blockquote>
+<p>We should put it on every single input that you use and it will be used when you send your data to a server eventually.</p>
+</blockquote>
+<p><img src="/uploads/NameAttributes.gif" alt="NameAttributes"></p>
+<p>Note that the webpage url changed after submitting the form.</p>
+<h2 id="Demo-of-Hijacking-Google-and-Reddit-Search"><a href="#Demo-of-Hijacking-Google-and-Reddit-Search" class="headerlink" title="Demo of Hijacking Google and Reddit Search"></a><a href="#Demo-of-Hijacking-Google-and-Reddit-Search" title="Demo of Hijacking Google and Reddit Search"></a>Demo of Hijacking Google and Reddit Search</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">Search Reddit</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">Search google</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">Search youtube</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<p> Search Reddit</p>
+<p> Search google</p>
+<p> Search youtube</p>
+<h2 id="Radio-Buttons-Checkboxes-amp-Selects"><a href="#Radio-Buttons-Checkboxes-amp-Selects" class="headerlink" title="Radio Buttons, Checkboxes, &amp; Selects"></a><a href="#Radio-Buttons-Checkboxes-amp-Selects" title="Radio Buttons, Checkboxes, &amp; Selects"></a>Radio Buttons, Checkboxes, &amp; Selects</h2><h3 id="Checkboxes"><a href="#Checkboxes" class="headerlink" title="Checkboxes"></a><a href="#Checkboxes" title="Checkboxes"></a>Checkboxes</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">I agree to everything</span><br><span class="line">Submit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Radio-Buttons"><a href="#Radio-Buttons" class="headerlink" title="Radio Buttons"></a><a href="#Radio-Buttons" title="Radio Buttons"></a>Radio Buttons</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">S:</span><br><span class="line"></span><br><span class="line">M:</span><br><span class="line"></span><br><span class="line">L:</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<p>S:  M:  L: </p>
+<hr>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Please select an Entree</span><br><span class="line"></span><br><span class="line">    Fish</span><br><span class="line">    Steak</span><br><span class="line">    Orange</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Please select an Entree Fish Steak Orange</p>
+<h2 id="Range-amp-Text-Area"><a href="#Range-amp-Text-Area" class="headerlink" title="Range &amp; Text Area"></a><a href="#Range-amp-Text-Area" title="Range &amp; Text Area"></a>Range &amp; Text Area</h2><h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a><a href="#Range" title="Range"></a>Range</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">Amount of Cheese:</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Amount of Cheese: </p>
+<h3 id="Text-Area"><a href="#Text-Area" class="headerlink" title="Text Area"></a><a href="#Text-Area" title="Text Area"></a>Text Area</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Any Special Request?</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Any Special Request?</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/20/IntroToTheWeb-Section-3/" rel="prev" title="IntroToTheWeb_Section_3">
+      <i class="fa fa-chevron-left"></i> IntroToTheWeb_Section_3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/22/CSS-The-Very-Basic/" rel="next" title="CSS: The Very Basic">
+      CSS: The Very Basic <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML-Forms-and-Tables"><span class="nav-number">1.</span> <span class="nav-text">HTML: Forms and Tables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tables-TR-TD-and-TH-element"><span class="nav-number">1.1.</span> <span class="nav-text">Tables: TR, TD, and TH element</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TR-Table-Row"><span class="nav-number">1.1.1.</span> <span class="nav-text">TR: Table Row</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TD-Table-Data"><span class="nav-number">1.1.2.</span> <span class="nav-text">TD: Table Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TH-Table-Header"><span class="nav-number">1.1.3.</span> <span class="nav-text">TH: Table Header</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tables-Thead-Tbody-and-Tfoot-Elements"><span class="nav-number">1.2.</span> <span class="nav-text">Tables: Thead, Tbody and Tfoot Elements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tables-Colspan-and-Rowspan"><span class="nav-number">1.3.</span> <span class="nav-text">Tables: Colspan and Rowspan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding-Excersice"><span class="nav-number">1.4.</span> <span class="nav-text">Coding Excersice</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Form-Element"><span class="nav-number">2.</span> <span class="nav-text">The Form Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-Forms"><span class="nav-number">2.1.</span> <span class="nav-text">Creating Forms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-form-gt"><span class="nav-number">2.2.</span> <span class="nav-text">&lt;form&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-input-gt-Common-Input-Types"><span class="nav-number">2.3.</span> <span class="nav-text">&lt;input&gt; Common Input Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-All-important-Label-label"><span class="nav-number">2.4.</span> <span class="nav-text">The All-important Label label</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML-Buttons"><span class="nav-number">3.</span> <span class="nav-text">HTML Buttons</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alternative"><span class="nav-number">3.1.</span> <span class="nav-text">alternative</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-name-Attribute"><span class="nav-number">4.</span> <span class="nav-text">The name Attribute</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-of-Hijacking-Google-and-Reddit-Search"><span class="nav-number">4.1.</span> <span class="nav-text">Demo of Hijacking Google and Reddit Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Radio-Buttons-Checkboxes-amp-Selects"><span class="nav-number">4.2.</span> <span class="nav-text">Radio Buttons, Checkboxes, &amp; Selects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkboxes"><span class="nav-number">4.2.1.</span> <span class="nav-text">Checkboxes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Radio-Buttons"><span class="nav-number">4.2.2.</span> <span class="nav-text">Radio Buttons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Range-amp-Text-Area"><span class="nav-number">4.3.</span> <span class="nav-text">Range &amp; Text Area</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Range"><span class="nav-number">4.3.1.</span> <span class="nav-text">Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text-Area"><span class="nav-number">4.3.2.</span> <span class="nav-text">Text Area</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jim</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jim</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Introduction to CSS FlexboxThe BasicWhat is it?Flexbox is one-dimensional layout method for laying out items in rows or columns. It’s New(ish)Flexbox is a recent addition to CSS, included to address c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Responsive_CSS_and_Flexbox">
+<meta property="og:url" content="http://example.com/2021/10/29/Responsive-CSS-and-Flexbox/index.html">
+<meta property="og:site_name" content="Jim Chen&#39;s Blog">
+<meta property="og:description" content="Introduction to CSS FlexboxThe BasicWhat is it?Flexbox is one-dimensional layout method for laying out items in rows or columns. It’s New(ish)Flexbox is a recent addition to CSS, included to address c">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-28T22:35:14.000Z">
+<meta property="article:modified_time" content="2026-01-05T11:17:34.810Z">
+<meta property="article:author" content="Jim">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="Flexbox">
+<meta property="article:tag" content="Responsive">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/10/29/Responsive-CSS-and-Flexbox/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Responsive_CSS_and_Flexbox | Jim Chen's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jim Chen's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/29/Responsive-CSS-and-Flexbox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Responsive_CSS_and_Flexbox
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-29 07:35:14" itemprop="dateCreated datePublished" datetime="2021-10-29T07:35:14+09:00">2021-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-05 20:17:34" itemprop="dateModified" datetime="2026-01-05T20:17:34+09:00">2026-01-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Introduction-to-CSS-Flexbox"><a href="#Introduction-to-CSS-Flexbox" class="headerlink" title="Introduction to CSS Flexbox"></a><a href="#Introduction-to-CSS-Flexbox" title="Introduction to CSS Flexbox"></a>Introduction to CSS Flexbox</h1><h2 id="The-Basic"><a href="#The-Basic" class="headerlink" title="The Basic"></a><a href="#The-Basic" title="The Basic"></a>The Basic</h2><h3 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a><a href="#What-is-it" title="What is it?"></a>What is it?</h3><p>Flexbox is one-dimensional layout method for laying out items in rows or columns.</p>
+<h3 id="It’s-New-ish"><a href="#It’s-New-ish" class="headerlink" title="It’s New(ish)"></a><a href="#It’s-New-ish" title="It’s New(ish)"></a>It’s New(ish)</h3><p>Flexbox is a recent addition to CSS, included to address common layout frustations.</p>
+<h3 id="Why-‘Flex’"><a href="#Why-‘Flex’" class="headerlink" title="Why ‘Flex’?"></a><a href="#Why-‘Flex’" title="Why ‘Flex’?"></a>Why ‘Flex’?</h3><p>Flexbox allows us to distirbute space dynamically accross elements of an unknown size, hence the term “flex”</p>
+<h2 id="Flex-direction"><a href="#Flex-direction" class="headerlink" title="Flex direction"></a><a href="#Flex-direction" title="Flex direction"></a>Flex direction</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction">https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction</a></p>
+<h2 id="Justify-content"><a href="#Justify-content" class="headerlink" title="Justify-content"></a><a href="#Justify-content" title="Justify-content"></a>Justify-content</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content</a></p>
+<h2 id="Flex-Wrap"><a href="#Flex-Wrap" class="headerlink" title="Flex Wrap"></a><a href="#Flex-Wrap" title="Flex Wrap"></a>Flex Wrap</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap">https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap</a></p>
+<ul>
+<li>main Axis: <code>left-right</code></li>
+<li>cross Axis: `top-down</li>
+</ul>
+<h2 id="Align-Item"><a href="#Align-Item" class="headerlink" title="Align Item"></a><a href="#Align-Item" title="Align Item"></a>Align Item</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">https://developer.mozilla.org/en-US/docs/Web/CSS/align-items</a></p>
+<h2 id="Flex-Basis-Grow-and-Shrink"><a href="#Flex-Basis-Grow-and-Shrink" class="headerlink" title="Flex-Basis, Grow and Shrink"></a><a href="#Flex-Basis-Grow-and-Shrink" title="Flex-Basis, Grow and Shrink"></a>Flex-Basis, Grow and Shrink</h2><h3 id="Flex-Basis"><a href="#Flex-Basis" class="headerlink" title="Flex-Basis"></a><a href="#Flex-Basis" title="Flex-Basis"></a>Flex-Basis</h3><p>Defines the initial size of an element before additional space is distributed.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis">https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis</a></p>
+<h3 id="Flex-Grow"><a href="#Flex-Grow" class="headerlink" title="Flex-Grow"></a><a href="#Flex-Grow" title="Flex-Grow"></a>Flex-Grow</h3><p>Controls the amount of available space an element should take up. Accepts a unit-less number value.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow</a></p>
+<h3 id="Flex-Shrink"><a href="#Flex-Shrink" class="headerlink" title="Flex-Shrink"></a><a href="#Flex-Shrink" title="Flex-Shrink"></a>Flex-Shrink</h3><p>If items are large than the container. They shrink according to flex-shrink.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink">https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink</a></p>
+<h2 id="Flex-Shorthands"><a href="#Flex-Shorthands" class="headerlink" title="Flex Shorthands"></a><a href="#Flex-Shorthands" title="Flex Shorthands"></a>Flex Shorthands</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Three values: flex-grow flex-shrink flex-basis */</span></span><br><span class="line"><span class="attribute">flex</span>: <span class="number">2</span> <span class="number">2</span> <span class="number">10%</span></span><br></pre></td></tr></table></figure>
+<h2 id="Responsive-Design-and-Media-Queries-Intro"><a href="#Responsive-Design-and-Media-Queries-Intro" class="headerlink" title="Responsive Design and Media_Queries_Intro"></a><a href="#Responsive-Design-and-Media-Queries-Intro" title="Responsive Design and Media_Queries_Intro"></a>Responsive Design and Media_Queries_Intro</h2><p><a href="https://www.ibest.tw/page01.php">https://www.ibest.tw/page01.php</a></p>
+<h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a><a href="#The-problem" title="The problem"></a>The problem</h3><p>As mobile devices and tablets became widely available, developers had a problem… how do we create websites that <strong>look good on all screen sizes?</strong></p>
+<h2 id="One-approach"><a href="#One-approach" class="headerlink" title="One approach"></a><a href="#One-approach" title="One approach"></a>One approach</h2><p>Early on, it was common to create separate stylesheets for different devices, or even completely different websites for each size.</p>
+<h2 id="Enter-Responsive"><a href="#Enter-Responsive" class="headerlink" title="Enter Responsive"></a><a href="#Enter-Responsive" title="Enter Responsive"></a>Enter Responsive</h2><p>These days, we typically create ONE website and stylesheet that is able to respond to different device sizes and features.</p>
+<h1 id="Media-Queries"><a href="#Media-Queries" class="headerlink" title="Media Queries"></a><a href="#Media-Queries" title="Media Queries"></a>Media Queries</h1><p>Media queries allow us to modify our styles depending on particular parameters like screen width or device type.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a><a href="#Example" title="Example"></a>Example</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span>(max-width: <span class="number">800px</span>)&#123;</span><br><span class="line">    <span class="selector-class">.sidebar</span>&#123;</span><br><span class="line">        <span class="attribute">display</span>: none;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.main</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span>(min-width: <span class="number">30em</span>) <span class="keyword">and</span> (<span class="attribute">orientation</span>: landscape)&#123;</span><br><span class="line">    <span class="selector-id">#container</span>&#123;</span><br><span class="line">        <span class="attribute">flex-direction</span>: column;</span><br><span class="line">        <span class="attribute">justify-content</span>: center;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="The-Power-of-Media-Queries"><a href="#The-Power-of-Media-Queries" class="headerlink" title="The Power of Media Queries"></a><a href="#The-Power-of-Media-Queries" title="The Power of Media Queries"></a>The Power of Media Queries</h1><h2 id="Breakpoint-to-find-the-most-frequently-used-px-size"><a href="#Breakpoint-to-find-the-most-frequently-used-px-size" class="headerlink" title="Breakpoint to find the most frequently used px size"></a><a href="#Breakpoint-to-find-the-most-frequently-used-px-size" title="Breakpoint to find the most frequently used px size"></a>Breakpoint to find the most frequently used px size</h2><p><a href="https://www.browserstack.com/guide/what-are-css-and-media-query-breakpoints">https://www.browserstack.com/guide/what-are-css-and-media-query-breakpoints</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/Responsive/" rel="tag"># Responsive</a>
+              <a href="/tags/Flexbox/" rel="tag"># Flexbox</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/28/Opacity-TheAphlaChannel/" rel="prev" title="Other Assorted Useful CSS Properties">
+      <i class="fa fa-chevron-left"></i> Other Assorted Useful CSS Properties
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/30/YAML-Intro/" rel="next" title="YAML_Intro">
+      YAML_Intro <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-to-CSS-Flexbox"><span class="nav-number">1.</span> <span class="nav-text">Introduction to CSS Flexbox</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Basic"><span class="nav-number">1.1.</span> <span class="nav-text">The Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-it"><span class="nav-number">1.1.1.</span> <span class="nav-text">What is it?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#It%E2%80%99s-New-ish"><span class="nav-number">1.1.2.</span> <span class="nav-text">It’s New(ish)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-%E2%80%98Flex%E2%80%99"><span class="nav-number">1.1.3.</span> <span class="nav-text">Why ‘Flex’?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flex-direction"><span class="nav-number">1.2.</span> <span class="nav-text">Flex direction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Justify-content"><span class="nav-number">1.3.</span> <span class="nav-text">Justify-content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flex-Wrap"><span class="nav-number">1.4.</span> <span class="nav-text">Flex Wrap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Align-Item"><span class="nav-number">1.5.</span> <span class="nav-text">Align Item</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flex-Basis-Grow-and-Shrink"><span class="nav-number">1.6.</span> <span class="nav-text">Flex-Basis, Grow and Shrink</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flex-Basis"><span class="nav-number">1.6.1.</span> <span class="nav-text">Flex-Basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flex-Grow"><span class="nav-number">1.6.2.</span> <span class="nav-text">Flex-Grow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flex-Shrink"><span class="nav-number">1.6.3.</span> <span class="nav-text">Flex-Shrink</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flex-Shorthands"><span class="nav-number">1.7.</span> <span class="nav-text">Flex Shorthands</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Responsive-Design-and-Media-Queries-Intro"><span class="nav-number">1.8.</span> <span class="nav-text">Responsive Design and Media_Queries_Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-problem"><span class="nav-number">1.8.1.</span> <span class="nav-text">The problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#One-approach"><span class="nav-number">1.9.</span> <span class="nav-text">One approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enter-Responsive"><span class="nav-number">1.10.</span> <span class="nav-text">Enter Responsive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Media-Queries"><span class="nav-number">2.</span> <span class="nav-text">Media Queries</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">2.1.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Power-of-Media-Queries"><span class="nav-number">3.</span> <span class="nav-text">The Power of Media Queries</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Breakpoint-to-find-the-most-frequently-used-px-size"><span class="nav-number">3.1.</span> <span class="nav-text">Breakpoint to find the most frequently used px size</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jim</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jim</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
