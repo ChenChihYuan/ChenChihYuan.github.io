@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenchihyuan.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="The Douglas-Peucker (RDP) algorithm is excellent for simplifying polylines by removing points within a tolerance epsilon. However, standard RDP only guarantees geometric proximity — it doesn’t prevent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Topology-Preserving RDP">
+<meta property="og:url" content="https://chenchihyuan.github.io/2026/01/07/Topology-Preserving-RDP/index.html">
+<meta property="og:site_name" content="Jim Chen&#39;s Blog">
+<meta property="og:description" content="The Douglas-Peucker (RDP) algorithm is excellent for simplifying polylines by removing points within a tolerance epsilon. However, standard RDP only guarantees geometric proximity — it doesn’t prevent">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-07T08:26:29.000Z">
+<meta property="article:modified_time" content="2026-01-08T06:39:22.746Z">
+<meta property="article:author" content="Jim">
+<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="Computational Geometry">
+<meta property="article:tag" content="Csharp">
+<meta property="article:tag" content="RhinoCommon">
+<meta property="article:tag" content="Topology">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://chenchihyuan.github.io/2026/01/07/Topology-Preserving-RDP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Topology-Preserving RDP | Jim Chen's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jim Chen's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2026/01/07/Topology-Preserving-RDP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Topology-Preserving RDP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-01-07 17:26:29" itemprop="dateCreated datePublished" datetime="2026-01-07T17:26:29+09:00">2026-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-08 15:39:22" itemprop="dateModified" datetime="2026-01-08T15:39:22+09:00">2026-01-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>The <a href="/2020/05/21/Ramer%E2%80%93Douglas%E2%80%93Peucker-algorithm/" title="Ramer–Douglas–Peucker_algorithm">Douglas-Peucker (RDP) algorithm</a> is excellent for simplifying polylines by removing points within a tolerance epsilon. However, standard RDP only guarantees <strong>geometric proximity</strong> — it doesn’t prevent <strong>topological violations</strong> like self-intersections, collapsed holes, or accidental crossings between nearby features.</p>
+<p>In this post, we’ll explore what topology-preserving simplification means and how to implement it using RhinoCommon.</p>
+<span id="more"></span>
+<h1 id="Why-Standard-RDP-Can-Break-Topology"><a href="#Why-Standard-RDP-Can-Break-Topology" class="headerlink" title="Why Standard RDP Can Break Topology"></a>Why Standard RDP Can Break Topology</h1><p>While RDP with epsilon controls point deviation, it can still create invalid geometries:</p>
+<p><strong>Common topology violations:</strong></p>
+<ul>
+<li><strong>Self-intersections</strong>: A simplified polyline crosses itself</li>
+<li><strong>Collapsed holes</strong>: Interior vertices of a polygon are removed, collapsing a hole</li>
+<li><strong>Feature crossings</strong>: Two close parallel lines collapse into crossing lines after simplification</li>
+<li><strong>Lost connectivity</strong>: Road intersections disappear or new false intersections appear</li>
+</ul>
+<p>These issues arise because RDP makes <strong>local decisions</strong> (remove this point based on distance) without considering <strong>global constraints</strong> (does this create an intersection?).</p>
+<h1 id="What-“Topology-Preserving”-Actually-Means"><a href="#What-“Topology-Preserving”-Actually-Means" class="headerlink" title="What “Topology-Preserving” Actually Means"></a>What “Topology-Preserving” Actually Means</h1><p>In spatial geometry, <strong>topology</strong> refers to relationships between features:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Relationship</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adjacency</strong></td>
+<td>Two polygons sharing a border</td>
+</tr>
+<tr>
+<td><strong>Containment</strong></td>
+<td>A hole inside a polygon</td>
+</tr>
+<tr>
+<td><strong>Non-intersection</strong></td>
+<td>Polylines that never cross</td>
+</tr>
+<tr>
+<td><strong>Connectivity</strong></td>
+<td>Road segments meeting at intersections</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <strong>topology-preserving simplification</strong> ensures:</p>
+<p>✔ Polygon rings stay valid (no self-intersections)<br>✔ Holes remain inside boundary shells<br>✔ Shared boundaries aren’t broken or duplicated<br>✔ Lines that didn’t intersect before still don’t intersect after<br>✔ Connectivity is not accidentally removed or added  </p>
+<p>This is <strong>stronger</strong> than just controlling point deviation with epsilon. Standard RDP only guarantees geometric proximity, not topological validity.</p>
+<h1 id="How-Topology-Preserving-RDP-Works"><a href="#How-Topology-Preserving-RDP-Works" class="headerlink" title="How Topology-Preserving RDP Works"></a>How Topology-Preserving RDP Works</h1><p>Most topology-preserving algorithms extend RDP with additional checks:</p>
+<h2 id="1-Self-Intersection-Checks"><a href="#1-Self-Intersection-Checks" class="headerlink" title="1. Self-Intersection Checks"></a>1. Self-Intersection Checks</h2><p>Before removing a point, test whether the new segment would intersect any existing segments in the polyline.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Original:  A─B─C─D─E</span><br><span class="line">           └───┘ </span><br><span class="line">Remove C:  A───┬─D─E  ← Does A-D intersect B-C? If yes, keep C.</span><br><span class="line">               B</span><br></pre></td></tr></table></figure>
+<h2 id="2-Constraint-Propagation"><a href="#2-Constraint-Propagation" class="headerlink" title="2. Constraint Propagation"></a>2. Constraint Propagation</h2><p>When simplifying adjacent features (e.g., shared polygon borders), ensure both sides simplify consistently to maintain adjacency.</p>
+<h2 id="3-Global-Validity-Guarantees"><a href="#3-Global-Validity-Guarantees" class="headerlink" title="3. Global Validity Guarantees"></a>3. Global Validity Guarantees</h2><p>After simplification, verify the output is a valid geometry (e.g., closed polygons without crossing boundaries).</p>
+<h1 id="Implementation-in-RhinoCommon"><a href="#Implementation-in-RhinoCommon" class="headerlink" title="Implementation in RhinoCommon"></a>Implementation in RhinoCommon</h1><p>Let’s implement a topology-preserving RDP algorithm for polylines in C#/RhinoCommon.</p>
+<h2 id="Core-Algorithm-Standard-RDP"><a href="#Core-Algorithm-Standard-RDP" class="headerlink" title="Core Algorithm: Standard RDP"></a>Core Algorithm: Standard RDP</h2><p>First, here’s the standard RDP as a baseline:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Rhino.Geometry;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">PolylineSimplification</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> Standard Douglas-Peucker simplification</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title">List</span>&lt;<span class="title">Point3d</span>&gt; <span class="title">SimplifyRDP</span>(<span class="params">List&lt;Point3d&gt; points, <span class="built_in">double</span> epsilon</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (points.Count &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> List&lt;Point3d&gt;(points);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Find the point with maximum distance from line segment</span></span><br><span class="line">        <span class="built_in">double</span> maxDist = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">int</span> maxIndex = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        Point3d start = points[<span class="number">0</span>];</span><br><span class="line">        Point3d end = points[points.Count - <span class="number">1</span>];</span><br><span class="line">        Line baseLine = <span class="keyword">new</span> Line(start, end);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; points.Count - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">double</span> dist = baseLine.DistanceTo(points[i], <span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">if</span> (dist &gt; maxDist)</span><br><span class="line">            &#123;</span><br><span class="line">                maxDist = dist;</span><br><span class="line">                maxIndex = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// If max distance is greater than epsilon, recursively simplify</span></span><br><span class="line">        <span class="keyword">if</span> (maxDist &gt; epsilon)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Recursive call for left and right segments</span></span><br><span class="line">            List&lt;Point3d&gt; left = SimplifyRDP(points.GetRange(<span class="number">0</span>, maxIndex + <span class="number">1</span>), epsilon);</span><br><span class="line">            List&lt;Point3d&gt; right = SimplifyRDP(points.GetRange(maxIndex, points.Count - maxIndex), epsilon);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Combine results (remove duplicate middle point)</span></span><br><span class="line">            left.RemoveAt(left.Count - <span class="number">1</span>);</span><br><span class="line">            left.AddRange(right);</span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// All points can be removed except endpoints</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> List&lt;Point3d&gt; &#123; start, end &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Topology-Preserving-Extension"><a href="#Topology-Preserving-Extension" class="headerlink" title="Topology-Preserving Extension"></a>Topology-Preserving Extension</h2><p>Now let’s add self-intersection checks:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">TopologyPreservingSimplification</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> Topology-preserving Douglas-Peucker simplification</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> Prevents self-intersections in the simplified polyline</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title">List</span>&lt;<span class="title">Point3d</span>&gt; <span class="title">SimplifyPreserveTopology</span>(<span class="params">List&lt;Point3d&gt; points, <span class="built_in">double</span> epsilon</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (points.Count &lt; <span class="number">3</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> List&lt;Point3d&gt;(points);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> SimplifyRecursive(points, epsilon, <span class="number">0</span>, points.Count - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Point3d&gt; <span class="title">SimplifyRecursive</span>(<span class="params">List&lt;Point3d&gt; points, <span class="built_in">double</span> epsilon, </span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="built_in">int</span> startIdx, <span class="built_in">int</span> endIdx</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (endIdx - startIdx &lt; <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> List&lt;Point3d&gt; &#123; points[startIdx], points[endIdx] &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Find point with maximum distance</span></span><br><span class="line">        <span class="built_in">double</span> maxDist = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">int</span> maxIndex = startIdx;</span><br><span class="line">        </span><br><span class="line">        Point3d start = points[startIdx];</span><br><span class="line">        Point3d end = points[endIdx];</span><br><span class="line">        Line baseLine = <span class="keyword">new</span> Line(start, end);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = startIdx + <span class="number">1</span>; i &lt; endIdx; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">double</span> dist = baseLine.DistanceTo(points[i], <span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">if</span> (dist &gt; maxDist)</span><br><span class="line">            &#123;</span><br><span class="line">                maxDist = dist;</span><br><span class="line">                maxIndex = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check if we can safely simplify (remove all intermediate points)</span></span><br><span class="line">        <span class="keyword">if</span> (maxDist &lt;= epsilon)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// TOPOLOGY CHECK: Would creating segment start-&gt;end cause self-intersection?</span></span><br><span class="line">            Line newSegment = <span class="keyword">new</span> Line(start, end);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (WouldCauseSelfIntersection(points, startIdx, endIdx, newSegment))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Cannot simplify - keep the furthest point and recurse</span></span><br><span class="line">                List&lt;Point3d&gt; left = SimplifyRecursive(points, epsilon, startIdx, maxIndex);</span><br><span class="line">                List&lt;Point3d&gt; right = SimplifyRecursive(points, epsilon, maxIndex, endIdx);</span><br><span class="line">                </span><br><span class="line">                left.RemoveAt(left.Count - <span class="number">1</span>);</span><br><span class="line">                left.AddRange(right);</span><br><span class="line">                <span class="keyword">return</span> left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Safe to simplify</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> List&lt;Point3d&gt; &#123; start, end &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Recursively simplify both sides</span></span><br><span class="line">            List&lt;Point3d&gt; left = SimplifyRecursive(points, epsilon, startIdx, maxIndex);</span><br><span class="line">            List&lt;Point3d&gt; right = SimplifyRecursive(points, epsilon, maxIndex, endIdx);</span><br><span class="line">            </span><br><span class="line">            left.RemoveAt(left.Count - <span class="number">1</span>);</span><br><span class="line">            left.AddRange(right);</span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> Check if a new segment would cause self-intersection with the polyline</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> <span class="title">WouldCauseSelfIntersection</span>(<span class="params">List&lt;Point3d&gt; points, </span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="built_in">int</span> startIdx, <span class="built_in">int</span> endIdx, Line newSegment</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Check all existing segments in the polyline</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Count - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Skip adjacent segments (they naturally share endpoints)</span></span><br><span class="line">            <span class="keyword">if</span> (i == startIdx - <span class="number">1</span> || i == startIdx || i == endIdx - <span class="number">1</span> || i == endIdx)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Skip if we&#x27;re checking the segment being replaced</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt;= startIdx &amp;&amp; i &lt; endIdx)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            Line existingSegment = <span class="keyword">new</span> Line(points[i], points[i + <span class="number">1</span>]);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Check for intersection</span></span><br><span class="line">            <span class="built_in">double</span> a, b;</span><br><span class="line">            <span class="keyword">if</span> (Rhino.Geometry.Intersect.Intersection.LineLine(</span><br><span class="line">                newSegment, existingSegment, <span class="keyword">out</span> a, <span class="keyword">out</span> b, <span class="number">0.001</span>, <span class="literal">false</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Check if intersection is at interior of both segments (not just endpoints)</span></span><br><span class="line">                <span class="keyword">if</span> (a &gt; <span class="number">0.001</span> &amp;&amp; a &lt; <span class="number">0.999</span> &amp;&amp; b &gt; <span class="number">0.001</span> &amp;&amp; b &lt; <span class="number">0.999</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// Self-intersection detected</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// No self-intersection</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> Simplify a polyline curve with topology preservation</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Polyline <span class="title">SimplifyPolylineCurve</span>(<span class="params">Polyline polyline, <span class="built_in">double</span> epsilon</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">bool</span> isClosed = polyline.IsClosed;</span><br><span class="line">        List&lt;Point3d&gt; points = polyline.ToList();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// For closed polylines, temporarily open them</span></span><br><span class="line">        <span class="keyword">if</span> (isClosed &amp;&amp; points.Count &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            points.RemoveAt(points.Count - <span class="number">1</span>); <span class="comment">// Remove duplicate closing point</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        List&lt;Point3d&gt; simplified = SimplifyPreserveTopology(points, epsilon);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Restore closed state if needed</span></span><br><span class="line">        <span class="keyword">if</span> (isClosed &amp;&amp; simplified.Count &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            simplified.Add(simplified[<span class="number">0</span>]); <span class="comment">// Re-close the polyline</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Polyline(simplified);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Handling-Closed-Polylines"><a href="#Handling-Closed-Polylines" class="headerlink" title="Handling Closed Polylines"></a>Handling Closed Polylines</h2><p>For closed polylines (polygons), we need additional care:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">PolygonSimplification</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> Simplify a closed polygon with topology preservation</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Polyline <span class="title">SimplifyPolygon</span>(<span class="params">Polyline polygon, <span class="built_in">double</span> epsilon</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!polygon.IsClosed || polygon.Count &lt; <span class="number">4</span>)</span><br><span class="line">            <span class="keyword">return</span> polygon;</span><br><span class="line"></span><br><span class="line">        List&lt;Point3d&gt; points = polygon.ToList();</span><br><span class="line">        points.RemoveAt(points.Count - <span class="number">1</span>); <span class="comment">// Remove duplicate closing point</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Find the point furthest from centroid as a stable anchor</span></span><br><span class="line">        Point3d centroid = AveragePoint(points);</span><br><span class="line">        <span class="built_in">int</span> anchorIdx = FindFurthestPoint(points, centroid);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Rotate list so anchor is first</span></span><br><span class="line">        List&lt;Point3d&gt; rotated = RotateList(points, anchorIdx);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Simplify as open polyline</span></span><br><span class="line">        List&lt;Point3d&gt; simplified = TopologyPreservingSimplification</span><br><span class="line">            .SimplifyPreserveTopology(rotated, epsilon);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Check for self-intersections in the final closed polygon</span></span><br><span class="line">        simplified.Add(simplified[<span class="number">0</span>]); <span class="comment">// Close it</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (HasSelfIntersection(simplified))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Fall back to original if simplification created invalid geometry</span></span><br><span class="line">            <span class="keyword">return</span> polygon;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Polyline(simplified);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Point3d <span class="title">AveragePoint</span>(<span class="params">List&lt;Point3d&gt; points</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">double</span> x = <span class="number">0</span>, y = <span class="number">0</span>, z = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> pt <span class="keyword">in</span> points)</span><br><span class="line">        &#123;</span><br><span class="line">            x += pt.X;</span><br><span class="line">            y += pt.Y;</span><br><span class="line">            z += pt.Z;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">int</span> count = points.Count;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Point3d(x / count, y / count, z / count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">FindFurthestPoint</span>(<span class="params">List&lt;Point3d&gt; points, Point3d reference</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">double</span> maxDist = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">int</span> maxIdx = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Count; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">double</span> dist = reference.DistanceTo(points[i]);</span><br><span class="line">            <span class="keyword">if</span> (dist &gt; maxDist)</span><br><span class="line">            &#123;</span><br><span class="line">                maxDist = dist;</span><br><span class="line">                maxIdx = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxIdx;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Point3d&gt; <span class="title">RotateList</span>(<span class="params">List&lt;Point3d&gt; list, <span class="built_in">int</span> startIdx</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="keyword">new</span> List&lt;Point3d&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; list.Count; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            result.Add(list[(startIdx + i) % list.Count]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">bool</span> <span class="title">HasSelfIntersection</span>(<span class="params">List&lt;Point3d&gt; points</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; points.Count - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Line seg1 = <span class="keyword">new</span> Line(points[i], points[i + <span class="number">1</span>]);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> j = i + <span class="number">2</span>; j &lt; points.Count - <span class="number">1</span>; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Skip adjacent segments</span></span><br><span class="line">                <span class="keyword">if</span> (j == i + <span class="number">1</span> || (i == <span class="number">0</span> &amp;&amp; j == points.Count - <span class="number">2</span>))</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                </span><br><span class="line">                Line seg2 = <span class="keyword">new</span> Line(points[j], points[j + <span class="number">1</span>]);</span><br><span class="line">                </span><br><span class="line">                <span class="built_in">double</span> a, b;</span><br><span class="line">                <span class="keyword">if</span> (Rhino.Geometry.Intersect.Intersection.LineLine(</span><br><span class="line">                    seg1, seg2, <span class="keyword">out</span> a, <span class="keyword">out</span> b, <span class="number">0.001</span>, <span class="literal">false</span>))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (a &gt; <span class="number">0.001</span> &amp;&amp; a &lt; <span class="number">0.999</span> &amp;&amp; b &gt; <span class="number">0.001</span> &amp;&amp; b &lt; <span class="number">0.999</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Usage-Example"><a href="#Usage-Example" class="headerlink" title="Usage Example"></a>Usage Example</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example: Simplify a polyline with topology preservation</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SimplifyPolylineExample</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Create a test polyline (potentially with close segments that might intersect)</span></span><br><span class="line">    <span class="keyword">var</span> points = <span class="keyword">new</span> List&lt;Point3d&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">1</span>, <span class="number">0.1</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">2</span>, <span class="number">-0.1</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">3</span>, <span class="number">0.2</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">4</span>, <span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">3.5</span>, <span class="number">2</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">3</span>, <span class="number">4</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">2</span>, <span class="number">3.9</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">1</span>, <span class="number">4.1</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="keyword">new</span> Point3d(<span class="number">0</span>, <span class="number">4</span>, <span class="number">0</span>)</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    Polyline polyline = <span class="keyword">new</span> Polyline(points);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">double</span> epsilon = <span class="number">0.5</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Standard RDP (might create self-intersections)</span></span><br><span class="line">    List&lt;Point3d&gt; standardSimplified = PolylineSimplification.SimplifyRDP(points, epsilon);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Topology-preserving RDP (prevents self-intersections)</span></span><br><span class="line">    Polyline topoSimplified = TopologyPreservingSimplification</span><br><span class="line">        .SimplifyPolylineCurve(polyline, epsilon);</span><br><span class="line">    </span><br><span class="line">    Rhino.RhinoApp.WriteLine(<span class="string">$&quot;Original points: <span class="subst">&#123;points.Count&#125;</span>&quot;</span>);</span><br><span class="line">    Rhino.RhinoApp.WriteLine(<span class="string">$&quot;Standard RDP: <span class="subst">&#123;standardSimplified.Count&#125;</span>&quot;</span>);</span><br><span class="line">    Rhino.RhinoApp.WriteLine(<span class="string">$&quot;Topology-preserving: <span class="subst">&#123;topoSimplified.Count&#125;</span>&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Performance-Considerations"><a href="#Performance-Considerations" class="headerlink" title="Performance Considerations"></a>Performance Considerations</h1><p>Topology-preserving simplification is <strong>slower</strong> than standard RDP because:</p>
+<ul>
+<li>Each simplification decision requires intersection checks: $O(n)$ per check</li>
+<li>Overall complexity: $O(n^2 \log n)$ vs $O(n \log n)$ for standard RDP</li>
+</ul>
+<p><strong>Optimization strategies:</strong></p>
+<ol>
+<li><strong>Spatial indexing</strong>: Use R-trees to speed up intersection queries</li>
+<li><strong>Coarse filtering</strong>: Check bounding boxes before detailed intersection tests</li>
+<li><strong>Progressive simplification</strong>: Apply aggressive epsilon first, then refine</li>
+</ol>
+<h1 id="Real-World-Applications"><a href="#Real-World-Applications" class="headerlink" title="Real-World Applications"></a>Real-World Applications</h1><p>Topology-preserving simplification is crucial in:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GIS</strong></td>
+<td>Simplifying administrative boundaries while preserving adjacency</td>
+</tr>
+<tr>
+<td><strong>Cartography</strong></td>
+<td>Map generalization at different zoom levels</td>
+</tr>
+<tr>
+<td><strong>CAD/BIM</strong></td>
+<td>Reducing mesh complexity while maintaining valid geometry</td>
+</tr>
+<tr>
+<td><strong>Game Development</strong></td>
+<td>LOD (Level of Detail) generation for terrain</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="References-amp-Further-Reading"><a href="#References-amp-Further-Reading" class="headerlink" title="References &amp; Further Reading"></a>References &amp; Further Reading</h1><ul>
+<li><strong>PostGIS</strong>: <a href="https://cartosig.webs.upv.es/jaspa/v0.2.0/manual/html/ST_SimplifyPreserveTopology.html"><code>ST_SimplifyPreserveTopology</code></a> - PostgreSQL/PostGIS implementation</li>
+<li><strong>GEOS Library</strong>: C++ library used by PostGIS for geometric operations</li>
+<li><strong>Visvalingam-Whyatt</strong>: Alternative algorithm that can also be made topology-aware (see <a href="/2026/01/06/Visvalingam-Whyatt/" title="Visvalingam-Whyatt">Visvalingam-Whyatt post</a>)</li>
+</ul>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>While standard RDP is fast and simple, <strong>topology-preserving RDP</strong> is essential when geometric validity matters. By adding self-intersection checks, we ensure that simplified geometries remain valid and maintain their topological relationships.</p>
+<p>The performance cost is worth it for applications where invalid geometry could cause downstream failures — such as spatial databases, GIS analysis, or manufacturing CAD models.</p>
+<p><strong>Key takeaway</strong>: Always consider whether your simplification needs to preserve topology. If yes, implement intersection checks. If performance is critical, invest in spatial indexing structures.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+              <a href="/tags/Csharp/" rel="tag"># Csharp</a>
+              <a href="/tags/RhinoCommon/" rel="tag"># RhinoCommon</a>
+              <a href="/tags/Computational-Geometry/" rel="tag"># Computational Geometry</a>
+              <a href="/tags/Topology/" rel="tag"># Topology</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/01/06/Visvalingam-Whyatt/" rel="prev" title="Visvalingam-Whyatt">
+      <i class="fa fa-chevron-left"></i> Visvalingam-Whyatt
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/01/08/jsts-threejs-simplifiedPreserveTopology/" rel="next" title="Visualizing JSTS Topology Preserving Simplification">
+      Visualizing JSTS Topology Preserving Simplification <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-Standard-RDP-Can-Break-Topology"><span class="nav-number">1.</span> <span class="nav-text">Why Standard RDP Can Break Topology</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-%E2%80%9CTopology-Preserving%E2%80%9D-Actually-Means"><span class="nav-number">2.</span> <span class="nav-text">What “Topology-Preserving” Actually Means</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-Topology-Preserving-RDP-Works"><span class="nav-number">3.</span> <span class="nav-text">How Topology-Preserving RDP Works</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Self-Intersection-Checks"><span class="nav-number">3.1.</span> <span class="nav-text">1. Self-Intersection Checks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Constraint-Propagation"><span class="nav-number">3.2.</span> <span class="nav-text">2. Constraint Propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Global-Validity-Guarantees"><span class="nav-number">3.3.</span> <span class="nav-text">3. Global Validity Guarantees</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation-in-RhinoCommon"><span class="nav-number">4.</span> <span class="nav-text">Implementation in RhinoCommon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-Algorithm-Standard-RDP"><span class="nav-number">4.1.</span> <span class="nav-text">Core Algorithm: Standard RDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Topology-Preserving-Extension"><span class="nav-number">4.2.</span> <span class="nav-text">Topology-Preserving Extension</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handling-Closed-Polylines"><span class="nav-number">4.3.</span> <span class="nav-text">Handling Closed Polylines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage-Example"><span class="nav-number">4.4.</span> <span class="nav-text">Usage Example</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Performance-Considerations"><span class="nav-number">5.</span> <span class="nav-text">Performance Considerations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Real-World-Applications"><span class="nav-number">6.</span> <span class="nav-text">Real-World Applications</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References-amp-Further-Reading"><span class="nav-number">7.</span> <span class="nav-text">References &amp; Further Reading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jim</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jim</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

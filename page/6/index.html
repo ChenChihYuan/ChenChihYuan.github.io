@@ -145,6 +145,216 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/09/InorderTreeTraverseWithoutRecursion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/09/InorderTreeTraverseWithoutRecursion/" class="post-title-link" itemprop="url">InorderTreeTraverseWithoutRecursion</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-09 12:57:46" itemprop="dateCreated datePublished" datetime="2021-02-09T12:57:46+09:00">2021-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-05 20:17:34" itemprop="dateModified" datetime="2026-01-05T20:17:34+09:00">2026-01-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Inorder-Tree-Traversal-without-Recursion"><a href="#Inorder-Tree-Traversal-without-Recursion" class="headerlink" title="Inorder Tree Traversal without Recursion"></a><a href="#Inorder-Tree-Traversal-without-Recursion" title="Inorder Tree Traversal without Recursion"></a>Inorder Tree Traversal without Recursion</h1><p><a href="https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/?ref=lbp">Reference</a></p>
+<p><strong>Time Complexity:</strong> O(n2)</p>
+<p>Using <code>Stack</code> is the obvious way to travese tree without recursion.</p>
+<ol>
+<li>create an empty stack S</li>
+<li>Initialize current node as root</li>
+<li>Push the current node to S and set current = current-&gt;left until current is <strong>NULL</strong></li>
+<li>If current is <strong>NULL</strong> and stack is <strong>not empty</strong> then<ol>
+<li>Pop the top item from stack</li>
+<li>Print the popped item, set current = popped_item-&gt;right</li>
+<li>Go to step 3.</li>
+</ol>
+</li>
+<li>If current is <strong>NULL</strong> and stack is <strong>empty</strong></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span>* left;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span>* right;</span><br><span class="line">    <span class="built_in">Node</span>(<span class="type">int</span> data)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;data = data;</span><br><span class="line">        left = right = null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">inOrder</span><span class="params">(<span class="keyword">struct</span> Node* root)</span></span>&#123;</span><br><span class="line">    stack s;</span><br><span class="line">    Node* curr = root;</span><br><span class="line">    <span class="keyword">while</span>(curr!= <span class="literal">NULL</span> || s.<span class="built_in">empty</span>()==<span class="literal">false</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(curr!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">            s.<span class="built_in">push</span>(curr);</span><br><span class="line">            curr = curr-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        curr = s.<span class="built_in">top</span>();</span><br><span class="line">        s.<span class="built_in">pop</span>();</span><br><span class="line">        cout&lt;data&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        curr =  curr-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span>* root = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">1</span>);</span><br><span class="line">    root-&gt;left = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">2</span>);</span><br><span class="line">    root-&gt;right = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">3</span>);</span><br><span class="line">    root-&gt;left-&gt;left = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">4</span>);</span><br><span class="line">    root-&gt;left-&gt;right = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">inOrder</span>(root);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/06/BFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/06/BFS/" class="post-title-link" itemprop="url">BFS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-06 02:02:43" itemprop="dateCreated datePublished" datetime="2021-02-06T02:02:43+09:00">2021-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-05 20:17:34" itemprop="dateModified" datetime="2026-01-05T20:17:34+09:00">2026-01-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Breadth-first-search"><a href="#Breadth-first-search" class="headerlink" title="Breadth-first search"></a><a href="#Breadth-first-search" title="Breadth-first search"></a>Breadth-first search</h1><p><strong>Breath-first search</strong>(BFS) is an algorithm for traversing or searching <strong>tree</strong> or <strong>graph</strong> data structures. It starts ar the <strong>tree root</strong>(or some arbitrary node of a graph), and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level. -<a href="https://en.wikipedia.org/wiki/Breadth-first_search#:~:text=Breadth%2Dfirst%20search%20\(BFS\">Wiki</a>,tree%20or%20graph%20data%20structures.&amp;text=It%20uses%20the%20opposite%20strategy,backtrack%20and%20expand%20other%20nodes.)</p>
+<h1 id="Queue-Method"><a href="#Queue-Method" class="headerlink" title="Queue Method"></a><a href="#Queue-Method" title="Queue Method"></a>Queue Method</h1><h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a><a href="#Pseudocode" title="Pseudocode"></a>Pseudocode</h2><hr>
+<p>Input: A graph G and a starting vertex root of G<br>Output: Goal state. THe parent links trace the shortest path back to root.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">procedure BFS(G, root) is</span><br><span class="line">    let Q be a queue</span><br><span class="line">    label root as discovered</span><br><span class="line">    Q.enqueue(root)</span><br><span class="line">    while Q is not empty do</span><br><span class="line">        v := Q.dequeue()</span><br><span class="line">        if c is the goal then</span><br><span class="line">            return v</span><br><span class="line">        for all edges from v to w in G.</span><br></pre></td></tr></table></figure>
+<p>The concept can refer to this article, though it is in Japanese.<br><a href="https://qiita.com/drken/items/996d80bcae64649a6580">BFS_queue</a><br><a href="https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/990/">LeetCode_BFS</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vector&gt; <span class="built_in">levelTravese</span>(TreeNode* root)&#123;</span><br><span class="line">        vector&gt; LvTraverse;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> LvTraverse;</span><br><span class="line">        </span><br><span class="line">        queue q;</span><br><span class="line">        q.<span class="built_in">push</span>(root);</span><br><span class="line">        TreeNode* node = root;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="type">int</span> k = q.<span class="built_in">size</span>();</span><br><span class="line">            vector tmp;</span><br><span class="line">            <span class="keyword">while</span>(k--)&#123;</span><br><span class="line">                root = q.<span class="built_in">front</span>();</span><br><span class="line">                tmp.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">                q.<span class="built_in">pop</span>();</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(root-&gt;left)</span><br><span class="line">                    q.<span class="built_in">push</span>(root-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(root-&gt;right)</span><br><span class="line">                    q.<span class="built_in">push</span>(root-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">            LvTraverse.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> LvTraverse;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Recursive-Method"><a href="#Recursive-Method" class="headerlink" title="Recursive Method"></a><a href="#Recursive-Method" title="Recursive Method"></a>Recursive Method</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">height</span><span class="params">(TreeNode* node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="type">int</span> lheight = <span class="built_in">height</span>(node-&gt;left);</span><br><span class="line">            <span class="type">int</span> rheight = <span class="built_in">height</span>(node-&gt;right);</span><br><span class="line">            <span class="keyword">return</span> lheight &gt; rheight ? lheight<span class="number">+1</span> : rheight<span class="number">+1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    vector&gt; <span class="built_in">printlevelOrder</span>(TreeNode* root)&#123;</span><br><span class="line">        vector&gt; vecs;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i&lt;= <span class="built_in">height</span>(root);i++)&#123;</span><br><span class="line">            vector invec;</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root, i, invec);</span><br><span class="line">            vecs.<span class="built_in">push_back</span>(invec);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vecs;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">AddGivenLevel</span><span class="params">(TreeNode* root, <span class="type">int</span> level, vector&amp; vec)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(level ==<span class="number">1</span>)</span><br><span class="line">            vec.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(level&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root-&gt;left, level<span class="number">-1</span>, vec);</span><br><span class="line">            <span class="built_in">AddGivenLevel</span>(root-&gt;right, level<span class="number">-1</span>, vec);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>Note:</p>
+<ol>
+<li>height can be found recursively. height(1_based) = level(0_based) + 1</li>
+</ol>
+<h1 id="Solve-Tree-Problems-Recursively"><a href="#Solve-Tree-Problems-Recursively" class="headerlink" title="Solve Tree Problems Recursively"></a><a href="#Solve-Tree-Problems-Recursively" title="Solve Tree Problems Recursively"></a>Solve Tree Problems Recursively</h1><p>Can refer to the LeetCode Page<a href="https://leetcode.com/explore/learn/card/data-structure-tree/17/solve-problems-recursively/534/">LINK</a></p>
+<p>Typically, we can solve a tree problem recursively using a <strong>top-down approach</strong> or using a <strong>bottom-up approach</strong>.</p>
+<h2 id="Top-down-Solution"><a href="#Top-down-Solution" class="headerlink" title="Top-down Solution"></a><a href="#Top-down-Solution" title="Top-down Solution"></a>Top-down Solution</h2><p><strong>Top-down</strong> means that in each recursive call, we will <strong>visit the node first</strong> to come up with some values, and <strong>pass</strong> these values <strong>to its children</strong> when calling the function recursively.</p>
+<p>So the top-down solution can be consideredd as a kind of <strong>preorder</strong> travesal. To be specific, the recursive function <code>top-down(root, params)</code> works like this:</p>
+<ol>
+<li>return specific value for null node</li>
+<li>update the answer if needed // answer &lt;— params</li>
+<li>left_ans = top_down(root.left, left_params) // left_params &lt;— root.val ,params</li>
+<li>right_ans = top_down(root.right, right_params) // right_params &lt;— root.val , params</li>
+<li>return the answer if needed // answers &lt;— left_ans, right_ans</li>
+</ol>
+<h3 id="For-example-find-height-of-a-binary-Tree"><a href="#For-example-find-height-of-a-binary-Tree" class="headerlink" title="For example - find height of a binary Tree"></a><a href="#For-example-find-height-of-a-binary-Tree" title="For example - find height of a binary Tree"></a>For example - find height of a binary Tree</h3><blockquote>
+<p>We know that depth of the root node is <code>1</code></p>
+</blockquote>
+<ol>
+<li>For each node, if we know its depth, we will know the depth of its children.</li>
+<li>Therefore, if we pass the depth of the node as a parameter when calling the function recursively, all the nodes will know their depth.</li>
+</ol>
+<hr>
+<ol>
+<li>return if root is <code>NULL</code></li>
+<li>if root is a leaf node:</li>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">answer = max(answer, depth)      // update the answer if needed</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>maximum_depth(root.left, depth + 1)</p>
+</li>
+<li>maximum_depth(root.right, depth+ 1)</li>
+</ol>
+<hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> answer;		       <span class="comment">// don&#x27;t forget to initialize answer before call maximum_depth</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">maximum_depth</span><span class="params">(TreeNode* root, <span class="type">int</span> depth)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) &#123;</span><br><span class="line">        answer = <span class="built_in">max</span>(answer, depth);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">maximum_depth</span>(root-&gt;left, depth + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">maximum_depth</span>(root-&gt;right, depth + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Button-up-Solution"><a href="#Button-up-Solution" class="headerlink" title="Button-up Solution"></a><a href="#Button-up-Solution" title="Button-up Solution"></a>Button-up Solution</h2><p><code>Button-up</code> is another recursive solution. In each recursive call, we will firstly call the function recursively for <strong>all the children nodes</strong> and then come up with the answer according to the returned valued and the value of the current node itself. This process can be regraded as a kind of <strong>postordered</strong> traversal. Typically, a “button-up” recursive function <code>bottom_up(root)</code> will be something like this:</p>
+<ol>
+<li>return specific value for null node</li>
+<li>left_ans = bottom_up(root.left) // call function recursively for left child</li>
+<li>right_ans = bottom_up(root.right) // call function recursively for right child</li>
+<li>return answers // answer &lt;– left_ans, right_ans, root.val</li>
+</ol>
+<hr>
+<h3 id="For-example-find-height-of-a-binary-Tree-1"><a href="#For-example-find-height-of-a-binary-Tree-1" class="headerlink" title="For example - find height of a binary Tree"></a><a href="#For-example-find-height-of-a-binary-Tree-1" title="For example - find height of a binary Tree"></a>For example - find height of a binary Tree</h3><blockquote>
+<p>Same exmaple, different perspective.</p>
+</blockquote>
+<ol>
+<li><p>If we know the maximum depth <code>l</code> of the subtree rooted at its <strong>left</strong> child and the maximum depth <code>r</code> of the subtree rooted at its <strong>right</strong> child, can we answer the previous question?</p>
+</li>
+<li><p>Of course yes, we can choose the maximum between them and add 1 to get the maximum depth of the subtree rooted at the current node. That is <code>x = max(l,r) + 1</code></p>
+</li>
+<li><p>return 0 if root is null</p>
+</li>
+<li><p>left_depth = maximum_depth(root.left)</p>
+</li>
+<li><p>right_depth = maximum_depth(root.right)</p>
+</li>
+<li><p>return max(left_depth, right_depth) + 1</p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">maximum_depth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!root) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;                                 <span class="comment">// return 0 for null node</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> left_depth = <span class="built_in">maximum_depth</span>(root-&gt;left);</span><br><span class="line">	<span class="type">int</span> right_depth = <span class="built_in">maximum_depth</span>(root-&gt;right);</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">max</span>(left_depth, right_depth) + <span class="number">1</span>;	  <span class="comment">// return depth of the subtree rooted at root</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/02/05/DiscreteDifferentialGeometry-01-Overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -840,232 +1050,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/16/EventAndDelegates/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jim">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jim Chen's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/16/EventAndDelegates/" class="post-title-link" itemprop="url">EventAndDelegates</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-16 06:31:13" itemprop="dateCreated datePublished" datetime="2020-06-16T06:31:13+09:00">2020-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2026-01-05 20:17:33" itemprop="dateModified" datetime="2026-01-05T20:17:33+09:00">2026-01-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.youtube.com/watch?v=jQgwEsJISy0">Resource</a></p>
-<h1 id="Events"><a href="#Events" class="headerlink" title="Events"></a><a href="#Events" title="Events"></a>Events</h1><ul>
-<li>A mechanism for communication between objects</li>
-<li>Used in building <code>Loosely Coupled Applications</code></li>
-<li>Helps extending applications</li>
-</ul>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a><a href="#Example" title="Example"></a>Example</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// Encoding logic</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        _mailService.Send(<span class="keyword">new</span> Mail());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>but, in the future, if we want to send <strong>text</strong> message to the video owner.</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// Encoding logic</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        _mailService.Send(<span class="keyword">new</span> Mail());</span><br><span class="line">        </span><br><span class="line">        _messageService.Send(<span class="keyword">new</span> Text());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>but if we do it this way, the whole <strong>Encode() method</strong> will need to be recompiled, and the class depends on this function, will need to be recompiled and redeploied.</p>
-<blockquote>
-<p>We want to design our application such that when you want to change that, it changes the minimum impact on the application</p>
-</blockquote>
-<p>We can use <code>Event</code> to deal with this problem.</p>
-<h1 id="How-we-do-event-in-this-case"><a href="#How-we-do-event-in-this-case" class="headerlink" title="How we do event in this case"></a><a href="#How-we-do-event-in-this-case" title="How we do event in this case"></a>How we do event in this case</h1><ul>
-<li>VideoEncoder<ol>
-<li>publisher</li>
-<li>event sender</li>
-</ol>
-</li>
-<li>MailService<ol>
-<li>Subscriber</li>
-<li>event receiver</li>
-</ol>
-</li>
-</ul>
-<p>So, in future.</p>
-<ul>
-<li>MessageService<ol>
-<li>Subscriber</li>
-<li>event receiver</li>
-</ol>
-</li>
-</ul>
-<h2 id="Main-changes"><a href="#Main-changes" class="headerlink" title="Main changes"></a><a href="#Main-changes" title="Main changes"></a>Main changes</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// Encoding logic</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        OnVideoEncoded();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>OnVidoEncoded()</code> method simply notify the subscribers.</p>
-<blockquote>
-<p><strong>VideoEncoder</strong> knows absoulately nothing about the <strong>MailService</strong> and <strong>MessageService</strong> or any other subscribers.<br>They(subscribers) can come later, and we can add more subscribers.</p>
-</blockquote>
-<h2 id="One-Question-Raise-How-VideoEncoder-publisher-notify-its-subscribers"><a href="#One-Question-Raise-How-VideoEncoder-publisher-notify-its-subscribers" class="headerlink" title="One Question Raise: How VideoEncoder(publisher) notify its subscribers"></a><a href="#One-Question-Raise-How-VideoEncoder-publisher-notify-its-subscribers" title="One Question Raise: How VideoEncoder(publisher) notify its subscribers"></a>One Question Raise: How VideoEncoder(publisher) notify its subscribers</h2><p>We need an agreement or contract between publisher and its subscribers.</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params"><span class="built_in">object</span> source, EventArgs e</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>This is a very typical implementation of method in the <code>subscribers</code>, and it is called <code>EventHandler</code>.<br>This is also the method which called by the <strong>publisher</strong> when the event is raised.</p>
-<p>Again, VideoEncoder(<strong>Event Publisher</strong>) do not know the existence of its publishers. Publisher <strong>decoupled</strong> from them(subscribers).<br>All the <strong>publisher</strong> knows, is a method(<strong>EventHandler</strong>).</p>
-<h2 id="How-do-you-tell-VideoEncoder-Publisher-what-method-to-call"><a href="#How-do-you-tell-VideoEncoder-Publisher-what-method-to-call" class="headerlink" title="How do you tell VideoEncoder(Publisher) what method to call?"></a><a href="#How-do-you-tell-VideoEncoder-Publisher-what-method-to-call" title="How do you tell VideoEncoder(Publisher) what method to call?"></a>How do you tell VideoEncoder(Publisher) what method to call?</h2><p>That’s where a <code>Delegate</code> comes in.</p>
-<h1 id="Delegates"><a href="#Delegates" class="headerlink" title="Delegates"></a><a href="#Delegates" title="Delegates"></a>Delegates</h1><ul>
-<li>Agreement/ Contract between Publisher and Subscriber</li>
-<li>Determines the <strong>signature</strong> of the event handler method in Subscriber</li>
-</ul>
-<ol>
-<li>Define a <strong>delegate</strong></li>
-<li>Define an event based on that delegate</li>
-<li>Raise the event</li>
-</ol>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">VideoEncodedEventHandler</span>(<span class="params"><span class="built_in">object</span> source, EventArgs <span class="keyword">args</span></span>)</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>object source</code> : source of that event</li>
-<li><code>EventArgs args</code>: any additional data we want to send to the event</li>
-</ul>
-<p>Here we declare an <strong>event</strong>, which hold a <strong>reference to a function</strong>, look like</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">VideoEncodedEventHandler</span>(<span class="params"><span class="built_in">object</span> source, EventArgs <span class="keyword">args</span></span>)</span>;</span><br></pre></td></tr></table></figure>
-<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a><a href="#Implementation" title="Implementation"></a>Implementation</h1><h2 id="Program-cs"><a href="#Program-cs" class="headerlink" title="Program.cs"></a><a href="#Program-cs" title="Program.cs"></a>Program.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] <span class="keyword">args</span></span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> video = <span class="keyword">new</span> Video() &#123; Title = <span class="string">&quot;Video 1&quot;</span> &#125;;</span><br><span class="line">            <span class="keyword">var</span> videoEncoder = <span class="keyword">new</span> VideoEncoder();          <span class="comment">// publisher</span></span><br><span class="line">            <span class="keyword">var</span> mailService = <span class="keyword">new</span> MailService();            <span class="comment">// subscriber</span></span><br><span class="line">            <span class="keyword">var</span> messageSerive = <span class="keyword">new</span> MessageService();       <span class="comment">// subscriber</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;  <span class="comment">// VideoEncoded event behind the scene, is a list of function pointers. OnVideoEncoded is the function pointer</span></span><br><span class="line">            videoEncoder.VideoEncoded += messageSerive.OnVideoEncoded;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            videoEncoder.Encode(video);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Video-cs"><a href="#Video-cs" class="headerlink" title="Video.cs"></a><a href="#Video-cs" title="Video.cs"></a>Video.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Video</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Title &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="VideoEncoder-cs"><a href="#VideoEncoder-cs" class="headerlink" title="VideoEncoder.cs"></a><a href="#VideoEncoder-cs" title="VideoEncoder.cs"></a>VideoEncoder.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Threading;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEventArgs</span> : <span class="title">EventArgs</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Video Video &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VideoEncoder</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 1- Define a delegate</span></span><br><span class="line">        <span class="comment">// 2- Define an event based on that delegate</span></span><br><span class="line">        <span class="comment">// 3- Raise the event</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">VideoEncodedEventHandler</span>(<span class="params"><span class="built_in">object</span> source, VideoEventArgs <span class="keyword">args</span></span>)</span>;      <span class="comment">// 1. define a delegate</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> VideoEncodedEventHandler VideoEncoded;                                     <span class="comment">// 2. define an event based on the delegate</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> EventHandler VideoEncoding;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encode</span>(<span class="params">Video video</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Encoding Video...&quot;</span>);</span><br><span class="line">            Thread.Sleep(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line">            OnVideoEncoded(video);                                                              <span class="comment">// 3. Raise the event</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params">Video video</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (VideoEncoded != <span class="literal">null</span>)</span><br><span class="line">                VideoEncoded(<span class="keyword">this</span>, <span class="keyword">new</span> VideoEventArgs() &#123; Video = video &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="MailService-cs"><a href="#MailService-cs" class="headerlink" title="MailService.cs"></a><a href="#MailService-cs" title="MailService.cs"></a>MailService.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MailService</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params"><span class="built_in">object</span> source, VideoEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;MailService: Sending an email...&quot;</span> + e.Video.Title);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="MessageService-cs"><a href="#MessageService-cs" class="headerlink" title="MessageService.cs"></a><a href="#MessageService-cs" title="MessageService.cs"></a>MessageService.cs</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">EventsAndDelegates</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MessageService</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnVideoEncoded</span>(<span class="params"><span class="built_in">object</span> source, VideoEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;MessageService: Sending a text message...&quot;</span> + e.Video.Title);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a><a href="#Result" title="Result"></a>Result</h2><p><img src="/uploads/Delegate1.JPG" alt="idea"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2020/06/15/Custom-Attribute-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jim">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jim Chen's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/15/Custom-Attribute-note/" class="post-title-link" itemprop="url">Custom_Attribute_note</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-15 09:28:43" itemprop="dateCreated datePublished" datetime="2020-06-15T09:28:43+09:00">2020-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2026-01-05 20:17:33" itemprop="dateModified" datetime="2026-01-05T20:17:33+09:00">2026-01-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.grasshopper3d.com/forum/topics/clarification-about-gh-component-gh-param-and-gh-attributes">clarification_about_IGH</a></p>
-<blockquote>
-<p>All objects that want to be part of a GH_Document must implement the <code>IGH_DocumentObject</code> <strong>interface</strong>.</p>
-</blockquote>
-<p>This interface provides <strong>core methods</strong> needed for all objects</p>
-<ol>
-<li>Undo</li>
-<li>Autosave</li>
-<li>Display</li>
-<li>Menu</li>
-<li>Tooltip</li>
-</ol>
-<p><code>IGH_ActiveObject</code> extends upon <code>IGH_DocumentObject</code> and it provides methods for participating in the solution.</p>
-<h2 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a><a href="#Parameters" title="Parameters"></a>Parameters</h2><p>Parameters(via the <code>IGH_Param</code> interface and several <code>GH_Param&lt;T&gt;</code> classes) maintain a data tree which is associated with a special type of <code>IGH_Goo</code> data. They have the logic build in that allows them to communicate with other parameters via their input/output wires.</p>
-<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a><a href="#Components" title="Components"></a>Components</h2><p>Components tend to drive from GH_Component(or at the very least implemeny <code>IGH_Component</code>), as that class provides all the bookkeeping methods for managing a collection of input and output parameters.</p>
-<h2 id="Attribute"><a href="#Attribute" class="headerlink" title="Attribute"></a><a href="#Attribute" title="Attribute"></a>Attribute</h2><p>Attributes are used primary for <strong>display purposes</strong>. Every object must be capable of creating and maintaining a class which ultimately implements <code>IGH_Attributes</code>. The attributes are in charge of</p>
-<ol>
-<li>rendering the object to the canvas</li>
-<li>providing basic information about the shape of an object</li>
-<li>handling mouse and key events</li>
-<li>responding correctly to selection actions</li>
-<li>maintaining the object hierarchy (Basically, it means that component attributes must be able to <strong>talk</strong> to input and output parameters, and the parameters need to be able to figure out they are slaved to a component.)</li>
-</ol>
-<hr>
-<p><a href="https://developer.rhino3d.com/api/grasshopper/html/8a7974ab-7b2b-4f48-84d0-6e81b184e6b0.htm">Custom Attribute SDK</a><br>Objects on the Grasshopper canvas consist of <strong>two part</strong>.<br>The most important piece is the class that implements the <code>IGH_DocumentObject</code> interface.<br>This interface provides the basic <strong>plumbing</strong> needed to make objects work within <strong>a Grasshopper node network.</strong></p>
-<p>The interface part of objects however is handled seperately.</p>
-<p>Every <code>IGH_DocumentObject</code> carries around an instance of a class that implements the <code>IGH_Attriibutes</code> interface(indeed, every IGH_DocumentOBject knows how to create its own stand-alone attributes).</p>
-<p>It is not possible to have an <code>IGH_Attributes</code> instance work on its own, we need an <code>IGH_DocoumentObject</code> to tie it to.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1131,12 +1119,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-count">115</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

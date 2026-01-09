@@ -145,6 +145,182 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/09/UsingVisualLISPDebuggingTools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/09/UsingVisualLISPDebuggingTools/" class="post-title-link" itemprop="url">UsingVisualLISPDebuggingTools</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-09 04:06:26" itemprop="dateCreated datePublished" datetime="2021-12-09T04:06:26+09:00">2021-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-05 20:17:35" itemprop="dateModified" datetime="2026-01-05T20:17:35+09:00">2026-01-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Differentiating-Between-Local-and-Global-Variable"><a href="#Differentiating-Between-Local-and-Global-Variable" class="headerlink" title="Differentiating Between Local and Global Variable"></a><a href="#Differentiating-Between-Local-and-Global-Variable" title="Differentiating Between Local and Global Variable"></a>Differentiating Between Local and Global Variable</h1><ul>
+<li><strong>Global variables</strong> are accessible by all functions loaded within a document(or drawing).</li>
+<li><strong>Local variables</strong> retain their value only as long as the function that defined them is running. After the function finishes running, the local variable values are automatically discarded, and the system reclaims the memory space the variable used.</li>
+</ul>
+<h1 id="Using-Local-Variable-in-the-Program"><a href="#Using-Local-Variable-in-the-Program" class="headerlink" title="Using Local Variable in the Program"></a><a href="#Using-Local-Variable-in-the-Program" title="Using Local Variable in the Program"></a>Using Local Variable in the Program</h1><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> gp<span class="symbol">:getPointInput</span>	(<span class="name">/</span> StartPt EndPt HalfWidth)</span><br><span class="line">  (<span class="name">if</span> (<span class="name">setq</span> StartPt (<span class="name">getpoint</span> <span class="string">&quot;\nStart point of path: &quot;</span>))</span><br><span class="line">    (<span class="name">if</span> (<span class="name">setq</span> EndPt (<span class="name">getpoint</span> StartPt <span class="string">&quot;\nEndpoint of path: &quot;</span>))</span><br><span class="line">      (<span class="name">if</span> (<span class="name">setq</span> HalfWidth (<span class="name">getdist</span> EndPt <span class="string">&quot;\nhalf-width of path: &quot;</span>))</span><br><span class="line">          T</span><br><span class="line">      )</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>The local variables are declared following the <code>slash character</code>.</p>
+<hr>
+<h1 id=""><a href="#" class="headerlink" title=""></a><a href="#"></a></h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/08/VisualLISP-GardenPath/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jim">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/08/VisualLISP-GardenPath/" class="post-title-link" itemprop="url">VisualLISP_GardenPath</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-08 06:14:00" itemprop="dateCreated datePublished" datetime="2021-12-08T06:14:00+09:00">2021-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-05 20:17:35" itemprop="dateModified" datetime="2026-01-05T20:17:35+09:00">2026-01-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Tutorial-Garden-Path-Visual-LISP-IDE"><a href="#Tutorial-Garden-Path-Visual-LISP-IDE" class="headerlink" title="Tutorial: Garden Path (Visual LISP IDE)"></a><a href="#Tutorial-Garden-Path-Visual-LISP-IDE" title="Tutorial: Garden Path (Visual LISP IDE)"></a>Tutorial: Garden Path (Visual LISP IDE)</h1><p><a href="https://help.autodesk.com/view/OARX/2018/CHS/?guid=GUID-66377097-9BDB-4E3D-97E6-2263A5F273EC">Reference</a></p>
+<ul>
+<li>The <code>Visual LISP® environment</code> is introduced.</li>
+<li><code>ActiveX®</code> and <code>Reactor functions of AutoLISP</code> are demonstrated, as well as several other extensions to the AutoLISP language provided with Visual LISP.</li>
+</ul>
+<hr>
+<p>There are two possible executino contexts for this tutorial:</p>
+<ul>
+<li>The application may be run as interpreted LISP in piecemeal files and/ or functions that are loaded into a single document.</li>
+<li>Or, the program code can be compiled into a <code>VLX</code> application, denoted by a *.vlx executable. A <code>VLX</code> operates from a self-contained namespace that can interact with the application-loading document.</li>
+</ul>
+<h2 id="Lesson-1-Designing-and-Beginning-the-Program-Visual-LISP-IDE"><a href="#Lesson-1-Designing-and-Beginning-the-Program-Visual-LISP-IDE" class="headerlink" title="Lesson 1: Designing and Beginning the Program(Visual LISP IDE)"></a><a href="#Lesson-1-Designing-and-Beginning-the-Program-Visual-LISP-IDE" title="Lesson 1: Designing and Beginning the Program(Visual LISP IDE)"></a>Lesson 1: Designing and Beginning the Program(Visual LISP IDE)</h2><p><a href="https://help.autodesk.com/view/OARX/2018/CHS/?guid=GUID-234D7B54-1972-4E84-9CFB-1057DE3D10EB">Reference</a></p>
+<h3 id="Defining-Overall-Program-Goals"><a href="#Defining-Overall-Program-Goals" class="headerlink" title="Defining Overall Program Goals"></a><a href="#Defining-Overall-Program-Goals" title="Defining Overall Program Goals"></a>Defining Overall Program Goals</h3><p><img src="2021-12-08-15-44-41.png" alt=""></p>
+<p><strong>Task</strong></p>
+<ul>
+<li>Given a start point, an endpoint, and a width, draw a rectilinear boundary. The boundary can be at any 2D orientation. There should be no limit on how large or small it can be.</li>
+<li>Prompt the user for tile size and tile spacing values. The tiles are simple circles and will fill the boundary but must not overlap or cross the boundary.</li>
+<li>Place the tiles in alternating rows.</li>
+</ul>
+<p>Example Location can be found in:<br>C:\Program Files\Autodesk\AutoCAD 2022\Tutorial\VisualLISP</p>
+<h3 id="Getting-Started-With-Visual-LISP"><a href="#Getting-Started-With-Visual-LISP" class="headerlink" title="Getting Started With Visual LISP"></a><a href="#Getting-Started-With-Visual-LISP" title="Getting Started With Visual LISP"></a>Getting Started With Visual LISP</h3><p>First, it helps to demonstrate what can happen when Visual LISP <strong>is waiting for contorl to return from AutoCAD</strong>.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;;; Function C:GPath is the main program function and defines the </span></span><br><span class="line"><span class="comment">;;; AutoCAD GPATH command.</span></span><br><span class="line">(<span class="name">defun</span> C<span class="symbol">:GPath</span> () </span><br><span class="line">  <span class="comment">;; Ask the user for input: first for path location and</span></span><br><span class="line">  <span class="comment">;; direction, then for path parameters. Continue only if you have</span></span><br><span class="line">  <span class="comment">;; valid input.</span></span><br><span class="line">  (<span class="name">if</span> (<span class="name">gp</span><span class="symbol">:getPointInput</span>)  <span class="comment">;</span></span><br><span class="line">    (<span class="name">if</span> (<span class="name">gp</span><span class="symbol">:getDialogInput</span>) </span><br><span class="line">      (<span class="name">progn</span> </span><br><span class="line">        <span class="comment">;; At this point, you have valid input from the user.</span></span><br><span class="line">        <span class="comment">;; Draw the outline, storing the resulting polyline</span></span><br><span class="line">        <span class="comment">;; &quot;pointer&quot; in the variable called PolylineName.</span></span><br><span class="line">        (<span class="name">setq</span> PolylineName (<span class="name">gp</span><span class="symbol">:drawOutline</span>))</span><br><span class="line">        (<span class="name">princ</span> <span class="string">&quot;\nThe gp:drawOutline function returned &lt;&quot;</span>)</span><br><span class="line">        (<span class="name">princ</span> PolylineName)</span><br><span class="line">        (<span class="name">princ</span> <span class="string">&quot;&gt;&quot;</span>)</span><br><span class="line">        (<span class="name">Alert</span> <span class="string">&quot;Congratulations - your program is complete!&quot;</span>)</span><br><span class="line">      )</span><br><span class="line">      (<span class="name">princ</span> <span class="string">&quot;\nFunction cancelled.&quot;</span>)</span><br><span class="line">    )</span><br><span class="line">    (<span class="name">princ</span> <span class="string">&quot;\nIncomplete information to draw a boundary.&quot;</span>)</span><br><span class="line">  )</span><br><span class="line">  (<span class="name">princ</span>) <span class="comment">; exit quietly</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">;;; Display a message to let the user know the command name.</span></span><br><span class="line">(<span class="name">princ</span> <span class="string">&quot;\nType gpath to draw a garden path.&quot;</span>)</span><br><span class="line">(<span class="name">princ</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>defun</code>: declare the funcation</li>
+<li><code>C:GPath</code> : Command, and the name is <code>GPath</code></li>
+<li><code>gp:getPointInput</code> and <code>getDialogInput</code>: These function names are prefixed with <code>gp:</code> to <strong>indicate</strong> they are specific to the <strong>graden path</strong> applcation. <em>This is not a requiremnet</em></li>
+<li>The final <code>princ</code> without a string argument forces the program to exit quietly.</li>
+</ul>
+<hr>
+<h3 id="Filling-the-Gaps-in-the-program"><a href="#Filling-the-Gaps-in-the-program" class="headerlink" title="Filling the Gaps in the program"></a><a href="#Filling-the-Gaps-in-the-program" title="Filling the Gaps in the program"></a>Filling the Gaps in the program</h3><ul>
+<li>pg:getPointInput</li>
+<li>pg:getUserInput</li>
+<li>gp:drawOutline</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;;; Function gp:getPointInput will get path location and size</span></span><br><span class="line">(<span class="name">defun</span> gp<span class="symbol">:getPointInput</span>	()</span><br><span class="line">  (<span class="name">alert</span></span><br><span class="line">    <span class="string">&quot;Function gp:getPointInput will get user drawing input&quot;</span></span><br><span class="line">  )</span><br><span class="line">  <span class="comment">;; For now, return T, as if the function worked correctly.</span></span><br><span class="line">  T</span><br><span class="line">)</span><br><span class="line"><span class="comment">;;; Function gp:getDialogInput will get path parameters</span></span><br><span class="line">(<span class="name">defun</span> gp<span class="symbol">:getDialogInput</span> ()</span><br><span class="line">  (<span class="name">alert</span></span><br><span class="line">    <span class="string">&quot;Function gp:getDialogInput will get user choices through a dialog&quot;</span></span><br><span class="line">  )</span><br><span class="line">  <span class="comment">;;For now, return T, as if the function worked correctly.</span></span><br><span class="line">  T</span><br><span class="line">)</span><br><span class="line"><span class="comment">;;; Function gp:drawOutline will draw the path boundary</span></span><br><span class="line">(<span class="name">defun</span> gp<span class="symbol">:drawOutline</span> ()</span><br><span class="line">  (<span class="name">alert</span></span><br><span class="line">    (<span class="name">strcat</span> <span class="string">&quot;This function will draw the outline of the polyline&quot;</span> </span><br><span class="line">	    <span class="string">&quot;\nand return a polyline entity name/pointer.&quot;</span></span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">  <span class="comment">;; For now, simply return a quoted symbol. Eventually, this</span></span><br><span class="line">  <span class="comment">;; function will return an entity name or pointer.</span></span><br><span class="line">  &#x27;SomeEname</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>The letter <code>T</code> is the symbol for <strong>“true”</strong> in AutoLISP</li>
+<li>The way <code>gpmain.lsp</code> is structured, each input function it calls must return a value other than <code>nil</code>(no value) for the program to proceed to the next step.</li>
+</ul>
+<p>An AutoLISP function will, by default, <em>return the value of the last expression evaluated within it</em>. In the stubbed-out functions, the only expression is a call to the alert function. But <strong>alert always returns nil</strong>. If this is left as the last expression in gp:getPointInput, it will always return nil, and you will never pass through the if to the gp:getDialogInput function.</p>
+<p>For a similar reason, the end of the gp:DrawOutline function returns <strong>a quoted symbol (‘SomeEname) as a placeholder</strong>. A quoted symbol is a LISP construct that is not evaluated. (If you are curious about how the LISP language works, there are a number of good books available, mentioned at the end of this tutorial.)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/12/07/AutoLisp-Note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -809,238 +985,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/16/SelectGeometryInSameLayer-GH/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jim">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jim Chen's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/16/SelectGeometryInSameLayer-GH/" class="post-title-link" itemprop="url">SelectGeometryInSameLayer_GH</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-16 04:35:12" itemprop="dateCreated datePublished" datetime="2021-11-16T04:35:12+09:00">2021-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2026-01-05 20:17:35" itemprop="dateModified" datetime="2026-01-05T20:17:35+09:00">2026-01-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a><a href="#Preface" title="Preface"></a>Preface</h1><p>Just as another regular work day, I memo down some new things along the task I am facing. Recently I have been crazy about the Voronoi diagram. Although as bad as I wanted to implement the sweepline algorithm, I found the best practice might be patient and learn thing little by little. Also, I am kinds into “Study with me” series on youtube. I feel clam with someone’s company alongside.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><a href="#Reference" title="Reference"></a>Reference</h2><p><a href="https://discourse.mcneel.com/t/c-select-objects-by-layer/84420/6">https://discourse.mcneel.com/t/c-select-objects-by-layer/84420/6</a><br>Appreciate the help from username Mahdiyar.</p>
-<p>Two things are different</p>
-<ul>
-<li>select object in Rhino DocView</li>
-<li>select object in GH</li>
-</ul>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ghobjs = <span class="keyword">new</span> List();</span><br><span class="line"><span class="keyword">var</span> selectedLayer = RhinoDoc.ActiveDoc.Layers.FindName(layerName);</span><br><span class="line"><span class="keyword">var</span> layers = <span class="keyword">new</span> List()&#123;selectedLayer&#125;;</span><br><span class="line"><span class="keyword">if</span>(subLayer)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">foreach</span>(<span class="keyword">var</span> layer <span class="keyword">in</span> RhinoDoc.ActiveDoc.Layers)</span><br><span class="line">    <span class="keyword">if</span>(layer.IsChildOf(selectedLayer))</span><br><span class="line">      layers.Add(layer);</span><br><span class="line">&#125;</span><br><span class="line">B = layers;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="keyword">var</span> layer <span class="keyword">in</span> layers)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> rhobjs = doc.Objects.FindByLayer(layer);</span><br><span class="line">  <span class="keyword">foreach</span> (<span class="keyword">var</span> rhObj <span class="keyword">in</span> rhobjs)</span><br><span class="line">    ghobjs.Add(rhObj.Geometry);</span><br><span class="line">&#125;</span><br><span class="line">A = ghobjs;</span><br></pre></td></tr></table></figure>
-<p><img src="./source/../../uploads/SelectInSameLayer.gif" alt="SelectInSameLayer"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenchihyuan.github.io/2021/11/12/VoronoiDiagram-Lectures/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jim">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jim Chen's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/12/VoronoiDiagram-Lectures/" class="post-title-link" itemprop="url">VoronoiDiagram_Lectures</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-12 07:31:40" itemprop="dateCreated datePublished" datetime="2021-11-12T07:31:40+09:00">2021-11-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2026-01-05 20:17:34" itemprop="dateModified" datetime="2026-01-05T20:17:34+09:00">2026-01-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lecture-Link"><a href="#Lecture-Link" class="headerlink" title="Lecture Link"></a><a href="#Lecture-Link" title="Lecture Link"></a>Lecture Link</h1><p><a href="https://www.youtube.com/watch?v=Pn19deUBsM8&amp;t=13s">https://www.youtube.com/watch?v=Pn19deUBsM8&amp;t=13s</a></p>
-<h2 id="The-Post-Office-Problem"><a href="#The-Post-Office-Problem" class="headerlink" title="The Post-Office Problem"></a><a href="#The-Post-Office-Problem" title="The Post-Office Problem"></a>The Post-Office Problem</h2><p><a href="https://link.springer.com/chapter/10.1007%2F3-540-10291-4_1">https://link.springer.com/chapter/10.1007%2F3-540-10291-4_1</a></p>
-<p><a href="http://blog.ivank.net/voronoi-diagram-in-javascript.html">http://blog.ivank.net/voronoi-diagram-in-javascript.html</a></p>
-<p><a href="http://paperjs.org/examples/voronoi/">http://paperjs.org/examples/voronoi/</a></p>
-<p><a href="https://shaneosullivan.wordpress.com/2011/03/22/sweep-line-voronoi-algorithm-in-javascript/">https://shaneosullivan.wordpress.com/2011/03/22/sweep-line-voronoi-algorithm-in-javascript/</a></p>
-<p><a href="https://jacquesheunis.com/post/fortunes-algorithm/">https://jacquesheunis.com/post/fortunes-algorithm/</a></p>
-<p><a href="http://blog.ivank.net/fortunes-algorithm-and-implementation.html">http://blog.ivank.net/fortunes-algorithm-and-implementation.html</a></p>
-<p><a href="https://github.com/pvigier/FortuneAlgorithm">https://github.com/pvigier/FortuneAlgorithm</a></p>
-<p><a href="http://www.cs.uu.nl/geobook/">http://www.cs.uu.nl/geobook/</a></p>
-<p><a href="https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html">https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html</a></p>
-<h1 id="TakeAwayFromPvigier’s-blog"><a href="#TakeAwayFromPvigier’s-blog" class="headerlink" title="TakeAwayFromPvigier’s blog"></a><a href="#TakeAwayFromPvigier’s-blog" title="TakeAwayFromPvigier’s blog"></a>TakeAwayFromPvigier’s blog</h1><p><a href="https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html">https://pvigier.github.io/2018/11/18/fortune-algorithm-details.html</a></p>
-<h2 id="pseudo-code-from-Pvigier’s-Blog"><a href="#pseudo-code-from-Pvigier’s-Blog" class="headerlink" title="pseudo-code from Pvigier’s Blog"></a><a href="#pseudo-code-from-Pvigier’s-Blog" title="pseudo-code from Pvigier’s Blog"></a>pseudo-code from Pvigier’s Blog</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">add a site event in the event queue for each site</span><br><span class="line">while the event queue is not empty</span><br><span class="line">    pop the top event</span><br><span class="line">    if the event is a site event</span><br><span class="line">        insert a new arc in the beachline</span><br><span class="line">        check for new circle events</span><br><span class="line">    else</span><br><span class="line">        create a vertex in the diagram</span><br><span class="line">        remove the shrunk arc from the beachline</span><br><span class="line">        delete invalidated events</span><br><span class="line">        check for new circle events</span><br></pre></td></tr></table></figure>
-<ul>
-<li>site event</li>
-<li>circle event</li>
-</ul>
-<h3 id="Diagram’s-Data-Structure"><a href="#Diagram’s-Data-Structure" class="headerlink" title="Diagram’s Data Structure"></a><a href="#Diagram’s-Data-Structure" title="Diagram’s Data Structure"></a>Diagram’s Data Structure</h3><p><a href="https://en.wikipedia.org/wiki/Doubly_connected_edge_list">Double connected edge list(DCEL)</a>.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">VoronoiDiagram</span>&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        std::vector mSite;</span><br><span class="line">        std::vector mFace;</span><br><span class="line">        std::list mVertices;</span><br><span class="line">        std::list mHalfEdges;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The <code>Site</code> class represents <strong>an input point</strong>. Each site has an <strong>index</strong>, which is useful to query them, coordinates and a pointer to their cell(<code>face</code>):</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Site</span>&#123;</span><br><span class="line">    std::<span class="type">size_t</span> index;</span><br><span class="line">    Vector2 point;</span><br><span class="line">    Face* face;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>The vertices of the cells are represented by the <code>Vertex</code> class, they just have a cooridinates field:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Vertex</span>&#123;</span><br><span class="line">    Vector2 point;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Here is the implementation of <code>half-edges</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">HalfEdge</span>&#123;</span><br><span class="line">    Vertex* origin;</span><br><span class="line">    Vertex* destination;</span><br><span class="line">    HalfEdge* twin;</span><br><span class="line">    Face* incidentFace;</span><br><span class="line">    HalfEdge* prev;</span><br><span class="line">    HalfEdge* next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>An edge in a Voronoi diagram is shared by two adjacent cells. In the DCEL data structure, we splite these edfes in two half-edges, one for each cell, and they are <strong>linked</strong> by the <code>twin</code> pointer.</p>
-<p>Moreover, a hald-edge has an origin vertex and a desrination vertex.<br>The <code>incidenetFace</code> field points to the face to which the half-edge belongs to.</p>
-<p>Finally, in DCEL, cells are implemented as a circular <strong>doubly linked list</strong> of half-edges where adjacent half-edges are linked together. Thus the <code>prev</code> and <code>next</code> fields points to the previous and next half-edges in the cell.</p>
-<p>Finally, the <code>Face</code> class represents a cell and it just contains a pointer to its site and another to one of its half-edges. It does not matter which half-edge it is because a cell is a <strong>closed polygon</strong>. Thus we can access to all of its hald-edges by traversing the circular linked list.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Face</span>&#123;</span><br><span class="line">    Site* site;</span><br><span class="line">    HalfEdge* outerComponent;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="Event-Queue"><a href="#Event-Queue" class="headerlink" title="Event Queue"></a><a href="#Event-Queue" title="Event Queue"></a>Event Queue</h2><p>The standard way to implement the event queue is to use a <strong>priority queue</strong>.</p>
-<p>During the processing of site and circle events we may need to remove circle events from the queue because they are not valid anymore.</p>
-<p>But most of the standard implementations of priority queues do not allow to remove an element which is not the <strong>top one</strong>. In particular that is the case for <code>std::priority_queue</code>.</p>
-<p>There are two ways to tackle this problem.</p>
-<ol>
-<li>The first and simplest one is to add a <code>valid</code> flag to <code>true</code> initially. Then instead of removing the circle event from the queue, we just set its flag to <code>false</code>. Finially, when we process the events in the main loop, if the <code>valid</code> flag of an event equals to <code>false</code>, we simply discard it and process the next one.</li>
-<li>The second method which I adopted is not to use <code>std::priority_queue</code>. Instead, I implemented <strong>my own priority queue</strong> which supports removal of any element it contains. The implementation of such a queue is pretty straightforward. I choose this method because I find it makes the code for the algorithm clearer.</li>
-</ol>
-<h2 id="Beachline"><a href="#Beachline" class="headerlink" title="Beachline"></a><a href="#Beachline" title="Beachline"></a>Beachline</h2><p>If not implemented correctly there is no guarantee that the algorithm will run in <em>O(log(n))</em>. The key to reach this time complecity is to use a <strong>self-balancing</strong> tree.</p>
-<p>In my implementation the beachline is still a tree, but <strong>all nodes represent an arc</strong>.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Arc</span>&#123;</span><br><span class="line">    <span class="keyword">enum class</span> <span class="title class_">Color</span>&#123;RED, BLACK&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Hierarchy</span></span><br><span class="line">    Arc* parent;</span><br><span class="line">    Arc* left;</span><br><span class="line">    Arc* right;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Diagram</span></span><br><span class="line">    VoronoiDiagram::Site* site;</span><br><span class="line">    VoronoiDiagram::HalfEdge* leftHalfEdge;</span><br><span class="line">    VoronoiDiagram::HalfEdge* rightHalfEdge;</span><br><span class="line">    Event* event;</span><br><span class="line">    <span class="comment">// Optimizations</span></span><br><span class="line">    Arc* prev;</span><br><span class="line">    Arc* next;</span><br><span class="line">    <span class="comment">// Only for balancing</span></span><br><span class="line">    Color color;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>In Fortune’s algorithm <strong>we have no key</strong>, we only know that we want to insert an arc before or after another in the beachline. To do that, I create methods <code>insertBefore</code> and <code>insertAfter</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Beachline::insertBefore</span><span class="params">(Arc* x, Arc* y)</span></span>&#123;</span><br><span class="line">    <span class="comment">// Find the right place</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">isNil</span>(x-&gt;left))&#123;</span><br><span class="line">        x-&gt;left = y;</span><br><span class="line">        y-&gt;parent = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        x-&gt;prev-&gt;right = y;</span><br><span class="line">        y-&gt;parent = x-&gt;prev;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Set the pointers</span></span><br><span class="line">    y-&gt;prev = x-&gt;prev;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">isNil</span>(y-&gt;prev))</span><br><span class="line">        y-&gt;prev-&gt;next = y;</span><br><span class="line">    </span><br><span class="line">    y-&gt;next = x;</span><br><span class="line">    x-&gt;prev = y;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Balance the tree</span></span><br><span class="line">    <span class="built_in">insertFixup</span>(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Priority-Queues"><a href="#Priority-Queues" class="headerlink" title="Priority Queues"></a><a href="#Priority-Queues" title="Priority Queues"></a>Priority Queues</h3><p><a href="https://www.youtube.com/watch?v=wptevk0bshY">https://www.youtube.com/watch?v=wptevk0bshY</a></p>
-<h4 id="What-is-a-Priority-Queue"><a href="#What-is-a-Priority-Queue" class="headerlink" title="What is a Priority Queue"></a><a href="#What-is-a-Priority-Queue" title="What is a Priority Queue"></a>What is a Priority Queue</h4><p>A priority queue is an Abstract Data Type(ADT) that operates similar to a normal queue excpet that <strong>each element has a certain priority</strong>. The priority of the elements in priority queue determin the order in which elements are removed from the PQ.</p>
-<p>NOTE: Priority queues only supports <strong>comparable data</strong>.</p>
-<h4 id="What-is-a-Heap"><a href="#What-is-a-Heap" class="headerlink" title="What is a Heap?"></a><a href="#What-is-a-Heap" title="What is a Heap?"></a>What is a Heap?</h4><p>A heap is a <strong>tree</strong> based DS that satifies the <strong>heap invariant</strong>(also called heap property):<br>If A is a parent node of B then A is ordered with repect to B for all nodes A, B in the heap.</p>
-<ul>
-<li>Max Heap</li>
-<li>Min Heap</li>
-</ul>
-<blockquote>
-<p>Heaps must be trees.</p>
-</blockquote>
-<h4 id="When-and-where-is-a-PQ-used"><a href="#When-and-where-is-a-PQ-used" class="headerlink" title="When and where is a PQ used?"></a><a href="#When-and-where-is-a-PQ-used" title="When and where is a PQ used?"></a>When and where is a PQ used?</h4><ul>
-<li>Used in certain implementaitons of Dijkstra’s shortest Path algorithm.</li>
-<li>Anytime you need the dynamically fetch the <code>next best</code> or <code>next worst</code> element</li>
-<li>Used in Huffman coding (which is often used for lossless data compression).</li>
-<li>Best First Search(BFS) algorithms such as A* use PQs to continuously grab the next most promising node</li>
-<li>Used by minimum Spanning Tree(MST) algorithms</li>
-</ul>
-<h4 id="Complexity-PQ-with-binary-heap"><a href="#Complexity-PQ-with-binary-heap" class="headerlink" title="Complexity PQ with binary heap"></a><a href="#Complexity-PQ-with-binary-heap" title="Complexity PQ with binary heap"></a>Complexity PQ with binary heap</h4><ul>
-<li>Binary Heap construction: O(n)</li>
-<li>Polling: O(log(n))</li>
-<li>Peeking: O(1)</li>
-<li>Adding: O(log(n))</li>
-</ul>
-<h3 id="Self-balance-Tree-AVL-Tree"><a href="#Self-balance-Tree-AVL-Tree" class="headerlink" title="Self balance Tree (AVL Tree)"></a><a href="#Self-balance-Tree-AVL-Tree" title="Self balance Tree (AVL Tree)"></a>Self balance Tree (AVL Tree)</h3><p><a href="https://www.youtube.com/watch?v=vRwi_UcZGjU">https://www.youtube.com/watch?v=vRwi_UcZGjU</a></p>
-<ul>
-<li>Balance</li>
-<li>Rotation</li>
-<li>Implementation</li>
-</ul>
-<p>Rebalancing threshold</p>
-<h2 id="pseudo-code-from-Jacquesheunis’-blog"><a href="#pseudo-code-from-Jacquesheunis’-blog" class="headerlink" title="pseudo-code from Jacquesheunis’ blog"></a><a href="#pseudo-code-from-Jacquesheunis’-blog" title="pseudo-code from Jacquesheunis’ blog"></a>pseudo-code from Jacquesheunis’ blog</h2><p><a href="https://jacquesheunis.com/post/fortunes-algorithm/">https://jacquesheunis.com/post/fortunes-algorithm/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Fill the event queue with site events for each input site.</span><br><span class="line">While the event queue still has items in it:</span><br><span class="line">    If the next event on the queue is a site event:</span><br><span class="line">        Add the new site to the beachline</span><br><span class="line">    Otherwise it must be an edge-intersection event:</span><br><span class="line">        Remove the squeezed cell from the beachline</span><br><span class="line">Cleanup any remaining intermediate state</span><br></pre></td></tr></table></figure>
-<h1 id="Voronoi-Diagram-Computataional-Geometry"><a href="#Voronoi-Diagram-Computataional-Geometry" class="headerlink" title="Voronoi Diagram - Computataional Geometry"></a><a href="#Voronoi-Diagram-Computataional-Geometry" title="Voronoi Diagram - Computataional Geometry"></a>Voronoi Diagram - Computataional Geometry</h1><h2 id="Fortune’s-Sweep"><a href="#Fortune’s-Sweep" class="headerlink" title="Fortune’s Sweep"></a><a href="#Fortune’s-Sweep" title="Fortune’s Sweep"></a>Fortune’s Sweep</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">VoronoiDiagram(P are in R2)</span><br><span class="line">Q : new PriorityQueue(P) // site events sortes by y-coord.</span><br><span class="line">T : new BalancedBinarySearchTree() // sweep status(B)</span><br><span class="line">D : new DCEL() // to-be Vor(P)</span><br><span class="line"></span><br><span class="line">while not Q.empty() do</span><br><span class="line">    p &lt;- Q.ExtractMax()</span><br><span class="line">    if p site event then</span><br><span class="line">        HandleSiteEvent(p)</span><br><span class="line">    else</span><br><span class="line">        a &lt;- arc on B that will disappear</span><br><span class="line">        HandleCircleEvent(a)</span><br><span class="line"></span><br><span class="line">treat remaining int. nodes of T(unbnd. edges of Vor(P))</span><br><span class="line">return D</span><br></pre></td></tr></table></figure>
-<h3 id="Handling-Events"><a href="#Handling-Events" class="headerlink" title="Handling Events"></a><a href="#Handling-Events" title="Handling Events"></a>Handling Events</h3><ul>
-<li>HandleSiteEvent(point p)<ul>
-<li>Search in <code>T</code> for the arc <code>a</code> vertically above <code>p</code>. If <code>a</code> has pointer to circle event in <code>Q</code>, delete this event.</li>
-<li>Split <code>a</code> into <code>a0</code> and <code>a2</code>. Let <code>a1</code> be the new arc of <code>p</code></li>
-<li>Add Vor-edges <code>&lt;q, p&gt;</code> and <code>&lt;p, q&gt;</code> to DECL</li>
-<li>Check <code>&lt;., a0, a1&gt;</code> and <code>&lt;a1, a2, .&gt;</code> for circle events.</li>
-</ul>
-</li>
-<li>HandleCircleEvent(arc <code>a</code>)<ul>
-<li>T.delete(a); update breakpts</li>
-<li>Delete all circle events involving <code>a</code> from <code>Q</code></li>
-<li>Add Vor-vtx <code>a_left</code> and <code>a_right</code></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1106,12 +1054,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-count">115</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
